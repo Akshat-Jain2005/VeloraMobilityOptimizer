@@ -1,0 +1,122 @@
+================================================================================
+VELORA MOBILITY OPTIMIZER - TEST CASE TC03
+================================================================================
+
+INPUT SUMMARY
+--------------------------------------------------------------------------------
+Total Requests:    15
+Total Vehicles:    6
+
+VEHICLES:
+  V00 | Capacity:   3 | Cost/km: $10.00 | Start: (12.9350, 77.6200)
+  V01 | Capacity:   3 | Cost/km: $11.00 | Start: (12.9400, 77.6250)
+  V02 | Capacity:   4 | Cost/km: $15.00 | Start: (12.9200, 77.6100)
+  V03 | Capacity:   6 | Cost/km: $19.00 | Start: (12.9500, 77.6300)
+  V04 | Capacity:   1 | Cost/km: $8.00 | Start: (12.9250, 77.6000)
+  V05 | Capacity:   4 | Cost/km: $14.00 | Start: (12.9600, 77.6400)
+
+REQUESTS:
+  R00 | Priority: HIGH   | Load: 1 | Window: [ 490.0,    540.0]
+  R01 | Priority: HIGH   | Load: 1 | Window: [ 495.0,    550.0]
+  R02 | Priority: MEDIUM | Load: 1 | Window: [ 500.0,    570.0]
+  R03 | Priority: LOW    | Load: 1 | Window: [ 525.0,    600.0]
+  R04 | Priority: ?      | Load: 1 | Window: [ 555.0,    645.0]
+  R05 | Priority: MEDIUM | Load: 1 | Window: [ 510.0,    585.0]
+  R06 | Priority: HIGH   | Load: 1 | Window: [ 485.0,    540.0]
+  R07 | Priority: LOW    | Load: 1 | Window: [ 540.0,    630.0]
+  R08 | Priority: ?      | Load: 1 | Window: [ 600.0,    720.0]
+  R09 | Priority: ?      | Load: 1 | Window: [ 570.0,    660.0]
+  R10 | Priority: MEDIUM | Load: 1 | Window: [ 520.0,    590.0]
+  R11 | Priority: LOW    | Load: 1 | Window: [ 540.0,    630.0]
+  R12 | Priority: HIGH   | Load: 1 | Window: [ 480.0,    530.0]
+  R13 | Priority: ?      | Load: 1 | Window: [ 585.0,    675.0]
+  R14 | Priority: MEDIUM | Load: 1 | Window: [ 515.0,    585.0]
+
+================================================================================
+OPTIMIZATION RESULTS
+================================================================================
+Global Cost:       $1210.99
+Routes Assigned:   6
+Requests Assigned: 15
+Requests Unassigned: 0
+
+DETAILED ROUTES
+--------------------------------------------------------------------------------
+Vehicle V00:
+  Total Distance: 5.54 km
+  Total Cost:     $55.38
+  Stops: 2
+
+    1. PICKUP  Request R12 @  482.22 | Window: [480.0, 530.0] | (12.9550, 77.6200)
+    2. DROPOFF Request R12 @  485.54 | Window: [480.0, 530.0] | (12.9716, 77.5946)
+
+Vehicle V01:
+  Total Distance: 5.48 km
+  Total Cost:     $60.32
+  Stops: 2
+
+    1. PICKUP  Request R00 @  490.00 | Window: [490.0, 540.0] | (12.9365, 77.6248)
+    2. DROPOFF Request R00 @  495.09 | Window: [490.0, 540.0] | (12.9716, 77.5946)
+
+Vehicle V02:
+  Total Distance: 6.41 km
+  Total Cost:     $96.18
+  Stops: 2
+
+    1. PICKUP  Request R04 @  555.00 | Window: [555.0, 645.0] | (12.9180, 77.6100)
+    2. DROPOFF Request R04 @  561.19 | Window: [555.0, 645.0] | (12.9716, 77.5946)
+
+Vehicle V03: (EMPTY)
+Vehicle V04:
+  Total Distance: 115.99 km
+  Total Cost:     $927.92
+  Stops: 22
+
+    1. PICKUP  Request R06 @  485.00 | Window: [485.0, 540.0] | (12.9525, 77.6280)
+    2. DROPOFF Request R06 @  489.20 | Window: [485.0, 540.0] | (12.9716, 77.5946)
+    3. PICKUP  Request R01 @  495.00 | Window: [495.0, 550.0] | (12.9340, 77.6220)
+    4. DROPOFF Request R01 @  500.13 | Window: [495.0, 550.0] | (12.9716, 77.5946)
+    5. PICKUP  Request R02 @  505.42 | Window: [500.0, 570.0] | (12.9310, 77.6200)
+    6. DROPOFF Request R02 @  510.70 | Window: [500.0, 570.0] | (12.9716, 77.5946)
+    7. PICKUP  Request R05 @  515.70 | Window: [510.0, 585.0] | (12.9500, 77.6350)
+    8. DROPOFF Request R05 @  520.69 | Window: [510.0, 585.0] | (12.9716, 77.5946)
+    9. PICKUP  Request R14 @  525.79 | Window: [515.0, 585.0] | (12.9480, 77.6350)
+    10. DROPOFF Request R14 @  530.90 | Window: [515.0, 585.0] | (12.9716, 77.5946)
+    11. PICKUP  Request R03 @  536.10 | Window: [525.0, 600.0] | (12.9400, 77.6300)
+    12. DROPOFF Request R03 @  541.30 | Window: [525.0, 600.0] | (12.9716, 77.5946)
+    13. PICKUP  Request R07 @  548.44 | Window: [540.0, 630.0] | (12.9270, 77.6420)
+    14. DROPOFF Request R07 @  555.58 | Window: [540.0, 630.0] | (12.9716, 77.5946)
+    15. PICKUP  Request R11 @  560.02 | Window: [540.0, 630.0] | (12.9330, 77.6050)
+    16. DROPOFF Request R11 @  564.46 | Window: [540.0, 630.0] | (12.9716, 77.5946)
+    17. PICKUP  Request R09 @  570.00 | Window: [570.0, 660.0] | (12.9250, 77.6000)
+    18. DROPOFF Request R09 @  575.21 | Window: [570.0, 660.0] | (12.9716, 77.5946)
+    19. PICKUP  Request R13 @  585.00 | Window: [585.0, 675.0] | (12.9190, 77.6080)
+    20. DROPOFF Request R13 @  591.03 | Window: [585.0, 675.0] | (12.9716, 77.5946)
+    21. PICKUP  Request R08 @  600.00 | Window: [600.0, 720.0] | (12.9410, 77.6310)
+    22. DROPOFF Request R08 @  605.21 | Window: [600.0, 720.0] | (12.9716, 77.5946)
+
+Vehicle V05:
+  Total Distance: 5.09 km
+  Total Cost:     $71.20
+  Stops: 2
+
+    1. PICKUP  Request R10 @  520.00 | Window: [520.0, 590.0] | (12.9600, 77.6400)
+    2. DROPOFF Request R10 @  525.09 | Window: [520.0, 590.0] | (12.9716, 77.5946)
+
+COST BREAKDOWN
+--------------------------------------------------------------------------------
+  Vehicle V00:      $     55.38  (  4.6%)
+  Vehicle V01:      $     60.32  (  5.0%)
+  Vehicle V02:      $     96.18  (  7.9%)
+  Vehicle V03:      $      0.00  (  0.0%)
+  Vehicle V04:      $    927.92  ( 76.6%)
+  Vehicle V05:      $     71.20  (  5.9%)
+--------------------------------------------------------------------------------
+  TOTAL:             $   1210.99  (100.0%)
+
+FILE REFERENCES
+--------------------------------------------------------------------------------
+Input JSON:  /Users/mac/Coding/Projects/Kriti/velora-mobility-optimizer/data/json/tc03_input.json
+Output JSON: /Users/mac/Coding/Projects/Kriti/velora-mobility-optimizer/data/json/tc03_output.json
+
+================================================================================

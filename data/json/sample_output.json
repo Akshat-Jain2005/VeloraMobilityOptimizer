@@ -1,0 +1,61 @@
+{
+  "globalCost": 105.91498312289589,
+  "routes": [
+    {
+      "stops": [
+        {
+          "arrival": 5.034950919442646,
+          "lat": 40.7549,
+          "lon": -73.984,
+          "reqId": 2,
+          "type": "P"
+        },
+        {
+          "arrival": 5.936599679218766,
+          "lat": 40.7614,
+          "lon": -73.9776,
+          "reqId": 2,
+          "type": "D"
+        },
+        {
+          "arrival": 5.936599679218766,
+          "lat": 40.7614,
+          "lon": -73.9776,
+          "reqId": 1,
+          "type": "P"
+        },
+        {
+          "arrival": 7.736632029478541,
+          "lat": 40.7505,
+          "lon": -73.9934,
+          "reqId": 1,
+          "type": "D"
+        },
+        {
+          "arrival": 8.803540333154213,
+          "lat": 40.758,
+          "lon": -73.9855,
+          "reqId": 0,
+          "type": "P"
+        },
+        {
+          "arrival": 10.59149831228959,
+          "lat": 40.7489,
+          "lon": -73.968,
+          "reqId": 0,
+          "type": "D"
+        }
+      ],
+      "totalCost": 105.91498312289589,
+      "totalDist": 10.59149831228959,
+      "vehicleId": 0
+    },
+    {
+      "stops": [],
+      "totalCost": 0.0,
+      "totalDist": 0.0,
+      "vehicleId": 1
+    }
+  ],
+  "unassigned": []
+}
