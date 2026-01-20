@@ -1,8 +1,22 @@
 {
-  "globalCost": 787.802703976475,
+  "globalCost": 771.9624230971918,
   "routes": [
     {
       "stops": [
+        {
+          "arrival": 495.0,
+          "lat": 12.95,
+          "lon": 77.62,
+          "reqId": 5,
+          "type": "P"
+        },
+        {
+          "arrival": 498.6529965383746,
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 5,
+          "type": "D"
+        },
         {
           "arrival": 525.0,
           "lat": 12.9298,
@@ -18,28 +32,28 @@
           "type": "D"
         },
         {
-          "arrival": 555.0,
-          "lat": 12.915,
-          "lon": 77.61,
-          "reqId": 4,
+          "arrival": 535.6424927485289,
+          "lat": 12.9352,
+          "lon": 77.6245,
+          "reqId": 0,
           "type": "P"
         },
         {
-          "arrival": 561.5111458051186,
+          "arrival": 540.8271445933862,
           "lat": 12.9716,
           "lon": 77.5946,
-          "reqId": 4,
+          "reqId": 0,
           "type": "D"
         },
         {
-          "arrival": 566.3876468268024,
+          "arrival": 545.70364561507,
           "lat": 12.96,
           "lon": 77.638,
           "reqId": 3,
           "type": "P"
         },
         {
-          "arrival": 571.2641478484862,
+          "arrival": 550.5801466367537,
           "lat": 12.9716,
           "lon": 77.5946,
           "reqId": 3,
@@ -88,50 +102,35 @@
           "type": "D"
         }
       ],
-      "totalCost": 597.647825275635,
-      "totalDist": 59.764782527563504,
+      "totalCost": 673.0227369604099,
+      "totalDist": 67.302273696041,
       "vehicleId": 0
     },
     {
       "stops": [
         {
-          "arrival": 510.0,
-          "lat": 12.9352,
-          "lon": 77.6245,
-          "reqId": 0,
+          "arrival": 555.0,
+          "lat": 12.915,
+          "lon": 77.61,
+          "reqId": 4,
           "type": "P"
         },
         {
-          "arrival": 515.1846518448573,
+          "arrival": 561.5111458051186,
           "lat": 12.9716,
           "lon": 77.5946,
-          "reqId": 0,
+          "reqId": 4,
           "type": "D"
         }
       ],
-      "totalCost": 104.89491792138959,
-      "totalDist": 7.492494137242113,
+      "totalCost": 98.93968613678192,
+      "totalDist": 7.067120438341566,
       "vehicleId": 1
     },
     {
-      "stops": [
-        {
-          "arrival": 495.0,
-          "lat": 12.95,
-          "lon": 77.62,
-          "reqId": 5,
-          "type": "P"
-        },
-        {
-          "arrival": 498.6529965383746,
-          "lat": 12.9716,
-          "lon": 77.5946,
-          "reqId": 5,
-          "type": "D"
-        }
-      ],
-      "totalCost": 85.25996077945037,
-      "totalDist": 4.736664487747243,
+      "stops": [],
+      "totalCost": 0.0,
+      "totalDist": 0.0,
       "vehicleId": 2
     }
   ],

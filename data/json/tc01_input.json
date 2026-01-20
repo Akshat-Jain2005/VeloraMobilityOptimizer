@@ -249,5 +249,47 @@
         "lon": 0.0
       }
     }
+  ],
+  "baseline": [
+    {
+      "employee_id": "E01",
+      "baseline_cost": 420,
+      "baseline_time_min": 45
+    },
+    {
+      "employee_id": "E02",
+      "baseline_cost": 380,
+      "baseline_time_min": 50
+    },
+    {
+      "employee_id": "E03",
+      "baseline_cost": 360,
+      "baseline_time_min": 55
+    },
+    {
+      "employee_id": "E04",
+      "baseline_cost": 400,
+      "baseline_time_min": 48
+    },
+    {
+      "employee_id": "E05",
+      "baseline_cost": 450,
+      "baseline_time_min": 60
+    },
+    {
+      "employee_id": "E06",
+      "baseline_cost": 430,
+      "baseline_time_min": 44
+    },
+    {
+      "employee_id": "E07",
+      "baseline_cost": 390,
+      "baseline_time_min": 58
+    },
+    {
+      "employee_id": "E08",
+      "baseline_cost": 370,
+      "baseline_time_min": 65
+    }
   ]
 }

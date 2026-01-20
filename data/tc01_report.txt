@@ -25,54 +25,55 @@ REQUESTS:
 ================================================================================
 OPTIMIZATION RESULTS
 ================================================================================
-Global Cost:       $787.80
+Global Cost:       $771.96
 Routes Assigned:   3
 Requests Assigned: 8
 Requests Unassigned: 0
 
+BASELINE COMPARISON
+--------------------------------------------------------------------------------
+  Baseline Total Cost:   $   3200.00
+  Optimized Total Cost:  $    771.96
+  - Improvement:         $   2428.04  (+75.9%)
+
 DETAILED ROUTES
 --------------------------------------------------------------------------------
 Vehicle V00:
-  Total Distance: 59.76 km
-  Total Cost:     $597.65
-  Stops: 12
-
-    1. PICKUP  Request R01 @  525.00 | Window: [525.0, 600.0] | (12.9298, 77.6210)
-    2. DROPOFF Request R01 @  530.46 | Window: [525.0, 600.0] | (12.9716, 77.5946)
-    3. PICKUP  Request R04 @  555.00 | Window: [555.0, 660.0] | (12.9150, 77.6100)
-    4. DROPOFF Request R04 @  561.51 | Window: [555.0, 660.0] | (12.9716, 77.5946)
-    5. PICKUP  Request R03 @  566.39 | Window: [510.0, 585.0] | (12.9600, 77.6380)
-    6. DROPOFF Request R03 @  571.26 | Window: [510.0, 585.0] | (12.9716, 77.5946)
-    7. PICKUP  Request R07 @  600.00 | Window: [600.0, 720.0] | (12.9400, 77.6300)
-    8. DROPOFF Request R07 @  605.20 | Window: [600.0, 720.0] | (12.9716, 77.5946)
-    9. PICKUP  Request R06 @  612.35 | Window: [570.0, 660.0] | (12.9250, 77.6400)
-    10. DROPOFF Request R06 @  619.49 | Window: [570.0, 660.0] | (12.9716, 77.5946)
-    11. PICKUP  Request R02 @  622.62 | Window: [540.0, 630.0] | (12.9440, 77.6000)
-    12. DROPOFF Request R02 @  625.74 | Window: [540.0, 630.0] | (12.9716, 77.5946)
-
-Vehicle V01:
-  Total Distance: 7.49 km
-  Total Cost:     $104.89
-  Stops: 2
-
-    1. PICKUP  Request R00 @  510.00 | Window: [510.0, 570.0] | (12.9352, 77.6245)
-    2. DROPOFF Request R00 @  515.18 | Window: [510.0, 570.0] | (12.9716, 77.5946)
-
-Vehicle V02:
-  Total Distance: 4.74 km
-  Total Cost:     $85.26
-  Stops: 2
+  Total Distance: 67.30 km
+  Total Cost:     $673.02
+  Stops: 14
 
     1. PICKUP  Request R05 @  495.00 | Window: [495.0, 555.0] | (12.9500, 77.6200)
     2. DROPOFF Request R05 @  498.65 | Window: [495.0, 555.0] | (12.9716, 77.5946)
+    3. PICKUP  Request R01 @  525.00 | Window: [525.0, 600.0] | (12.9298, 77.6210)
+    4. DROPOFF Request R01 @  530.46 | Window: [525.0, 600.0] | (12.9716, 77.5946)
+    5. PICKUP  Request R00 @  535.64 | Window: [510.0, 570.0] | (12.9352, 77.6245)
+    6. DROPOFF Request R00 @  540.83 | Window: [510.0, 570.0] | (12.9716, 77.5946)
+    7. PICKUP  Request R03 @  545.70 | Window: [510.0, 585.0] | (12.9600, 77.6380)
+    8. DROPOFF Request R03 @  550.58 | Window: [510.0, 585.0] | (12.9716, 77.5946)
+    9. PICKUP  Request R07 @  600.00 | Window: [600.0, 720.0] | (12.9400, 77.6300)
+    10. DROPOFF Request R07 @  605.20 | Window: [600.0, 720.0] | (12.9716, 77.5946)
+    11. PICKUP  Request R06 @  612.35 | Window: [570.0, 660.0] | (12.9250, 77.6400)
+    12. DROPOFF Request R06 @  619.49 | Window: [570.0, 660.0] | (12.9716, 77.5946)
+    13. PICKUP  Request R02 @  622.62 | Window: [540.0, 630.0] | (12.9440, 77.6000)
+    14. DROPOFF Request R02 @  625.74 | Window: [540.0, 630.0] | (12.9716, 77.5946)
 
+Vehicle V01:
+  Total Distance: 7.07 km
+  Total Cost:     $98.94
+  Stops: 2
+
+    1. PICKUP  Request R04 @  555.00 | Window: [555.0, 660.0] | (12.9150, 77.6100)
+    2. DROPOFF Request R04 @  561.51 | Window: [555.0, 660.0] | (12.9716, 77.5946)
+
+Vehicle V02: (EMPTY)
 COST BREAKDOWN
 --------------------------------------------------------------------------------
-  Vehicle V00:      $    597.65  ( 75.9%)
-  Vehicle V01:      $    104.89  ( 13.3%)
-  Vehicle V02:      $     85.26  ( 10.8%)
+  Vehicle V00:      $    673.02  ( 87.2%)
+  Vehicle V01:      $     98.94  ( 12.8%)
+  Vehicle V02:      $      0.00  (  0.0%)
 --------------------------------------------------------------------------------
-  TOTAL:             $    787.80  (100.0%)
+  TOTAL:             $    771.96  (100.0%)
 
 FILE REFERENCES
 --------------------------------------------------------------------------------

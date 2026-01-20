@@ -197,7 +197,11 @@ int main(int argc, char** argv) {
 
     // Config
     bool allowExternal = false; string mapsKey;
-    if (j.contains("config")) { allowExternal = j["config"].value("allow_external_maps", false); mapsKey = j["config"].value("maps_api_key", ""); }
+    if (j.contains("config")) { 
+        allowExternal = j["config"].value("allow_external_maps", false); 
+        mapsKey = j["config"].value("maps_api_key", ""); 
+    }
+    
     MapDistance mapDist(allowExternal, mapsKey);
     gMapDist = &mapDist;
 
