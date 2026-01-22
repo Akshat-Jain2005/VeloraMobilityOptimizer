@@ -6,7 +6,7 @@ A high-performance C++ solver for the Vehicle Routing Problem (VRP) with Employe
 
 *   **Hybrid Algorithm**: Combines a **Greedy Constructive Heuristic** with **Simulated Annealing** (SA) to find near-optimal solutions.
 *   **Realistic Constraints**:
-    *   **Hard**: Vehicle Capacity, Female Safety (Shared Rides).
+    *   **Hard**: Vehicle Capacity, Safety.
     *   **Soft**: Priority-based Time Tolerances (P1: 5min ... P5: 30min).
 *   **Infeasibility Handling**: "Forced Assignment" strategy ensures no employee is left behind, even if it violates windows (with penalties).
 *   **Robust Map Service**:
