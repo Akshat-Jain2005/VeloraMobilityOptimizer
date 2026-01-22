@@ -1,0 +1,707 @@
+﻿International Conference on Logistics and Industrial Engineering 2021 
+
+HETEROGENEOUS FLEET VEHICLE ROUTING PROBLEM WITH TIME 
+WINDOW: A CASE STUDY IN DKSH VIETNAM 
+
+Nguyen Van Chung1, Ngo Thanh Phuong Anh1 and Luong-Nhat Nhieu2*
+ 
+
+1 International University – Vietnam National University HCMC, Hochiminh city 70000, 
+
+nvchung@hcmiu.edu.vn (N.V.C.) 
+
+anhngotp@gmail.com (N.T.P.A) 
+
+2* National Kaohsiung University of Science and Technology, Kaohsiung 80778, 
+
+nnluong.iem@gmail.com (L.-N.N.) 
+
+Abstract.  
+
+In this article, a company’s healthcare business unit encountered a traffic problem that should be resolved by creating 
+vehicle routes. According to the characteristics of the company, the problem is classified as a vehicle routing problem 
+of a heterogeneous fleet with a time window, and the capacity and the number of vehicles is limited. Then a 
+mathematical method is proposed and IBM CPLEX OPTIMIZER is used to solve the constraints. In order to evaluate 
+the performance of the proposed method, experiments were conducted using real company data, and then compared 
+with actual costs. It has been observed that the proposed method can be used to obtain reasonably better results for 
+this problem. In addition, some ideas were put forward to actually implement the model and its effects in practice. 
+
+Keywords: Vehicle routing problem, Heterogeneous fleet of vehicle, Time window, Symmetric distance matrix. 
+
+1. Introduction  
+ This paper is organized as follows: The next 
+
+ Nowadays, the efficiency of logistics activities is chapter introduces previous work regarding this topic. 
+recognized as one of the factors that have the most Chapter 3 presents methodology and chapter 4 is the 
+profound influence on the overall performance of the results comparing to actual data, implementation and 
+business. The management of this logistics operation its impact. Finally, the last chapter offers conclusions 
+mainly includes managing and improving the process and suggestions for future research. 
+of inventory, import and export and transportation.  
+Transportation problems with large volumes, high 2. Literature review 
+product diversity, limited vehicles, complex 
+transportation networks, and time window constraints Hsu's research in 2007 aimed to determine the 
+have always been a challenge for logistics managers. optimal transport routes within the constraints of time 
+In search of a suitable answer to this challenge, more and number of vehicles for the perishable food 
+and more different approaches and variations of the distribution problem. This study uses stochastic 
+vehicle routing problem (VRP) have been introduced mathematical models to solve vehicle routing 
+by researchers in recent decades (Elshaer & Awad, problems with time window (VRP-TW). The results of 
+2020; Pan, Zhang, & Lim, 2021; Vidal, Laporte, & the study show a significant share of inventory and 
+Matl, 2020). Among them can be mentioned energy costs in the system's cost structure. In addition, 
+mathematical optimization models that are developed the authors also show the trade-off between inventory 
+increasingly complex with more and more real-world costs and fixed costs through adjustments for the 
+factors integrated. To continue this journey, as the number of vehicles. With stochastic time travel 
+main contribution of this article, a variant of the considerations, the results imply that time constraints 
+mathematical optimization model for heterogeneous become more difficult to satisfy than themselves under 
+fleet VRP was developed. Moreover, this proposed deterministic conditions (Hsu, Hung, & Li, 2007). In 
+model is then applied to the actual operation of another study, published by Hande Öztop et al., 
+logistics enterprises in Vietnam as a validation process mixed-integer programming and constraint 
+for later model improvements. programming models were introduced to identify 
+
+1 
+ 
+
+
+
+ International Conference on Logistics and Industrial Engineering 2021 
+
+optimal and near-optimal solutions for VRP-TW. In a higher delivery rate is required (Chen, Pan, Chen, & 
+this study, heterogeneous vehicles are used to Liu, 2020). In 2021, a study evaluating VRP solutions 
+distribute valuable products such as cash to Automated that trade-off between the three pillars of sustainable 
+Teller Machines. The resulting models provide safe development was conducted by Hassana Abdullahi et 
+routes with minimal travel time for heterogeneous al. The solutions in this study are determined through 
+vehicles. The limitation of the study mentioned by the a metaheuristics algorithm that reconciles the 
+authors is the small number of clients as a typical advantages of a greedy local search method and a 
+limitation of exact solution methods (Öztop, Kizilay, biased randomized savings heuristic. The three 
+& Çil, 2020). In the global trend of reducing sustainability pillars are integrated in this study in the 
+emissions, electric vehicles are also considered as a form of objective functions, which are costs 
+new mode of transport thereby creating another variant representing economic factors, accident risks 
+of VRP, electric VRP (EVRP). A study that developed representing social factors, and CO2 emissions 
+an optimization model for EVRP with fuzzy representing environment factors (Abdullahi, Reyes-
+uncertainty parameters was performed by Zhang et al. Rubiano, Ouelhadj, Faulin, & Juan, 2021). 
+The above fuzzy uncertainty parameters describe the  
+uncertainty conditions in EVRP such as energy 3. Methodology 
+consumption, travel time, service time, etc. In 
+addition, the authors also propose an integrated First, the problem and its objective are defined. Then, 
+algorithm with the core ALNS algorithm to enhance research papers related to the problem are searched 
+the solutions as well as optimize CPU time (Zhang, and review. Next, based on research papers and reality, 
+Chen, Zhang, & Zhuang, 2020). In research published a model to solve the problem is construct and data is 
+in 2020, Hongqi Li considered the VRP-TW problem collected and analyzed. After that, by using the 
+with modern unmanned aerial vehicles (UAVs). This analyzed data as input, the model will be run and 
+study aims to optimize the delivery route of UAV-van created a result. The result is then validated by 
+vehicle complexes. The solution to the above problem comparing with the reality. If the outcome is not better 
+was determined by the authors by the adaptive large than reality, the model will go back to problem 
+neighborhood search algorithm. The results of this modelling, data analyzing and running model and 
+study are a reference for businesses about the result validating again until it is better than reality. 
+feasibility of a new transportation mode (Li, Wang, Finally, the conclusion and suggestion are provided 
+Chen, & Bai, 2020). In 2020, Daniel proposed two based on the better outcome.  
+different models for VRP-TW with limited time This paper proposes a mathematical model to 
+multiple trips. The numerical experiments of the study solve a real-life heterogeneous fleet vehicle routing 
+show that the proposed model is more efficient than problem with time windows. The problem consists in 
+the existing models mentioned by authors (Neira, determining, each day, how to allocate the trucks from 
+Aguayo, De la Fuente, & Klapp, 2020). depots to all customers, the amount to be delivered in 
+Distribution networks are expected to become each truck to each customer, which one is the best 
+significantly different as distributors adopt customer route and the suitable time for attending each node, 
+picking through a network of locker facilities. A linear with the aim of minimizing the total transportation 
+programming paradigm has been developed by Redi et cost (summation of fixed and operating costs), 
+al. to find a solution to VRP with such locker facilities. satisfying the customers demand and respecting all the 
+The numerical results of this study also demonstrate problem constraints (vehicle number and feature, and 
+the advantages of customer picking strategy over time windows). The difference of this model 
+home delivery strategy through the reduction of both comparing to the papers is, in this paper, a 
+important criteria, total transportation cost and number linearization method is introduced to transform two 
+of vehicles (Redi et al., 2020). In Chen's research in non-linear constraints into linear constraints. It also 
+2020, a new optimization algorithm was developed for considered different types of products with different 
+the problem of food distribution under COVID19- space, which both papers did not take into account. A 
+influenced conditions, which was developed on the directed graph G = (N, A) is given, where 𝑁 =
+basis of the integration of an artificial bee colony  {1, 2, . . . , 𝑛} is the set of n nodes. Node 1 represents 
+algorithm with tabu search. The performance of this the depot while the remaining node set 𝑁\{1} 
+proposed algorithm shows that artificial bee colony corresponds to the customers from node 2 to node n. 
+algorithms can be improved through the tabu search Node set N has 3 indexes: 𝑖, 𝑗, 𝑘 ∈𝑁. Each pair of 
+mechanisms. The numerical results also show that the location (i,j), is associated with distance 𝑑𝑖𝑗 . There are 
+number of vehicles will increase if distribution 𝑝∈𝑃 types of products, defined by their occupied space 
+network operators want to increase the delivery speed. 𝑆𝑝𝑎𝑐𝑒𝑝 in a vehicle. Node 𝑖 ∈ 𝑁\{1} (all customers 
+In addition, the maximum working time is extended if except the depot) have demand 𝐷𝑖𝑝 for product type 
+
+2 
+ 
+
+
+
+ International Conference on Logistics and Industrial Engineering 2021 
+
+𝑝∈𝑃. M is the set of transportation modes, each vehicle Arriving time of vehicle type m at 
+𝑎
+
+𝑚∈𝑀 has their capacity 𝐶𝑎𝑝𝑚, fixed cost 𝐹𝑚, total 𝑖𝑚 
+node 𝑖 
+
+operating cost 𝑐𝑚𝑑𝑖𝑗𝑚, velocity 𝑣𝑚 and service time Leaving time of vehicle type m at 
+𝑙
+
+𝑠𝑖𝑚 at node 𝑖 ∈ 𝑁\{1}. Whenever a vehicle is 𝑖𝑚 
+node 𝑖 
+
+triggered, it will use a fixed amount of money for 
+maintenance and capital amortization costs, no matter As shown in equation (1), the model’s objective 
+how far it goes. This is called fixed cost 𝐹𝑚. Operating function focuses on minimizing total transportation 
+cost is the sum of fuel and oil on average consumed by cost, including a fixed cost (𝐹𝑚) and operating cost 
+a vehicle. The total operating cost of a vehicle on route (𝐶𝑚𝑑𝑖𝑗). Each cost is then multiplied to variable 𝑥𝑚
+
+𝑖𝑗  to 
+(𝑖, 𝑗) equaled to operating cost per kilometer traveled make sure that only cost of triggered vehicle will be 
+𝑐𝑚 multiplied with the distanced travelled on route summarized. The decision variable 𝑥𝑚
+
+1𝑗 means that 
+(𝑖, 𝑗) by vehicle m 𝑑𝑖𝑗𝑚. The time window for all 
+
+only vehicle started from the depot (node 𝑖 =  1) by 
+nodes 𝑖 ∈ 𝑁\{1} are [e, l] with e is the earliest time 
+
+vehicle m to any customer (node 𝑗) will be counted 
+and l is the latest time vehicles can enter that node. 
+
+with fixed cost since this is where all vehicles start. 
+Time window for depot is [0, L], all trucks can start 
+leaving the depot at 0 and must be back by L. The 𝑴𝒊𝒏𝒊𝒎𝒊𝒛𝒆 ∑𝑚∈𝑀 ∑𝑗∈𝑁 𝐹𝑚 𝑥𝑚
+
+1𝑗 +
+parameters and decision variables of the proposed ∑ ∑ 𝑚
+
+𝑚∈𝑀 𝑖,𝑗∈𝑁 𝐶𝑚𝑑𝑖𝑗 𝑥𝑖𝑗  (1) 
+model are presented in Tables 1 and 2. 𝑖≠𝑗
+
+Table 1. Model's parameters ∑𝑚∈𝑀 ∑𝑖∈ 𝑥𝑚
+𝑁 𝑖𝑗  , ∀𝑗 ∈ 𝑁\{1} (2) 
+
+Parameter Description ∑𝑚∈𝑀 ∑𝑗∈ 𝑥𝑚
+𝑁 𝑖𝑗  , ∀𝑖 ∈ 𝑁\{1} (3) 
+
+The demand for customer node 𝑖 of 
+𝐷𝑖𝑝 
+
+product type 𝑝 ∑𝑖∈𝑁 𝑥𝑚
+𝑖𝑗 = ∑ 𝑥𝑚
+
+𝑘∈𝑁 𝑗𝑘 , ∀𝑚 ∈ 𝑀, 𝑗 ∈ 𝑁\{1} (4) 
+𝑆𝑝𝑎𝑐𝑒𝑝 𝑖≠𝑗 𝑘≠𝑗
+
+The space of product type 𝑝 
+
+Constraints (2), (3) and (4) makes sure that each 
+𝑑𝑖𝑗  Distance between node 𝑖 and node 𝑗 
+
+customer is visited only once and that if a vehicle visits 
+Fixed cost when using vehicle type a customer, it must also depart from it. Each vehicle 
+
+𝐹𝑚 
+𝑚 can be used no more than once is imposed by 
+Operating cost per kilometer constraints (5) and (6). 
+
+𝐶𝑚 
+travelled of vehicle type 𝑚 
+
+∑ 𝑥𝑚
+𝑗∈𝑁\{1} 1𝑗 ≤ 1, ∀𝑚 ∈ 𝑀, 𝑖 ∈ 𝑁 (5) 
+
+𝐶𝑎𝑝𝑚 Capacity of vehicle type 𝑚 
+
+∑ 𝑥𝑚
+
+𝑣 𝑖∈𝑁\{1} 𝑖1 ≤ 1, ∀𝑚 ∈ 𝑀, 𝑗 ∈ 𝑁 (6) 
+𝑚 Velocity of vehicle type 𝑚 
+
+Serving time at customer node 𝑖 of Constraint (7) makes sure that there will be no 
+𝑆𝑖𝑚 
+
+vehicle m vehicle assigned to route (𝑖, 𝑗) when node i and j are 
+Earliest time to arrive at customer the same. 
+
+𝑒 
+zone 
+Latest time to arrive at customer ∑ 𝑥𝑚
+
+𝑚∈𝑀 𝑖𝑗 = 0, ∀(𝑖, 𝑗) ∈ 𝑁, 𝑖 = 𝑗 (7) 
+𝑙 
+
+zone 
+Latest returning time of all vehicles Constraint (8) is the commodity flow constraints: 
+
+𝐿 
+to the depot they specify that the difference between the quantity 
+
+ of goods a vehicle carries before and after visiting a 
+customer is equal to the demand of that customer and 
+
+Table 2. Model's decision variables constraints (9) ensure that the vehicle capacity is never 
+exceeded. 
+
+Parameter Description 
+Equal to 1 if vehicle type m travels ∑𝑚∈𝑀 ∑𝑖∈𝑁 𝑦𝑖𝑗𝑚𝑝 − ∑𝑚∈𝑀 ∑𝑘∈𝑁 𝑦𝑗𝑘𝑚𝑝 = 𝐷𝑖𝑝 , ∀𝑝 ∈
+
+𝑥𝑚 𝑖≠𝑗 𝑘≠𝑗
+𝑖𝑗  directly from node 𝑖 to node 𝑗 and 
+
+𝑃, 𝑗 ∈ 𝑁\{1}  (8) 
+equal to 0 if otherwise 
+Quantity of product type p that ∑
+
+𝑦 𝑝∈𝑃 𝐷𝑖𝑝 𝑆𝑝𝑎𝑐𝑒𝑝𝑥𝑚
+𝑖𝑗 ≤ ∑𝑝∈𝑃 𝑦𝑖𝑗𝑚𝑝𝑆𝑝𝑎𝑐𝑒𝑝 ≤
+
+𝑖𝑗𝑚𝑝 vehicle m carries when it leaves 
+(𝐶𝑎𝑝
+
+node 𝑖 to service node 𝑗 𝑚 − ∑𝑝∈𝑃 𝐷𝑖𝑝𝑆𝑝𝑎𝑐𝑒𝑝)𝑥𝑚
+𝑖𝑗 , ∀(𝑖, 𝑗) ∈ 𝑁, 𝑖 ≠
+
+𝑗, 𝑚 ∈ 𝑀  (9) 
+
+3 
+ 
+
+
+
+ International Conference on Logistics and Industrial Engineering 2021 
+
+Constraint (9) prevent any product is taken back 𝑎𝑖𝑚 ≤  𝑙𝑖𝑚 − 𝑠𝑖𝑚 + (1 − 𝑥𝑚
+𝑖𝑗 )𝐵𝑖𝑔𝑀, ∀𝑚 ∈ 𝑀, 𝑖 ∈ 𝑁\
+
+to the depot while constraint (10) guarantees that no {1}, 𝑗 ∈ 𝑁, 𝑖 ≠ 𝑗 (23) 
+products will be assigned if a vehicle is not activated. 
+
+4. Case study and numerical results 
+𝑦𝑖1𝑚𝑝 = 0, ∀𝑖 ∈ 𝑁, 𝑚 ∈ 𝑀, 𝑝 ∈ 𝑃   (10) 
+
+DKSH Vietnam Co., Ltd. are the leading Market 
+∑𝑝∈𝑃 𝑦𝑖𝑗𝑚𝑝 ≤ 𝑥𝑚
+
+𝑖𝑗 × 𝐵𝑖𝑔𝑀, ∀(𝑖, 𝑗) ∈ 𝑁, 𝑚 ∈ 𝑀 (11) Expansion Services provider for companies who want 
+to grow their business in Vietnam. Serving their 
+
+Constraints (12) make sure that if customer 𝑗 business partners through their extensive global 
+follows customer 𝑖 in the route, the arrival time at networks and industry expertise, DKSH Vietnam help 
+customer 𝑗 is equal to the departure time from companies to grow their businesses in new and 
+customer 𝑖 plus the travel time between these two existing markets. As one of Vietnam’s leading 
+customers. business organizations, their network of 22 business 
+
+locations, including offices, distribution centers, and 
+𝑑𝑖𝑗 cross-docks, across the country and 4,500 employees 
+
+(𝑎𝑗𝑚 − (𝑙𝑖𝑚 + )) 𝑥𝑚 ∀ 𝑖 𝑗 ∈ , ≠ , ∈
+𝑣 𝑖𝑗 = 0, ( , ) 𝑁 𝑖 𝑗 𝑚
+
+𝑚 make them an international “local” company. DKSH 
+
+𝑀  (12) Vietnam is committed to building long-term business 
+partnerships in Vietnam. DKSH Vietnam constantly 
+
+Constraints (13) relate arrival time, departure time strives to bring world-class standards to industries in 
+with service time and guarantee that their relationships Vietnam while also contributing to the development of 
+are compatible to the time window. Constraints (14) local communities. 
+and (15) are the time window for the customers and 
+depot. Finally, constraints (16), (17), (18) and (19) In Healthcare branch, DKSH Vietnam has three 
+
+restrict the values of the variables. warehouses located in Ha Noi, Da Nang and Binh 
+Duong, and a distribution center (DC) in Can Tho. All 
+
+(𝑙 oversea products are shipped to Binh Duong 
+𝑖𝑚 − (𝑎𝑖𝑚 + 𝑠𝑖𝑚))𝑥𝑚
+
+𝑖𝑗 = 0, ∀𝑖 ∈ 𝑁\{1}, 𝑗 ∈ 𝑁, 𝑖 ≠
+𝑗, 𝑚 ∈ 𝑀  (13) warehouse from Cat Lai seaport. Then, products will 
+
+be transported to Ha Noi and Da Nang warehouses 
+
+𝑎 depending on the customers’ location. The warehouse 
+𝑗𝑚 ≥ 𝑒 ∑ 𝑥𝑚
+
+𝑗∈𝑁 𝑖𝑗 , ∀𝑖 ∈ 𝑁\{1}, 𝑚 ∈ 𝑀  (14) 
+main functions are received products, pick and pack 
+
+𝑎 according to customers order, release bills and ship to 
+𝑗𝑚 ≤ 𝑙 ∑ 𝑥𝑚
+
+𝑗∈𝑁 𝑖𝑗 , ∀𝑖 ∈ 𝑁\{1}, 𝑚 ∈ 𝑀  (15) 
+customers. The Can Tho DC main responsibility is 
+
+𝑥𝑚 only to receive packages in large containers from Binh 
+𝑖𝑗  ∈ {0,1}, ∀(𝑖, 𝑗) ∈ 𝑁, 𝑚 ∈ 𝑀  (16) 
+
+Duong warehouse and distribute packages into smaller 
+
+𝑦 truck and ship to customers. The Da Nang warehouse 
+𝑖𝑗𝑚𝑝 ≥ 0, ∀(𝑖, 𝑗) ∈ 𝑁, 𝑚 ∈ 𝑀, 𝑝 ∈ 𝑃  (17) 
+
+covers from Quang Binh to Binh Thuan. From Quang 
+
+𝑎 Binh up to the north is covered by Ha Noi warehouse, 
+𝑖𝑚 ≥ 0, ∀𝑖 ∈ 𝑁, 𝑚 ∈ 𝑀  (18) 
+
+and from Binh Thuan province down to the south is 
+𝑙 cover by Binh Duong warehouse.  
+
+𝑖𝑚 ≥ 0, ∀𝑖 ∈ 𝑁, 𝑚 ∈ 𝑀 (19) 
+
+In order to linearization the non-linear constraints (12) Right now, DKSH Vietnam delivery policy is that 
+and (13), the BigM constraints method was applied one truck is responsible for one province’s order. The 
+and formulation the alternative constraints (20), (21), capacity of the truck is depended on the province’s 
+(22) and (23) below. demand. Trucks will get packages from warehouses 
+
+and transport to the province’s city. From there, a local 
+𝑑𝑖𝑗
+
+𝑎 transportation team hired by DKSH Vietnam 
+𝑗𝑚 ≥  𝑙𝑖𝑚 + − (1 − 𝑥𝑚 , 𝑚 𝑀 ( , )
+
+𝑣 𝑖𝑗 )𝐵𝑖𝑔𝑀 ∀ ∈ , 𝑖 𝑗 ∈
+𝑚 consisting of 3-5 people, depending on the province 
+
+𝑁, 𝑖 ≠ 𝑗 (20) size, will receive packages from the truck and shipped 
+to customers. After distributing packages, the truck 
+
+𝑑𝑖𝑗
+𝑎𝑗𝑚 ≤  𝑙𝑖𝑚 + + (1 − 𝑥𝑚)𝐵𝑖𝑔𝑀, ∀𝑚 ∈ 𝑀, (𝑖, 𝑗) ∈
+
+𝑣 𝑖𝑗 will ship to customers living in the city only and come 
+𝑚
+
+𝑁, 𝑖 ≠ 𝑗 (21) back to warehouses after finish shipping. The latest 
+time for shipping is 6 PM then all trucks must go back 
+
+𝑎 𝑚 and be available at the depot before 1 AM of the next 
+𝑖𝑚 ≥  𝑙𝑖𝑚 − 𝑠𝑖𝑚  − (1 − 𝑥𝑖𝑗 )𝐵𝑖𝑔𝑀, ∀𝑚 ∈ 𝑀, 𝑖 ∈
+
+𝑁\{1}, 𝑗 ∈ 𝑁, 𝑖 ≠ 𝑗 day. Customer orders cut off time is 6 PM each day. 
+ (22) 
+
+Orders are then sent to warehouses, where they will be 
+processed, pick and pack into packages, and loaded on 
+
+4 
+ 
+
+
+
+ International Conference on Logistics and Industrial Engineering 2021 
+
+trucks. Only after the cut off time will DKSH Vietnam 5 3 2 7 5 0 
+know exactly each customer demand for the next 
+
+6 6 5 2 5 4 
+delivery and each truck delivery schedule will be 
+generated. By 2 AM the next morning, trucks are 7 9 11 5 7 2 
+loaded with packages and the transportation cycle 8 3 5 5 2 0 
+begins again. Each province or city is divided into 
+
+9 5 2 2 3 1 
+many areas with different delivery schedule. Delivery 
+frequency ranges from 1 to 6 days a week, depending 10 6 5 2 2 1 
+on customer need and distance from the warehouse. 11 7 4 4 1 2 
+Usually, big city centers will be delivered 6 days a 
+
+12 7 3 2 1 1 
+week. DKSH Vietnam continues to expand its market 
+by signing contracts with new clients each year. In 13 6 4 2 1 0 
+2018, Sanofi became DKSH Vietnam’s new client and 14 4 3 5 1 0 
+is one of the biggest clients. Its sales last year 
+accounted for 28% of total sales. DKSH Vietnam 15 6 2 0 1 3 
+
+classified their customers into 4 groups as Table 3. 16 7 1 5 2 4 
+
+17 9 3 0 2 0 
+Table 3. DKSH Vietnam customer classification 
+
+18 12 2 0 0 2 
+Average value per order 
+
+Group Proportion 19 5 7 2 2 1 
+in a month (VND) 
+
+A Over 15 million 5% 20 4 1 0 5 4 
+
+B 10 – 15 million 12% 21 3 1 1 2 1 
+C 5 – 10 million 28% 22 14 2 0 3 0 
+D Under 5 million 55% 
+
+23 6 2 1 4 0 
+
+As can be seen, more than half of customers 24 4 6 3 10 4 
+usually place orders under 5 million VND and the 25 7 5 2 9 2 
+average SKU per order is 5. This means that each time 
+
+26 5 7 9 0 3 
+customers place an order they usually buy few 
+products and spend little money on it. 27 11 9 5 3 2 
+
+28 2 1 3 0 5 
+4.1. Case study data 
+
+29 9 1 1 2 0 
+
+Customers demand data collected from DKSH 30 11 2 3 7 4 
+Vietnam is processed by grouping customer in some 
+
+31 14 2 1 0 0 
+districts in a province into one node. As can be seen, 
+some nodes are different areas of one province. Unlike 32 9 2 3 1 0 
+DKSH Vietnam transportation rule, where they 33 8 3 2 3 2 
+decided that one vehicle is responsible for one 
+
+34 12 4 3 0 0 
+province, in this model, the vehicle can transport 
+freely between nodes that are not in one province. One 35 14 3 2 0 1 
+month demands in 2018 of these nodes were chosen 36 5 2 5 3 0 
+randomly and the average is used for the model 
+
+37 10 3 4 0 0 
+customers demand input as Table 4.  
+
+38 9 4 0 5 1 
+Table 4. Node demand 
+
+39 7 3 2 1 0 
+
+SKU 40 7 3 0 3 0 
+Node 
+
+1 2 3 4 5 41 8 2 1 0 1 
+
+1 0 0 0 0 0 42 6 4 0 3 0 
+
+2 14 8 11 5 2 43 5 2 3 1 0 
+
+3 10 13 5 9 1 44 9 2 3 0 0 
+
+4 5 6 3 2 2 45 7 5 1 2 1 
+
+5 
+ 
+
+
+
+ International Conference on Logistics and Industrial Engineering 2021 
+
+Each node demand contains many packages of 611,174,000 VND (~27,407 USD) with 16 vehicles 
+different size, each package is for a customer as Table are triggered. 
+5. The distance between these nodes is estimated based 
+on the position where the truck drops off packages to Table 7. Vehicle routing optimization result 
+a local transportation team and are calculated by using 
+Python linked with Google map. Vehicle ID Route Node Sequence 
+
+1 Depot-2-19-Depot 
+Table 5. Product space requirement 
+
+2 Depot-4-5-6-Depot 
+
+SKUs 1 2 3 4 5 3 Depot-25-39-43-45-Depot 
+
+Space 4 Depot-37-38-Depot 
+0.1 0.2 0.3 0.4 0.5 
+
+(m3) 5 Depot-21-44-Depot 
+
+6 Depot-11-10-Depot 
+All vehicles will start leaving the depot at 2 AM 7 Depot-7-27-Depot 
+
+each day. This is considered as time 0 in the model 8 Depot-29-26-28-30-Depot 
+when all transportation begins. Each vehicle type has 
+
+9 Depot-16-Depot 
+different capacity, velocity. To create equality 
+between vehicles with the same type, their parameters 10 Depot-40-Depot 
+
+(capacity, velocity, operating cost per km travelled, 11 Depot-34-3-Depot 
+service time for each customer will be exactly the 12 Depot-24-35-20-Depot 
+same. This means, all trucks of the same type will have 14 Depot-15-14-32-31-Depot 
+equal probability chosen by the model. Vehicle 
+
+15 Depot-22-23- Depot 
+velocity may varies depended on the size of the road. 
+So, their average velocity will be taken, which is 40 – 18 Depot-33-12-13-42-Depot 
+
+45km/h, depending on the truck size. Bigger truck will 20 Depot-8-9-36-17-18-41-Depot 
+
+have slower speed. These data are consolidated by 
+DKSH Vietnam given data as well as reference by These results are compared with the cost of routes 
+sShip transportation company trucking fee as Table 6. actually covered by the trucks of the company at the 
+Meanwhile the time window for customer ([𝑒, 𝑙]) is same time as Figure 1. In both cases, the route cost is 
+06:00-14:00 with the latest depot depart time (𝐿) is 
+
+calculated by adding the fixed and operating costs. 
+01:00 every day. 
+
+Table 6. Vehicle characteristics 
+
+Vehicle 
+1-10 11-20 21-23 
+
+ID 
+Vehicle 
+
+2 2.5 15 
+type (ton) 
+Capacity 
+
+13 16 66 
+(m3) 
+
+Velocity 
+45 45 40 
+
+(km/h) 
+Fixed cost 
+
+210,000 230,000 350,000  
+(VND) Figure 1. Transportation performance 
+
+Operating 
+cost 21,500 22,500 31,500 As state before, there are 45 nodes comes from 25 
+
+(VND/km) provinces. With DKSH Vietnam transportation rule, 
+Service which is one vehicle responsible for one province, 
+
+time 0.3 0.4 0.5 there are 25 triggered vehicles and it costs them around 
+(hour) 42,000 USD transportation cost. This does not even 
+
+ cover the transportation cost when the trucks go 
+4.2. Optimization results around the province’s city for delivery. Comparing 
+
+both models, it is clear that with the new model, DKSH 
+In Table 7, the optimization results are presented, Vietnam can reduces 9 trucks, saving around 
+
+which proposed the total transportation cost is 14,500USD per day, or 3,253,480USD per year. 
+
+6 
+ 
+
+
+
+ International Conference on Logistics and Industrial Engineering 2021 
+
+The advantage of this proposal is that each vehicle time still respect all problem constraints and time 
+does not strictly need to be visited only one province. window. DKSH Vietnam could apply this model to 
+By dividing provinces into one or many nodes based reality easily, save more transportation and system 
+on their demands, a vehicle can flexibly travel between cost than what they are doing right now. 
+two nodes of, maybe, different provinces, as long as 
+this route saves more cost. Another advantage of this Most of the problem aspects have been covered in 
+is that instead of using a big truck to deliver to this model, however, there are still some limitations 
+customers in cities, the truck will now just drop off due to solving time constraint. For future work, the 
+packages and one or two local transportation solving time should be reduced to at most 30 minutes 
+employees, depend on how many customer orders, to reach optimal solution. In order to do that, other 
+will deliver them to customers. By switching from a solving method, like heuristics, could be developed. 
+truck to motorbikes, packages will be delivered faster, The model could be improved to be applied for more 
+considering Vietnam traffic characteristics. complex problems at Southern region, where a DC is 
+Furthermore, it will save more transportation cost involved, and Middle region since there are longer 
+since a 2-ton truck cost 21,500VND/km while two distance and the lead time varies from 1 to 2 days. For 
+motorbikes cost only 10,000VND/km (5,000VND/km a more practical and complete solution, other 
+each). For a more practical and out of scope transportation factors such as toll, rush hour, reducing 
+comparison, transportation employee costs will also emission gas should also be taken into consideration. 
+now be included. There are two types of transportation The number of product types could increase more to 
+employee, local transportation employee, and on-truck be more realistic. 
+transportation employee. Local transportation 
+employees are DKSH Vietnam employees who based 6. References 
+
+in each province with their duty to receive a package 
+Abdullahi, H., Reyes-Rubiano, L., Ouelhadj, D., 
+
+from a truck and distribute it to customers. On-truck 
+Faulin, J., & Juan, A. A. (2021). Modelling and 
+
+transportation employees are the ones who go with the 
+truck to help the driver distributing packages to local multi-criteria analysis of the sustainability 
+
+employees and deliver packages to the city’s dimensions for the green vehicle routing problem. 
+
+customers while the driver stays with the truck. With European Journal of Operational Research, 
+292(1), 143-154. doi:10.1016/j.ejor.2020.10.028 
+
+the new method, the on-truck employees are not 
+Chen, D., Pan, S., Chen, Q., & Liu, J. (2020). Vehicle 
+
+needed anymore, since now all trucks do not deliver 
+routing problem of contactless joint distribution 
+
+directly to any customer. In this particular situation, 25 
+of on-truck employees are a shift to 25-35 local service during COVID-19 pandemic. Transp Res 
+
+employees. Salaries for these two types of employees Interdiscip Perspect, 8, 100233. 
+
+are 6 million VND/person/month. With about 10 doi:10.1016/j.trip.2020.100233 
+Elshaer, R., & Awad, H. (2020). A taxonomic review 
+
+people differences, it will cost around 60 million 
+of metaheuristic algorithms for solving the 
+
+VND/month more (~2,690USD). However, this is not 
+vehicle routing problem and its variants. 
+
+much comparing to the 14,500USD/day saving in 
+Computers & Industrial Engineering, 140, 
+
+transportation cost. 
+106242. doi:10.1016/j.cie.2019.106242 
+
+5. Conclusion Hsu, C.-I., Hung, S.-F., & Li, H.-C. (2007). Vehicle 
+routing problem with time-windows for 
+
+This paper proposed a mathematical model to perishable food delivery. Journal of Food 
+solve a real-life transportation problem in a Engineering, 80(2), 465-475. 
+pharmaceutical distribution company, DKSH doi:10.1016/j.jfoodeng.2006.05.029 
+Vietnam. The problem is classified as a heterogeneous Li, H., Wang, H., Chen, J., & Bai, M. (2020). Two-
+fleet vehicle routing problem with time windows echelon vehicle routing problem with time 
+problem, which was modified to a real-life situation windows and mobile satellites. Transportation 
+and introduced a linearization method for some Research Part B: Methodological, 138, 179-201. 
+constraints. doi:10.1016/j.trb.2020.05.010 
+
+Neira, D. A., Aguayo, M. M., De la Fuente, R., & 
+The proposed approach has fulfilled the research Klapp, M. A. (2020). New compact integer 
+
+objective, which is to minimize total transportation programming formulations for the multi-trip 
+cost by determining the optimal set of routes for a fleet vehicle routing problem with time windows. 
+of vehicles. It has offered a better solution in terms of Computers & Industrial Engineering, 144, 
+distribution cost and a number of trucks used 106399. doi:10.1016/j.cie.2020.106399 
+compared to the current practice while at the same 
+
+7 
+ 
+
+
+
+ International Conference on Logistics and Industrial Engineering 2021 
+
+Öztop, H., Kizilay, D., & Çil, Z. A. (2020). 
+Mathematical models for the periodic vehicle 
+routing problem with time windows and time 
+spread constraints. An International Journal of 
+Optimization and Control: Theories & 
+Applications (IJOCTA), 11(1), 10-23. 
+doi:10.11121/ijocta.01.2021.00899 
+
+Pan, B., Zhang, Z., & Lim, A. (2021). Multi-trip time-
+dependent vehicle routing problem with time 
+windows. European Journal of Operational 
+Research, 291(1), 218-231. 
+doi:10.1016/j.ejor.2020.09.022 
+
+Redi, A. A. N. P., Jewpanya, P., Kurniawan, A. C., 
+Persada, S. F., Nadlifatin, R., & Dewi, O. A. C. 
+(2020). A Simulated Annealing Algorithm for 
+Solving Two-Echelon Vehicle Routing Problem 
+with Locker Facilities. Algorithms, 13(9), 218. 
+doi:10.3390/a13090218 
+
+Vidal, T., Laporte, G., & Matl, P. (2020). A concise 
+guide to existing and emerging vehicle routing 
+problem variants. European Journal of 
+Operational Research, 286(2), 401-416. 
+doi:10.1016/j.ejor.2019.10.010 
+
+Zhang, S., Chen, M., Zhang, W., & Zhuang, X. (2020). 
+Fuzzy optimization model for electric vehicle 
+routing problem with time windows and 
+recharging stations. Expert Systems with 
+Applications, 145, 113123. 
+doi:10.1016/j.eswa.2019.113123 
+
+ 
+
+8

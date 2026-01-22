@@ -1,0 +1,8 @@
+build/
+.venv/
+.DS_Store
+temp.json
+*.o
+*.dSYM
+__pycache__/
+*.pyc

@@ -1,0 +1,21 @@
+
+Aditya Jain 12/01/2026 21:46
+Kindly clarify what the "allow_external_maps" parameter means given in the Metadata of the input files.
+Testcase 12/01/2026 23:03
+If a problem admits two or more possible solutions, which one is considered better, and on what basis is this decision made?
+Which constraints are the hard constraint and which ones are soft, what is the penalty if our sol fails to meet one of these constraint?
+Adityaaa26 13/01/2026 11:32
+13 January 2026
+In test cases, dropping points are the same, so is it a constraint or just coincidence.
+Also, please specify the expected order of magnitude for the number of employees and vehicles, or the approximate time limits for the test cases. (edited)
+@Aditya Jain Kindly clarify what the "allow_external_maps" parameter means given in the Metadata of the input files.
+Velora 13/01/2026 16:07
+"allow_external_maps" indicates whether external mapping/routing APIs may be used only for distance or travel-time estimation; this is not a strict restriction and applies only to that specific test case.
+However, solutions that consistently follow the specified haversine distance method are viewed more positively during evaluation for fairness and comparability.
+@Testcase If a problem admits two or more possible solutions, which one is considered better, and on what basis is this decision made? Velora 13/01/2026 16:13
+The evaluation criterion is clearly mentioned in the problem statement; (participants are expected to focus primarily on cost optimisation.)
+@Adityaaa26 In test cases, dropping points are the same, so is it a constraint or just coincidence. Also, please specify the expected order of magnitude for the number of e... Velora 13/01/2026 16:14
+The common drop location in the test cases is intentional and should be treated as a fixed constraint, representing a single office destination rather than a coincidence.
+The number of employees and vehicles will vary across test cases (from small to large-scale scenarios), and solutions are expected to handle inputs ranging from a few dozen up to ~100+ employees, with practical runtimes suitable for near-real-time execution.
+vanshikaaaaa_ 13/01/2024 21:50
+is the latest drop time rigid? or the tolerance of an employee for delay can be incorporated in drop time?

@@ -1,0 +1,534 @@
+================================================================================
+VELORA MOBILITY OPTIMIZER - TEST CASE TC05
+================================================================================
+
+INPUT SUMMARY
+--------------------------------------------------------------------------------
+Total Requests:    100
+Total Vehicles:    30
+
+VEHICLES:
+  V00 | Capacity:   6 | Cost/km: $18.00 | Start: (12.9279, 77.6271)
+  V01 | Capacity:   6 | Cost/km: $18.00 | Start: (12.9279, 77.6271)
+  V02 | Capacity:   6 | Cost/km: $18.00 | Start: (12.9279, 77.6271)
+  V03 | Capacity:   6 | Cost/km: $18.00 | Start: (12.9279, 77.6271)
+  V04 | Capacity:   6 | Cost/km: $18.00 | Start: (12.9279, 77.6271)
+  V05 | Capacity:   6 | Cost/km: $18.00 | Start: (12.9279, 77.6271)
+  V06 | Capacity:   6 | Cost/km: $18.00 | Start: (12.9279, 77.6271)
+  V07 | Capacity:   6 | Cost/km: $18.00 | Start: (12.9279, 77.6271)
+  V08 | Capacity:   6 | Cost/km: $18.00 | Start: (12.9279, 77.6271)
+  V09 | Capacity:   6 | Cost/km: $18.00 | Start: (12.9279, 77.6271)
+  V10 | Capacity:   4 | Cost/km: $14.00 | Start: (12.9279, 77.6271)
+  V11 | Capacity:   4 | Cost/km: $14.00 | Start: (12.9279, 77.6271)
+  V12 | Capacity:   4 | Cost/km: $14.00 | Start: (12.9279, 77.6271)
+  V13 | Capacity:   4 | Cost/km: $14.00 | Start: (12.9279, 77.6271)
+  V14 | Capacity:   4 | Cost/km: $14.00 | Start: (12.9279, 77.6271)
+  V15 | Capacity:   4 | Cost/km: $14.00 | Start: (12.9279, 77.6271)
+  V16 | Capacity:   4 | Cost/km: $14.00 | Start: (12.9279, 77.6271)
+  V17 | Capacity:   4 | Cost/km: $14.00 | Start: (12.9279, 77.6271)
+  V18 | Capacity:   4 | Cost/km: $14.00 | Start: (12.9279, 77.6271)
+  V19 | Capacity:   4 | Cost/km: $14.00 | Start: (12.9279, 77.6271)
+  V20 | Capacity:   3 | Cost/km: $10.00 | Start: (12.9279, 77.6271)
+  V21 | Capacity:   3 | Cost/km: $10.00 | Start: (12.9279, 77.6271)
+  V22 | Capacity:   3 | Cost/km: $10.00 | Start: (12.9279, 77.6271)
+  V23 | Capacity:   3 | Cost/km: $10.00 | Start: (12.9279, 77.6271)
+  V24 | Capacity:   3 | Cost/km: $10.00 | Start: (12.9279, 77.6271)
+  V25 | Capacity:   3 | Cost/km: $10.00 | Start: (12.9279, 77.6271)
+  V26 | Capacity:   3 | Cost/km: $10.00 | Start: (12.9279, 77.6271)
+  V27 | Capacity:   3 | Cost/km: $10.00 | Start: (12.9279, 77.6271)
+  V28 | Capacity:   3 | Cost/km: $10.00 | Start: (12.9279, 77.6271)
+  V29 | Capacity:   3 | Cost/km: $10.00 | Start: (12.9279, 77.6271)
+
+REQUESTS:
+  R00 | Priority: P3     | Load: 1 | Window: [ 491.0,    581.0]
+  R01 | Priority: P3     | Load: 1 | Window: [ 504.0,    594.0]
+  R02 | Priority: P3     | Load: 1 | Window: [ 523.0,    613.0]
+  R03 | Priority: P3     | Load: 1 | Window: [ 501.0,    591.0]
+  R04 | Priority: P2     | Load: 1 | Window: [ 505.0,    595.0]
+  R05 | Priority: P3     | Load: 1 | Window: [ 513.0,    603.0]
+  R06 | Priority: P3     | Load: 1 | Window: [ 491.0,    581.0]
+  R07 | Priority: P4     | Load: 1 | Window: [ 495.0,    585.0]
+  R08 | Priority: P3     | Load: 1 | Window: [ 518.0,    608.0]
+  R09 | Priority: P3     | Load: 1 | Window: [ 517.0,    607.0]
+  R10 | Priority: P3     | Load: 1 | Window: [ 503.0,    593.0]
+  R11 | Priority: P5     | Load: 1 | Window: [ 493.0,    583.0]
+  R12 | Priority: P4     | Load: 1 | Window: [ 538.0,    628.0]
+  R13 | Priority: P1     | Load: 1 | Window: [ 501.0,    591.0]
+  R14 | Priority: P3     | Load: 1 | Window: [ 497.0,    587.0]
+  R15 | Priority: P2     | Load: 1 | Window: [ 491.0,    581.0]
+  R16 | Priority: P4     | Load: 1 | Window: [ 521.0,    611.0]
+  R17 | Priority: P3     | Load: 1 | Window: [ 509.0,    599.0]
+  R18 | Priority: P3     | Load: 1 | Window: [ 526.0,    616.0]
+  R19 | Priority: P3     | Load: 1 | Window: [ 485.0,    575.0]
+  R20 | Priority: P5     | Load: 1 | Window: [ 518.0,    608.0]
+  R21 | Priority: P3     | Load: 1 | Window: [ 528.0,    618.0]
+  R22 | Priority: P3     | Load: 1 | Window: [ 492.0,    582.0]
+  R23 | Priority: P1     | Load: 1 | Window: [ 539.0,    629.0]
+  R24 | Priority: P3     | Load: 1 | Window: [ 524.0,    614.0]
+  R25 | Priority: P3     | Load: 1 | Window: [ 538.0,    628.0]
+  R26 | Priority: P3     | Load: 1 | Window: [ 497.0,    587.0]
+  R27 | Priority: P4     | Load: 1 | Window: [ 524.0,    614.0]
+  R28 | Priority: P2     | Load: 1 | Window: [ 483.0,    573.0]
+  R29 | Priority: P1     | Load: 1 | Window: [ 481.0,    571.0]
+  R30 | Priority: P2     | Load: 1 | Window: [ 520.0,    610.0]
+  R31 | Priority: P3     | Load: 1 | Window: [ 486.0,    576.0]
+  R32 | Priority: P5     | Load: 1 | Window: [ 533.0,    623.0]
+  R33 | Priority: P2     | Load: 1 | Window: [ 530.0,    620.0]
+  R34 | Priority: P3     | Load: 1 | Window: [ 517.0,    607.0]
+  R35 | Priority: P2     | Load: 1 | Window: [ 511.0,    601.0]
+  R36 | Priority: P1     | Load: 1 | Window: [ 493.0,    583.0]
+  R37 | Priority: P3     | Load: 1 | Window: [ 485.0,    575.0]
+  R38 | Priority: P2     | Load: 1 | Window: [ 535.0,    625.0]
+  R39 | Priority: P2     | Load: 1 | Window: [ 520.0,    610.0]
+  R40 | Priority: P4     | Load: 1 | Window: [ 484.0,    574.0]
+  R41 | Priority: P3     | Load: 1 | Window: [ 492.0,    582.0]
+  R42 | Priority: P1     | Load: 1 | Window: [ 540.0,    630.0]
+  R43 | Priority: P3     | Load: 1 | Window: [ 505.0,    595.0]
+  R44 | Priority: P2     | Load: 1 | Window: [ 501.0,    591.0]
+  R45 | Priority: P3     | Load: 1 | Window: [ 501.0,    591.0]
+  R46 | Priority: P3     | Load: 1 | Window: [ 539.0,    629.0]
+  R47 | Priority: P4     | Load: 1 | Window: [ 533.0,    623.0]
+  R48 | Priority: P2     | Load: 1 | Window: [ 483.0,    573.0]
+  R49 | Priority: P3     | Load: 1 | Window: [ 490.0,    580.0]
+  R50 | Priority: P2     | Load: 1 | Window: [ 491.0,    581.0]
+  R51 | Priority: P3     | Load: 1 | Window: [ 515.0,    605.0]
+  R52 | Priority: P2     | Load: 1 | Window: [ 494.0,    584.0]
+  R53 | Priority: P3     | Load: 1 | Window: [ 520.0,    610.0]
+  R54 | Priority: P2     | Load: 1 | Window: [ 509.0,    599.0]
+  R55 | Priority: P4     | Load: 1 | Window: [ 492.0,    582.0]
+  R56 | Priority: P3     | Load: 1 | Window: [ 528.0,    618.0]
+  R57 | Priority: P4     | Load: 1 | Window: [ 511.0,    601.0]
+  R58 | Priority: P2     | Load: 1 | Window: [ 495.0,    585.0]
+  R59 | Priority: P1     | Load: 1 | Window: [ 493.0,    583.0]
+  R60 | Priority: P2     | Load: 1 | Window: [ 485.0,    575.0]
+  R61 | Priority: P3     | Load: 1 | Window: [ 511.0,    601.0]
+  R62 | Priority: P2     | Load: 1 | Window: [ 509.0,    599.0]
+  R63 | Priority: P3     | Load: 1 | Window: [ 518.0,    608.0]
+  R64 | Priority: P3     | Load: 1 | Window: [ 499.0,    589.0]
+  R65 | Priority: P4     | Load: 1 | Window: [ 493.0,    583.0]
+  R66 | Priority: P4     | Load: 1 | Window: [ 496.0,    586.0]
+  R67 | Priority: P2     | Load: 1 | Window: [ 493.0,    583.0]
+  R68 | Priority: P2     | Load: 1 | Window: [ 505.0,    595.0]
+  R69 | Priority: P3     | Load: 1 | Window: [ 516.0,    606.0]
+  R70 | Priority: P2     | Load: 1 | Window: [ 527.0,    617.0]
+  R71 | Priority: P3     | Load: 1 | Window: [ 482.0,    572.0]
+  R72 | Priority: P4     | Load: 1 | Window: [ 516.0,    606.0]
+  R73 | Priority: P3     | Load: 1 | Window: [ 510.0,    600.0]
+  R74 | Priority: P4     | Load: 1 | Window: [ 536.0,    626.0]
+  R75 | Priority: P4     | Load: 1 | Window: [ 500.0,    590.0]
+  R76 | Priority: P2     | Load: 1 | Window: [ 516.0,    606.0]
+  R77 | Priority: P4     | Load: 1 | Window: [ 482.0,    572.0]
+  R78 | Priority: P3     | Load: 1 | Window: [ 509.0,    599.0]
+  R79 | Priority: P3     | Load: 1 | Window: [ 518.0,    608.0]
+  R80 | Priority: P3     | Load: 1 | Window: [ 505.0,    595.0]
+  R81 | Priority: P3     | Load: 1 | Window: [ 505.0,    595.0]
+  R82 | Priority: P2     | Load: 1 | Window: [ 519.0,    609.0]
+  R83 | Priority: P3     | Load: 1 | Window: [ 521.0,    611.0]
+  R84 | Priority: P1     | Load: 1 | Window: [ 485.0,    575.0]
+  R85 | Priority: P3     | Load: 1 | Window: [ 537.0,    627.0]
+  R86 | Priority: P1     | Load: 1 | Window: [ 498.0,    588.0]
+  R87 | Priority: P3     | Load: 1 | Window: [ 527.0,    617.0]
+  R88 | Priority: P3     | Load: 1 | Window: [ 500.0,    590.0]
+  R89 | Priority: P3     | Load: 1 | Window: [ 486.0,    576.0]
+  R90 | Priority: P3     | Load: 1 | Window: [ 483.0,    573.0]
+  R91 | Priority: P5     | Load: 1 | Window: [ 481.0,    571.0]
+  R92 | Priority: P4     | Load: 1 | Window: [ 533.0,    623.0]
+  R93 | Priority: P3     | Load: 1 | Window: [ 539.0,    629.0]
+  R94 | Priority: P3     | Load: 1 | Window: [ 504.0,    594.0]
+  R95 | Priority: P1     | Load: 1 | Window: [ 495.0,    585.0]
+  R96 | Priority: P3     | Load: 1 | Window: [ 523.0,    613.0]
+  R97 | Priority: P3     | Load: 1 | Window: [ 518.0,    608.0]
+  R98 | Priority: P3     | Load: 1 | Window: [ 534.0,    624.0]
+  R99 | Priority: P1     | Load: 1 | Window: [ 360.0,    540.0]
+
+================================================================================
+OPTIMIZATION RESULTS
+================================================================================
+Global Cost:       $8823.88
+Routes Assigned:   30
+Requests Assigned: 100
+Requests Unassigned: 0
+
+DETAILED ROUTES
+--------------------------------------------------------------------------------
+Vehicle V00: (EMPTY)
+Vehicle V01: (EMPTY)
+Vehicle V02: (EMPTY)
+Vehicle V03:
+  Total Distance: 36.62 km
+  Total Cost:     $472.34
+  Stops: 12
+
+    1. PICKUP  Request R92 @  533.00 | Window: [533.0, 623.0] | (12.9331, 77.6009)
+    2. PICKUP  Request R11 @  534.00 | Window: [493.0, 583.0] | (12.9355, 77.5920)
+    3. PICKUP  Request R96 @  542.42 | Window: [523.0, 613.0] | (12.9748, 77.6585)
+    4. PICKUP  Request R85 @  543.37 | Window: [537.0, 627.0] | (12.9832, 77.6604)
+    5. PICKUP  Request R94 @  549.50 | Window: [504.0, 594.0] | (12.9731, 77.7160)
+    6. PICKUP  Request R71 @  551.30 | Window: [482.0, 572.0] | (12.9718, 77.7325)
+    7. DROPOFF Request R85 @  566.72 | Window: [537.0, 627.0] | (13.0500, 77.6150)
+    8. DROPOFF Request R71 @  566.72 | Window: [482.0, 572.0] | (13.0500, 77.6150)
+    9. DROPOFF Request R92 @  566.72 | Window: [533.0, 623.0] | (13.0500, 77.6150)
+    10. DROPOFF Request R11 @  566.72 | Window: [493.0, 583.0] | (13.0500, 77.6150)
+    11. DROPOFF Request R96 @  566.72 | Window: [523.0, 613.0] | (13.0500, 77.6150)
+    12. DROPOFF Request R94 @  566.72 | Window: [504.0, 594.0] | (13.0500, 77.6150)
+
+Vehicle V04: (EMPTY)
+Vehicle V05: (EMPTY)
+Vehicle V06: (EMPTY)
+Vehicle V07: (EMPTY)
+Vehicle V08: (EMPTY)
+Vehicle V09: (EMPTY)
+Vehicle V10:
+  Total Distance: 44.99 km
+  Total Cost:     $454.39
+  Stops: 6
+
+    1. PICKUP  Request R99 @  510.51 | Window: [360.0, 540.0] | (12.8000, 77.5700)
+    2. PICKUP  Request R35 @  523.91 | Window: [511.0, 601.0] | (12.9197, 77.5838)
+    3. PICKUP  Request R54 @  525.89 | Window: [509.0, 599.0] | (12.9239, 77.6016)
+    4. DROPOFF Request R54 @  539.99 | Window: [509.0, 599.0] | (13.0500, 77.6150)
+    5. DROPOFF Request R35 @  539.99 | Window: [511.0, 601.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R99 @  539.99 | Window: [360.0, 540.0] | (13.0500, 77.6150)
+
+Vehicle V11:
+  Total Distance: 36.78 km
+  Total Cost:     $371.50
+  Stops: 8
+
+    1. PICKUP  Request R05 @  513.00 | Window: [513.0, 603.0] | (12.9031, 77.6328)
+    2. PICKUP  Request R98 @  534.00 | Window: [534.0, 624.0] | (12.8490, 77.6735)
+    3. PICKUP  Request R01 @  545.55 | Window: [504.0, 594.0] | (12.9187, 77.5946)
+    4. PICKUP  Request R65 @  548.39 | Window: [493.0, 583.0] | (12.9439, 77.5900)
+    5. DROPOFF Request R01 @  560.50 | Window: [504.0, 594.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R65 @  560.50 | Window: [493.0, 583.0] | (13.0500, 77.6150)
+    7. DROPOFF Request R05 @  560.50 | Window: [513.0, 603.0] | (13.0500, 77.6150)
+    8. DROPOFF Request R98 @  560.50 | Window: [534.0, 624.0] | (13.0500, 77.6150)
+
+Vehicle V12:
+  Total Distance: 40.16 km
+  Total Cost:     $405.61
+  Stops: 8
+
+    1. PICKUP  Request R53 @  520.00 | Window: [520.0, 610.0] | (12.8525, 77.6671)
+    2. PICKUP  Request R97 @  522.29 | Window: [518.0, 608.0] | (12.8320, 77.6670)
+    3. PICKUP  Request R82 @  524.63 | Window: [519.0, 609.0] | (12.8268, 77.6879)
+    4. PICKUP  Request R26 @  525.12 | Window: [497.0, 587.0] | (12.8300, 77.6848)
+    5. DROPOFF Request R97 @  550.72 | Window: [518.0, 608.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R53 @  550.72 | Window: [520.0, 610.0] | (13.0500, 77.6150)
+    7. DROPOFF Request R82 @  550.72 | Window: [519.0, 609.0] | (13.0500, 77.6150)
+    8. DROPOFF Request R26 @  550.72 | Window: [497.0, 587.0] | (13.0500, 77.6150)
+
+Vehicle V13:
+  Total Distance: 39.86 km
+  Total Cost:     $402.55
+  Stops: 8
+
+    1. PICKUP  Request R72 @  516.00 | Window: [516.0, 606.0] | (12.9582, 77.6260)
+    2. PICKUP  Request R45 @  530.93 | Window: [501.0, 591.0] | (12.9648, 77.7637)
+    3. PICKUP  Request R17 @  532.29 | Window: [509.0, 599.0] | (12.9674, 77.7514)
+    4. PICKUP  Request R89 @  539.08 | Window: [486.0, 576.0] | (12.9543, 77.6903)
+    5. DROPOFF Request R72 @  552.48 | Window: [516.0, 606.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R89 @  552.48 | Window: [486.0, 576.0] | (13.0500, 77.6150)
+    7. DROPOFF Request R17 @  552.48 | Window: [509.0, 599.0] | (13.0500, 77.6150)
+    8. DROPOFF Request R45 @  552.48 | Window: [501.0, 591.0] | (13.0500, 77.6150)
+
+Vehicle V14:
+  Total Distance: 67.23 km
+  Total Cost:     $678.99
+  Stops: 16
+
+    1. PICKUP  Request R88 @  500.00 | Window: [500.0, 590.0] | (12.8971, 77.6494)
+    2. PICKUP  Request R78 @  509.00 | Window: [509.0, 599.0] | (12.8567, 77.6744)
+    3. PICKUP  Request R37 @  518.41 | Window: [485.0, 575.0] | (12.9396, 77.6918)
+    4. PICKUP  Request R91 @  523.31 | Window: [481.0, 571.0] | (12.9613, 77.6525)
+    5. DROPOFF Request R91 @  533.97 | Window: [481.0, 571.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R78 @  533.97 | Window: [509.0, 599.0] | (13.0500, 77.6150)
+    7. DROPOFF Request R88 @  533.97 | Window: [500.0, 590.0] | (13.0500, 77.6150)
+    8. DROPOFF Request R37 @  533.97 | Window: [485.0, 575.0] | (13.0500, 77.6150)
+    9. PICKUP  Request R42 @  546.18 | Window: [540.0, 630.0] | (12.9439, 77.5860)
+    10. PICKUP  Request R51 @  547.68 | Window: [515.0, 605.0] | (12.9381, 77.5735)
+    11. PICKUP  Request R08 @  550.58 | Window: [518.0, 608.0] | (12.9124, 77.5780)
+    12. PICKUP  Request R56 @  554.83 | Window: [528.0, 618.0] | (12.9433, 77.6012)
+    13. DROPOFF Request R08 @  566.79 | Window: [518.0, 608.0] | (13.0500, 77.6150)
+    14. DROPOFF Request R51 @  566.79 | Window: [515.0, 605.0] | (13.0500, 77.6150)
+    15. DROPOFF Request R42 @  566.79 | Window: [540.0, 630.0] | (13.0500, 77.6150)
+    16. DROPOFF Request R56 @  566.79 | Window: [528.0, 618.0] | (13.0500, 77.6150)
+
+Vehicle V15:
+  Total Distance: 16.44 km
+  Total Cost:     $166.06
+  Stops: 6
+
+    1. PICKUP  Request R34 @  517.00 | Window: [517.0, 607.0] | (12.9542, 77.6588)
+    2. PICKUP  Request R41 @  519.07 | Window: [492.0, 582.0] | (12.9709, 77.6504)
+    3. PICKUP  Request R55 @  520.20 | Window: [492.0, 582.0] | (12.9758, 77.6412)
+    4. DROPOFF Request R55 @  528.93 | Window: [492.0, 582.0] | (13.0500, 77.6150)
+    5. DROPOFF Request R34 @  528.93 | Window: [517.0, 607.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R41 @  528.93 | Window: [492.0, 582.0] | (13.0500, 77.6150)
+
+Vehicle V16:
+  Total Distance: 32.68 km
+  Total Cost:     $330.04
+  Stops: 8
+
+    1. PICKUP  Request R39 @  520.00 | Window: [520.0, 610.0] | (12.9189, 77.6495)
+    2. PICKUP  Request R06 @  528.83 | Window: [491.0, 581.0] | (12.9726, 77.7095)
+    3. PICKUP  Request R31 @  533.29 | Window: [486.0, 576.0] | (12.9779, 77.7503)
+    4. PICKUP  Request R86 @  534.53 | Window: [498.0, 588.0] | (12.9860, 77.7423)
+    5. DROPOFF Request R39 @  550.05 | Window: [520.0, 610.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R86 @  550.05 | Window: [498.0, 588.0] | (13.0500, 77.6150)
+    7. DROPOFF Request R31 @  550.05 | Window: [486.0, 576.0] | (13.0500, 77.6150)
+    8. DROPOFF Request R06 @  550.05 | Window: [491.0, 581.0] | (13.0500, 77.6150)
+
+Vehicle V17:
+  Total Distance: 13.79 km
+  Total Cost:     $139.23
+  Stops: 6
+
+    1. PICKUP  Request R75 @  500.00 | Window: [500.0, 590.0] | (12.9593, 77.6260)
+    2. PICKUP  Request R29 @  501.04 | Window: [481.0, 571.0] | (12.9686, 77.6274)
+    3. PICKUP  Request R81 @  505.00 | Window: [505.0, 595.0] | (12.9847, 77.6299)
+    4. DROPOFF Request R81 @  512.44 | Window: [505.0, 595.0] | (13.0500, 77.6150)
+    5. DROPOFF Request R29 @  512.44 | Window: [481.0, 571.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R75 @  512.44 | Window: [500.0, 590.0] | (13.0500, 77.6150)
+
+Vehicle V18:
+  Total Distance: 49.02 km
+  Total Cost:     $504.19
+  Stops: 8
+
+    1. PICKUP  Request R28 @  496.51 | Window: [483.0, 573.0] | (12.9210, 77.6391)
+    2. PICKUP  Request R77 @  507.19 | Window: [482.0, 572.0] | (12.9550, 77.7313)
+    3. PICKUP  Request R12 @  538.00 | Window: [538.0, 628.0] | (12.9721, 77.7444)
+    4. DROPOFF Request R28 @  554.48 | Window: [483.0, 573.0] | (13.0500, 77.6150)
+    5. DROPOFF Request R12 @  554.48 | Window: [538.0, 628.0] | (13.0500, 77.6150)
+    6. PICKUP  Request R40 @  563.47 | Window: [484.0, 574.0] | (12.9716, 77.6353)
+    7. DROPOFF Request R77 @  572.45 | Window: [482.0, 572.0] | (13.0500, 77.6150)
+    8. DROPOFF Request R40 @  572.45 | Window: [484.0, 574.0] | (13.0500, 77.6150)
+
+Vehicle V19:
+  Total Distance: 35.41 km
+  Total Cost:     $357.64
+  Stops: 8
+
+    1. PICKUP  Request R21 @  528.00 | Window: [528.0, 618.0] | (12.9425, 77.7081)
+    2. PICKUP  Request R25 @  538.00 | Window: [538.0, 628.0] | (12.9585, 77.7606)
+    3. PICKUP  Request R22 @  539.51 | Window: [492.0, 582.0] | (12.9708, 77.7665)
+    4. PICKUP  Request R27 @  541.76 | Window: [524.0, 614.0] | (12.9694, 77.7457)
+    5. DROPOFF Request R21 @  558.52 | Window: [528.0, 618.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R22 @  558.52 | Window: [492.0, 582.0] | (13.0500, 77.6150)
+    7. DROPOFF Request R25 @  558.52 | Window: [538.0, 628.0] | (13.0500, 77.6150)
+    8. DROPOFF Request R27 @  558.52 | Window: [524.0, 614.0] | (13.0500, 77.6150)
+
+Vehicle V20:
+  Total Distance: 68.30 km
+  Total Cost:     $498.56
+  Stops: 12
+
+    1. PICKUP  Request R09 @  517.00 | Window: [517.0, 607.0] | (12.9303, 77.6263)
+    2. PICKUP  Request R36 @  528.92 | Window: [493.0, 583.0] | (12.8302, 77.6655)
+    3. PICKUP  Request R76 @  532.87 | Window: [516.0, 606.0] | (12.8582, 77.6880)
+    4. DROPOFF Request R09 @  555.62 | Window: [517.0, 607.0] | (13.0500, 77.6150)
+    5. DROPOFF Request R76 @  555.62 | Window: [516.0, 606.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R36 @  555.62 | Window: [493.0, 583.0] | (13.0500, 77.6150)
+    7. PICKUP  Request R57 @  566.66 | Window: [511.0, 601.0] | (12.9557, 77.6466)
+    8. PICKUP  Request R61 @  571.02 | Window: [511.0, 601.0] | (12.9451, 77.6854)
+    9. PICKUP  Request R16 @  571.83 | Window: [521.0, 611.0] | (12.9522, 77.6839)
+    10. DROPOFF Request R16 @  585.01 | Window: [521.0, 611.0] | (13.0500, 77.6150)
+    11. DROPOFF Request R57 @  585.01 | Window: [511.0, 601.0] | (13.0500, 77.6150)
+    12. DROPOFF Request R61 @  585.01 | Window: [511.0, 601.0] | (13.0500, 77.6150)
+
+Vehicle V21:
+  Total Distance: 59.96 km
+  Total Cost:     $437.71
+  Stops: 10
+
+    1. PICKUP  Request R03 @  514.11 | Window: [501.0, 591.0] | (12.9133, 77.5922)
+    2. PICKUP  Request R80 @  522.71 | Window: [505.0, 595.0] | (12.9783, 77.6354)
+    3. DROPOFF Request R80 @  530.99 | Window: [505.0, 595.0] | (13.0500, 77.6150)
+    4. DROPOFF Request R03 @  530.99 | Window: [501.0, 591.0] | (13.0500, 77.6150)
+    5. PICKUP  Request R48 @  543.26 | Window: [483.0, 573.0] | (12.9764, 77.6994)
+    6. PICKUP  Request R23 @  549.57 | Window: [539.0, 629.0] | (12.9648, 77.7564)
+    7. PICKUP  Request R95 @  550.94 | Window: [495.0, 585.0] | (12.9675, 77.7688)
+    8. DROPOFF Request R48 @  569.96 | Window: [483.0, 573.0] | (13.0500, 77.6150)
+    9. DROPOFF Request R95 @  569.96 | Window: [495.0, 585.0] | (13.0500, 77.6150)
+    10. DROPOFF Request R23 @  569.96 | Window: [539.0, 629.0] | (13.0500, 77.6150)
+
+Vehicle V22:
+  Total Distance: 82.44 km
+  Total Cost:     $601.84
+  Stops: 12
+
+    1. PICKUP  Request R07 @  523.23 | Window: [495.0, 585.0] | (12.8283, 77.6939)
+    2. PICKUP  Request R32 @  537.94 | Window: [533.0, 623.0] | (12.9588, 77.7158)
+    3. PICKUP  Request R84 @  542.23 | Window: [485.0, 575.0] | (12.9766, 77.7509)
+    4. DROPOFF Request R07 @  559.07 | Window: [495.0, 585.0] | (13.0500, 77.6150)
+    5. DROPOFF Request R32 @  559.07 | Window: [533.0, 623.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R84 @  559.07 | Window: [485.0, 575.0] | (13.0500, 77.6150)
+    7. PICKUP  Request R46 @  572.35 | Window: [539.0, 629.0] | (12.9509, 77.6835)
+    8. PICKUP  Request R93 @  574.92 | Window: [539.0, 629.0] | (12.9430, 77.7057)
+    9. PICKUP  Request R20 @  578.71 | Window: [518.0, 608.0] | (12.9756, 77.7161)
+    10. DROPOFF Request R46 @  592.44 | Window: [539.0, 629.0] | (13.0500, 77.6150)
+    11. DROPOFF Request R93 @  592.44 | Window: [539.0, 629.0] | (13.0500, 77.6150)
+    12. DROPOFF Request R20 @  592.44 | Window: [518.0, 608.0] | (13.0500, 77.6150)
+
+Vehicle V23:
+  Total Distance: 57.14 km
+  Total Cost:     $417.12
+  Stops: 10
+
+    1. PICKUP  Request R30 @  520.00 | Window: [520.0, 610.0] | (12.9199, 77.5827)
+    2. PICKUP  Request R70 @  527.00 | Window: [527.0, 617.0] | (12.9369, 77.5652)
+    3. PICKUP  Request R64 @  528.09 | Window: [499.0, 589.0] | (12.9420, 77.5738)
+    4. DROPOFF Request R64 @  540.90 | Window: [499.0, 589.0] | (13.0500, 77.6150)
+    5. DROPOFF Request R30 @  540.90 | Window: [520.0, 610.0] | (13.0500, 77.6150)
+    6. PICKUP  Request R58 @  558.72 | Window: [495.0, 585.0] | (12.9674, 77.7559)
+    7. PICKUP  Request R62 @  560.98 | Window: [509.0, 599.0] | (12.9750, 77.7366)
+    8. DROPOFF Request R58 @  576.57 | Window: [495.0, 585.0] | (13.0500, 77.6150)
+    9. DROPOFF Request R62 @  576.57 | Window: [509.0, 599.0] | (13.0500, 77.6150)
+    10. DROPOFF Request R70 @  576.57 | Window: [527.0, 617.0] | (13.0500, 77.6150)
+
+Vehicle V24:
+  Total Distance: 66.99 km
+  Total Cost:     $608.61
+  Stops: 10
+
+    1. PICKUP  Request R15 @  522.79 | Window: [491.0, 581.0] | (12.8210, 77.6707)
+    2. PICKUP  Request R04 @  527.17 | Window: [505.0, 595.0] | (12.8572, 77.6867)
+    3. PICKUP  Request R60 @  533.24 | Window: [485.0, 575.0] | (12.9071, 77.6640)
+    4. DROPOFF Request R04 @  549.99 | Window: [505.0, 595.0] | (13.0500, 77.6150)
+    5. DROPOFF Request R60 @  549.99 | Window: [485.0, 575.0] | (13.0500, 77.6150)
+    6. PICKUP  Request R50 @  562.44 | Window: [491.0, 581.0] | (12.9719, 77.6974)
+    7. PICKUP  Request R90 @  563.55 | Window: [483.0, 573.0] | (12.9691, 77.7071)
+    8. DROPOFF Request R50 @  576.99 | Window: [491.0, 581.0] | (13.0500, 77.6150)
+    9. DROPOFF Request R90 @  576.99 | Window: [483.0, 573.0] | (13.0500, 77.6150)
+    10. DROPOFF Request R15 @  576.99 | Window: [491.0, 581.0] | (13.0500, 77.6150)
+
+Vehicle V25:
+  Total Distance: 88.27 km
+  Total Cost:     $644.36
+  Stops: 16
+
+    1. PICKUP  Request R19 @  511.38 | Window: [485.0, 575.0] | (12.9227, 77.6387)
+    2. PICKUP  Request R73 @  518.65 | Window: [510.0, 600.0] | (12.9434, 77.7023)
+    3. PICKUP  Request R14 @  524.77 | Window: [497.0, 587.0] | (12.9684, 77.6519)
+    4. DROPOFF Request R19 @  534.69 | Window: [485.0, 575.0] | (13.0500, 77.6150)
+    5. DROPOFF Request R73 @  534.69 | Window: [510.0, 600.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R14 @  534.69 | Window: [497.0, 587.0] | (13.0500, 77.6150)
+    7. PICKUP  Request R24 @  543.70 | Window: [524.0, 614.0] | (12.9787, 77.6546)
+    8. PICKUP  Request R38 @  550.70 | Window: [535.0, 625.0] | (12.9621, 77.7169)
+    9. PICKUP  Request R68 @  556.03 | Window: [505.0, 595.0] | (12.9806, 77.7622)
+    10. DROPOFF Request R24 @  573.75 | Window: [524.0, 614.0] | (13.0500, 77.6150)
+    11. DROPOFF Request R38 @  573.75 | Window: [535.0, 625.0] | (13.0500, 77.6150)
+    12. DROPOFF Request R68 @  573.75 | Window: [505.0, 595.0] | (13.0500, 77.6150)
+    13. PICKUP  Request R33 @  585.57 | Window: [530.0, 620.0] | (12.9444, 77.6025)
+    14. PICKUP  Request R02 @  586.76 | Window: [523.0, 613.0] | (12.9488, 77.5925)
+    15. DROPOFF Request R33 @  598.27 | Window: [530.0, 620.0] | (13.0500, 77.6150)
+    16. DROPOFF Request R02 @  598.27 | Window: [523.0, 613.0] | (13.0500, 77.6150)
+
+Vehicle V26:
+  Total Distance: 57.87 km
+  Total Cost:     $422.42
+  Stops: 12
+
+    1. PICKUP  Request R18 @  526.00 | Window: [526.0, 616.0] | (12.9215, 77.6565)
+    2. PICKUP  Request R10 @  529.93 | Window: [503.0, 593.0] | (12.9544, 77.6433)
+    3. PICKUP  Request R59 @  530.94 | Window: [493.0, 583.0] | (12.9631, 77.6404)
+    4. DROPOFF Request R10 @  540.99 | Window: [503.0, 593.0] | (13.0500, 77.6150)
+    5. DROPOFF Request R59 @  540.99 | Window: [493.0, 583.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R18 @  540.99 | Window: [526.0, 616.0] | (13.0500, 77.6150)
+    7. PICKUP  Request R44 @  553.09 | Window: [501.0, 591.0] | (12.9760, 77.6969)
+    8. PICKUP  Request R63 @  560.53 | Window: [518.0, 608.0] | (12.9640, 77.7644)
+    9. PICKUP  Request R52 @  563.29 | Window: [494.0, 584.0] | (12.9887, 77.7620)
+    10. DROPOFF Request R63 @  580.61 | Window: [518.0, 608.0] | (13.0500, 77.6150)
+    11. DROPOFF Request R52 @  580.61 | Window: [494.0, 584.0] | (13.0500, 77.6150)
+    12. DROPOFF Request R44 @  580.61 | Window: [501.0, 591.0] | (13.0500, 77.6150)
+
+Vehicle V27:
+  Total Distance: 35.23 km
+  Total Cost:     $257.16
+  Stops: 6
+
+    1. PICKUP  Request R47 @  533.00 | Window: [533.0, 623.0] | (12.8941, 77.6497)
+    2. PICKUP  Request R66 @  539.63 | Window: [496.0, 586.0] | (12.8453, 77.6848)
+    3. PICKUP  Request R13 @  546.39 | Window: [501.0, 591.0] | (12.8992, 77.6562)
+    4. DROPOFF Request R66 @  563.74 | Window: [496.0, 586.0] | (13.0500, 77.6150)
+    5. DROPOFF Request R13 @  563.74 | Window: [501.0, 591.0] | (13.0500, 77.6150)
+    6. DROPOFF Request R47 @  563.74 | Window: [533.0, 623.0] | (13.0500, 77.6150)
+
+Vehicle V28:
+  Total Distance: 52.36 km
+  Total Cost:     $382.24
+  Stops: 10
+
+    1. PICKUP  Request R49 @  514.50 | Window: [490.0, 580.0] | (12.9175, 77.5869)
+    2. PICKUP  Request R00 @  516.87 | Window: [491.0, 581.0] | (12.9358, 77.5760)
+    3. PICKUP  Request R43 @  518.32 | Window: [505.0, 595.0] | (12.9409, 77.5883)
+    4. DROPOFF Request R43 @  530.79 | Window: [505.0, 595.0] | (13.0500, 77.6150)
+    5. DROPOFF Request R00 @  530.79 | Window: [491.0, 581.0] | (13.0500, 77.6150)
+    6. PICKUP  Request R87 @  540.66 | Window: [527.0, 617.0] | (12.9644, 77.6388)
+    7. PICKUP  Request R79 @  547.56 | Window: [518.0, 608.0] | (12.9455, 77.6996)
+    8. DROPOFF Request R87 @  562.36 | Window: [527.0, 617.0] | (13.0500, 77.6150)
+    9. DROPOFF Request R79 @  562.36 | Window: [518.0, 608.0] | (13.0500, 77.6150)
+    10. DROPOFF Request R49 @  562.36 | Window: [490.0, 580.0] | (13.0500, 77.6150)
+
+Vehicle V29:
+  Total Distance: 37.17 km
+  Total Cost:     $271.32
+  Stops: 8
+
+    1. PICKUP  Request R83 @  521.00 | Window: [521.0, 611.0] | (12.9130, 77.5978)
+    2. PICKUP  Request R74 @  536.00 | Window: [536.0, 626.0] | (12.9186, 77.5893)
+    3. PICKUP  Request R69 @  544.52 | Window: [516.0, 606.0] | (12.9794, 77.6372)
+    4. DROPOFF Request R83 @  552.73 | Window: [521.0, 611.0] | (13.0500, 77.6150)
+    5. PICKUP  Request R67 @  560.60 | Window: [493.0, 583.0] | (12.9872, 77.6485)
+    6. DROPOFF Request R67 @  568.47 | Window: [493.0, 583.0] | (13.0500, 77.6150)
+    7. DROPOFF Request R74 @  568.47 | Window: [536.0, 626.0] | (13.0500, 77.6150)
+    8. DROPOFF Request R69 @  568.47 | Window: [516.0, 606.0] | (13.0500, 77.6150)
+
+INFEASIBILITY ANALYSIS & RELAXED CONSTRAINTS
+--------------------------------------------------------------------------------
+RELAXED CONSTRAINTS (SOFT INFEASIBILITY):
+  No soft constraints were relaxed.
+
+COST BREAKDOWN
+--------------------------------------------------------------------------------
+  Vehicle V00:      $      0.00  (  0.0%)
+  Vehicle V01:      $      0.00  (  0.0%)
+  Vehicle V02:      $      0.00  (  0.0%)
+  Vehicle V03:      $    472.34  (  5.4%)
+  Vehicle V04:      $      0.00  (  0.0%)
+  Vehicle V05:      $      0.00  (  0.0%)
+  Vehicle V06:      $      0.00  (  0.0%)
+  Vehicle V07:      $      0.00  (  0.0%)
+  Vehicle V08:      $      0.00  (  0.0%)
+  Vehicle V09:      $      0.00  (  0.0%)
+  Vehicle V10:      $    454.39  (  5.1%)
+  Vehicle V11:      $    371.50  (  4.2%)
+  Vehicle V12:      $    405.61  (  4.6%)
+  Vehicle V13:      $    402.55  (  4.6%)
+  Vehicle V14:      $    678.99  (  7.7%)
+  Vehicle V15:      $    166.06  (  1.9%)
+  Vehicle V16:      $    330.04  (  3.7%)
+  Vehicle V17:      $    139.23  (  1.6%)
+  Vehicle V18:      $    504.19  (  5.7%)
+  Vehicle V19:      $    357.64  (  4.1%)
+  Vehicle V20:      $    498.56  (  5.7%)
+  Vehicle V21:      $    437.71  (  5.0%)
+  Vehicle V22:      $    601.84  (  6.8%)
+  Vehicle V23:      $    417.12  (  4.7%)
+  Vehicle V24:      $    608.61  (  6.9%)
+  Vehicle V25:      $    644.36  (  7.3%)
+  Vehicle V26:      $    422.42  (  4.8%)
+  Vehicle V27:      $    257.16  (  2.9%)
+  Vehicle V28:      $    382.24  (  4.3%)
+  Vehicle V29:      $    271.32  (  3.1%)
+--------------------------------------------------------------------------------
+  TOTAL:             $   8823.88  (100.0%)
+
+FILE REFERENCES
+--------------------------------------------------------------------------------
+Input JSON:  /Users/mac/Coding/Projects/Kriti/velora-mobility-optimizer/data/json/tc05_input.json
+Output JSON: /Users/mac/Coding/Projects/Kriti/velora-mobility-optimizer/data/json/tc05_output.json
+
+================================================================================

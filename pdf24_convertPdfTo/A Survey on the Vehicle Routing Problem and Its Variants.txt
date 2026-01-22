@@ -1,0 +1,688 @@
+﻿Intelligent Information Management, 2012, 4, 66-74 
+http://dx.doi.org/10.4236/iim.2012.43010 Published Online May 2012 (http://www.SciRP.org/journal/iim) 
+
+A Survey on the Vehicle Routing Problem and  
+Its Variants 
+
+Suresh Nanda Kumar1, Ramasamy Panneerselvam2 
+1Education Department, CII Institute of Logistics, Chennai, India 
+
+2Department of Management Studies, Pondicherry University, Pondicherry, India 
+Email: suresh.nandakumar@cii.in, panneer_dms@yahoo.co.in 
+
+ 
+Received January 18, 2012; revised March 4, 2012; accepted March 12, 2012 
+
+ABSTRACT 
+In this paper, we have conducted a literature review on the recent developments and publications involving the vehicle 
+routing problem and its variants, namely vehicle routing problem with time windows (VRPTW) and the capacitated 
+vehicle routing problem (CVRP) and also their variants. The VRP is classified as an NP-hard problem. Hence, the use 
+of exact optimization methods may be difficult to solve these problems in acceptable CPU times, when the problem 
+involves real-world data sets that are very large. The vehicle routing problem comes under combinatorial problem. 
+Hence, to get solutions in determining routes which are realistic and very close to the optimal solution, we use heuristics 
+and meta-heuristics. In this paper we discuss the various exact methods and the heuristics and meta-heuristics used to 
+solve the VRP and its variants. 
+ 
+Keywords: Vehicle Routing Problem; Exact Methods; Heuristics; Meta-Heuristics; VRPTW; Optimization;  
+
+Ant Colony Optimization; Genetic Algorithms 
+
+1. Introduction The VRP was first stated by [1] that was about the 
+routing of a fleet of gasoline delivery trucks between a 
+
+The Vehicle Routing Problem (VRP) is used to design an 
+bulk terminal and a number of service stations supplied 
+
+optimal route for a fleet of vehicles to service a set of cu- by the terminal. The distance between any two locations 
+stomers, given a set of constraints. The VRP is used in is given and a demand for a given product is specified for 
+supply chain management in the physical delivery of the service stations. 
+goods and services. There are several variants to the VRP. The VRP can be defined as the problem of designing 
+These are formulated based on the nature of the trans- least cost delivery routes from a depot to a set of geo- 
+ported goods, the quality of service required and the cha- graphically dispersed locations (customers) subject to a 
+racteristics of the customers and the vehicles. The VRP is set of constraints. 
+of the NP-hard type. Dynamic Vehicle Routing Problems (DVRP), some- 
+
+The vehicle routing problem (VRP) has been very ex- times referred to as On-line Vehicle Routing Problems, 
+tensively studied in the optimization literature. It started have recently arisen due to the advances in information 
+with the seminal papers of [1,2]. Now, VRP offers a and communication technologies that enable information 
+wealth of heuristic and metaheuristic approaches, which to be obtained and processed in real-time. In DVRP, 
+are surveyed in the papers of [3-5]. The VRP is so widely some of the orders are known in advance before the start 
+studied because of its wide applicability and its impor- of the working day, but as the day progresses, new orders 
+tance in determining efficient strategies for reducing ope- arrive and the system has to incorporate them into an 
+rational costs in distribution networks. Today, exact VRP evolving schedule. The existence of a communication 
+methods have a size limit of 50 - 100 orders depending system between the dispatcher (where the tours are cal- 
+on the VRP variant and the time—response requirements. culated, e.g. headquarter of the company) and the drivers 
+Consequently, current research concentrates on approxi- is assumed. The dispatcher can periodically communicate 
+mate algorithms that are capable of finding high quality to the drivers about the new visits assigned to them. In 
+solutions in limited time, in order to be applicable to real- this way, during the day, each driver always has know- 
+life problem instances that are characterized by large ve- ledge about the next customers assigned to him/her. 
+hicle fleets and affect significantly logistics and distribu- The classical VRP is defined as follows: Let G = (V, A) 
+tion strategies. be a directed graph where V = {0, ··· ,n} is the vertex set 
+
+Copyright © 2012 SciRes.                                                                                  IIM 
+
+
+
+S. N. KUMAR, R. PANNEERSELVAM 67
+
+and A = {(i, j) : i, j  V, i ≠ j} is the arc set. Vertex 0 qk and every customer has a varying demand mi. qk must 
+represents the depot whereas the remaining vertices cor- be greater than or equal to the sum of all demands on the 
+respond to customers. A fleet of m identical vehicles of route travelled by the vehicle k, which means that no 
+capacity Q is based at the depot. The fleet size is given a vehicle can be overloaded. The time window constraint is 
+priori or is a decision variable. Each customer i has a denoted by a predefined time interval, given an earliest 
+non-negative demand qi. arrival time and latest arrival time. The vehicles must 
+
+The heuristic methods for the VRP can be divided into arrive at the customers not later than the latest arrival 
+construction heuristics, improvement heuristics and meta- time. If vehicles arrive earlier than the earliest arrival 
+heuristics. time, waiting occurs. Each customer also imposes a ser- 
+
+vice time to the route, taking into consideration the load- 
+2. VRP Variations ing/unloading time of goods. In Solomon’s instances, the 
+
+service time is assumed to be unique regardless of the 
+There are different classes or variations of VRP like the load quantity needed to be handled. Vehicles are also 
+capacitated VRP (CVRP), VRP with Time Windows supposed to complete their individual routes within a 
+(VRPTW). In the CVRP, a fleet of identical vehicles total route time, which is essentially the time window of 
+located at a central depot has to be optimally routed to the depot. 
+supply a set of customers with known demands.  There are three types of principal decision variables in 
+
+The capacitated VRP (CVRP) is described as the VRPTW. The principal decision variable xijk (i, j  {0, 1, 
+graph theoretic problem: Let G = (V, E) be a complete 2, ···, N}; k  {1, 2, ···, K}; i ≠ j) is 1 if vehicle k travels 
+and undirected graph where V = {0, ···, n} is the vertex from customer i to customer j, and 0 otherwise. The de- 
+set and E is the edge set. Vertex set Vc = {1, ···, n} cor- cision variable Ti denotes the time when a vehicle arrives 
+responds to n customers, whereas vertex 0 corresponds to at the customer, and wi denotes the waiting time at node i. 
+the depot.  The objective is to design a network that satisfies all 
+
+The objective of the VRPTW is to serve a number of constraints, at the same time minimizing the total travel 
+customers within predefined time windows at minimum cost. The model is mathematically formulated below: 
+cost (in terms of distance travelled), without violating the 
+capacity and total trip time constraints for each vehicle. Principal Decision Variables 
+Combinatorial optimisation problems of this kind are 
+non-polynomial-hard (NP-hard) and are hence best sol- Ti arrival time at node i 
+
+ved by using heuristics. The most important metaheuris- wi wait time at node i 
+
+tics used to solve the VRPTW are Tabu search (TS), ge- xijk  {0,1}, 0 if there is no arc from node i to node j, 
+
+netic algorithm (GA), evolutionary algorithms (EA) and and 1 otherwise, 
+
+ant colony optimisation algorithm (ACO). i  j;i, j0,1,2,, N  
+The constraints of the Vehicle Routing Problem with Parameters: 
+
+Time Windows (VRPTW) consist of a set of identical ve- K total number of vehicles 
+hicles, a central depot node, a set of customer nodes and N total number of customers 
+a network connecting the depot and customers. There are cij cost incurred on arc from node i to j 
+N + 1 customers and K vehicles. The depot node is de- tij travel time between node i and j 
+noted as customer 0. Each arc in the network represents a mi demand at node i 
+connection between two nodes and also indicates the qk capacity of vehicle k 
+direction it travels. Each route starts from the depot. The ei earliest arrival time at node i 
+number of routes in the network is equal to the number of li latest arrival time at node i 
+vehicles used. One vehicle is dedicated to one route. A fi service time at node i 
+cost cij and a travel time tij are associated with each arc of rk maximum route time allowed for vehicle k 
+the network. N N K
+
+In Solomon’s 56 VRPTW 100-customer instances [6], Minimize   cij xijk  
+i0 j0 ji,k1
+
+all distances are represented by Euclidean distance, and 
+subject to: 
+
+the speed of all vehicles is assumed to be unity. That is, it 
+K N
+
+takes one unit of time to travel one unit of distance. This  xijk  K , for i  0        (1) 
+assumption makes the problem simpler, because numeri- k1 j1
+
+cally the travel cost cij, the travel time tij and the Euclid- N
+
+ean distance between the customer nodes equal each  xijk 1 for i  0 and k 1,, K    (2) 
+j1
+
+other. 
+N
+
+Each customer in the node can be visited only once by  x jik 1 for i  0 and k 1,, K    (3) 
+one of the vehicles. Every vehicle has the same capacity  J 1
+
+Copyright © 2012 SciRes.                                                                                  IIM 
+
+
+
+68 S. N. KUMAR, R. PANNEERSELVAM 
+
+K N tive function. The VRP with hard (resp., soft) time win-
+  xijk 1, for i1,, N     (4) dow constraints is abbreviated as VRPHTW (resp., 
+k1 j0, ji
+
+VRPSTW).  
+K N
+
+  xijk 1, for j1,, N     (5) An iterative route construction and improvement algo-
+k1 i0,i j rithm for the vehicle routing problem with soft time win- 
+
+dows was proposed [7]. 
+N N
+
+mi  xijk  qk , for k 1,, K    (6) There are several heuristics proposed to solve the 
+i1 j0, ji CVRP and its variants in the literature. Authors [8] have 
+
+N N done detailed survey on CVRP in their book “The Vehi- 
+  xijk tij  fi  wi   rk , for k 1,, K  (7) cle Routing Problem” that describes both exact and heu- 
+i0 j0, ji ristic methods for VRPs up to 2002. [9] proposed a two- 
+
+T0  w0  f0  0               (8) commodity flow formulation of the CVRP. 
+The VRPTW belongs to the class of the NP-hard com- 
+
+K N
+
+  xijk Ti  tij  fi  wi   Tj , for i1,, K  (9) binatorial optimization problems [10] Lenstra and Rin- 
+k1 i0,i j nooy Kan (1981). Hence, primarily heuristic procedures 
+
+are generally used for larger instances of the VRPTW. In 
+ei  Ti  wi   li for i1,, N      (10) the recent past, quite good results have been achieved for 
+
+The objective function minimizes the total cost of the VRPTW with meta-heuristics. 
+travel of all the vehicles in completing their tours. Con- Two groups of meta-heuristics have been used for sol- 
+straint set 1 guarantees that the number of tours is K by ving the VRPTW Homberger and Gehring (2005) [11]. 
+selecting at most K outgoing arcs from the depot (I = 0). 1) Meta-heuristics controlling local search processes, 
+
+The constraint set 2 ensures that for each vehicle, there such as tabu search [12,13], simulated annealing [14] ge- 
+is exactly one outgoing arc from the depot is selected. netic algorithms [15,16], evolution strategies [17], large 
+Similarly, the constraint set 3 ensures that for each vehi- neighbourhood search [18], and guided local search [19], 
+cle, there is exactly one arc entering into the node with also a software framework for a hybridized algorithm of 
+respect to depot (i = 0). These two constraint sets (con- two metaheuristics—Particle Swarm Optimization (PSO) 
+straint set 2 and constraint set 3) jointly ensure that a and Genetic Algorithm (GA). The hybrid algorithm is 
+complete tour for each vehicle is ensured. used to optimize the best route for the vehicles that also 
+
+The constraint set 4 makes sure that from each node i incorporates a mechanism to trigger swarm condition for 
+only one arc for each vehicle emanates from it. The con- PSO algorithm [20]; and 2) Meta-heuristics controlling a 
+straint set 5 ensures that for each node j, only one arc for subordinate construction heuristic, such as the greedy 
+each vehicle enters into it. These two constrains (con- randomized search procedure (GRASP) proposed by [21], 
+straint set 4 and constraint set 5) make sure that each the RNET metaheuristic [22] and multiple ant colony 
+vehicle visits each node only once.  systems as proposed by [23]. 
+
+The constraint set 6 sees that for each vehicle, the total Author [18] used a local search method called Large 
+demand (load) allocated to it is less than or equal to its Neighbourhood Search (LNS) for solving vehicle routing 
+capacity. problems. LNS is similar to the constraint programming 
+
+The constraint set 7 ensures that the total time of travel technology and is analogous to the shuffling technique of 
+
+of the route of each vehicle is less than or equal to the job-shop scheduling. The technique explores a large nei- 
+
+maximum route time allocation to that vehicle. ghbourhood of the current solution by selecting a number 
+
+The constraint set 8 sets the arrival time, waiting time of customer visits to remove from the routing plan, and 
+
+and service time of each vehicle at the depot to zero. The re-inserting these visits using a constraint-based tree 
+
+constraint set 9 guarantees that the arrival time of each search. 
+
+vehicle at the node j is less than the specified arrival time Both exact algorithms and heuristics have been used to 
+
+at that node. The constraint set 10 guarantees that the solve the different classes of VRPs. We discuss some of 
+
+sum of the arrival time and the waiting time of each ve- these below. 
+
+hicle at each node i is more than equal to the earliest ar-
+rival time at that node and less than or equal to the latest 3. Exact Methods 
+arrival time at that node i, i = 1, 2, 3, ···, N. Constraint sets Exact algorithms to solve VRP especially the capacitated 
+8-10 define the time windows. These formulations com- VRP (CVRP) include the branch-and-bound, the branch- 
+pletely specify the feasible solutions for the VRPTW. and-cut and the branch-and-price algorithms, which are 
+
+A constraint is called hard if it must be satisfied, while briefly described below. 
+it is called soft if it can be violated. The violation of soft A branch-cut-and-price exact algorithm was suggested 
+constraints is usually penalized and added to the objec- by [24] for the Capacitated Vehicle Routing Problem 
+
+Copyright © 2012 SciRes.                                                                                  IIM 
+
+
+
+S. N. KUMAR, R. PANNEERSELVAM 69
+
+with Two-Dimensional Loading Constraints. since it requires solving an exponential number of in- 
+Authors [25] proposed an exact algorithm for the mul- stances of an NP-hard problem. 
+
+tiple vehicle routing problem with time windows (VRP- Authors [31] suggest a genetic and set partitioning 
+TW). They proposed an exact branch-and-price algo- two-phase approach for the VRPTW. The VRPTW is 
+rithm for solving the multiple vehicle routing problem formulated as a set partitioning problem (SP). The GA is 
+with time windows. based on natural reproduction, selection and evolution of 
+
+Column generation or Dantzig-Wolfe decomposition Darwin’s theory. Ever since, GA has been popular be- 
+provides a flexible framework that can accommodate cause it can contribute to find good solutions for complex 
+complex constraints and time-dependent costs.  mathematical problems, like the VRP and other NP-hard 
+
+An exact solution approach was developed by [26] for problems, in a reasonable amount of time. 
+vehicle routing and scheduling problem with soft time The authors [1] described how the VRP may be con-
+windows (VRPSTW). They proposed a new column ge- sidered as a generalization of the travelling salesman 
+neration-based exact optimization approach for the vehi- problem (TSP). They described the generalization of the 
+cle routing problem with semi soft time windows (VR- TSP with multiple salesmen and called this problem the 
+PSSTW). Elementary shortest path problem with re- “clover problem”. 
+source constraints and late arrival penalties is solved as a We consider the problem of routing vehicles stationed 
+sub-problem. This uses the Dantzig-Wolfe decomposi- at a central facility (depot) to supply customers with 
+tion method. known demands, in such a way as to minimize the total 
+
+The authors [27] give an exact solution approach for distance travelled. The problem is referred to as the vehi- 
+vehicle routing and scheduling problem with soft time cle routing problem (VRP) and is a generalization of the 
+windows (VRPSTW). They proposed a new column multiple travelling salesman problem that has many pra- 
+generation-based exact optimization approach for the ve- ctical applications. 
+hicle routing problem with semi soft time windows In [32] the authors present tree search algorithms for 
+(VRPSSTW). Elementary shortest path problem with the exact solution of the VRP incorporating lower bounds 
+resource constraints and late arrival penalties is solved as computed from 1) shortest spanning k-degree centre tree 
+a sub-problem. This uses the Dantzig-Wolfe decomposi- (k-DCT), and 2) q-routes. The final algorithms also in- 
+tion method. clude problem reduction and dominance tests. They pre- 
+
+sent computational results for a number of problems de- 
+Algorithms Based on the Set Partitioning rived from the literature. The results of these authors 
+Formulation show that the bounds derived from the q-routes are supe- 
+
+rior to those from k-DCT and that VRPs of up to about 
+The Set Partitioning (SP) formulation of the CVRP was 25 customers can be solved exactly. 
+originally proposed by [28]. A binary variable is used to In [33], the authors have developed a branch-and-cut 
+represent a feasible route. The Ballinski and Quandt for- procedure for the VRPTW. They addressed the problem 
+mulation is the following: of finding the minimum number of vehicles required to 
+
+Let R denote a set of routes in which r denotes a spe- visit a set of nodes subject to time window and capacity 
+cific route. Let air be a binary coefficient equal to 1 if and constraints. The fleet is homogeneous and is located at a 
+only if vertex i  V\{0} belongs to route r, let cr  be the common depot. Each node requires the same type of ser- 
+optimal cost of the route r, and let yk be a binary variable vice. An exact method is introduced based on branch and 
+equal to 1 if and only if route r is used in the optimal cut. In their computations, they obtain ever increasing 
+solution. The problem is then as given below. lower bounds on the optimal solution. This is done by 
+
+(SP) minimize   solving a series of relaxed problems that incorporate 
+cr yr rR             (11) newly found valid inequalities. They obtain feasible so- 
+
+lutions or upper bounds using greedy randomized adap- 
+subject to tive search procedure (GRASP). They also introduce a 
+
+air yr 1 iV \0 r R      (12) wide variety of cuts to tighten the linear programming 
+(LP) relaxation of the original mixed-integer program. 
+
+yr  0,1 where rR        (13) To find violated cuts, it is necessary to solve a separation 
+A full column generation algorithm was developed by problem. 
+
+[29] who solved instances (n) in the range 15 to 25. 
+According [30], it is impractical for a direct applica- 4. Heuristic Approaches 
+
+tion of this formulation, because of the large number of The cluster-first, route-second heuristic [34] first locates 
+potential routes encountered in most non-trivial instances m seeds and constructs a cluster for each seed so as to 
+and of the difficulty of computing the cr  coefficients minimize the sum of customers to seed distances, while 
+
+Copyright © 2012 SciRes.                                                                                  IIM 
+
+
+
+70 S. N. KUMAR, R. PANNEERSELVAM 
+
+satisfying the capacity constraint. This is achieved by computation. In [41], they were the first to apply a ge- 
+solving a Generalized Assignment Problem (GAP). A netic algorithm to VRPTW. They hybridized a genetic 
+route is then determined on each cluster by solving a TSP. algorithm with a greedy heuristic. Under this scheme, the 
+Some procedures for selecting the seeds are described in genetic algorithm searches for a good ordering of cus- 
+[35]. Exact comparisons with other algorithms are diffi- tomers, while the construction of the feasible solution is 
+cult to make because the distance rounding convention handled by the greedy heuristic. During the past few 
+used in the experiments is not specified. It is also inte- years, numerous papers have been written on generating 
+resting from a methodological point of view because if good solutions for VRPTW with GAs. Almost all these 
+can benefit from algorithmic improvements for the Gene- papers present hybridizations of a GA with different con-
+ralized Assignment Problem (GAP) or for the TSP. struction heuristics [41,42] a, local searches [16,43] and 
+
+In [36] they proposed a neighborhood search heuristics other meta-heuristics such as tabu search [44] and ant 
+to optimize the planned routes of vehicles in a context colony system [45]. 
+where new requests, with a pick-up and a delivery loca- The authors [46] have considered a variant of VRPTW 
+tion, occur in real-time. This is a dynamic vehicle routing constrained by a limited vehicle fleet, which is a more 
+problem (DVRP). Within this framework, new solutions realistic problem in logistics. A limited number of vehi- 
+are explored through a neighborhood structure based on cles is given (m-VRPTW). Under this scenario, a feasible 
+ejection chains. Numerical results show the benefits of solution is one that may contain either un-served custo- 
+these procedures in a real-time context. The impact of a mers and/or relaxed time windows. They present an ana- 
+master—slave parallelization scheme, using an increas- lytical upper bound for that formulation, and show that 
+ing number of processors is also investigated. their tabu search approach came fairly close to the upper 
+
+The authors [37] propose a real-time time-dependent bound. This algorithm is also good from the stability 
+vehicle routing problem with time windows. This prob- point of view. They also show that the same algorithm 
+lem is formulated as a series of mixed integer program- could be used to give reasonably good results for the 
+ming models that account for real-time and time-depen- standard VRPTW problem. 
+dent travel times, as well as for real-time demands in a In their article, [47] propose an ant colony system 
+unified framework. Vehicle routes and the departure (ACS) meta heuristic procedure to solve the DVRP. It is 
+times are treated as decision variables, with delayed de- based on the partition of the working day into time slices. 
+parture permitted at each node serviced. A route con- A sequence of static vehicle routing problems is then ge- 
+struction and a route improvement heuristics are pro- nerated. They then used an Ant Colony System algorithm 
+posed by the authors. to solve these problems. The properties of ACS have 
+
+An efficient route minimization heuristic for the vehi- been also exploited to transfer information about good 
+cle routing problem with time windows was suggested by solutions from a time slice to the following one. They 
+[38]. The heuristic proposed by them is based on the define new public domain benchmark problems and they 
+ejection pool, powerful insertion and guided local search test the algorithms that they proposed on those bench- 
+strategies. mark instances. A computational study on a newly de- 
+
+In [39], a route construction heuristic with an adaptive fined set of benchmarks, finally showed that the method 
+parallel scheme is presented. The results from extensive they proposed was able to achieve good results both on 
+computational experiments show the proposed parallel artificial and real problems. 
+route construction heuristic is efficient and effective for In their paper, [48] present a meta-heuristic, which is 
+routes construction, which is particularly useful for gene- based on the Threshold Accepting combined with modi- 
+ration of the initial solutions for many meta-heuristic fied Nearest Neighbour and Exchange procedures, to 
+approaches with improved solution quality and conver- solve the Vehicle Routing Problem with Backhauls and 
+gence of the solution process. Time Windows (VRPBTW). The VRPBTW assumes that 
+
+Authors [40] proposed heuristics and a scatter search trucks initially start from the depot, deliver goods to the 
+(SS) algorithms to solve real-life heterogeneous fleet ve- line-haul customers, successively pickup goods from the 
+hicle routing problem with time windows and split deli- backhaul consumers, and finally return to depot. 
+veries (HFVRPTWSD). They proposed two constructive The authors [49] propose a cellular Genetic Algorithm 
+heuristics to generate the initial solutions of SS. First is 
+
+(cGA) which is a kind of decentralized population based 
+the adaptation of the sequential insertion heuristic and 
+
+heuristic, which is used for solving CVRP, improving 
+the sequential insertion heuristic. 
+
+several of the best existing results so far in the literature. 
+
+5. Meta-Heuristics Their study shows a high performance in terms of the 
+quality of the solutions found and the number of function 
+
+Many of the most successful meta-heuristics for the large evaluations (effort). 
+VRPTW instances are based on some form of parallel According to [50] they propose a cooperative parallel 
+
+Copyright © 2012 SciRes.                                                                                  IIM 
+
+
+
+S. N. KUMAR, R. PANNEERSELVAM 71
+
+meta-heuristic for the VRPTW, based on the solution wa- depots along their route. They proposed a heuristic com- 
+rehouse strategy. Here several search threads cooperate bining the adaptive memory principle, a tabu search me- 
+asynchronously, exchanging information on the best so- thod for the solution of sub-problems, and integer pro- 
+lutions identified. The exchanges are performed through gramming. 
+a mechanism called solution warehouse, which holds and A multi-objective evolutionary algorithm (EA) for 
+manages a pool of solutions. solving the VRPTW was suggested by [55]. For multi- 
+
+The authors [11] proposed a two-phase hybrid meta- objective problems, heuristics generally have two aims (1) 
+heuristic for the VRPTW. The objective function of the To minimize the distance of the generated solutions,  
+VRPTW considered here combines the minimization of called the Pareto approximation, from the true Pareto 
+the number of vehicles (primary criterion) and the total front, and second to maximize the diversity of them.  
+travel distance (secondary criterion). The aim of the first Evolutionary algorithms (EAs) are optimizers based 
+phase is the minimization of the number of vehicles by on Darwin’s theory of evolution, where only the fittest 
+means of a (l; k)-evolution strategy, whereas in the sec- individuals survive and produce offspring to populate the 
+ond phase the total distance is minimized using a tabu next generation. 
+search algorithm. In his article, [56] proposed a hybrid ACO algorithm 
+
+In their article, [51] present a novel hybrid ant colony for solving vehicle routing problem (VRP) heuristically 
+optimization approach called SS_ACO algorithm to in combination with an exact algorithm. In the basic VRP, 
+solve the vehicle routing problem. The main feature of geographically scattered customers of known demand are 
+the hybrid algorithm is to hybridize the solution con- supplied from a single depot by a fleet of identically ca- 
+struction mechanism of the ant colony optimization pacitated vehicles. The intuition of the proposed algo- 
+(ACO) with scatter search (SS). In our hybrid algorithm, rithm is that nodes which are near to each other will pro- 
+we use ACO algorithm and greedy heuristic to generate bably belong to the same branch of the minimum span- 
+the initial solutions which are then formed the reference ning tree of the problem graph and thus will probably 
+set. Within the scatter search framework, after two-solu- belong to the same route in VRP. Given a clustering of 
+tion combination method for the reference set has been client nodes, the solution is to find a route in these clus- 
+applied, we employ ACO method to generate new solu- ters by using ACO with a modified version of transition 
+tions through updating the common arc pheromone rule of the ants. At the end of each iteration, ACO tries to 
+mechanism. Moreover, during implementing the hybrid improve the quality of solutions by using a local search 
+algorithm, cyclic transfers, a new class of neighborhood algorithm, and update the associated weights of the graph 
+search algorithm can also be embedded into the scatter arcs. 
+search framework as neighborhood search to improve Authors [57] have formulated an improved ant colony 
+solutions. Despite the size of the cyclic transfer neigh- optimization (IACO) algorithm to solve the period vehi- 
+borhood is very large, a restricted subset of the cyclic cle routing problem with time windows (PVRPTW). In 
+transfer neighborhood is adopted to reduce the computa- PVRPTW, the planning period is extended to several 
+tional requirements to reasonable levels. days and each customer must be served within a speci- 
+
+A new and effective meta-heuristic algorithm, active fied time window. Multi-dimension pheromone matrix is 
+guided evolution strategies, for the VRPTW is presented used to accumulate heuristic information on different 
+by [52]. The algorithm combines the strengths of the days. Two cross-over operations are introduced to im- 
+guided local search and evolution strategies belonging to prove the performance of the algorithm. 
+meta-heuristics into an iterative two-stage procedure. In their article, [58] suggested an Ant Colony algo- 
+Guided local search is used to regulate a composite local rithm hybridized with insertion heuristics for the Time 
+search in the first stage and the neighbourhood of the Dependent Vehicle Routing Problem with Time Win- 
+evolution strategies algorithm in the second stage. dows (TDVRPTW). In the TDVRPTW, a fleet of vehi- 
+
+The authors [53] have used a scatter search meta-heu- cles must deliver goods to a set of customers, time win- 
+ristics to solve the VRPTW. Both a common arc method dow constraints of the customers must be respected and 
+and an optimization-based set covering model are used to the fact that the travel time between two points depends 
+combine vehicle routing solutions. A reactive tabu search on the time of departure, has to be taken into account. 
+meta-heuristic and a tabu search with an advanced re- 
+covery feature, together with a set covering procedure are 6. Hybrid Methods 
+
+used for solution improvement. Hybrid methods use a combination of exact, heuristic 
+In their article, [54] proposed a multi-depot vehicle procedure or meta-heuristics to solve the VRP. 
+
+routing problem with inter-depot routes, which addresses The authors [59] have proposed a hybrid method using 
+an extension of the multi-depot vehicle routing problem constraint programming and meta-heuristics. Constraint 
+in which vehicles may be replenished at intermediate Programming typically uses the technique of depth-first 
+
+Copyright © 2012 SciRes.                                                                                  IIM 
+
+
+
+72 S. N. KUMAR, R. PANNEERSELVAM 
+
+branch and bound as the method of solving optimization two or more of the exact methods, heuristics and meta- 
+problems. Although this method can give the optimal heuristics. 
+solution for large problems, the time needed to find the 
+optimal will be prohibitive. This paper introduces a me- REFERENCES 
+thod for using iterative improvement techniques within a 
+Constraint programming framework and applies this tech- [1] G. Dantzig and J. Ramser, “The Truck Dispatching Prob- 
+nique to vehicle routing problems. They introduced a lem,” Management Science, Vol. 6, No. 1, 1959, pp. 80-91.  
+
+constraint programming model for vehicle routing, after doi:10.1287/mnsc.6.1.80 
+
+which they describe a system for integrating constraint [2] G. Clarke and J. R. Wright, “Scheduling of Vehicle Rout- 
+
+programming and iterative improvement techniques. They ing Problem from a Central Depot to a Number of Delivery 
+Points,” Operations Research, Vol. 12, No. 4, 1964, pp. 568- 
+
+then described how the method can be greatly acceler- 581. doi:10.1287/opre.12.4.568 
+ated by handling core constraints using fast local checks, 
+
+[3] G. Laporte, “The Vehicle Routing Problem: An Overview 
+while other more complex constraints are left to the con- of Exact and Approximate Algorithms,” European Journal 
+straint propagation system. They have coupled their it- of Operational Research, Vol. 59, No. 3, 1992, pp. 345-358.  
+erative improvement technique with a meta-heuristic to doi:10.1016/0377-2217(92)90192-C 
+avoid the search being trapped in local minima. They use [4] M. Gendreau, G. Laporte and J.-Y. Potvin, “Metaheuristics 
+two meta-heuristics: a simple Tabu Search procedure and for the VRP,” In: P. Toth and D. Vigo, Eds., The Vehicle 
+Guided Local Search. They have conducted an empirical Routing Problem, SIAM Monographs on Discrete Mathe- 
+study over benchmark problems and it shows the relative matics and Applications, Philadelphia, 2002, pp. 129-154.  
+merits of these two techniques. doi:10.1137/1.9780898718515.ch6 
+
+[5] J.-F. Cordeau, M. Gendreau, A. Hertz, G. Laporte and J. S. 
+7. Conclusions Sormany, “New Heuristics for the Vehicle Routing Prob- 
+
+lem,” In: A. Langevi and D. Riopel, Eds., Logistics Systems: 
+Vehicle routing problem forms an integral part of supply Design and Optimization, Springer, New York, 2005, pp. 
+chain management, which plays a significant role for 279-297. doi:10.1007/0-387-24977-X_9 
+productivity improvement in organizations through effi- [6] M. Solomon, “Algorithms for the Vehicle Routing and 
+cient and effective delivery of goods/services to cus- Scheduling Problem with Time Window Constraints,” Op- 
+tomers. In this paper, an attempt has been made to survey erations Research, Vol. 35, No. 2, 1987, pp. 254-265.  
+
+the recent developments in the vehicle routing problem doi:10.1287/opre.35.2.254 
+
+(VRP) and its variants. The literature is classified into [7] F. M. Andres, “An Iterative Route Construction and Im-
+
+exact methods, heuristics approaches, meta-heuristics, provement Algorithm for the Vehicle Routing Problem 
+with Soft Time Windows,” Transportation Research Part 
+
+and hybrid methods. At the beginning, a complete work- B, Vol. 43, No. 4, 2010, pp. 438-447. 
+ing mathematical model for the vehicle routing problem 
+
+[8] P. Toth and D. Vigo, “An Overview of Vehicle Routing 
+with time windows (VRPTW) is given. Under exact me- Problems,” SIAM Monographs on Discrete Mathematics 
+thods, a descriptive set partitioning formulation for the and Applications, 2002, pp.1-26.  
+vehicle routing problem with time windows has been doi:10.1137/1.9780898718515.ch1 
+presented. Further, the contributions of different resear- [9] R. Baldacci, E. Hadjiconstantinou and A. Mingozzi, “An 
+chers under this category have been discussed. Exact Algorithm for the Capacitated Vehicle Routing Prob- 
+
+Since, the VRPTW is a combinatorial problem, deve- lem Based on a Two-Commodity Network Flow Formula- 
+lopment of efficient heuristic is inevitable to find near/ tion,” Operations Research, Vol. 52, No. 5, 2004, pp. 723- 
+global optimal solution. So, in this paper, in the next 738. doi:10.1287/opre.1040.0111 
+
+three sections, the contributions of researchers in three [10] J. K. Lenstra and A. H. G. Rinnooy Kan, “Complexity of 
+categories, viz. heuristics, meta-heuristics and hybrid Vehicle and Scheduling Problems,” Networks, Vol. 11, No. 
+
+m 2, 1981, pp. 221-227. doi:10.1002/net.3230110211 
+ethods, respectively, have been presented. 
+Under meta-heuristic, the contributions of the resear- [11] J. Homberger and H. Gehring, “A Two-Phase Hybrid 
+
+chers on simulated annealing algorithms, tabu search, Meta-Heuristic for the Vehicle Routing Problem with 
+Time Windows,” European Journal of Operational Re- 
+
+genetic algorithm, ant-colony optimization and GRASP search, Vol. 162, No. 1, 2005, pp. 220-238.  
+applied to vehicle routing problems are presented. doi:10.1016/j.ejor.2004.01.027 
+
+Under hybrid methods, a limited number of researches [12] J.-Y. Potvin, T. Kervahut, B.-L. Garcia and J.-M. Rousseau, 
+which combine the meta-heuristics with exact methods “The Vehicle Routing Problem with Time Windows Part I: 
+are presented. Tabu Search,” INFORMS Journal on Computing, Vol. 8, No. 
+
+From the literature, it is clear that very few researches 2, pp. 158-164. doi:10.1287/ijoc.8.2.158 
+have been carried under hybrid methods applied to vehi- [13] E. Taillard, P. Badeau, M. Gendreau, F. Guertin and J.-Y. 
+cle routing problem. Hence, future researchers may focus Potvin, “A Tabu Search Heuristic for the Vehicle Routing 
+on developing efficient hybrid approaches by combining Problem with Soft Time Windows,” Transportation Sci- 
+
+Copyright © 2012 SciRes.                                                                                  IIM 
+
+
+
+S. N. KUMAR, R. PANNEERSELVAM 73
+
+ence, Vol. 31, No. 2, 1997, pp. 170-186.  [26] N. Azi, M. Gendreau and J.-Y. Potvin, “An Exact Algo- 
+doi:10.1287/trsc.31.2.170 rithm for a Vehicle Routing Problem with Time Windows 
+
+[14] W. C. Chiang and R. Russell, “Simulated Annealing Meta- and Multiple Use of Vehicles,” European Journal of Op- 
+Heuristics for the Vehicle Routing Problem with Time erational Research, Vol. 202, No. 3, 2010, pp. 756-763.  
+Windows,” Annals of Operations Research, Vol. 93, No. 1, doi:10.1016/j.ejor.2009.06.034 
+1996, pp. 3-27. doi:10.1007/BF02601637 [27] A. G. Qureshi, E. Taniguchi and T. Yamada, “An Exact 
+
+[15] S. R. Thangiah, K. E. Nygard and P. L. Juell, “GIDEON: A Solution Approach for Vehicle Routing and Scheduling 
+Genetic Algorithm System for Vehicle Routing with Time Problems with Soft Time Windows,” Transportation Re-
+Windows,” Proceedings of the 7th IEEE Conference on search Part E: Logistics and Transportation Review, Vol. 
+Artificial Intelligence Applications, Miami Beach, 24-28 45, No. 6, 2009, pp. 960-977.  
+February 1991, pp. 322-328.  doi:10.1016/j.tre.2009.04.007 
+doi:10.1109/CAIA.1991.120888 [28] M. L. Ballinski and R. E. Quandt, “On Integer Program for 
+
+[16] J.-Y. Potvin and S. Bengio, “The Vehicle Routing Problem a Delivery Problem,” Operations Research, Vol. 12, No. 2, 
+with Time Windows Part II: Genetic Search,” INFORMS 1964, pp. 300-304. doi:10.1287/opre.12.2.300 
+Journal on Computing, Vol. 8, No. 2, 1996, pp. 165-172.  [29] Y. Agarwal, K. Mathur and H. M. Salkin, “A Set-Parti- 
+doi:10.1287/ijoc.8.2.165 tioning-Based Algorithm for the Vehicle Routing Prob-
+
+[17] J. Homberger and H. Gehring, “Two Evolutionary Meta- lem,” Networks, Vol. 19, No. 7, 1989, pp. 731-749.  
+Heuristics for the Vehicle Routing Problem with Time doi:10.1002/net.3230190702 
+Windows: Meta-Heuristics for Location and Routing Prob- [30] G. Laporte, “Fifty Years of Vehicle Routing,” Transpor-
+lems,” Information Systems and Operational Research tation Science, Vol. 43, No. 4, 2009, pp. 408-416. 
+(Special Issue), Vol. 37, 1999, pp. 297-318. [31] G. B. Alvarenga, G. R. Mateus and G. de Tomi, “A Genetic 
+
+[18] P. Shaw, “Using Constraint Programming and Local Search and Set Partitioning Two-Phase Approach for the Vehicle 
+Methods to Solve Vehicle Routing Problems,” Principles and Routing Problem with Time Windows,” Computers and 
+Practice of Constraint Programming—CP98, Lecture Notes Operations Research, Vol. 34, No. 6, 2007, pp. 1561-1584.  
+in Computer Science, Springer-Verlag, New York, 1998, pp. doi:10.1016/j.cor.2005.07.025 
+417-431. [32] N. Christofides, A. Mingozzi and P. Toth, “Exact algo-
+
+[19] P. Kilby, P. Prosser and P. Shaw, “Guided Local Search rithm for the Vehicle Routing Problem Based on Span-
+for the Vehicle Routing Problems with Time Windows: ning Tree and Shortest Paths Relaxations,” Mathematical 
+Meta-heuristics: Advances and Trends in Local Search Programming, Vol. 20, No. 1, 1981, pp. 255-282.  
+for Optimization,” Academic Publishers, Boston, 1999, doi:10.1007/BF01589353 
+pp. 473-486. [33] F. J. Bard, G. Kontoravdis and G. Yu, “A Branch-and-Cut 
+
+[20] S. Masrom, A. M. Nasir, S. Z. Z. Abidin and A. S. A. Procedure for the Vehicle Routing Problem with Time 
+Rahman, “Software Framework for Vehicle Routing Prob- Windows,” Transportation Science, Vol. 36, No. 2, 2002, 
+lem with Hybrid Metaheuristic Algorithms,” Proceedings pp. 250-269. doi:10.1287/trsc.36.2.250.565 
+of the Applied Computing Conference, Angers, 17-19 No- [34] M. Fisher and R. Jaikumar, “A Generalized Assignment 
+vember 2011, pp. 55-61. Heuristic for Vehicle Routing,” Networks, Vol. 11, No. 2, 
+
+[21] G. Kontoravdis and J. Bard, “A GRASP for the Vehicle 1981, pp. 109-124. doi:10.1002/net.3230110205 
+Routing Problem with Time Windows,” INFORMS Jour- [35] B. M. Baker and J. Sheasby, “Extensions to the Generalised 
+nal of Computing, Vol. 7, No. 1, 1995, pp. 10-23.  Assignment Heuristic for Vehicle Routing,” European Jour- 
+doi:10.1287/ijoc.7.1.10 nal of Operational Research, Vol. 119, No. 1, 1999, pp. 147- 
+
+[22] F.-H. Liu and S.-Y. Shen, “The Fleet Size and Mix Vehicle 157. doi:10.1016/S0377-2217(98)00348-8 
+Routing Problem with Time Windows,” Journal of the Op- [36] M. Gandreau, F. Guertin, J.-Y. Potvin and R. Seguin, “Nei- 
+erational Research Society, Vol. 50, No. 7, 1999, pp. 721- ghborhood Search Heuristics for a Dynamic Vehicle Dis- 
+732. 
+
+patching Problem with Pick-Ups and Deliveries,” Transpor- 
+[23] L. M. Gambardella, E. Taillard and G. Agazzi, “MACS- tation Research Part E: Logistics and Transportation Review, 
+
+VRPTW: A Multiple Ant Colony System for Vehicle Rout- Vol. 14, No. 3, 2006, pp. 157-174. 
+ing Problems with Time Windows New: Ideas in Optimi- 
+zation,” McGraw-Hill, London, 1999. [37] X. Chen, W. S. Wan and X. H. Xu, “The Real-Time 
+
+Time-Dependent Vehicle Routing Problem,” Transporta- 
+[24] S. Ropke, J.-F. Cordeau, M. Iori and D. Vigo, tion Research Part E: Logistics and Transportation Re- 
+
+“Branch-and-Cut-and-Price for the Capacitated Vehicle view, Vol. 42, No. 5, 2006, pp. 383-408.  
+Routing Problem with Two-Dimensional Loading Con- doi:10.1016/j.tre.2005.01.003 
+straints,” Proceedings of ROUTE, Jekyll Island, 13 May 
+2007.  [38] N. Yuichi and B. Olli, “A Powerful Route Minimization 
+
+Heuristic for the Vehicle Routing Problem with Time 
+[25] G. Gutiérrez-Jarpa, G. Desaulniers, G. Laporte and V. Ma- Windows,” Operations Research Letters, Vol. 37, No. 5, 
+
+rianov, “A Branch-and-Price Algorithm for the Vehicle 
+Routing Problem with Deliveries, Selective Pickups and 2009, pp. 333-338. doi:10.1016/j.orl.2009.04.006 
+Time Windows,” European Journal of Operational Re- [39] K.-W. Peng, “An Adaptive Parallel Route Construction 
+search, Vol. 206, No. 12, 2010, pp. 341-349.  Heuristic for the Vehicle Routing Problem with Time 
+doi:10.1016/j.ejor.2010.02.037 Windows Constraints,” Expert Systems with Applications, 
+
+Copyright © 2012 SciRes.                                                                                  IIM 
+
+
+
+74 S. N. KUMAR, R. PANNEERSELVAM 
+
+Vol. 38, No. 9, 2011, pp. 11939-11946. Transactions on Evolutionary Computation, Vol. 9, No. 2, 
+[40] B. Patrıcia, T. Hugo and Y. Yoshida, “Scatter Search for a 2005, pp. 126-142. doi:10.1109/TEVC.2005.843751 
+
+Real-Life Heterogeneous Fleet Vehicle Routing Problem [50] A. Le Bouthillier and T. G. Crainic, “A Cooperative Par- 
+with Time Windows and Split Deliveries in Brazil,” Euro- allel Meta-Heuristic for the Vehicle Routing Problem with 
+pean Journal of Operational Research, Vol. 199, 2009, pp. Time Windows,” Computers & Operations Research, Vol. 
+750-758. doi:10.1016/j.ejor.2008.08.003 32, No. 7, 2005, pp. 1685-1708.  
+
+[41] J. L. Blanton and R. L. Wainwright, “Multiple Vehicle doi:10.1016/j.cor.2003.11.023 
+Routing with Time and Capacity Constraints Using Ge- [51] X. Zhang and L. Tang, “A New Hybrid Ant Colony Op-
+netic Algorithms,” Proceedings of the 5th International timization Algorithm for the Vehicle Routing Problem,” 
+Conference on Genetic Algorithms, San Francisco, 17 Pattern Recognition Letters, Vol. 30, No. 9, 2009, pp. 848- 
+July 1993, pp. 452-459. 855.  
+
+[42] J. Berger, M. Salois and R. A. Begin, “Hybrid Genetic [52] M. David and O. Bräysy, “Active Guided Evolution Strate-
+Algorithm for the Vehicle Routing Problem with Time gies for Large-Scale Vehicle Routing Problems with Time 
+Windows,” Lecture Notes in Artificial Intelligence 1418, Windows,” Computers & Operations Research, Vol. 32, 
+Springer, Berlin, 1998, pp. 114-127. No. 6, 2005, pp. 1593-1614.  
+
+[43] S. R. Thangiah, I. H. Osman and T. Sun, “Hybrid Genetic doi:10.1016/j.cor.2003.11.017 
+Algorithms, Simulated Annealing and Tabu Search Meth- [53] R. A. Russell and W.-C. Chiang, “Scatter Search for the 
+ods for Vehicle Routing Problems with Time Windows,” Vehicle Routing Problem with Time Windows,” European 
+Technical Report UKC/OR94/4, Institute of Mathematics Journal of Operational Research, Vol. 169, No. 2, 2006, pp. 
+and Statistics, University of Kent, Canterbury, 1995. 606-622. doi:10.1016/j.ejor.2004.08.018 
+
+[44] W.-K. Ho, J. C. Agn and A. Lim, “A Hybrid Search Algo- [54] C. Benoit., J.-F. Cordeau and G. Laporte, “The Multi-Depot 
+rithm for the Vehicle Routing Problem with Time Win- Vehicle Routing Problem with Inter-Depot Routes,” Euro- 
+dows,” International Journal on Artificial Intelligence Tools, pean Journal of Operational Research, Vol. 176, No. 2, 
+Vol. 10, No. 3, 2001, pp. 431-449.  2007, pp. 756-773. doi:10.1016/j.ejor.2005.08.015 
+doi:10.1142/S021821300100060X [55] G.-N. Abel and Bullinaria John A, “An Improved Multi-Ob- 
+
+[45] J. Berger, M. Barkaoui and O. A. Bräysy, “Route-Directed jective Evolutionary Algorithm for the Vehicle Routing Prob- 
+Hybrid Genetic Approach for the Vehicle Routing Problem lem with Time Windows,” Computers & Operations Research, 
+with Time Windows,” INFOR, Vol. 41, No. 2, 2003, pp. Vol. 38, No. 1, 2011, pp. 287-300.  
+179-194. doi:10.1016/j.cor.2010.05.004 
+
+[46] C. L. Hoong, M. Sim and K. M. Teo, “Vehicle Routing [56] E. Aziz, “An Algorithm for the Vehicle Problem,” Interna- 
+Problem with Time-Windows and a Limited Number of tional Journal of Advanced Robotic Systems, Vol. 7, No. 2, 
+Vehicles,” European Journal of Operational Research, 2010, pp. 125-132. 
+Vol. 148, No. 3, 2003, pp. 559-569.  [57] Yu Bin and Yang Zhong Zhen, “An Ant Colony Optimi-
+doi:10.1016/S0377-2217(02)00363-6 zation Model: The Period Vehicle Routing Problem with 
+
+[47] R. Montemanni, L. M. Gambardella, A. E. Rizzoli and A. Time Windows,” Transportation Research Part E, Vol. 
+V. Donati, “Ant Colony System for a Dynamic Vehicle 47, 2011, pp. 166-181. doi:10.1016/j.tre.2010.09.010 
+Routing Problem,” Journal of Combinatorial Optimiza- [58] S. R. Balseiro, I. Loiseau and J. Ramone, “An Ant Col-
+tion, Vol. 10, No. 4, 2005, pp. 327-343.  ony Algorithm Hybridized with Insertion Heuristics for 
+doi:10.1007/s10878-005-4922-6 the Time Dependent Vehicle Routing Problem with Time 
+
+[48] Y.-J. Cho and S.-D. Wang, “A Threshold Accepting Meta- Windows,” Computers & Operations Research, Vol. 38, 
+Heuristic for the Vehicle Routing Problem with Backhauls 2011, pp. 954-966. doi:10.1016/j.cor.2010.10.011 
+and Time Windows,” Journal of the Eastern Asia Society [59] B. De Backer and V. Furnon, “Meta-heuristics in Con-
+for Transportation Studies, Vol. 6, 2005, pp. 3022-3037. straint Programming Experiments with Tabu Search on 
+http://www.easts.info/on-line/journal_06.htm the Vehicle Routing Problem,” Proceedings of the 2nd 
+
+[49] E. Alba and B. Dorronsoro, “The Exploration/Exploitation International Conference on Meta-Heuristics (MIC’97), 
+Tradeoff in Dynamic Cellular Genetic Algorithms,” IEEE Sophia Antipolis, France, 1997. 
+
+ 
+ 
+
+Copyright © 2012 SciRes.                                                                                  IIM

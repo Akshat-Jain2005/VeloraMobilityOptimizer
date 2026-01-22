@@ -1,0 +1,32 @@
+
++
+12:09 O
+ILTE R
+Vo 4G
++ route-optimization-ch... >
+←
+#
+16
+1 Online
+8
+B
+Velora Yesterday at 21:28
+Q
+this is the case where you are not using real map and just following meta
+data ...but following on a real map is more preferrable
+@Adz What is the purpose of the app? What are the required app features you want?
+Velora Yesterday at 21:29
+the same exact features in the
+website..just clone the same website into
+app
+@Adz What is the purpose of the app? What are the required app features you want?
+Velora Yesterday at 21:30
+app shouldn't have any extra features
+@Mahe What is more important reducing the total cost or following the vehicle preference and sharing
+Velora Yesterday at 21:33
+every constraint has some specific importance.. but when you are
+compromising on some constraints for cost,mention this in the report clearly and your optimised cost by not following
+that particular constraint.
+4+
+HB
+Message #...

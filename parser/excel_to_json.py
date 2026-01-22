@@ -15,6 +15,18 @@ def sheet_to_records(df):
     df = df.where(pd.notnull(df), None)
     return df.to_dict(orient='records')
 
+def get_sharing_limit(val):
+    if not val or not isinstance(val, str): return 100
+    v = val.lower().strip()
+    if 'single' in v: return 1
+    if 'double' in v: return 2
+    if 'triple' in v: return 3
+    return 100
+
+def get_vehicle_type(val):
+    if not val: return "any"
+    return str(val).lower().strip()
+
 def time_to_minutes(time_obj):
     """Convert time object or string (HH:MM) to minutes since midnight."""
     import datetime as dt
@@ -47,6 +59,7 @@ def main():
                 'id': idx,
                 'vehicle_id': r.get('vehicle_id', f'V{idx:02d}'),
                 'capacity': int(r.get('capacity', 4)),
+                'type': get_vehicle_type(r.get('type', r.get('Type', 'any'))),
                 'costPerKm': float(r.get('cost_per_km', r.get('costPerKm', 1.0))),
                 'startLoc': {'lat': float(r.get('current_lat', r.get('startLat', 0.0))), 
                             'lon': float(r.get('current_lng', r.get('startLon', 0.0)))},
@@ -54,6 +67,37 @@ def main():
             }
             vehicles.append(v)
         result['vehicles'] = vehicles
+
+    # Parse Metadata
+    # Default tolerances (minutes)
+    tolerances = {1: 30, 2: 20, 3: 15, 4: 10, 5: 5} # Fallback
+    weights = {"cost": 0.7, "time": 0.3}
+    
+    if 'metadata' in xls.sheet_names:
+        df = xls.parse('metadata')
+        meta = {}
+        for r in sheet_to_records(df):
+            k = str(r.get('key', '')).strip()
+            v = r.get('value', None)
+            if k and v is not None:
+                meta[k] = v
+        
+        # Update config
+        if 'allow_external_maps' in meta:
+            result['config']['allow_external_maps'] = (str(meta['allow_external_maps']).lower() == 'true')
+        
+        # Parse tolerances
+        for i in range(1, 6):
+            k = f'priority_{i}_max_delay_min'
+            if k in meta:
+                tolerances[i] = int(meta[k])
+                
+        # Parse weights
+        if 'objective_cost_weight' in meta: weights['cost'] = float(meta['objective_cost_weight'])
+        if 'objective_time_weight' in meta: weights['time'] = float(meta['objective_time_weight'])
+
+    result['config']['tolerances'] = tolerances
+    result['config']['weights'] = weights
 
     if 'employees' in xls.sheet_names:
         df = xls.parse('employees')
@@ -64,6 +108,8 @@ def main():
                 'id': idx,
                 'employee_id': r.get('employee_id', f'E{idx:02d}'),
                 'priority': int(r.get('priority', 3)),
+                'vehiclePreference': get_vehicle_type(r.get('vehicle_preference', r.get('vehiclePreference', 'any'))),
+                'sharingLimit': get_sharing_limit(r.get('sharing_preference', r.get('sharingPreference', 'any'))),
                 'pickup': {'lat': float(r.get('pickup_lat', r.get('pickupLat', 0.0))), 
                           'lon': float(r.get('pickup_lng', r.get('pickupLon', 0.0)))},
                 'dropoff': {'lat': float(r.get('drop_lat', r.get('dropoffLat', 0.0))), 
@@ -112,6 +158,10 @@ def main():
             # expect columns named pickupLat,pickupLon,dropoffLat,dropoffLon
             if all(k in r for k in ('pickupLat','pickupLon','dropoffLat','dropoffLon')):
                 req = {
+                    'vehiclePreference': get_vehicle_type(r.get('vehicle_preference', r.get('vehiclePreference', 'any'))),
+                    'sharingLimit': get_sharing_limit(r.get('sharing_preference', r.get('sharingPreference', 'any'))),
+                    'vehiclePreference': get_vehicle_type(r.get('vehicle_preference', r.get('vehiclePreference', 'any'))),
+                    'sharingLimit': get_sharing_limit(r.get('sharing_preference', r.get('sharingPreference', 'any'))),
                     'id': int(r.get('id', 0)),
                     'priority': int(r.get('priority', 3)),
                     'pickup': {'lat': float(r.get('pickupLat', 0.0)), 'lon': float(r.get('pickupLon', 0.0))},

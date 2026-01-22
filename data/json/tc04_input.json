@@ -1,13 +1,25 @@
 {
   "config": {
     "allow_external_maps": false,
-    "maps_api_key": ""
+    "maps_api_key": "",
+    "tolerances": {
+      "1": 5,
+      "2": 10,
+      "3": 15,
+      "4": 20,
+      "5": 30
+    },
+    "weights": {
+      "cost": 0.7,
+      "time": 0.3
+    }
   },
   "vehicles": [
     {
       "id": 0,
       "vehicle_id": "V01",
       "capacity": 2,
+      "type": "any",
       "costPerKm": 10.0,
       "startLoc": {
         "lat": 12.935,
@@ -19,6 +31,7 @@
       "id": 1,
       "vehicle_id": "V02",
       "capacity": 2,
+      "type": "any",
       "costPerKm": 11.0,
       "startLoc": {
         "lat": 12.94,
@@ -30,6 +43,7 @@
       "id": 2,
       "vehicle_id": "V03",
       "capacity": 4,
+      "type": "any",
       "costPerKm": 14.0,
       "startLoc": {
         "lat": 12.92,
@@ -41,6 +55,7 @@
       "id": 3,
       "vehicle_id": "V04",
       "capacity": 6,
+      "type": "any",
       "costPerKm": 18.0,
       "startLoc": {
         "lat": 12.95,
@@ -54,6 +69,8 @@
       "id": 0,
       "employee_id": "E01",
       "priority": 1,
+      "vehiclePreference": "premium",
+      "sharingLimit": 1,
       "pickup": {
         "lat": 12.936,
         "lon": 77.624
@@ -70,6 +87,8 @@
       "id": 1,
       "employee_id": "E02",
       "priority": 1,
+      "vehiclePreference": "premium",
+      "sharingLimit": 1,
       "pickup": {
         "lat": 12.938,
         "lon": 77.626
@@ -86,6 +105,8 @@
       "id": 2,
       "employee_id": "E03",
       "priority": 1,
+      "vehiclePreference": "premium",
+      "sharingLimit": 1,
       "pickup": {
         "lat": 12.94,
         "lon": 77.628
@@ -102,6 +123,8 @@
       "id": 3,
       "employee_id": "E04",
       "priority": 1,
+      "vehiclePreference": "premium",
+      "sharingLimit": 1,
       "pickup": {
         "lat": 12.942,
         "lon": 77.63
@@ -118,6 +141,8 @@
       "id": 4,
       "employee_id": "E05",
       "priority": 2,
+      "vehiclePreference": "any",
+      "sharingLimit": 2,
       "pickup": {
         "lat": 12.93,
         "lon": 77.62
@@ -134,6 +159,8 @@
       "id": 5,
       "employee_id": "E06",
       "priority": 2,
+      "vehiclePreference": "any",
+      "sharingLimit": 2,
       "pickup": {
         "lat": 12.928,
         "lon": 77.618
@@ -150,6 +177,8 @@
       "id": 6,
       "employee_id": "E07",
       "priority": 3,
+      "vehiclePreference": "normal",
+      "sharingLimit": 3,
       "pickup": {
         "lat": 12.95,
         "lon": 77.635
@@ -166,6 +195,8 @@
       "id": 7,
       "employee_id": "E08",
       "priority": 3,
+      "vehiclePreference": "normal",
+      "sharingLimit": 3,
       "pickup": {
         "lat": 12.948,
         "lon": 77.633
@@ -182,6 +213,8 @@
       "id": 8,
       "employee_id": "E09",
       "priority": 4,
+      "vehiclePreference": "any",
+      "sharingLimit": 3,
       "pickup": {
         "lat": 12.915,
         "lon": 77.605
@@ -198,6 +231,8 @@
       "id": 9,
       "employee_id": "E10",
       "priority": 1,
+      "vehiclePreference": "premium",
+      "sharingLimit": 1,
       "pickup": {
         "lat": 13.05,
         "lon": 77.8
@@ -311,6 +346,58 @@
         "lat": 0.0,
         "lon": 0.0
       }
+    }
+  ],
+  "baseline": [
+    {
+      "employee_id": "E01",
+      "baseline_cost": 420,
+      "baseline_time_min": 40
+    },
+    {
+      "employee_id": "E02",
+      "baseline_cost": 425,
+      "baseline_time_min": 42
+    },
+    {
+      "employee_id": "E03",
+      "baseline_cost": 430,
+      "baseline_time_min": 43
+    },
+    {
+      "employee_id": "E04",
+      "baseline_cost": 435,
+      "baseline_time_min": 44
+    },
+    {
+      "employee_id": "E05",
+      "baseline_cost": 400,
+      "baseline_time_min": 50
+    },
+    {
+      "employee_id": "E06",
+      "baseline_cost": 395,
+      "baseline_time_min": 50
+    },
+    {
+      "employee_id": "E07",
+      "baseline_cost": 380,
+      "baseline_time_min": 58
+    },
+    {
+      "employee_id": "E08",
+      "baseline_cost": 385,
+      "baseline_time_min": 58
+    },
+    {
+      "employee_id": "E09",
+      "baseline_cost": 450,
+      "baseline_time_min": 65
+    },
+    {
+      "employee_id": "E10",
+      "baseline_cost": 700,
+      "baseline_time_min": 35
     }
   ]
 }

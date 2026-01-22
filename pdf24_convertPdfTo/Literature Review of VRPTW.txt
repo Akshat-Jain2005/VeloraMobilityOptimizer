@@ -1,0 +1,1390 @@
+﻿3.3 7.7
+
+Systematic Review
+
+A Systematic Literature Review of
+Vehicle Routing Problems with
+Time Windows
+
+Xiaobo Liu, Yen-Lin Chen, Lip Yee Por and Chin Soon Ku
+
+Special Issue
+Applied Artificial Intelligence for Sustainability
+
+Edited by
+Dr. Muhammad Syafrudin, Dr. Ganjar Alfian, Dr. Norma Latif Fitriyani and Dr. Muhammad Anshari
+
+https://doi.org/10.3390/su151512004
+
+
+
+sustainability
+
+Systematic Review
+
+A Systematic Literature Review of Vehicle Routing Problems
+with Time Windows
+Xiaobo Liu 1, Yen-Lin Chen 2,* , Lip Yee Por 1,* and Chin Soon Ku 3,*
+
+1 Department of Computer System and Technology, Faculty of Computer Science and Information Technology,
+Universiti Malaya, Kuala Lumpur 50603, Malaysia; s2117654@siswa.um.edu.my
+
+2 Department of Computer Science and Information Engineering, National Taipei University of Technology,
+Taipei 106344, Taiwan
+
+3 Department of Computer Science, Universiti Tunku Abdul Rahman, Kampar 31900, Malaysia
+* Correspondence: ylchen@mail.ntut.edu.tw (Y.-L.C.); porlip@um.edu.my (L.Y.P.); kucs@utar.edu.my (C.S.K.)
+
+Abstract: Vehicle routing problems with time windows (VRPTW) have gained a lot of attention due
+to their important role in real-life logistics and transport. As a result of the complexity of real-life
+situations, most problems are multi-constrained and multi-objective, which increases their difficulty.
+The aim of this paper is to contribute to the effective solution of VRPTW-related problems. Therefore,
+research questions and objectives are set in accordance with PRISMA guidelines, and data extraction
+and analysis of the relevant literature within the last five years (2018–2022) are compared to answer
+the set research questions. The results show that approximately 86% of the algorithms involved in
+the literature are approximate methods, with more meta-heuristics than heuristics, and nearly 40% of
+the literature uses hybrid methods combining two or more algorithms.
+
+Keywords: vehicle routing; vehicle routing problems (VRP); vehicle routing problems with time
+windows (VRPTW); time windows
+
+Citation: Liu, X.; Chen, Y.-L.;
+
+Por, L.Y.; Ku, C.S. A Systematic 1. Introduction
+Literature Review of Vehicle Routing
+
+Vehicle routing problems with time windows (VRPTW) is a widely recognized prob-
+Problems with Time Windows.
+
+Sustainability 2023, 15, 12004. lem in the field of logistics, involving the optimization of delivery routes for a fleet of
+https://doi.org/10.3390/ vehicles, while considering specific time windows for each delivery. VRPTW is a notable
+su151512004 variant within the broader context of vehicle routing problems. It was first proposed by
+
+Solomon [1] in 1987. Nowadays, as logistics plays a vital role in supply chain management
+Academic Editors: Muhammad
+
+and transportation, VRPTW has gained significant attention from the research commu-
+Anshari, Muhammad Syafrudin,
+
+nity due to its numerous real-world applications. For example, waste collection [2,3],
+Ganjar Alfian and Norma
+
+home healthcare [4,5], perishable goods delivery [6], municipal solid waste collection [7],
+Latif Fitriyani
+
+home delivery [8], bus route optimization [9], ride-sharing services [10], customized bus
+Received: 14 July 2023 service [11], among others [12–24].
+Revised: 31 July 2023 However, finding an optimal solution for VRPTW is a non-deterministic polynomial-
+Accepted: 1 August 2023 hard problem [1], and the complexity of the problem increases significantly with the size of
+Published: 4 August 2023 the input data. Therefore, researchers use less exact algorithms to obtain optimal solutions,
+
+but more approximation algorithms to find acceptable approximate solutions. Numerous
+approximation algorithms have been proposed to address this challenge, such as single
+algorithms [2–17], hybrid algorithms [18–30], and machine-learning methods [31], but there
+
+Copyright: © 2023 by the authors.
+is still a need for more effective and efficient solutions to optimize vehicle routes.
+
+Licensee MDPI, Basel, Switzerland.
+In recent years, VRPTW has become an active area of research, and several studies have fo-
+
+This article is an open access article
+cused on developing new algorithms and techniques to improve the efficiency and effectiveness
+
+distributed under the terms and
+of vehicle routing. However, despite significant progress, there are still several challenges that
+
+conditions of the Creative Commons
+
+Attribution (CC BY) license (https:// need to be addressed, including the incorporation of multiple constraints [2–5,13–16,32–45],
+creativecommons.org/licenses/by/ multiple objects [2,4,5,16,45–48], the use of realistic datasets [4,28,49,50], and the adaptation of
+4.0/). solutions to real-world scenarios [8,9,20,25,28,38,51–53].
+
+Sustainability 2023, 15, 12004. https://doi.org/10.3390/su151512004 https://www.mdpi.com/journal/sustainability
+
+
+
+– – – –
+–
+
+Sustainability 2023, 15, 12004 2 of 20
+
+Another important challenge in the context of VRPTW is the evaluation and compari-
+son of existing algorithms. Several metrics have been proposed to evaluate the performance
+of these algorithms, such as solution quality, computational time, and scalability. However,
+the selection of appropriate metrics and the comparison of different algorithms is a complex
+task that requires a thorough analysis of the strengths and weaknesses of each method.
+
+Moreover, the development of practical applications of VRPTW requires a multidisci-
+plinary approach that takes into account not only technical–optimization aspects, but also
+real-world constraints, such as environmental factors [29,35,54,55], social responsibility [36,51],
+and economic sustainability [29,34,39,43,55–58]. Therefore, research in this area must focus on
+the integration of optimization algorithms with other disciplines to ensure that the solutions
+are practical and relevant.
+
+In this context, a systematic literature review of VRPTW research can provide a
+comprehensive analysis of the current state of the art, identify research gaps and future
+research directions, and facilitate the development of more effective and efficient algorithms
+for solving this problem. Therefore, this paper aims to conduct a systematic literature review
+(SLR) of VRPTW-related studies to identify and analyze the major challenges, existing
+algorithms, evaluation metrics, and potential research directions in this area.
+
+2. Method
+
+The methodology used in this study for conducting a systematic literature review on
+VRPTW is depicted in Figure 1. To ensure a comprehensive and transparent review, the
+researchers followed the widely recognized and reliable Preferred Reporting Items for Sys-
+tematic Reviews and Meta-Analyses (PRISMA) guidelines [59]. The PRISMA methodology
+offers a clear and replicable framework that encompasses literature searches, screening
+and selection of relevant articles, and synthesis of the findings. The decision to adopt
+the PRISMA methodology was appropriate for this study as it facilitated a thorough and
+systematic literature search, a meticulous article screening and selection process, and
+adherence to a detailed reporting checklist to ensure the review’s clari’ty and transparency.
+
+ 
+Figure 1. Literature review methodology.
+
+
+
+Sustainability 2023, 15, 12004 3 of 20
+
+The literature review methodology consists of five sequential steps, which are
+as follows:
+
+2.1. Determine Research Questions and Objectives
+
+To ensure an organized literature search and analysis, the following research questions
+and objectives were identified:
+
+Research Questions:
+
+• What are the major challenges and issues faced by VRPTW?
+• What are the existing algorithms and solution methods for VRPTW?
+• What are the evaluation metrics used to assess the performance of VRPTW algorithms?
+• What are the shortcomings and deficiencies of the existing algorithms?
+• What are the future research directions and trends in VRPTW?
+
+Research Objectives:
+
+• To provide a comprehensive analysis of the main challenges and issues faced by VRPTW.
+• To review and summarize the existing algorithms and solution methods for VRPTW.
+• To identify and analyze the evaluation metrics used to assess the performance of
+
+VRPTW algorithms.
+• To highlight the shortcomings and deficiencies of the existing algorithms and propose
+
+potential improvements.
+• To identify and discuss the future research directions and trends in VRPTW.
+
+2.2. Determine Search Strategy and Selection Criteria
+
+Several databases, as shown in Table 1, including Science Direct, ACM, Wiley, Springer
+Link, and IEEE Xplore, were chosen to ensure a comprehensive search of the literature.
+The chosen search terms were (“vehicle routing problems” OR “VRP” OR “vehicle routing
+problems with time windows” OR “VRPTW” OR “vehicle routing problems with time
+window constraints” OR “VRP with time constraints” OR “VRP with time windows” OR
+“VRP with time constraints” OR “VRP with time window constraints”). The search was
+conducted on articles published from 2018 until 2022.
+
+Table 1. Websites of databases.
+
+Database URL
+
+Science Direct https://www.sciencedirect.com/ (accessed on 30 June 2023)
+ACM https://dl.acm.org/ (accessed on 30 June 2023)
+Wiley https://onlinelibrary.wiley.com/ (accessed on 30 June 2023)
+
+Springer Link https://link.springer.com/ (accessed on 30 June 2023)
+IEEE Xplore https://ieeexplore.ieee.org/ (accessed on 30 June 2023)
+
+As shown in Table 2, we set inclusion and exclusion criteria for selecting and
+excluding articles.
+
+Table 2. Eligibility criteria.
+
+Inclusion Criteria Exclusion Criteria
+
+1. Articles that are peer-reviewed original articles 1. Studies that do not validate the proposed method or algorithm
+
+2. Articles that have a proposed approach for VRPTW 2. Studies offering unclear results or findings
+
+3. Articles that solve the problem of VRPTW and related variants 3. Short papers, posters, short communications, and patents
+
+4. Articles that can access full-text content 4. Duplicated studies (by title or content)
+
+5. Studies written in the English language 5. Articles that were published other than 1 January 2018 to 31 December 2022
+
+
+
+Sustainability 2023, 15, 12004 4 of 20
+
+Inclusion Criteria: We only included VRPTW-related peer-reviewed research articles
+that addressed the research questions and objectives defined in Section 2.1. In addition, we
+considered studies written in English that were available in full-text format.
+
+Exclusion Criteria: We excluded articles that were not related to the VRPTW problems
+or other variant solutions, such as those that focused on VRPTW evolution, technology, and
+utilization, or studies that did not validate the proposed method or algorithm, or studies
+that provided unclear results or findings, or studies that did not meet the inclusion criteria.
+
+2.3. Perform Screening and Data Extraction
+
+The selected studies were evaluated thoroughly during the screening process to
+assess their relevance to the research questions and objectives. Subsequently, the full-text
+articles were carefully reviewed, and any studies that failed to meet the inclusion criteria
+or were not directly related to the research questions were excluded from the analysis.
+The chosen studies were used to extract the relevant information, which included the
+research methodologies employed, the types of VRPTW problems examined, and the
+specific challenges and issues addressed. To identify any common themes, patterns, or
+gaps in the existing literature, the extracted data was meticulously analyzed.
+
+In our SLR, the screening process was conducted collaboratively by all of the authors.
+Initially, a comprehensive search was performed to identify relevant papers based on
+predefined inclusion and exclusion criteria. The selected papers were then distributed
+among the authors for individual review.
+
+The titles and abstracts of the articles were evaluated independently by each author to
+determine their relevance to the research questions and objectives. Through this process,
+the literature was assessed in a comprehensive and unbiased manner.
+
+To ensure the reliability and consistency of the screening process, we adopted a test-
+retest approach. A random sample of the selected articles was independently reviewed by
+the same authors at a later stage. This was done to evaluate the consistency and agreement
+of the inclusion or exclusion decisions made during the initial screening process, following
+the recommendation by [60] for ensuring quality in the literature reviews.
+
+The responsibilities for conducting the SLR were divided among the authors, with
+each author actively participating in the screening and data extraction processes. The
+decisions made during the screening process were based on individual assessments and
+discussions among the authors to resolve any discrepancies.
+
+2.4. Perform Data Synthesis and Analysis
+
+The findings from the literature review have been carefully presented through a
+combination of textual narrative, tables, and charts. This approach not only provides a com-
+prehensive and detailed overview of the research, but also allows for a visual representation
+of the data.
+
+By using tables and charts, important trends and patterns in the research on VRPTW
+are highlighted in a more digestible and easy-to-understand format. This visual representa-
+tion adds clarity and depth to the findings, making it easier for readers to grasp the key
+takeaways from the literature review.
+
+In addition to presenting the synthesized findings, the analysis of the literature has
+also uncovered common themes and emerging trends in the field of VRPTW. By examining
+multiple studies and sources, it becomes apparent that certain research directions are more
+prevalent, indicating areas in which further investigation may be fruitful.
+
+These common themes, patterns, and emerging trends provide valuable insights and
+guidance for future research in the field of VRPTW. By identifying these areas, researchers
+can focus their efforts on addressing gaps in the existing literature and exploring new
+avenues of study.
+
+Overall, the combination of textual narrative, tables, and charts in presenting the
+synthesized findings, along with the identification of common themes, patterns, and
+
+
+
+Sustainability 2023, 15, 12004 5 of 20
+
+emerging trends, enhances the comprehensiveness and interpretability of the research
+on VRPTW.
+
+2.5. Identifying Future Research Directions
+
+The analysis of the literature provides a basis for considering potential avenues for
+future research, which are then presented in the Section 4 of this paper.
+
+3. Result
+
+For a systematic review of VRPTW, Figure 2 depicts the PRISMA flow diagram [59].
+Identification, screening, and eligibility are the three stages involved. We obtained 10,556
+articles from the database search during the initial identification phase. After removing
+duplicates, there were 9780 articles left. The screening phase included a review of the article
+titles and abstracts, which resulted in the inclusion of 344 articles. During the eligibility
+phase, the remaining articles were subjected to full-text screening, and 280 were rejected
+because they did not meet the inclusion criteria.
+
+ 
+
+Figure 2. PRISMA flow diagram [59] for systematic review of VRPTW.
+
+The 64 included articles were analyzed and synthesized to provide an overview of the
+major challenges, existing algorithms, evaluation metrics, and potential research directions
+in VRPTW (see Supplementary Materials). The findings of our systematic literature review
+are presented below.
+
+Figure 3 demonstrates the distribution of the number of included studies from 2018 to
+2022. It is clear to see that there is a steady sign of increased research on VRPTW. In each of
+the four years since 2019, more than twice as many articles have been published as in 2018.
+This shows that VRPTW-related issues have been relatively stable in recent years.
+
+Figure 4 illustrates the number of included studies grouped by journal. It can be seen
+that the number of articles published in the top three journals, IEEE Access, European
+Journal of Operational Research, and Applied Soft Computing, accounts for close to 58%.
+The number of journals that included only one article accounted for more than half of
+the total.
+
+
+
+Sustainability 2023, 15, 12004 6 of 20
+
+ 
+
+Figure 3. Distribution of papers by year.
+
+ 
+Figure 4. Journal distribution.
+
+Table 3 exhibits details of the included articles and the journals in which they were
+published. The highest share of the 21 academic journals, nearly 97%, is published in
+journals owned by IEEE and Elsevier. These two publishers also obtained more results
+during the initial search phase of the literature (6582, or about 63% of the total). It is
+noteworthy that one of the journals included in our research comes from the Pan American
+Health Organization (PAHO). Founded in 1902, it works for the Americas to improve and
+protect the health of their people. This indicates that the VRPTW issue is of high concern
+and has an impact worldwide.
+
+Next, we answered the five research questions set out in Section 2.1 in detail, thereby
+meeting the research objectives we set.
+
+
+
+Sustainability 2023, 15, 12004 7 of 20
+
+Table 3. Distribution of publication venues.
+
+Journal Publisher Articles Count
+
+Applied Intelligence Springer [46] 1
+
+Canadian Journal of Electrical and Computer Engineering-Revure Canadienne De Genie
+IEEE [25] 1
+
+Electrique Et Informatique
+
+Complex System Modeling and Simulation IEEE [57] 1
+
+Computer Communications Elsevier [5] 1
+
+Ieee Systems Journal IEEE [61] 1
+
+Ieee Transactions on Cybernetics IEEE [18,48] 2
+
+Ieee Transactions on Emerging Topics in Computational Intelligence IEEE [10] 1
+
+Ieee-Caa Journal of Automatica Sinica IEEE [21] 1
+
+Neurocomputing Elsevier [6] 1
+
+Revista Panamericana De Salud Publica-Pan American Journal of Public Health PAHO [62] 1
+
+Soft Computing Letters Elsevier [63] 1
+
+Ieee Transactions on Automation Science and Engineering IEEE [64] 1
+
+Ieee Latin America Transactions IEEE [41] 1
+
+Journal of Computational Science Elsevier [1,65] 2
+
+Journal of Systems Engineering and Electronics IEEE [30,33] 2
+
+Engineering Applications of Artificial Intelligence Elsevier [3,15,35] 3
+
+Knowledge-Based Systems Elsevier [17,58] 3
+
+Ieee Transactions on Intelligent Transportation Systems IEEE [31,44,66] 3
+
+Applied Soft Computing Elsevier [2,4,13,34,43,54] 6
+
+European Journal of Operational Research Elsevier [12,16,32,36–39,42,49,51,55,56] 12
+
+Ieee Access IEEE [7–9,11,14,19,20,22–24,26–29,40,47,50,52,53,67] 19
+
+3.1. Answering Research Question No. 1: What Are the Major Challenges and Issues Faced
+by VRPTW?
+
+Table 4 summarizes the major challenges and issues faced by VRPTW and its related
+articles. Here, 87.5% of the articles contained one or more restrictions other than the
+time window. In addition to the 10 main restrictions, there were several other restrictions
+that were not recorded. For example, of the other 12.5%, [36] contained the service time
+restriction and [32] contained the parcel locker restriction. The following are the major
+challenges and issues faced by VRPTW:
+
+Table 4. A table summarizes the major challenges and issues faced by VRPTW and its related articles.
+
+Article C1 C2 C3 C4 C5 C6 C7 C8 C9 C10
+
+Chen et al. (2018) [19] * * * *
+Chen et al. (2021) [55] * * * * * *
+Ciancio et al. (2018) [56] * * * *
+Gmira et al. (2021) [57] * * * *
+Goel and Maini (2018) [25] * * * *
+Goel et al. (2019) [13] * * * * * *
+Hoogeboom and Dullaert (2019) [14] * * *
+Jie et al. (2022) [54] * * * * *
+Liu and Jiang (2019) [53] * * * *
+Liu et al. (2020) [67] * * * *
+Lu and Gzara (2019) [35] * * *
+Macrina et al. (2019) [23] * * * * *
+Miranda et al. (2018) [26] * * * * * *
+Molina et al. (2020) [24] * * * *
+Pan et al. (2021) [37] * * * *
+Reil et al. (2018) [65] * * * * *
+Shi et al. (2020) [27] * * * * *
+Song et al. (2020) [15] * * * *
+Wang et al. (2021) [38] * * * * *
+Yesodha and Amudha (2022) [28] * * * * *
+Exposito-Marquez et al. (2019) [12] * * * * *
+
+
+
+Sustainability 2023, 15, 12004 8 of 20
+
+Table 4. Cont.
+
+Article C1 C2 C3 C4 C5 C6 C7 C8 C9 C10
+
+Ali et al. (2021) [20] * *
+Fontaine (2022) [16] * *
+Sitek et al. (2022) [29] * * *
+Chaieb and Sassi (2021) [21] * * *
+Li et al. (2019) [22] * *
+Tilk et al. (2019) [51] * *
+Raeesi and Zografos (2021) [64] * *
+Agrawal et al. (2021) [2] * *
+Jiang et al. (2020) [3] * * *
+Lagos et al. (2018) [58] * *
+Zheng (2020) [30] * *
+Shen et al. (2020) [44] *
+Jiang et al. (2020) [61] * *
+Duan et al. (2022) [63] * *
+Dekhici et al. (2019) [4] * *
+Deng et al. (2018) [52] * *
+Wang et al. (2019) [39] * *
+Wu et al. (2020) [6] * *
+Zhang et al. (2020) [31] * *
+Shen et al. (2022) [66] * * *
+Mao et al. (2020) [48] * *
+Shen et al. (2021) [68] * * *
+Yan et al. (2019) [69] * *
+He et al. (2021) [43] *
+Li and Li (2020) [36] *
+Wu et al. (2019) [40] *
+Khoo et al. (2020) [46] *
+Zhang et al. (2018) [45] *
+Yu et al. (2022) [49] *
+Lin et al. (2022) [50] * *
+Yu et al. (2022) [32] *
+Liu et al. (2022) [47] * *
+Lan et al. (2020) [33] * *
+Riazi et al. (2019) [5] *
+Zhang et al. (2020) [7] * *
+Zhu et al. (2021) [34] * *
+Sun et al. (2019) [41] * *
+Zhou et al. (2019) [8] * *
+Wang et al. (2020) [42] * * *
+Liu and Wang (2022) [9] * * *
+Perboli et al. (2021) [17] * *
+Li et al. (2022) [10] * *
+Miguel et al. (2019) [18] * * * *
+
+Note: C1–C10 refer to the 10 challenges and issues mentioned earlier. * denotes that the article addresses the
+corresponding challenge or issue.
+
+Time windows (C1): Time windows are a critical aspect of VRPTW as they limit the
+delivery or pickup times for each customer. However, they also add complexity to the
+problem and make it difficult to find optimal solutions.
+
+Capacitated vehicles (C2): The capacity of the vehicles used in VRPTW is limited,
+which means that a vehicle may not be able to serve all customers in a single trip. This
+adds complexity to the problem as it requires efficient vehicle routing and scheduling.
+
+Heterogeneous fleet (C3): In some cases, VRPTW involves a heterogeneous fleet of
+vehicles with different capacities and capabilities. This makes it challenging to optimize
+vehicle routing and scheduling.
+
+Dynamic demand (C4): In some applications, customer demand may be dynamic and
+uncertain. This makes it difficult to plan the vehicle routes and schedules in advance.
+
+Travel time (C5): The travel time between the customers and depots is an important
+factor in VRPTW, as it affects the overall efficiency of the delivery or pickup process.
+However, factors such as traffic congestion and road conditions may have an impact on
+travel time.
+
+
+
+Sustainability 2023, 15, 12004 9 of 20
+
+Multi-objective optimization (C6): VRPTW often involves multiple objectives, such as
+minimizing the total travel time or distance, maximizing vehicle utilization, and minimizing
+the number of vehicles used. These conflicting objectives make it challenging to find
+optimal solutions.
+
+Environmental considerations (C7): In recent years, there has been a growing empha-
+sis on reducing the environmental impact of transportation. VRPTW needs to consider
+environmental factors such as vehicle emissions and energy consumption while optimizing
+vehicle routing and scheduling.
+
+Pickup and delivery (C8): In many logistics and transport tasks, the customers have
+demands for delivery and pickup. For pick-up and delivery within the time range, each
+customer is allocated a certain window of time.
+
+Time-dependent (C9): For modern logistics, sometimes vehicles need to complete their
+travel routes within a certain time limit.
+
+Electric Vehicles (C10): In contrast with combustion-engine vehicles, electric vehicles
+are unable to complete long-distance deliveries due to their limited battery capacity. If
+necessary, they need to travel to a limited number of charging stations and then charge for
+a period of time.
+
+Of the above 64 papers, the 10 most cited between 2018 and 2022 are shown in Table 5.
+From these 10 papers, we can see that in the last five years, researchers focused more
+on the use of metaheuristics, especially a mixture of two or more algorithms to solve
+multi-objective or multi-constrained tasks. Among them, route planning for electric
+vehicles is more complex and difficult compared with conventional fuel vehicles. No-
+tably, the VRPTW problem is more targeted and applied to the real-world logistics and
+transportation industries.
+
+Table 5. Top 10 most cited articles.
+
+Article Citations
+
+Goel & Maini (2018) [25] 82
+Macrina et al. (2019) [23] 75
+
+Wang et al. (2019) [39] 71
+Liu et al. (2020) [67] 56
+
+Gmira et al. (2021) [57] 52
+Reil et al. (2018) [65] 48
+Pan et al. (2021) [37] 46
+
+Wang et al. (2020) [42] 43
+Chen et al. (2021) [55] 42
+Song et al. (2020) [15] 34
+
+3.2. Answering Research Question No. 2: What Are the Existing Algorithms and Solution
+Methods for VRPTW?
+
+Table 6 shows the algorithms and solution methods used in the review articles for
+the VRPTW problem. We categorized the algorithms and solution methods into five main
+groups: exact, heuristic, metaheuristic, hybrid, and other methods.
+
+Table 6. Summary of the existing algorithms and solution methods for VRPTW.
+
+Article Exact Method Heuristic Method Metaheuristic Method Hybrid Method Other Method
+
+Chen et al. (2018) [19] LS and ALNS Ruin-and-recreate based
+
+Chen et al. (2021) [55] ALNS
+
+Ciancio et al. (2018) [56] BPC
+
+Exposito-Marquez et al. (2019) [12] GRASP
+
+Gmira et al. (2021) [57] TS
+
+Goel and Maini (2018) [25] ACO and FA HAFA
+
+Hoogeboom and Dullaert (2019) [14] TS Hybrid
+
+
+
+Sustainability 2023, 15, 12004 10 of 20
+
+Table 6. Cont.
+
+Article Exact Method Heuristic Method Metaheuristic Method Hybrid Method Other Method
+
+Goel et al. (2019) [13] ACO
+
+Jie et al. (2022) [54] GA and VNS Hybrid
+
+Liu et al. (2020) [67] CAATD
+
+Liu and Jiang (2019) [53] LNS H-LNS
+
+Lu and Gzara (2019) [35] BPC
+
+Macrina et al. (2019) [23] GA
+
+Miranda et al. (2018) [26] NSGA-II
+
+Molina et al. (2020) [24] B&C
+
+Pan et al. (2021) [37] GRASP and SA
+
+Reil et al. (2018) [65] BPC BPPA
+
+Shi et al. (2020) [27] LBTS
+
+Song et al. (2020) [15] GA and ACO Hybrid
+
+Wang et al. (2021) [38] GA and VNS Hybrid
+
+Yesodha and Amudha (2022) [28] FA
+
+Ali et al. (2021) [20] ALNS
+
+Fontaine, (2022) [16] ALNS
+
+Sitek et al. (2020) [29] GA
+
+Chaieb and Sassi (2021) [21] TS
+
+Li et al. (2019) [22] FA
+
+Tilk et al. (2019) [51] BPAC
+
+Raeesi and Zografos (2021) [64] MG-DP-ILNS
+
+Jiang et al. (2020) [3] ACO Hybrid
+
+Lagos et al. (2018) [58] PSO
+
+Zheng (2020) [30] IA
+
+Shen et al. (2020) [44] ACO and BSO Hybrid
+
+Jiang et al. (2020) [61] VNS
+
+Duan et al. (2022) [63] PSO
+
+Dekhici et al. (2019) [4] FA
+
+Deng et al. (2018) [52] ACO and MMAS Hybrid
+
+Wang et al. (2019) [39] MOEA
+
+Wu et al. (2020) [6] TS
+
+Zhang et al. (2020) [31] DMMA
+
+Shen et al. (2022) [66] ALNS
+
+Mao et al. (2020) [48] LS ACO Hybrid
+
+Shen et al. (2021) [68] EDA LFD Hybrid
+
+Yan et al. (2019) [69] INDS and INS Hybrid
+
+He et al. (2021) [43] ACO and VNS Hybrid
+
+Li and Li (2020) [36] TS
+
+Wu et al. (2019) [40] BSO and ACO Hybrid
+
+Khoo et al. (2020) [46] GA Ruin-and-recreate based
+
+Zhang et al. (2018) [45] GA and PSO Hybrid Ruin-and-recreate based
+
+Yu et al. (2022) [49] CGA PSO Hybrid
+
+Lin et al. (2022) [50] DRL
+
+Yu et al. (2022) [32] SA
+
+Liu et al. (2022) [47] BSO and ACO Hybrid
+
+Lan et al. (2020) [33] VNS Decomposition-based
+
+Riazi et al. (2019) [5] CGA Hybrid Gossip algorithm
+
+Zhang et al. (2020) [7] SA
+
+Zhu et al. (2021) [34] GA
+
+Sun et al. (2019) [41] TS and ALNS Hybrid
+
+Zhou et al. (2019) [8] G and NS Hybrid
+
+
+
+Sustainability 2023, 15, 12004 11 of 20
+
+Table 6. Cont.
+
+Article Exact Method Heuristic Method Metaheuristic Method Hybrid Method Other Method
+
+Wang et al. (2020) [42] ILS Hybrid
+
+Liu and Wang (2022) [9] ALNS
+
+Perboli et al. (2021) [17] LNS
+
+Li et al. (2022) [10] LS and SA Hybrid
+
+Miguel et al. (2019) [18] MOEA Hybrid
+
+Agrawal et al. (2020) [2] CI
+
+Note: ACO: ant colony optimization; ALNS: adaptive large neighborhood search; ANS: adaptive neighborhood
+selection; BPC: branch-and-price-and-cut; BSO: brain storm optimization; CGA: column generation algorithm;
+CI: cohort intelligence algorithm; DMMA: dynamic memory memetic algorithm; DRL: deep reinforcement
+learning; EDA: estimation of distribution algorithm; FA: firefly algorithm; G: greedy algorithm; GA: genetic
+algorithm; GRASP: greedy randomized adaptive search procedure; IA: Ito algorithm; IDNS: iteratively dynamic
+neighborhood search; ILS: iterated local search; INS: iterative neighborhood search; LFD: Lévy flight distribution;
+LNS: large neighborhood search; LS: local search; MG-DP-ILNS: multi-graph dynamic programming based
+intensified large neighborhood search; MMAS: max − min ant system; MOEA: multi-objective evolutionary
+algorithm; PSO: particle swarm optimization; RBP: robust branch-and-price; SA: simulated annealing; TS: Tabu
+Search; VND: variable neighborhood descent; VNS: variable neighborhood search.
+
+Exact Method: Refers to algorithms that guarantee the optimal solution to a problem.
+To the best of our knowledge, most of these methods are limited to solve instances of
+small to medium-sized VRPTW where the exact solution can be found within a reasonable
+amount of time. These methods include techniques such as direct tree search methods
+(e.g., branch-and-price-and-cut) and dynamic programming.
+
+Heuristic Method: Refers to algorithms that are designed to quickly find a good
+solution but do not guarantee the optimal solution. These methods are often used for
+larger instances of VRPTW, where exact algorithms are computationally expensive. These
+methods include techniques such as constructive heuristics, the savings algorithm, and the
+Clarke and Wright Algorithm.
+
+Metaheuristic Method: Refers to algorithms that are designed to efficiently search
+through large solution spaces to find good-quality solutions. These methods often combine
+multiple heuristic techniques to create a robust search strategy. These methods include
+techniques such as simulated annealing, Tabu search, genetic algorithm, ant colony opti-
+mization, and particle swarm optimization.
+
+Hybrid Method: Refers to algorithms that combine two or more techniques from the
+other categories to create a more powerful search strategy. These methods often combine
+exact and heuristic techniques, or heuristic and metaheuristic techniques, to find high-
+quality solutions in a reasonable amount of time.
+
+Other Method: Refers to approaches that do not fit into any of the other categories.
+These methods may include techniques such as constraint programming, integer program-
+ming, and artificial neural networks. These methods are often used to solve specific VRPTW
+problems, such as those with time-dependent or stochastic travel times.
+
+Table 6 shows that most articles use heuristic and metaheuristic methods to solve the
+VRPTW problem. Exact methods are used less frequently because the VRPTW is known to
+be an NP-hard problem, which makes finding exact solutions computationally expensive
+for larger instances. Hybrid methods and other methods are used less frequently but still
+have some representation in the literature. Figure 5 illustrates the details of the usage of
+the method types. Approximate algorithms accounted for over three-quarters of the total,
+with metaheuristics exceeding heuristics in approximate algorithms, accounting for 69%
+and 17%, respectively. Exact algorithms accounted for just under 10%, at 7%. For other
+methods, deep reinforcement learning accounted for 7% of the total.
+
+Figure 6 and Table 6 show the taxonomy of VRPTW algorithms and highlight the wide
+variety of approaches that researchers have taken to address the complex and challenging
+VRPTW problem, demonstrating the significant effort and ingenuity that have gone into
+this field of research, respectively. Moreover, the ongoing evolution of the field suggests that
+new and innovative algorithms and solution methods will continue to emerge, pushing the
+
+
+
+Sustainability 2023, 15, 12004 12 of 20
+
+boundaries of what is possible and driving further advancements in VRPTW research. As a
+result, the impact of this research will likely extend far beyond the academic community as
+its findings and insights are applied to real-world transportation and logistics challenges,
+helping to optimize and streamline the delivery of goods and services, while minimizing
+costs and environmental impact.
+
+ 
+
+Figure 5. Method used for solving the VRPTW problem.
+
+Figure 6. Taxonomy of VRPTW algorithms.
+
+
+
+Sustainability 2023, 15, 12004 13 of 20
+
+In recent years, a large number of algorithms have been proposed to solve the VRPTW
+family of problems. Based on the 64 papers reviewed in this paper, the commonly used
+algorithms fall into three main categories: exact algorithms, approximate algorithms, and
+other algorithms. As shown in Figure 5, the most adopted algorithm in the last five years
+has been the approximation algorithm. In particular, there are far more metaheuristic
+algorithms among them than heuristic algorithms. Notably, there have been attempts to
+introduce deep reinforcement learning algorithms, popular in other computer-related fields,
+to solve the VRPTW family of problems.
+
+3.3. Answering Research Question No. 3: What Are the Evaluation Metrics Used to Assess the
+Performance of VRPTW Algorithms?
+
+Table 7 provides a comprehensive overview of the evaluation metrics used to measure
+the performance of VRPTW algorithms. These metrics are classified into four categories:
+solution quality, computational time, convergence, and diversity.
+
+Table 7. Summary of the evaluation metrics and formulae used to assess the performance of VRPTW.
+
+Metric Formula Description
+n n
+
+Total Travel Distance ∑ ∑ c Total distance traveled by all vehicles
+ij xij
+
+i=1 j=1
+
+n n
+Total Travel Time ∑ ∑ t x Total time taken to travel all routes
+
+ij ij
+i=1 j=1
+
+m
+Number of Vehicles Used ∑ y Number of vehicles used to serve all customers
+
+i
+i=1
+
+n
+Maximum Vehicle Load m
+
+max ∑ q Maximum load of any vehicle
+j xij
+
+i=1 j=1
+
+m n m
+Average Vehicle Load ( ∑ ∑ q f all vehicles
+
+j xij)/( ∑ y Average load o
+i)
+
+i=1 j=1 i=1
+
+m
+Route Duration Variance 1 2 ariance of the duration of all routes
+
+m ∑ (Ti − T) V
+i=1
+
+√
+
+Route Duration Standard Deviation m
+1 2 Standard deviation of the duration of all routes
+m ∑ (Ti − T)
+
+i=1
+
+n
+Time Window Violations ∑ (max(0, t me window violations across all customers
+
+i − ai) + max(0, bi − ti)) Total ti
+i=1
+
+Feasibility Ratio (Number of feasible solutions)/(Total number of solutions) Ratio of feasible solutions to the total number of solutions
+
+Computation Time - Time taken to find a solution
+
+Note: n: The number of customers; m: The number of vehicles; q: The capacity of each vehicle; dij: The distance
+between customer i and customer j; ci : The demand of customer i; ti : The time window for customer i, specified
+as a time interval [ai , bi ]; si : The service time required at customer i; pi : The pickup quantity for customer i; ri : The
+delivery quantity for customer i; tij: The travel time between customer i and customer i; fij: The fuel consumption
+between customer i and customer j; sij: The carbon emission between customer i and customer j; Ti : The arrival
+time at customer i; Vk: The total distance traveled by vehicle k; C: The total cost of the solution, including fuel
+consumption and vehicle usage cost; O: The objective function being optimized, such as minimizing the total
+distance traveled or the total cost of the solution; z: The best-known solution for a given problem instance; z′: The
+solution obtained by the algorithm being evaluated; CPU: The CPU time required to solve the problem instance;
+Gap: The relative gap between the best-known solution and the solution obtained by the algorithm, expressed as
+a percentage; It: The number of iterations required by the algorithm to converge to a solution.
+
+The solution quality metrics assess the quality of the obtained solutions in terms of
+the number of vehicles used, total distance traveled, total travel time, total waiting time,
+maximum lateness, and total cost. These metrics provide insights into the efficiency of
+the algorithms regarding resource utilization, distances covered, time spent traveling and
+waiting, delivery punctuality, and overall cost effectiveness.
+
+The computational time metrics evaluate the efficiency of the algorithms in terms of the
+time required to find the best solution, the time taken to find the first feasible solution, and
+the average time per iteration. These metrics help determine how quickly the algorithms
+can generate feasible solutions and their overall computational efficiency.
+
+The convergence metrics measure the speed and efficiency of the algorithms in con-
+verging to optimal or near-optimal solutions. The metrics include convergence speed, the
+
+
+
+Sustainability 2023, 15, 12004 14 of 20
+
+number of iterations required for convergence, and the convergence rate. These metrics
+provide insights into the algorithms’ ability to converge and find optimal solutions within
+a reasonable timeframe.
+
+Lastly, the diversity metrics focus on evaluating the diversity of the solutions pro-
+duced by the algorithms. These metrics encompass the entropy of the solutions and the
+diversity of the solutions. By measuring the entropy, these metrics assess the randomness
+or variability of the solutions found, while the diversity metric quantifies the number of
+distinct solutions obtained.
+
+In summary, Table 7 offers a valuable reference for evaluating the performance of
+VRPTW algorithms. It enables researchers and practitioners to compare different al-
+gorithms by analyzing their results for each metric. This table is an indispensable re-
+source for assessing and understanding the effectiveness of various algorithms in solving
+VRPTW problems.
+
+3.4. Answering Research Question No. 4: What Are the Shortcomings and Deficiencies of the
+Existing Algorithms?
+
+There are several shortcomings and deficiencies in the existing algorithms for solving
+VRPTW problems. Some of these include the following:
+
+Inability to handle large problem instances: Many existing algorithms are not capable
+of handling large problem instances with many customers, vehicles, and time windows.
+This is because these algorithms often have high computational complexity, and their
+running times increase exponentially with problem size. For example, exact algorithms,
+such as branch and bound, can become computationally infeasible for large problem
+instances. In addition, many heuristic and metaheuristic algorithms can become stuck in
+local optima for large problems.
+
+Lack of scalability: Related to the first point, many existing algorithms do not scale
+well with problem size. As the problem size increases, the solution quality may degrade
+significantly, or the algorithm may become infeasible due to its computational complexity.
+For example, some algorithms may be efficient for small to medium-sized problems, but
+their performance may degrade quickly for large problems.
+
+Difficulty in handling stochasticity: Many VRPTW problems are subject to stochas-
+ticity, such as uncertainty in customer demand or travel times. However, many existing
+algorithms do not explicitly handle stochasticity or do so in a limited manner. For example,
+some algorithms may assume deterministic customer demands and travel times, which
+can result in suboptimal solutions when these assumptions are violated.
+
+Lack of flexibility: Many existing algorithms are tailored to specific problem formula-
+tions or assumptions, such as fixed fleet sizes or uniform vehicle capacities. This can limit
+their applicability to real-world problems that may have varying or dynamic constraints.
+For example, an algorithm designed for VRPTW with a fixed fleet size may not be suitable
+for problems with a flexible fleet size.
+
+Dependence on problem-specific heuristics: Some existing algorithms rely on problem-
+specific heuristics or techniques, which may limit their applicability to other VRPTW
+problems. For example, an algorithm that relies on specific properties of the problem, such
+as a certain network structure or vehicle capacity distribution, may not be suitable for
+problems that violate these assumptions.
+
+Limited comparison to state-of-the-art: Many existing algorithms are evaluated
+against a limited set of benchmarks or other algorithms, which may limit the general-
+izability of their results. For example, an algorithm may perform well against a few
+benchmark problems, but may not perform well against more challenging problems or
+other state-of-the-art algorithms.
+
+Overall, while existing VRPTW algorithms have made significant progress in ad-
+dressing the complexities and challenges of these problems, there is still much room for
+improvement in terms of scalability, flexibility, and handling stochasticity. Future research
+
+
+
+Sustainability 2023, 15, 12004 15 of 20
+
+could focus on developing more efficient and flexible algorithms that can handle stochastic-
+ity and can be applied to a wide range of VRPTW problems.
+
+3.5. Answering Research Question No. 5: What Are the Future Research Directions and Trends
+in VRPTW?
+
+There are several potential future research directions and trends in VRPTW, including:
+Exact algorithms: Based on the reviewer’s comment, exact algorithms such as branch
+
+and price (BP), branch and cut (BC), and branch-and-price-and-cut (BPC) play a crucial
+role in solving vehicle routing problems (VRP), including the VRP with time windows
+(VRPTW), and are indeed a significant field of study.
+
+Branch and price (BP) and branch and cut (BC) are exact algorithms that combine
+the principles of branch-and-bound and column generation techniques to solve combi-
+natorial optimization problems efficiently. These algorithms decompose the problem
+into subproblems, iteratively branching on the solution space and generating columns
+(routes in VRP context) to improve the lower bounds and find better feasible solutions.
+
+Branch and price (BP) typically applies to problems with a large number of variables
+(e.g., VRP with many customers) and a smaller number of constraints (e.g., capacity and
+time window constraints). On the other hand, branch and cut (BC) is more suitable for
+problems with a large number of constraints, and it involves cutting planes to tighten the
+problem’s relaxation.
+
+Branch-and-price-and-cut (BPC) is an extension that combines the advantages of
+both BP and BC. It integrates column generation with cutting planes to efficiently solve
+large-scale combinatorial optimization problems such as VRP. BPC allows for the dynamic
+addition of new columns (routes) and cutting planes (constraints) during the search process,
+which helps to improve the solution quality and convergence speed.
+
+Hybridization of algorithms: Hybridizing two or more algorithms can help leverage
+the strengths of each algorithm and create more powerful solutions. For example, a
+hybrid algorithm could combine the local search capabilities of tabu search with the global
+optimization capabilities of genetic algorithms.
+
+Integration of machine learning: Machine learning algorithms such as the deep
+Q network (DQN) algorithm [70] can be used to develop predictive models that can im-
+prove the accuracy of demand forecasting, route optimization, and other aspects of VRPTW.
+For example, a neural network could be used to predict the demand or availability profiles
+for each customer based on historical data, such as failed delivery data [71], which could
+then be used to optimize the routes to reduce the chance of failed delivery.
+
+Real-time decision-making: With the advent of the Internet of Things (IoT) and real-
+time data analytics, it may be possible to make more informed and dynamic decisions
+in real time. For example, sensors on delivery vehicles could transmit data about traffic,
+weather, and other factors that could be used to optimize routes in real time.
+
+Multi-objective optimization: Multi-objective optimization is an approach to opti-
+mization that considers multiple conflicting objectives simultaneously. For example, in
+VRPTW, one objective may be to minimize travel time, while another may be to minimize
+transportation costs [72], such as fuel consumption. Multi-objective optimization can help
+find trade-offs between conflicting objectives and identify optimal solutions. Another
+example is when a branch-and-cut algorithm was combined with price to create a branch-
+and-price-and-cut algorithm to avoid freight consolidation and storage without increasing
+its transportation cost [73].
+
+Green VRPTW or Electric VRPTW [74]: With increasing concern about environmental
+sustainability, there is a growing interest in developing “green” VRPTW algorithms that
+minimize carbon emissions and energy consumption. For example, an algorithm such as
+mixed-integer linear programming [75] could optimize routes based on the availability of
+charging stations for electric vehicles.
+
+Collaborative VRPTW: Collaborative VRPTW involves the coordination of multiple
+vehicles, such as ride-hailing vehicles and electric motorcycles [76], from multiple compa-
+
+
+
+Sustainability 2023, 15, 12004 16 of 20
+
+nies or organizations to optimize delivery routes. For example, a collaborative VRPTW
+algorithm could optimize the routes of several delivery companies that operate in the same
+area to minimize congestion and reduce delivery times.
+
+Autonomous delivery: With the development of autonomous vehicles and drones,
+there is a growing interest in developing VRPTW algorithms that can optimize the routes
+of autonomous vehicles [77]. For example, an algorithm could optimize the routes of a fleet
+of autonomous delivery vehicles to minimize delivery times and maximize efficiency.
+
+4. Conclusions
+
+This systematic literature review (SLR) provides a targeted and comprehensive overview
+of the Vehicle Routing Problems with Time Windows (VRPTW) family of literature published
+from 2018 to 2022. Following the PRISMA systematic literature review guidelines, we
+formulated five research questions and objectives, searched 10,556 VRPTW-related papers
+from reputable databases, and identified 64 articles that met our criteria. The entire review
+process adhered closely to the PRISMA guidelines, ensuring replicability.
+
+The findings of this study indicate that the multi-objective and/or multi-constrained
+VRPTW problem has been the most interesting area of research for the research community
+in the last five years. The majority of research in this field has focused on approximation
+algorithms, accounting for 86% of all algorithms investigated. Notably, algorithms such
+as the Adaptive Large Neighborhood Search (ALNS) have shown effectiveness in solving
+large-scale VRPTW problems. The ALNS algorithm’s ability to adaptively explore different
+neighborhoods makes it well-suited for handling large problem instances. We acknowledge
+the value of ALNS and its potential for addressing VRPTW challenges. Additionally, we
+understand that the branch-and-price-and-cut (BPC) algorithm can also be employed to
+solve large-scale VRPTW problems. Some robust VRP algorithms cover stochasticity, and
+some dynamic VRP algorithms focus on flexible fleet sizes. However, our review of the
+literature indicated that the ALNS and BPC algorithms may have limitations when applied
+to larger problem instances, as suggested by studies [56,65], while flexible fleet size is
+mentioned as a goal or constraint in the literature [22,41,61].
+
+Our SLR also speculates on potential future research directions, including the hy-
+bridization of algorithms, integration into machine learning, real-time decision making,
+multi-objective optimization, electric vehicles, collaborative VRPTW, and automated de-
+livery. These directions highlight the evolving nature of the field and the need to address
+emerging challenges and opportunities.
+
+Considering the context of intelligent transportation systems (ITS) and smart vehicles,
+the integration of VRPTW algorithms becomes increasingly relevant. By incorporating
+real-time data and leveraging advanced technologies, such as autonomous capabilities
+and vehicle-to-infrastructure communication, VRPTW algorithms can optimize routes,
+minimize travel time, and reduce costs. The utilization of smart vehicles equipped with
+intelligent features further enhances the efficiency and effectiveness of logistics and trans-
+portation operations.
+
+This SLR contributes to the understanding of VRPTW algorithms and their potential
+applications in the context of ITS and smart vehicles. By harnessing real-time data and
+advanced algorithms, logistics and transportation systems can achieve improved resource
+utilization, reduced congestion, and enhanced overall performance. The findings under-
+score the significance of integrating VRPTW solutions within the framework of ITS and
+leveraging smart vehicles for future advancements in this field.
+
+5. Limitation
+
+One potential limitation of the paper is the potential for publication bias. The review
+focused on articles published in specific databases and may have missed relevant studies
+published in other sources or unpublished works. This could introduce a bias in the
+findings and limit the comprehensiveness of the review.
+
+
+
+Sustainability 2023, 15, 12004 17 of 20
+
+Another limitation is the restriction to a specific time period, with the review encom-
+passing studies published only within the last five years. While this approach allows for a
+focused analysis of recent research, it may exclude relevant studies published before the
+defined time frame that could provide valuable insights or historical context.
+
+Additionally, the review’s reliance on the accuracy and completeness of the selected
+articles is another potential limitation. The quality of the review is dependent on the quality
+of the included studies, and there is a possibility of incomplete reporting or biases within
+the selected articles that could impact the overall findings and conclusions.
+
+Supplementary Materials: The following supporting information can be downloaded at:
+https://www.mdpi.com/article/10.3390/su151512004/s1, PRISMA Abstract Checklist. Reference [59]
+is cited in the Supplementary Materials.
+
+Author Contributions: Conceptualization, X.L. and L.Y.P.; methodology, X.L.; validation, L.Y.P.,
+Y.-L.C. and C.S.K.; formal analysis, X.L.; investigation, X.L.; resources, X.L.; data curation, L.Y.P.;
+writing—original draft preparation, L.Y.P.; writing—review and editing, L.Y.P., Y.-L.C. and C.S.K.;
+visualization, X.L.; supervision, L.Y.P.; project administration, Y.-L.C. and L.Y.P.; funding acquisition,
+Y.-L.C. and C.S.K. All authors have read and agreed to the published version of the manuscript.
+
+Funding: This work was funded by the National Science and Technology Council in Taiwan under
+grant numbers NSTC-112-2221-E-027-088-MY2 and NSTC-111-2622-8-027-009 and also supported by
+the Ministry of Education of Taiwan under Official Document No. 1112303249 entitled “The study of
+artificial intelligence and advanced semi-conductor manufacturing for female STEM talent education
+and industry-university value-added cooperation promotion“.
+
+Institutional Review Board Statement: Not applicable.
+
+Informed Consent Statement: Not applicable.
+
+Data Availability Statement: Not applicable.
+
+Conflicts of Interest: The authors declare no conflict of interest.
+
+References
+1. Solomon, M.M. Algorithms for the vehicle routing and scheduling problems with time window constraints. Oper. Res. 1987, 35,
+
+254–265. [CrossRef]
+2. Agrawal, P.; Kaur, G.; Kolekar, S.S. Investigation on biomedical waste management of hospitals using cohort intelligence
+
+algorithm. Soft Comput. Lett. 2021, 3, 100008. [CrossRef]
+3. Jiang, P.; Men, J.; Xu, H.; Zheng, S.; Kong, Y.; Zhang, L. A Variable Neighborhood Search-Based Hybrid Multiobjective Evolutionary
+
+Algorithm for HazMat Heterogeneous Vehicle Routing Problem With Time Windows. IEEE Syst. J. 2020, 14, 4344–4355. [CrossRef]
+4. Dekhici, L.; Redjem, R.; Belkadi, K.; Mhamedi, A.E. Discretization of the firefly algorithm for home care. Can. J. Electr. Comput.
+
+Eng. 2019, 42, 20–26. [CrossRef]
+5. Riazi, S.; Wigström, O.; Bengtsson, K.; Lennartson, B. A column generation-based gossip algorithm for home healthcare routing
+
+and scheduling problems. IEEE Trans. Autom. Sci. Eng. 2019, 16, 127–137. [CrossRef]
+6. Wu, Y.; Zheng, B.; Zhou, X.L. A disruption recovery model for time-dependent vehicle routing problem with time windows in
+
+delivering perishable goods. IEEE Access 2020, 8, 189614–189631. [CrossRef]
+7. Zhang, S.Q.; Mu, D.; Wang, C. A Solution for the Full-Load Collection Vehicle Routing Problem With Multiple Trips and Demands:
+
+An Application in Beijing. IEEE Access 2020, 8, 89381–89394. [CrossRef]
+8. Zhou, F.L.; He, Y.D.; Zhou, L. Last Mile Delivery With Stochastic Travel Times Considering Dual Services. IEEE Access 2019, 7,
+
+159013–159021. [CrossRef]
+9. Liu, R.S.; Wang, N. Data-Driven Bus Route Optimization Algorithm Under Sudden Interruption of Public Transport. IEEE Access
+
+2022, 10, 5250–5263. [CrossRef]
+10. Li, X.; Gao, J.; Wang, C.; Huang, X.; Nie, Y. Ride-Sharing Matching Under Travel Time Uncertainty Through Data-Driven Robust
+
+Optimization. IEEE Access 2022, 10, 116931–116941. [CrossRef]
+11. Sun, Q.; Chien, S.; Hu, D.; Chen, G.; Jiang, R.-S. Optimizing Multi-Terminal Customized Bus Service With Mixed Fleet. IEEE
+
+Access 2020, 8, 156456–156469. [CrossRef]
+12. Expósito, A.; Brito, J.; Moreno, J.A.; Expósito-Izquierdo, C. Quality of service objectives for vehicle routing problem with time
+
+windows. Appl. Soft Comput. 2019, 84, 105707. [CrossRef]
+13. Goel, R.; Maini, R.; Bansal, S. Vehicle routing problem with time windows having stochastic customers demands and stochastic
+
+service times: Modelling and solution. J. Comput. Sci. 2019, 34, 1–10. [CrossRef]
+14. Hoogeboom, M.; Dullaert, W. Vehicle routing with arrival time diversification. Eur. J. Oper. Res. 2019, 275, 93–107. [CrossRef]
+
+
+
+Sustainability 2023, 15, 12004 18 of 20
+
+15. Song, M.-X.; Li, J.-Q.; Han, Y.Q.; Han, Y.-Y.; Liu, L.-L.; Sun, Q. Metaheuristics for solving the vehicle routing problem with the
+time windows and energy consumption in cold chain logistics. Appl. Soft Comput. 2020, 95, 106561. [CrossRef]
+
+16. Fontaine, P. The vehicle routing problem with load-dependent travel times for cargo bicycles. Eur. J. Oper. Res. 2022, 300,
+1005–1016. [CrossRef]
+
+17. Perboli, G.; Rosano, M.; Wei, Q. A Simulation-Optimization Approach for the Management of the On-Demand Parcel Delivery in
+Sharing Economy. IEEE Trans. Intell. Transp. Syst. 2022, 23, 10570–10582. [CrossRef]
+
+18. Miguel, F.; Frutos, M.; Tohmé, F.; Babey, M.M. A Decision Support Tool for Urban Freight Transport Planning Based on a
+Multi-Objective Evolutionary Algorithm. IEEE Access 2019, 7, 156707–156721. [CrossRef]
+
+19. Chen, B.; Qu, R.; Bai, R.; Laesanklang, W. A hyper-heuristic with two guidance indicators for bi-objective mixed-shift vehicle
+routing problem with time windows. Appl. Intell. 2018, 48, 4937–4959. [CrossRef]
+
+20. Ali, O.; Cote, J.F.; Coelho, L.C. Models and algorithms for the delivery and installation routing problem. Eur. J. Oper. Res. 2021,
+291, 162–177. [CrossRef]
+
+21. Chaieb, M.; Ben, D. Sassi, Measuring and evaluating the Home Health Care Scheduling Problem with Simultaneous Pick-up and
+Delivery with Time Window using a Tabu Search metaheuristic solution. Appl. Soft Comput. 2021, 113, 107957. [CrossRef]
+
+22. Li, J.; Li, T.; Yu, Y.; Zhang, Z.; Pardalos, P.M.; Zhang, Y.; Ma, Y. Discrete firefly algorithm with compound neighborhoods
+for asymmetric multi-depot vehicle routing problem in the maintenance of farm machinery. Appl. Soft Comput. 2019,
+81, 105460. [CrossRef]
+
+23. Macrina, G.; Laporte, G.; Guerriero, F.; Pugliese, L.D.P. An energy-efficient green-vehicle routing problem with mixed vehicle
+fleet, partial battery recharging and time windows. Eur. J. Oper. Res. 2019, 276, 971–982. [CrossRef]
+
+24. Molina, J.C.; Salmero, J.L.; Eguia, I.; Racero, J. The heterogeneous vehicle routing problem with time windows and a limited
+number of resources. Eng. Appl. Artif. Intell. 2020, 94, 103745. [CrossRef]
+
+25. Goel, R.; Maini, R. A hybrid of ant colony and firefly algorithms (HAFA) for solving vehicle routing problems. J. Comput. Sci.
+2018, 25, 28–37. [CrossRef]
+
+26. Miranda, D.M.; Branke, J.; Conceicao, S.V. Algorithms for the multi-objective vehicle routing problem with hard time windows
+and stochastic travel time and service time. Appl. Soft Comput. 2018, 70, 66–79. [CrossRef]
+
+27. Shi, Y.; Zhou, Y.; Boudouh, T.; Grunder, O. A lexicographic-based two-stage algorithm for vehicle routing problem with
+simultaneous pickup-delivery and time window. Eng. Appl. Artif. Intell. 2020, 95, 103901. [CrossRef]
+
+28. Yesodha, R.; Amudha, T. A bio-inspired approach: Firefly algorithm for Multi-Depot Vehicle Routing Problem with Time
+Windows. Comput. Commun. 2022, 190, 48–56. [CrossRef]
+
+29. Sitek, P.; Wikarek, J.; Rutczyńska-Wdowiak, K.; Bocewicz, G.; Banaszak, Z. Optimization of capacitated vehicle routing problem
+with alternative delivery, pick-up and time windows: A modified hybrid approach. Neurocomputing 2021, 423, 670–678. [CrossRef]
+
+30. Zheng, J. A Vehicle Routing Problem Model With Multiple Fuzzy Windows Based on Time-Varying Traffic Flow. IEEE Access
+2020, 8, 39439–39444. [CrossRef]
+
+31. Zhang, H.; Wang, Z.; Tang, M.; Lv, X.; Luo, H.; Liu, Y. Dynamic Memory Memetic Algorithm for VRPPD With Multiple Arrival
+Time and Traffic Congestion Constraints. IEEE Access 2020, 8, 167537–167554. [CrossRef]
+
+32. Yu, V.F.; Susanto, H.; Jodiawan, P.; Ho, T.-W.; Lin, S.-W.; Huang, Y.-T. A Simulated Annealing Algorithm for the Vehicle Routing
+Problem With Parcel Lockers. IEEE Access 2022, 10, 20764–20782. [CrossRef]
+
+33. Lan, Y.-L.; Liu, F.; Ng, W.W.Y.; Zhang, J.; Gui, M. Decomposition Based Multi-Objective Variable Neighborhood Descent Algorithm
+for Logistics Dispatching. IEEE Trans. Emerg. Top. Comput. Intell. 2021, 5, 826–839. [CrossRef]
+
+34. Zhu, Y.F.; Lee, K.Y.; Wang, Y.H. Adaptive Elitist Genetic Algorithm With Improved Neighbor Routing Initialization for Electric
+Vehicle Routing Problems. IEEE Access 2021, 9, 16661–16671. [CrossRef]
+
+35. Lu, D.; Gzara, F. The robust vehicle routing problem with time windows: Solution by branch and price and cut. Eur. J. Oper. Res.
+2019, 275, 925–938. [CrossRef]
+
+36. Li, G.M.; Li, J.H. An Improved Tabu Search Algorithm for the Stochastic Vehicle Routing Problem With Soft Time Windows. IEEE
+Access 2020, 8, 158115–158124. [CrossRef]
+
+37. Pan, B.B.; Zhang, Z.Z.; Lim, A. Multi-trip time-dependent vehicle routing problem with time windows. Eur. J. Oper. Res. 2021,
+291, 218–231. [CrossRef]
+
+38. Wang, Y.; Li, Q.; Guan, X.; Fan, J.; Xu, M.; Wang, H. Collaborative multi-depot pickup and delivery vehicle routing problem with
+split loads and time windows. Knowl. Based Syst. 2021, 231, 107412. [CrossRef]
+
+39. Wang, J.H.; Weng, T.Y.; Zhang, Q.F. A Two-Stage Multiobjective Evolutionary Algorithm for Multiobjective Multidepot Vehicle
+Routing Problem With Time Windows. IEEE Trans. Cybern. 2019, 49, 2467–2478. [CrossRef]
+
+40. Wu, L.; He, Z.; Chen, Y.; Wu, D.; Cui, J. Brainstorming-Based Ant Colony optimization for Vehicle Routine With Soft Time
+Windows. IEEE Access 2019, 7, 19643–19652. [CrossRef]
+
+41. Sun, B.; Yang, Y.; Shi, J.; Zheng, L. Dynamic Pick-Up and Delivery Optimization With Multiple Dynamic Events in Real-World
+Environment. IEEE Access 2019, 7, 146209–146220. [CrossRef]
+
+42. Wang, J.; Sun, Y.; Zhang, Z.; Gao, S. Solving multitrip pickup and delivery problem with time windows and manpower planning
+using multiobjective algorithms. IEEE/CAA J. Autom. 2020, 7, 1134–1153. [CrossRef]
+
+43. He, M.; Wei, Z.; Wu, X.; Peng, Y. An Adaptive Variable Neighborhood Search Ant Colony Algorithm for Vehicle Routing Problem
+With Soft Time Windows. IEEE Access 2021, 9, 21258–21266. [CrossRef]
+
+
+
+Sustainability 2023, 15, 12004 19 of 20
+
+44. Shen, Y.; Liu, M.; Yang, J.; Shi, Y.; Middendorf, M. A Hybrid Swarm Intelligence Algorithm for Vehicle Routing Problem With
+Time Windows. IEEE Access 2020, 8, 93882–93893. [CrossRef]
+
+45. Zhang, J.T.; Yang, F.X.; Weng, X. An Evolutionary Scatter Search Particle Swarm Optimization Algorithm for the Vehicle Routing
+Problem With Time Windows. IEEE Access 2018, 6, 63468–63485. [CrossRef]
+
+46. Khoo, T.-S.; Mohammad, B.B.; Wong, V.-H.; Tay, Y.-H.; Nair, M. A Two-Phase Distributed Ruin-and-Recreate Genetic Algorithm
+for Solving the Vehicle Routing Problem With Time Windows. IEEE Access 2020, 8, 169851–169871. [CrossRef]
+
+47. Liu, M.; Song, Q.; Zhao, Q.; Li, L.; Yang, Z.; Zhang, Y. A Hybrid BSO-ACO for Dynamic Vehicle Routing Problem on Real-World
+Road Networks. IEEE Access 2022, 10, 118302–118312. [CrossRef]
+
+48. Mao, H.; Shi, J.; Zhou, Y.; Zhang, G. The Electric Vehicle Routing Problem With Time Windows and Multiple Recharging Options.
+IEEE Access 2020, 8, 114864–114875. [CrossRef]
+
+49. Yu, N.; Qian, B.; Hu, R.; Chen, Y.; Wang, L. Solving open vehicle problem with time window by hybrid column generation
+algorithm. J. Syst. Eng. Electron. 2022, 33, 997–1009. [CrossRef]
+
+50. Lin, B.; Ghaddar, B.; Nathwani, J. Deep Reinforcement Learning for the Electric Vehicle Routing Problem With Time Windows.
+IEEE Trans. Intell. Transp. Syst. 2022, 23, 11528–11538. [CrossRef]
+
+51. Tilk, C.; Drexl, M.; Irnich, S. Nested branch-and-price-and-cut for vehicle routing problems with multiple resource interdepen-
+dencies. Eur. J. Oper. Res. 2019, 276, 549–565. [CrossRef]
+
+52. Deng, Y.; Zhu, W.; Li, H.; Zheng, Y. Multi-type ant system algorithm for the time dependent vehicle routing problem with time
+windows. J. Syst. Eng. Electron. 2018, 29, 625–638.
+
+53. Liu, R.; Jiang, Z.B. A hybrid large-neighborhood search algorithm for the cumulative capacitated vehicle routing problem with
+time-window constraints. Appl. Soft Comput. 2019, 80, 18–30. [CrossRef]
+
+54. Jie, K.W.; Liu, S.Y.; Sun, X.J. A hybrid algorithm for time-dependent vehicle routing problem with soft time windows and
+stochastic factors. Eng. Appl. Artif. Intell. 2022, 109, 104606. [CrossRef]
+
+55. Chen, C.; Demir, E.; Huang, Y. An adaptive large neighborhood search heuristic for the vehicle routing problem with time
+windows and delivery robots. Eur. J. Oper. Res. 2021, 294, 1164–1180. [CrossRef]
+
+56. Ciancio, C.; Lagana, D.; Vocaturo, F. Branch-price-and-cut for the Mixed Capacitated General Routing Problem with Time
+Windows. Eur. J. Oper. Res. 2018, 267, 187–199. [CrossRef]
+
+57. Gmira, M.; Gendreau, M.; Lodi, A.; Potvin, J.-Y. Tabu search for the time-dependent vehicle routing problem with time windows
+on a road network. Eur. J. Oper. Res. 2021, 288, 129–140. [CrossRef]
+
+58. Lagos, C.; Guerrero, G.; Cabrera, E.; Moltedo, A.; Johnson, F.; Paredes, F. An improved Particle Swarm Optimization Algorithm
+for the VRP with Simultaneous Pickup and Delivery and Time Windows. IEEE Lat. Am. Trans. 2018, 16, 1732–1740. [CrossRef]
+
+59. Page, M.J.; McKenzie, J.E.; Bossuyt, P.M.; Boutron, I.; Hoffmann, T.C.; Mulrow, C.D.; Shamseer, L.; Tetzlaff, J.M.; Akl, E.A.;
+Brennan, S.E.; et al. The PRISMA 2020 statement: An updated guideline for reporting systematic reviews. Rev. Panam. Salud
+Publica-Pan Am. J. Public Health 2022, 46, e112.
+
+60. Kitchenham, B.; Charters, S. Guidelines for Performing Systematic Literature Reviews in Software Engineering; Technical Report
+EBSE 2007-001, Keele University and Durham University Joint Report. 2007. Available online: https://www.elsevier.com/__
+data/promis_misc/525444systematicreviewsguide.pdf (accessed on 20 June 2023).
+
+61. Jiang, G.; Lam, S.-K.; Ning, F.; He, P.; Xie, J. Peak-Hour Vehicle Routing for First-Mile Transportation: Problem Formulation and
+Algorithms. IEEE Trans. Intell. Transp. Syst. 2020, 21, 3308–3321. [CrossRef]
+
+62. Paul, A.; Kumar, R.S.; Rout, C.; Goswami, A. A bi-objective two-echelon pollution routing problem with simultaneous pickup
+and delivery under multiple time windows constraint. OpSearch 2021, 58, 962–993. [CrossRef]
+
+63. Duan, J.H.; He, Z.A.; Yen, G.G. Robust Multiobjective Optimization for Vehicle Routing Problem With Time Windows. IEEE Trans.
+Cybern. 2022, 52, 8300–8314. [CrossRef] [PubMed]
+
+64. Raeesi, R.; Zografos, K.G. Coordinated routing of electric commercial vehicles with intra-route recharging and en-route battery
+swapping. Eur. J. Oper. Res. 2022, 301, 82–109. [CrossRef]
+
+65. Reil, S.; Bortfeldt, A.; Monch, L. Heuristics for vehicle routing problems with backhauls, time windows, and 3D loading
+constraints. Eur. J. Oper. Res. 2018, 266, 877–894. [CrossRef]
+
+66. Shen, Y.; Yu, L.; Li, J. Robust Electric Vehicle Routing Problem with Time Windows under Demand Uncertainty and Weight-Related
+Energy Consumption. Complex Syst. Model. Simul. 2022, 2, 18–34. [CrossRef]
+
+67. Liu, C.; Kou, G.; Zhou, X.; Peng, Y.; Sheng, H.; Alsaadi, F.E. Time-dependent vehicle routing problem with time windows of city
+logistics with a congestion avoidance approach. Knowl. Based Syst. 2020, 188, 104813. [CrossRef]
+
+68. Shen, Y.D.; Peng, L.W.; Li, J. An improved estimation of distribution algorithm for multi-compartment electric vehicle routing
+problem. J. Syst. Eng. Electron. 2021, 32, 365–379.
+
+69. Yan, X.; Xiao, B.; Xiao, Y.; Zhao, Z.; Ma, L.; Wang, N. Skill vehicle routing problem with time windows considering dynamic
+service times and time-skill-dependent costs. IEEE Access 2019, 7, 77208–77221. [CrossRef]
+
+70. Ahamed, T.; Zou, B.; Farazi, N.P.; Tulabandhula, T. Deep reinforcement learning for crowdsourced urban delivery. Transp. Res. B
+Methodol. 2021, 152, 227–257. [CrossRef]
+
+71. Voigt, S.; Frank, M.; Fontaine, P.; Kuhn, H. The Vehicle Routing Problem with Availability Profiles. Transp. Sci. 2022, 57,
+531–551. [CrossRef]
+
+
+
+Sustainability 2023, 15, 12004 20 of 20
+
+72. Sahin, M.K.; Yamana, H. A Branch and Price Algorithm for the Heterogeneous Fleet Multi-Depot Multi-Trip Vehicle Routing
+Problem with Time Windows. Transp. Sci. 2022, 56, 1409–1722. [CrossRef]
+
+73. Marques, G.; Sadykov, R.; Dupas, R.; Deschamps, J.-C. A Branch-Cut-and-Price Approach for the Single-Trip and Multi-Trip
+Two-Echelon Vehicle Routing Problem with Time Windows. Transp. Sci. 2022, 56, 1598–1617. [CrossRef]
+
+74. Froger, A.; Jabali, O.; Mendoza, J.E.; Laporte, G. The Electric Vehicle Routing Problem with Capacitated Charging Stations. Transp.
+Sci. 2022, 56, 460–482. [CrossRef]
+
+75. Montoya, A.; Gueret, C.; Mendoza, J.E.; Villegas, J.G. The electric vehicle routing problem with nonlinear charging function.
+Transp. Res. B Methodol. 2017, 103, 87–110. [CrossRef]
+
+76. Zhan, X.; Szeto, W.Y.; Wang, Y. The ride-hailing sharing problem with parcel transportation. Transp. Res. E Logist. Transp. Rev.
+2023, 172, 103073. [CrossRef]
+
+77. Guo, Q.; Ban, X.J. A multi-scale control framework for urban traffic control with connected and automated vehicles. Transp. Res.
+B Methodol. 2023, 175, 102787. [CrossRef]
+
+Disclaimer/Publisher’s Note: The statements, opinions and data contained in all publications are solely those of the individual
+author(s) and contributor(s) and not of MDPI and/or the editor(s). MDPI and/or the editor(s) disclaim responsibility for any injury to
+people or property resulting from any ideas, methods, instructions or products referred to in the content.

@@ -1,13 +1,25 @@
 {
   "config": {
-    "allow_external_maps": false,
-    "maps_api_key": ""
+    "allow_external_maps": true,
+    "maps_api_key": "",
+    "tolerances": {
+      "1": 5,
+      "2": 10,
+      "3": 15,
+      "4": 20,
+      "5": 30
+    },
+    "weights": {
+      "cost": 0.7,
+      "time": 0.3
+    }
   },
   "vehicles": [
     {
       "id": 0,
       "vehicle_id": "V01",
       "capacity": 3,
+      "type": "any",
       "costPerKm": 10.0,
       "startLoc": {
         "lat": 12.935,
@@ -19,6 +31,7 @@
       "id": 1,
       "vehicle_id": "V02",
       "capacity": 4,
+      "type": "any",
       "costPerKm": 14.0,
       "startLoc": {
         "lat": 12.92,
@@ -30,6 +43,7 @@
       "id": 2,
       "vehicle_id": "V03",
       "capacity": 6,
+      "type": "any",
       "costPerKm": 18.0,
       "startLoc": {
         "lat": 12.95,
@@ -43,6 +57,8 @@
       "id": 0,
       "employee_id": "E01",
       "priority": 1,
+      "vehiclePreference": "premium",
+      "sharingLimit": 1,
       "pickup": {
         "lat": 12.9352,
         "lon": 77.6245
@@ -59,6 +75,8 @@
       "id": 1,
       "employee_id": "E02",
       "priority": 2,
+      "vehiclePreference": "any",
+      "sharingLimit": 2,
       "pickup": {
         "lat": 12.9298,
         "lon": 77.621
@@ -75,6 +93,8 @@
       "id": 2,
       "employee_id": "E03",
       "priority": 3,
+      "vehiclePreference": "normal",
+      "sharingLimit": 3,
       "pickup": {
         "lat": 12.944,
         "lon": 77.6
@@ -91,6 +111,8 @@
       "id": 3,
       "employee_id": "E04",
       "priority": 2,
+      "vehiclePreference": "any",
+      "sharingLimit": 2,
       "pickup": {
         "lat": 12.96,
         "lon": 77.638
@@ -107,6 +129,8 @@
       "id": 4,
       "employee_id": "E05",
       "priority": 4,
+      "vehiclePreference": "any",
+      "sharingLimit": 3,
       "pickup": {
         "lat": 12.915,
         "lon": 77.61
@@ -123,6 +147,8 @@
       "id": 5,
       "employee_id": "E06",
       "priority": 1,
+      "vehiclePreference": "premium",
+      "sharingLimit": 1,
       "pickup": {
         "lat": 12.95,
         "lon": 77.62
@@ -139,6 +165,8 @@
       "id": 6,
       "employee_id": "E07",
       "priority": 3,
+      "vehiclePreference": "normal",
+      "sharingLimit": 2,
       "pickup": {
         "lat": 12.925,
         "lon": 77.64
@@ -155,6 +183,8 @@
       "id": 7,
       "employee_id": "E08",
       "priority": 5,
+      "vehiclePreference": "any",
+      "sharingLimit": 3,
       "pickup": {
         "lat": 12.94,
         "lon": 77.63

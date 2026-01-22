@@ -14,82 +14,92 @@ VEHICLES:
   V03 | Capacity:   6 | Cost/km: $18.00 | Start: (12.9500, 77.6300)
 
 REQUESTS:
-  R00 | Priority: HIGH   | Load: 1 | Window: [ 490.0,    525.0]
-  R01 | Priority: HIGH   | Load: 1 | Window: [ 495.0,    530.0]
-  R02 | Priority: HIGH   | Load: 1 | Window: [ 500.0,    535.0]
-  R03 | Priority: HIGH   | Load: 1 | Window: [ 505.0,    540.0]
-  R04 | Priority: MEDIUM | Load: 1 | Window: [ 510.0,    570.0]
-  R05 | Priority: MEDIUM | Load: 1 | Window: [ 510.0,    570.0]
-  R06 | Priority: LOW    | Load: 1 | Window: [ 525.0,    600.0]
-  R07 | Priority: LOW    | Load: 1 | Window: [ 525.0,    600.0]
-  R08 | Priority: ?      | Load: 1 | Window: [ 570.0,    660.0]
-  R09 | Priority: HIGH   | Load: 1 | Window: [ 480.0,    520.0]
+  R00 | Priority: P1     | Load: 1 | Window: [ 490.0,    525.0]
+  R01 | Priority: P1     | Load: 1 | Window: [ 495.0,    530.0]
+  R02 | Priority: P1     | Load: 1 | Window: [ 500.0,    535.0]
+  R03 | Priority: P1     | Load: 1 | Window: [ 505.0,    540.0]
+  R04 | Priority: P2     | Load: 1 | Window: [ 510.0,    570.0]
+  R05 | Priority: P2     | Load: 1 | Window: [ 510.0,    570.0]
+  R06 | Priority: P3     | Load: 1 | Window: [ 525.0,    600.0]
+  R07 | Priority: P3     | Load: 1 | Window: [ 525.0,    600.0]
+  R08 | Priority: P4     | Load: 1 | Window: [ 570.0,    660.0]
+  R09 | Priority: P1     | Load: 1 | Window: [ 480.0,    520.0]
 
 ================================================================================
 OPTIMIZATION RESULTS
 ================================================================================
-Global Cost:       $10847.84
+Global Cost:       $1001730.65
 Routes Assigned:   4
-Requests Assigned: 9
-Requests Unassigned: 1
+Requests Assigned: 10
+Requests Unassigned: 0
+
+BASELINE COMPARISON
+--------------------------------------------------------------------------------
+  Baseline Total Cost:   $   4420.00
+  Optimized Total Cost:  $1001730.65
+  - Improvement:         $-997310.65  (-22563.6%)
 
 DETAILED ROUTES
 --------------------------------------------------------------------------------
 Vehicle V00:
-  Total Distance: 48.17 km
-  Total Cost:     $481.72
-  Stops: 10
+  Total Distance: 47.13 km
+  Total Cost:     $344.07
+  Stops: 14
 
-    1. PICKUP  Request R03 @  505.00 | Window: [505.0, 540.0] | (12.9420, 77.6300)
-    2. DROPOFF Request R03 @  510.05 | Window: [505.0, 540.0] | (12.9716, 77.5946)
-    3. PICKUP  Request R02 @  515.10 | Window: [500.0, 535.0] | (12.9400, 77.6280)
-    4. DROPOFF Request R02 @  520.14 | Window: [500.0, 535.0] | (12.9716, 77.5946)
-    5. PICKUP  Request R04 @  525.53 | Window: [510.0, 570.0] | (12.9300, 77.6200)
-    6. DROPOFF Request R04 @  530.91 | Window: [510.0, 570.0] | (12.9716, 77.5946)
-    7. PICKUP  Request R05 @  536.38 | Window: [510.0, 570.0] | (12.9280, 77.6180)
-    8. DROPOFF Request R05 @  541.85 | Window: [510.0, 570.0] | (12.9716, 77.5946)
-    9. PICKUP  Request R06 @  546.84 | Window: [525.0, 600.0] | (12.9500, 77.6350)
-    10. DROPOFF Request R06 @  551.84 | Window: [525.0, 600.0] | (12.9716, 77.5946)
+    1. PICKUP  Request R00 @  490.00 | Window: [490.0, 525.0] | (12.9360, 77.6240)
+    2. DROPOFF Request R00 @  495.08 | Window: [490.0, 525.0] | (12.9716, 77.5946)
+    3. PICKUP  Request R01 @  500.13 | Window: [495.0, 530.0] | (12.9380, 77.6260)
+    4. DROPOFF Request R01 @  505.19 | Window: [495.0, 530.0] | (12.9716, 77.5946)
+    5. PICKUP  Request R03 @  510.24 | Window: [505.0, 540.0] | (12.9420, 77.6300)
+    6. DROPOFF Request R03 @  515.30 | Window: [505.0, 540.0] | (12.9716, 77.5946)
+    7. PICKUP  Request R05 @  520.77 | Window: [510.0, 570.0] | (12.9280, 77.6180)
+    8. PICKUP  Request R04 @  521.08 | Window: [510.0, 570.0] | (12.9300, 77.6200)
+    9. DROPOFF Request R05 @  526.46 | Window: [510.0, 570.0] | (12.9716, 77.5946)
+    10. DROPOFF Request R04 @  526.46 | Window: [510.0, 570.0] | (12.9716, 77.5946)
+    11. PICKUP  Request R07 @  531.38 | Window: [525.0, 600.0] | (12.9480, 77.6330)
+    12. PICKUP  Request R06 @  531.69 | Window: [525.0, 600.0] | (12.9500, 77.6350)
+    13. DROPOFF Request R07 @  536.69 | Window: [525.0, 600.0] | (12.9716, 77.5946)
+    14. DROPOFF Request R06 @  536.69 | Window: [525.0, 600.0] | (12.9716, 77.5946)
 
 Vehicle V01:
-  Total Distance: 15.46 km
-  Total Cost:     $170.10
-  Stops: 4
+  Total Distance: 5.37 km
+  Total Cost:     $42.96
+  Stops: 2
 
-    1. PICKUP  Request R01 @  495.00 | Window: [495.0, 530.0] | (12.9380, 77.6260)
-    2. DROPOFF Request R01 @  500.05 | Window: [495.0, 530.0] | (12.9716, 77.5946)
-    3. PICKUP  Request R00 @  505.13 | Window: [490.0, 525.0] | (12.9360, 77.6240)
-    4. DROPOFF Request R00 @  510.22 | Window: [490.0, 525.0] | (12.9716, 77.5946)
+    1. PICKUP  Request R02 @  500.00 | Window: [500.0, 535.0] | (12.9400, 77.6280)
+    2. DROPOFF Request R02 @  505.04 | Window: [500.0, 535.0] | (12.9716, 77.5946)
 
 Vehicle V02:
   Total Distance: 7.17 km
-  Total Cost:     $100.38
+  Total Cost:     $72.42
   Stops: 2
 
     1. PICKUP  Request R08 @  570.00 | Window: [570.0, 660.0] | (12.9150, 77.6050)
     2. DROPOFF Request R08 @  576.39 | Window: [570.0, 660.0] | (12.9716, 77.5946)
 
 Vehicle V03:
-  Total Distance: 5.31 km
-  Total Cost:     $95.64
+  Total Distance: 45.41 km
+  Total Cost:     $1001271.20
   Stops: 2
 
-    1. PICKUP  Request R07 @  525.00 | Window: [525.0, 600.0] | (12.9480, 77.6330)
-    2. DROPOFF Request R07 @  529.92 | Window: [525.0, 600.0] | (12.9716, 77.5946)
+    1. PICKUP  Request R09 @  501.51 | Window: [480.0, 520.0] | (13.0500, 77.8000)
+    2. DROPOFF Request R09 @  525.41 | Window: [480.0, 520.0] | (12.9716, 77.5946)
 
-UNASSIGNED REQUESTS
+INFEASIBILITY ANALYSIS & RELAXED CONSTRAINTS
 --------------------------------------------------------------------------------
-  R09 | Priority: HIGH
+RELAXED CONSTRAINTS (SOFT INFEASIBILITY):
+  [!!] MAX DELAY CONSTRAINT VIOLATED (Forced): Req R09 (P1)
+       Arrival: 525.4 | Window End: 520.0 | Delay: 5.4m (Allowed: 5.0m)
+       Action: Employee transported despite infeasible timeline (as per 'must go' instruction).
 
 COST BREAKDOWN
 --------------------------------------------------------------------------------
-  Vehicle V00:      $    481.72  (  4.4%)
-  Vehicle V01:      $    170.10  (  1.6%)
-  Vehicle V02:      $    100.38  (  0.9%)
-  Vehicle V03:      $     95.64  (  0.9%)
-  Unassigned Penalty: $  10000.00  ( 92.2%)
+  Vehicle V00:      $    344.07  (  0.0%)
+  Vehicle V01:      $     42.96  (  0.0%)
+  Vehicle V02:      $     72.42  (  0.0%)
+  Vehicle V03:      $1001271.20  (100.0%)
 --------------------------------------------------------------------------------
-  TOTAL:             $  10847.84  (100.0%)
+  TOTAL:             $1001730.65  (100.0%)
 
 FILE REFERENCES
 --------------------------------------------------------------------------------

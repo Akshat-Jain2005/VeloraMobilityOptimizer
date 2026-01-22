@@ -85,8 +85,18 @@ def run_test_case(tc_number):
             [str(solver_path), str(json_input), str(json_output)],
             capture_output=True,
             text=True,
-            timeout=30
+            timeout=60
         )
+        
+        solver_warnings = []
+        if result.stderr:
+            for line in result.stderr.split('\n'):
+                if line.strip():
+                    solver_warnings.append(line)
+                    # Print to console if meaningful warning
+                    if "Warning" in line or "Failed" in line or "API" in line:
+                         print(f"   ⚠️ {line}")
+
         if result.returncode != 0:
             print(f"❌ Solver failed: {result.stderr}")
             return None
@@ -112,7 +122,7 @@ def run_test_case(tc_number):
             input_data = json.load(f)
         
         # Generate report
-        report = generate_report(tc_number, input_data, solution, json_input, json_output)
+        report = generate_report(tc_number, input_data, solution, json_input, json_output, solver_warnings)
         
         with open(txt_report, 'w') as f:
             f.write(report)
@@ -133,7 +143,7 @@ def run_test_case(tc_number):
     }
 
 
-def generate_report(tc_number, input_data, solution, json_in_path, json_out_path):
+def generate_report(tc_number, input_data, solution, json_in_path, json_out_path, warnings=None):
     """
     Generate a clean text report from solution JSON.
     """
@@ -148,6 +158,11 @@ def generate_report(tc_number, input_data, solution, json_in_path, json_out_path
     report = []
     report.append("=" * 80)
     report.append(f"VELORA MOBILITY OPTIMIZER - TEST CASE TC{tc_number:02d}")
+    if warnings:
+        for w in warnings:
+            if "Warning" in w or "Failed" in w:
+                report.append(f"⚠️  SYSTEM WARNING: {w}") 
+
     report.append("=" * 80)
     report.append("")
     
@@ -170,7 +185,10 @@ def generate_report(tc_number, input_data, solution, json_in_path, json_out_path
     # Request Details
     report.append("REQUESTS:")
     for r in requests:
-        priority_text = {1: "HIGH", 2: "MEDIUM", 3: "LOW"}.get(r.get('priority', 3), "?")
+        priority_val = r.get('priority', '?')
+        # Display as P1, P2 ... P5
+        priority_text = f"P{priority_val}" if str(priority_val).isdigit() else str(priority_val)
+        
         report.append(f"  R{r.get('id', '?'):02d} | Priority: {priority_text:6s} | Load: {r.get('load', 1)} | "
                      f"Window: [{r.get('earlyTime', 0):6.1f}, {r.get('lateTime', 1e6):8.1f}]")
     report.append("")
@@ -238,15 +256,92 @@ def generate_report(tc_number, input_data, solution, json_in_path, json_out_path
                          f"Window: {time_window} | ({lat:.4f}, {lon:.4f})")
         report.append("")
     
-    # Unassigned Requests
+    # Unassigned Requests & Infeasibility Analysis
+    report.append("INFEASIBILITY ANALYSIS & RELAXED CONSTRAINTS")
+    report.append("-" * 80)
+    
+    has_infeasibility_info = False
+    
+    # Check for unassigned
     if unassigned:
-        report.append("UNASSIGNED REQUESTS")
-        report.append("-" * 80)
+        has_infeasibility_info = True
+        report.append("UNASSIGNED REQUESTS (HARD INFEASIBILITY):")
         for req_id in unassigned:
             req = next((r for r in requests if r.get('id') == req_id), {})
-            priority_text = {1: "HIGH", 2: "MEDIUM", 3: "LOW"}.get(req.get('priority', 3), "?")
-            report.append(f"  R{req_id:02d} | Priority: {priority_text}")
+            p_val = req.get('priority', '?')
+            report.append(f"  [!] R{req_id:02d} (P{p_val}) could not be assigned.")
+            report.append(f"      Reason: Strictly violates Time Window or Max Delay limits even with soft relaxations.")
         report.append("")
+    
+    # Check for relaxed constraints (Soft Infeasibility)
+    relaxed_found = False
+    report.append("RELAXED CONSTRAINTS (SOFT INFEASIBILITY):")
+    for route in routes:
+        v_id = route.get('vehicleId', '?')
+        # Find vehicle object
+        vehicle = next((v for v in vehicles if v.get('id') == v_id), {})
+        v_type = vehicle.get('type', 'any').lower()
+        
+        # Track load for sharing limits
+        current_load = 0
+        active_reqs = []
+        
+        # Re-simulate to find violations
+        stops = route.get('stops', [])
+        # Sort stops by arrival? They should be sorted.
+        
+        for stop in stops:
+            req_id = stop.get('reqId')
+            req = next((r for r in requests if r.get('id') == req_id), {})
+            
+            # 0. Check Max Delay Violation (Forced Infeasibility)
+            if stop.get('type') == 'D': # Dropoff
+                late_time = req.get('lateTime', 1e6)
+                arrival = stop.get('arrival', 0)
+                p_val = int(req.get('priority', 3))
+                
+                # Get max delay for this priority
+                tolerances = input_data.get('config', {}).get('tolerances', {})
+                max_delay_allowed = float(tolerances.get(str(p_val), 30))
+                
+                delay = max(0, arrival - late_time)
+                if delay > max_delay_allowed + 0.01: # Epsilon
+                     relaxed_found = True
+                     has_infeasibility_info = True
+                     report.append(f"  [!!] MAX DELAY CONSTRAINT VIOLATED (Forced): Req R{req_id:02d} (P{p_val})")
+                     report.append(f"       Arrival: {arrival:.1f} | Window End: {late_time:.1f} | Delay: {delay:.1f}m (Allowed: {max_delay_allowed}m)")
+                     report.append(f"       Action: Employee transported despite infeasible timeline (as per 'must go' instruction).")
+
+            # 1. Vehicle Preference Check
+            if stop.get('type') == 'P': # Pickup
+                pref = req.get('vehiclePreference', 'any').lower()
+                if pref != 'any' and v_type != 'any' and pref != v_type:
+                    relaxed_found = True
+                    has_infeasibility_info = True
+                    report.append(f"  [~] Vehicle Preference Relaxed: Req R{req_id:02d} (Pref: {pref}) assigned to V{v_id:02d} (Type: {v_type})")
+            
+            # 2. Sharing Limit Check
+            if stop.get('type') == 'P':
+                current_load += req.get('load', 1)
+                active_reqs.append(req)
+            else:
+                current_load -= req.get('load', 1)
+                active_reqs = [r for r in active_reqs if r.get('id') != req_id]
+                
+            # Check for everyone currently in car
+            for active in active_reqs:
+                limit = active.get('sharingLimit', 100)
+                if current_load > limit:
+                    # Avoid spamming multiple times for same violation?
+                    # simple heuristic: just report it
+                    relaxed_found = True
+                    has_infeasibility_info = True
+                    report.append(f"  [~] Sharing Limit Relaxed: Req R{active.get('id'):02d} (Limit: {limit}) in vehicle with load {current_load}")
+
+    if not relaxed_found:
+        report.append("  No soft constraints were relaxed.")
+    
+    report.append("")
     
     # Cost Breakdown
     report.append("COST BREAKDOWN")
