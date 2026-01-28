@@ -29,9 +29,10 @@ double MapDistance::distance(double lat1, double lon1, double lat2, double lon2)
     // Fail-fast mechanism: If API is unstable, switch to Haversine globally
     static bool globalDisableExternal = false;
     
-    // CASE 1: External Maps Not Allowed -> Use Pure Haversine (Air Distance)
+    // CASE 1: External Maps Not Allowed -> Use Estimated Road Distance (1.4x Air)
+    // Always use 1.4x factor as road distance approximation (roads are not straight lines)
     if (!allowExternal_) {
-        return haversine(lat1, lon1, lat2, lon2);
+        return haversine(lat1, lon1, lat2, lon2) * 1.4;
     }
 
     // CASE 2: External Maps Allowed

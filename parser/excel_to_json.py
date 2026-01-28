@@ -1,15 +1,37 @@
 #!/usr/bin/env python3
-"""Simple Excel to JSON converter for Velora optimizer.
+"""
+Excel to JSON converter for this...
 
 Usage: python parser/excel_to_json.py input.xlsx output.json
 
 Expected sheets (optional): vehicles, requests, employees (not required)
 
 """
+
+import os
 import sys
 import json
 import pandas as pd
 from datetime import datetime
+
+def load_dotenv_env():
+    """Load env vars from env/.env if present (simple KEY=VALUE parser)."""
+    env_path = os.path.join(os.path.dirname(__file__), '..', 'env', '.env')
+    env_path = os.path.abspath(env_path)
+    if not os.path.exists(env_path):
+        return
+    with open(env_path, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            if '=' not in line:
+                continue
+            key, val = line.split('=', 1)
+            key = key.strip()
+            val = val.strip().strip('"').strip("'")
+            if key:
+                os.environ[key] = val
 
 def sheet_to_records(df):
     df = df.where(pd.notnull(df), None)
@@ -27,6 +49,11 @@ def get_vehicle_type(val):
     if not val: return "any"
     return str(val).lower().strip()
 
+def normalize_text(val, default=""):
+    if val is None:
+        return default
+    return str(val).strip()
+
 def time_to_minutes(time_obj):
     """Convert time object or string (HH:MM) to minutes since midnight."""
     import datetime as dt
@@ -43,6 +70,7 @@ def time_to_minutes(time_obj):
     return 0.0
 
 def main():
+    load_dotenv_env()
     if len(sys.argv) < 3:
         print("Usage: excel_to_json.py input.xlsx output.json")
         return
@@ -55,15 +83,20 @@ def main():
         df = xls.parse('vehicles')
         vehicles = []
         for idx, r in enumerate(sheet_to_records(df)):
+            vehicle_type = get_vehicle_type(r.get('vehicle_type', r.get('type', r.get('Type', 'any'))))
             v = {
                 'id': idx,
                 'vehicle_id': r.get('vehicle_id', f'V{idx:02d}'),
+                'fuel_type': normalize_text(r.get('fuel_type', r.get('fuelType', ''))),
+                'vehicle_type': vehicle_type,
                 'capacity': int(r.get('capacity', 4)),
-                'type': get_vehicle_type(r.get('type', r.get('Type', 'any'))),
+                'type': vehicle_type,
                 'costPerKm': float(r.get('cost_per_km', r.get('costPerKm', 1.0))),
+                'avg_speed_kmph': float(r.get('avg_speed_kmph', r.get('avgSpeedKmph', 0.0))),
                 'startLoc': {'lat': float(r.get('current_lat', r.get('startLat', 0.0))), 
                             'lon': float(r.get('current_lng', r.get('startLon', 0.0)))},
-                'availabilityTime': time_to_minutes(r.get('available_from', r.get('availabilityTime', 0.0)))
+                'availabilityTime': time_to_minutes(r.get('available_from', r.get('availabilityTime', 0.0))),
+                'category': normalize_text(r.get('category', ''))
             }
             vehicles.append(v)
         result['vehicles'] = vehicles
@@ -98,6 +131,17 @@ def main():
 
     result['config']['tolerances'] = tolerances
     result['config']['weights'] = weights
+
+    # Always source the API key from environment (metadata never provides it)
+    maps_api_key = os.getenv('MAPS_API_KEY', '')
+    result['config']['maps_api_key'] = maps_api_key
+    
+    # CRITICAL: If API key is present, automatically enable external maps
+    # If no API key, the solver will use Haversine * 1.4 for road distance approximation
+    if maps_api_key:
+        result['config']['allow_external_maps'] = True
+    else:
+        result['config']['allow_external_maps'] = True  # Still True - MapDistance handles the fallback
 
     if 'employees' in xls.sheet_names:
         df = xls.parse('employees')

@@ -18,74 +18,98 @@
     {
       "id": 0,
       "vehicle_id": "V01",
+      "fuel_type": "electric",
+      "vehicle_type": "4w",
       "capacity": 3,
-      "type": "any",
+      "type": "4w",
       "costPerKm": 10.0,
+      "avg_speed_kmph": 28.0,
       "startLoc": {
         "lat": 12.935,
         "lon": 77.62
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "premium"
     },
     {
       "id": 1,
       "vehicle_id": "V02",
+      "fuel_type": "electric",
+      "vehicle_type": "4w",
       "capacity": 3,
-      "type": "any",
+      "type": "4w",
       "costPerKm": 11.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.94,
         "lon": 77.625
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "premium"
     },
     {
       "id": 2,
       "vehicle_id": "V03",
+      "fuel_type": "petrol",
+      "vehicle_type": "4w",
       "capacity": 4,
-      "type": "any",
+      "type": "4w",
       "costPerKm": 15.0,
+      "avg_speed_kmph": 35.0,
       "startLoc": {
         "lat": 12.92,
         "lon": 77.61
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "normal"
     },
     {
       "id": 3,
       "vehicle_id": "V04",
+      "fuel_type": "diesel",
+      "vehicle_type": "van",
       "capacity": 6,
-      "type": "any",
+      "type": "van",
       "costPerKm": 19.0,
+      "avg_speed_kmph": 32.0,
       "startLoc": {
         "lat": 12.95,
         "lon": 77.63
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "normal"
     },
     {
       "id": 4,
       "vehicle_id": "V05",
+      "fuel_type": "petrol",
+      "vehicle_type": "2w",
       "capacity": 1,
-      "type": "any",
+      "type": "2w",
       "costPerKm": 8.0,
+      "avg_speed_kmph": 42.0,
       "startLoc": {
         "lat": 12.925,
         "lon": 77.6
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "normal"
     },
     {
       "id": 5,
       "vehicle_id": "V06",
+      "fuel_type": "petrol",
+      "vehicle_type": "4w",
       "capacity": 4,
-      "type": "any",
+      "type": "4w",
       "costPerKm": 14.0,
+      "avg_speed_kmph": 34.0,
       "startLoc": {
         "lat": 12.96,
         "lon": 77.64
       },
-      "availabilityTime": 490
+      "availabilityTime": 490,
+      "category": "normal"
     }
   ],
   "requests": [

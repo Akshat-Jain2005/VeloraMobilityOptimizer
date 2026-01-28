@@ -1,6 +1,6 @@
 {
   "config": {
-    "allow_external_maps": false,
+    "allow_external_maps": true,
     "maps_api_key": "",
     "tolerances": {
       "1": 5,
@@ -18,362 +18,482 @@
     {
       "id": 0,
       "vehicle_id": "V_SUV_00",
+      "fuel_type": "Petrol",
+      "vehicle_type": "suv",
       "capacity": 6,
-      "type": "any",
+      "type": "suv",
       "costPerKm": 18.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "SUV"
     },
     {
       "id": 1,
       "vehicle_id": "V_SUV_01",
+      "fuel_type": "Petrol",
+      "vehicle_type": "suv",
       "capacity": 6,
-      "type": "any",
+      "type": "suv",
       "costPerKm": 18.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "SUV"
     },
     {
       "id": 2,
       "vehicle_id": "V_SUV_02",
+      "fuel_type": "Petrol",
+      "vehicle_type": "suv",
       "capacity": 6,
-      "type": "any",
+      "type": "suv",
       "costPerKm": 18.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "SUV"
     },
     {
       "id": 3,
       "vehicle_id": "V_SUV_03",
+      "fuel_type": "Petrol",
+      "vehicle_type": "suv",
       "capacity": 6,
-      "type": "any",
+      "type": "suv",
       "costPerKm": 18.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "SUV"
     },
     {
       "id": 4,
       "vehicle_id": "V_SUV_04",
+      "fuel_type": "Petrol",
+      "vehicle_type": "suv",
       "capacity": 6,
-      "type": "any",
+      "type": "suv",
       "costPerKm": 18.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "SUV"
     },
     {
       "id": 5,
       "vehicle_id": "V_SUV_05",
+      "fuel_type": "Petrol",
+      "vehicle_type": "suv",
       "capacity": 6,
-      "type": "any",
+      "type": "suv",
       "costPerKm": 18.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "SUV"
     },
     {
       "id": 6,
       "vehicle_id": "V_SUV_06",
+      "fuel_type": "Petrol",
+      "vehicle_type": "suv",
       "capacity": 6,
-      "type": "any",
+      "type": "suv",
       "costPerKm": 18.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "SUV"
     },
     {
       "id": 7,
       "vehicle_id": "V_SUV_07",
+      "fuel_type": "Petrol",
+      "vehicle_type": "suv",
       "capacity": 6,
-      "type": "any",
+      "type": "suv",
       "costPerKm": 18.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "SUV"
     },
     {
       "id": 8,
       "vehicle_id": "V_SUV_08",
+      "fuel_type": "Petrol",
+      "vehicle_type": "suv",
       "capacity": 6,
-      "type": "any",
+      "type": "suv",
       "costPerKm": 18.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "SUV"
     },
     {
       "id": 9,
       "vehicle_id": "V_SUV_09",
+      "fuel_type": "Petrol",
+      "vehicle_type": "suv",
       "capacity": 6,
-      "type": "any",
+      "type": "suv",
       "costPerKm": 18.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 480
+      "availabilityTime": 480,
+      "category": "SUV"
     },
     {
       "id": 10,
       "vehicle_id": "V_SED_00",
+      "fuel_type": "Petrol",
+      "vehicle_type": "sedan",
       "capacity": 4,
-      "type": "any",
+      "type": "sedan",
       "costPerKm": 14.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 495
+      "availabilityTime": 495,
+      "category": "Sedan"
     },
     {
       "id": 11,
       "vehicle_id": "V_SED_01",
+      "fuel_type": "Petrol",
+      "vehicle_type": "sedan",
       "capacity": 4,
-      "type": "any",
+      "type": "sedan",
       "costPerKm": 14.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 495
+      "availabilityTime": 495,
+      "category": "Sedan"
     },
     {
       "id": 12,
       "vehicle_id": "V_SED_02",
+      "fuel_type": "Petrol",
+      "vehicle_type": "sedan",
       "capacity": 4,
-      "type": "any",
+      "type": "sedan",
       "costPerKm": 14.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 495
+      "availabilityTime": 495,
+      "category": "Sedan"
     },
     {
       "id": 13,
       "vehicle_id": "V_SED_03",
+      "fuel_type": "Petrol",
+      "vehicle_type": "sedan",
       "capacity": 4,
-      "type": "any",
+      "type": "sedan",
       "costPerKm": 14.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 495
+      "availabilityTime": 495,
+      "category": "Sedan"
     },
     {
       "id": 14,
       "vehicle_id": "V_SED_04",
+      "fuel_type": "Petrol",
+      "vehicle_type": "sedan",
       "capacity": 4,
-      "type": "any",
+      "type": "sedan",
       "costPerKm": 14.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 495
+      "availabilityTime": 495,
+      "category": "Sedan"
     },
     {
       "id": 15,
       "vehicle_id": "V_SED_05",
+      "fuel_type": "Petrol",
+      "vehicle_type": "sedan",
       "capacity": 4,
-      "type": "any",
+      "type": "sedan",
       "costPerKm": 14.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 495
+      "availabilityTime": 495,
+      "category": "Sedan"
     },
     {
       "id": 16,
       "vehicle_id": "V_SED_06",
+      "fuel_type": "Petrol",
+      "vehicle_type": "sedan",
       "capacity": 4,
-      "type": "any",
+      "type": "sedan",
       "costPerKm": 14.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 495
+      "availabilityTime": 495,
+      "category": "Sedan"
     },
     {
       "id": 17,
       "vehicle_id": "V_SED_07",
+      "fuel_type": "Petrol",
+      "vehicle_type": "sedan",
       "capacity": 4,
-      "type": "any",
+      "type": "sedan",
       "costPerKm": 14.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 495
+      "availabilityTime": 495,
+      "category": "Sedan"
     },
     {
       "id": 18,
       "vehicle_id": "V_SED_08",
+      "fuel_type": "Petrol",
+      "vehicle_type": "sedan",
       "capacity": 4,
-      "type": "any",
+      "type": "sedan",
       "costPerKm": 14.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 495
+      "availabilityTime": 495,
+      "category": "Sedan"
     },
     {
       "id": 19,
       "vehicle_id": "V_SED_09",
+      "fuel_type": "Petrol",
+      "vehicle_type": "sedan",
       "capacity": 4,
-      "type": "any",
+      "type": "sedan",
       "costPerKm": 14.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 495
+      "availabilityTime": 495,
+      "category": "Sedan"
     },
     {
       "id": 20,
       "vehicle_id": "V_HAT_00",
+      "fuel_type": "Petrol",
+      "vehicle_type": "hatchback",
       "capacity": 3,
-      "type": "any",
+      "type": "hatchback",
       "costPerKm": 10.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 510
+      "availabilityTime": 510,
+      "category": "Hatchback"
     },
     {
       "id": 21,
       "vehicle_id": "V_HAT_01",
+      "fuel_type": "Petrol",
+      "vehicle_type": "hatchback",
       "capacity": 3,
-      "type": "any",
+      "type": "hatchback",
       "costPerKm": 10.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 510
+      "availabilityTime": 510,
+      "category": "Hatchback"
     },
     {
       "id": 22,
       "vehicle_id": "V_HAT_02",
+      "fuel_type": "Petrol",
+      "vehicle_type": "hatchback",
       "capacity": 3,
-      "type": "any",
+      "type": "hatchback",
       "costPerKm": 10.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 510
+      "availabilityTime": 510,
+      "category": "Hatchback"
     },
     {
       "id": 23,
       "vehicle_id": "V_HAT_03",
+      "fuel_type": "Petrol",
+      "vehicle_type": "hatchback",
       "capacity": 3,
-      "type": "any",
+      "type": "hatchback",
       "costPerKm": 10.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 510
+      "availabilityTime": 510,
+      "category": "Hatchback"
     },
     {
       "id": 24,
       "vehicle_id": "V_HAT_04",
+      "fuel_type": "Petrol",
+      "vehicle_type": "hatchback",
       "capacity": 3,
-      "type": "any",
+      "type": "hatchback",
       "costPerKm": 10.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 510
+      "availabilityTime": 510,
+      "category": "Hatchback"
     },
     {
       "id": 25,
       "vehicle_id": "V_HAT_05",
+      "fuel_type": "Petrol",
+      "vehicle_type": "hatchback",
       "capacity": 3,
-      "type": "any",
+      "type": "hatchback",
       "costPerKm": 10.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 510
+      "availabilityTime": 510,
+      "category": "Hatchback"
     },
     {
       "id": 26,
       "vehicle_id": "V_HAT_06",
+      "fuel_type": "Petrol",
+      "vehicle_type": "hatchback",
       "capacity": 3,
-      "type": "any",
+      "type": "hatchback",
       "costPerKm": 10.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 510
+      "availabilityTime": 510,
+      "category": "Hatchback"
     },
     {
       "id": 27,
       "vehicle_id": "V_HAT_07",
+      "fuel_type": "Petrol",
+      "vehicle_type": "hatchback",
       "capacity": 3,
-      "type": "any",
+      "type": "hatchback",
       "costPerKm": 10.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 510
+      "availabilityTime": 510,
+      "category": "Hatchback"
     },
     {
       "id": 28,
       "vehicle_id": "V_HAT_08",
+      "fuel_type": "Petrol",
+      "vehicle_type": "hatchback",
       "capacity": 3,
-      "type": "any",
+      "type": "hatchback",
       "costPerKm": 10.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 510
+      "availabilityTime": 510,
+      "category": "Hatchback"
     },
     {
       "id": 29,
       "vehicle_id": "V_HAT_09",
+      "fuel_type": "Petrol",
+      "vehicle_type": "hatchback",
       "capacity": 3,
-      "type": "any",
+      "type": "hatchback",
       "costPerKm": 10.0,
+      "avg_speed_kmph": 30.0,
       "startLoc": {
         "lat": 12.9279,
         "lon": 77.6271
       },
-      "availabilityTime": 510
+      "availabilityTime": 510,
+      "category": "Hatchback"
     }
   ],
   "requests": [

@@ -1,6 +1,20 @@
-// Simple solver that reads input JSON, performs a greedy constructive heuristic
-// and a lightweight simulated annealing, and prints JSON output.
-
+/***
+ * VELORA MOBILITY OPTIMIZER - HVRPSTW SOLVER
+ * Heterogeneous Vehicle Routing Problem with Soft Time Windows
+ * 
+ * Algorithm: Greedy Constructive Heuristic (Solomon I1) + Simulated Annealing
+ * 
+ * Based on research papers:
+ * - Solomon (1987): "Algorithms for the Vehicle Routing and Scheduling Problems with Time Window Constraints"
+ * - HVRPSTW Case Studies for cost optimization
+ * 
+ * Cost Function (from research): 
+ *   Min = Σ(distance_ij * cost_per_km) + Σ(early_penalty) + Σ(late_penalty) + soft_constraint_penalties
+ * 
+ * Constraints:
+ *   HARD: Vehicle capacity, Pickup before dropoff precedence
+ *   SOFT: Time windows (with priority-based tolerances), Sharing limits, Vehicle preferences
+ */
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -12,36 +26,51 @@
 #include <string>
 #include <numeric>
 #include <unordered_set>
+#include <unordered_map>
+#include <chrono>
 
-#include <nlohmann/json.hpp>
-
+#include "json.hpp"
 #include "map_distance.hpp"
 
 using json = nlohmann::json;
 using namespace std;
 
-struct Location { double lat, lon; };
+// ============== DATA STRUCTURES ==============
+
+struct Location { 
+    double lat, lon; 
+    
+    bool operator==(const Location& o) const {
+        return abs(lat - o.lat) < 1e-6 && abs(lon - o.lon) < 1e-6;
+    }
+};
+
 enum StopType { PICKUP, DROPOFF };
 
 struct Request {
     int id;
-    int priority;
+    string employeeId;
+    int priority;           // 1 (highest) to 5 (lowest)
     Location pickup;
     Location dropoff;
-    double earlyTime;
-    double lateTime;
+    double earlyTime;       // Earliest pickup time (minutes from midnight)
+    double lateTime;        // Latest drop time (minutes from midnight)
     int load;
-    string vehiclePreference;
-    int sharingLimit;
+    string vehiclePreference;  // "any", "premium", "normal", etc.
+    int sharingLimit;          // Max passengers willing to share with (1=no sharing)
 };
 
 struct Vehicle {
     int id;
+    string vehicleId;
     int capacity;
     double costPerKm;
     Location startLoc;
-    double availabilityTime;
-    string type;
+    double availabilityTime;   // Minutes from midnight
+    double speed;              // km/h - CRITICAL: each vehicle has its own speed
+    string type;               // "premium", "normal", "van", etc.
+    string category;
+    string fuelType;
 };
 
 struct Stop {
@@ -50,446 +79,694 @@ struct Stop {
     Location loc;
     double arrivalTime{0};
     double departureTime{0};
+    double waitTime{0};        // Time spent waiting for time window to open
 };
 
 struct Route {
     int vehicleId{-1};
     vector<Stop> stops;
-    double totalDist{0};
-    double totalCost{0};
+    double totalDist{0};       // Total distance in km
+    double totalTime{0};       // Total time in minutes
+    double totalCost{0};       // Monetary cost (distance * costPerKm)
+    double penaltyCost{0};     // Penalty cost for constraint violations
+    double totalRouteCost{0};  // totalCost + penaltyCost
 };
 
 struct Solution {
     vector<Route> routes;
     vector<int> unassignedReqs;
+    double totalMoneyCost{0};
+    double totalPenaltyCost{0};
     double globalCost{0};
 };
 
-// Global distance provider pointer (set in main)
-static MapDistance* gMapDist = nullptr;
+// Baseline data for comparison
+struct BaselineEntry {
+    string employeeId;
+    double baselineCost;
+    double baselineTime;
+};
 
-double getDistance(const Location& a, const Location& b) {
-    if (gMapDist) return gMapDist->distance(a.lat, a.lon, b.lat, b.lon);
-    // fallback (shouldn't happen)
-    const double R = 6371.0;
-    double lat1 = a.lat * M_PI / 180.0;
-    double lat2 = b.lat * M_PI / 180.0;
-    double dLat = (b.lat - a.lat) * M_PI / 180.0;
-    double dLon = (b.lon - a.lon) * M_PI / 180.0;
-    double s = sin(dLat/2)*sin(dLat/2) + cos(lat1)*cos(lat2)*sin(dLon/2)*sin(dLon/2);
-    double c = 2*asin(sqrt(s));
-    return R * c;
-}
+// ============== GLOBAL CONTEXT ==============
 
-
-// Context for tolerances and weights
-struct SolutionContext {
-    std::unordered_map<int, double> maxDelayMap; // priority -> max delay mins
+struct SolverContext {
+    // Priority-based delay tolerances (minutes) - from metadata
+    unordered_map<int, double> maxDelayByPriority;
+    
+    // Objective weights
     double wCost{0.7};
     double wTime{0.3};
+    
+    // Penalty weights (tuned based on research papers)
+    double earlyArrivalPenaltyPerMin{2.0};      // Waiting cost
+    double lateArrivalPenaltyPerMin{10.0};      // Base late penalty
+    double sharingViolationPenalty{500.0};      // Per occurrence
+    double vehiclePrefViolationPenalty{300.0};  // Per request
+    double unassignedPenalty{50000.0};          // Must assign everyone if possible
+    double maxDelayViolationPenalty{100000.0};  // Hard constraint violation
+    
+    // Service time per stop (loading/unloading)
+    double serviceTimePerStop{2.0};  // minutes
+    
+    // Default speed if not specified
+    double defaultSpeedKmph{30.0};
+    
+    // Baseline data
+    vector<BaselineEntry> baseline;
+    
+    double getMaxDelay(int priority) const {
+        int p = max(1, min(5, priority));
+        auto it = maxDelayByPriority.find(p);
+        if (it != maxDelayByPriority.end()) return it->second;
+        // Default tolerances: P1=5min, P2=10min, P3=15min, P4=20min, P5=30min
+        static const double defaults[] = {5, 10, 15, 20, 30};
+        return defaults[p - 1];
+    }
 } gCtx;
 
-static int clampPriority(int p) {
-    if (p < 1) return 1;
-    if (p > 5) return 5;
-    return p;
+static MapDistance* gMapDist = nullptr;
+
+// ============== UTILITY FUNCTIONS ==============
+
+double getDistance(const Location& a, const Location& b) {
+    // ALL distance calculations MUST go through MapDistance
+    // MapDistance handles: API key present -> real API calls, no key -> Haversine * 1.4
+    if (!gMapDist) {
+        cerr << "[FATAL] MapDistance not initialized! This should never happen." << endl;
+        exit(1);
+    }
+    return gMapDist->distance(a.lat, a.lon, b.lat, b.lon);
 }
 
-static double priorityWeight(int priority) {
-    // Standard delay penalty if needed
-    int p = clampPriority(priority);
+// Convert distance to travel time using vehicle speed
+double getTravelTime(double distKm, double speedKmph) {
+    if (speedKmph <= 0) speedKmph = gCtx.defaultSpeedKmph;
+    return (distKm / speedKmph) * 60.0;  // Return minutes
+}
+
+// Priority-based delay penalty weight (higher priority = higher penalty)
+double getPriorityWeight(int priority) {
+    int p = max(1, min(5, priority));
+    // P1: 50, P2: 40, P3: 30, P4: 20, P5: 10
     return (6 - p) * 10.0;
 }
 
+// ============== ROUTE VALIDATION & COST CALCULATION ==============
 
-// Revised Constraints & Cost Function
-bool isValidRoute(const Route& r, const Vehicle& v, const vector<Request>& reqs, bool checkDelay = true) {
-    int load = 0;
+struct RouteEvaluation {
+    bool feasible{true};
+    double totalDist{0};
+    double totalTime{0};
+    double moneyCost{0};
+    double penaltyCost{0};
+    double totalCost{0};
+    vector<double> arrivalTimes;
+    vector<double> waitTimes;
+    string infeasibilityReason;
+};
+
+RouteEvaluation evaluateRoute(const Route& r, const Vehicle& v, const vector<Request>& reqs) {
+    RouteEvaluation eval;
+    if (r.stops.empty()) return eval;
+    
+    // First check pickup-before-dropoff constraint
+    unordered_set<int> pickedUp;
+    for (const auto& stop : r.stops) {
+        if (stop.type == PICKUP) {
+            pickedUp.insert(stop.reqId);
+        } else {  // DROPOFF
+            if (pickedUp.find(stop.reqId) == pickedUp.end()) {
+                eval.feasible = false;
+                eval.infeasibilityReason = "Dropoff before pickup for request " + to_string(stop.reqId);
+                return eval;
+            }
+        }
+    }
+    
     double currentTime = v.availabilityTime;
     Location currentLoc = v.startLoc;
-
-    vector<int> activeReqs;
-
-    for (const auto& stop : r.stops) {
-        double travelTime = getDistance(currentLoc, stop.loc);
-        currentTime += travelTime; // Updates arrival time at stop
+    double speedKmph = (v.speed > 0) ? v.speed : gCtx.defaultSpeedKmph;
+    
+    int currentLoad = 0;
+    unordered_set<int> activePassengers;  // Currently in vehicle
+    
+    for (size_t i = 0; i < r.stops.size(); ++i) {
+        const Stop& stop = r.stops[i];
+        const Request& req = reqs[stop.reqId];
         
-        // Update load and active list
+        // 1. Travel to this stop
+        double dist = getDistance(currentLoc, stop.loc);
+        double travelTime = getTravelTime(dist, speedKmph);
+        eval.totalDist += dist;
+        currentTime += travelTime;
+        
+        // 2. Handle time window and waiting
+        double waitTime = 0;
         if (stop.type == PICKUP) {
-            load += reqs[stop.reqId].load;
-            activeReqs.push_back(stop.reqId);
-        } else {
-            load -= reqs[stop.reqId].load;
-            auto it = find(activeReqs.begin(), activeReqs.end(), stop.reqId);
-            if (it != activeReqs.end()) activeReqs.erase(it);
+            // Can't pick up before earliest time
+            if (currentTime < req.earlyTime) {
+                waitTime = req.earlyTime - currentTime;
+                currentTime = req.earlyTime;
+            }
         }
-
-        // 1. Capacity Checks are HARD
-        if (load > v.capacity) return false;
+        eval.waitTimes.push_back(waitTime);
+        eval.arrivalTimes.push_back(currentTime);
         
-        // 4. Time Windows
+        // 3. Waiting penalty (opportunity cost)
+        if (waitTime > 0) {
+            eval.penaltyCost += waitTime * gCtx.earlyArrivalPenaltyPerMin;
+        }
+        
+        // 4. Update load and check constraints
         if (stop.type == PICKUP) {
-            currentTime = max(currentTime, reqs[stop.reqId].earlyTime);
-        } else {
-            // Dropoff
-            // HARD CONSTRAINT: Cannot exceed Max Delay (Unless checkDelay is false)
-            if (checkDelay) {
-                double maxDelay = 30.0; // default
-                if (gCtx.maxDelayMap.count(reqs[stop.reqId].priority)) {
-                    maxDelay = gCtx.maxDelayMap[reqs[stop.reqId].priority];
+            currentLoad += req.load;
+            activePassengers.insert(stop.reqId);
+            
+            // HARD CONSTRAINT: Capacity
+            if (currentLoad > v.capacity) {
+                eval.feasible = false;
+                eval.infeasibilityReason = "Capacity exceeded";
+                return eval;
+            }
+            
+            // SOFT CONSTRAINT: Vehicle preference
+            if (req.vehiclePreference != "any" && v.type != "any" && 
+                !v.type.empty() && req.vehiclePreference != v.type &&
+                req.vehiclePreference != v.category) {
+                eval.penaltyCost += gCtx.vehiclePrefViolationPenalty;
+            }
+            
+            // SOFT CONSTRAINT: Sharing limit
+            // Check if adding this passenger exceeds any active passenger's sharing limit
+            for (int activeId : activePassengers) {
+                if ((int)activePassengers.size() > reqs[activeId].sharingLimit) {
+                    eval.penaltyCost += gCtx.sharingViolationPenalty;
                 }
-                // If arrival > lateTime + maxDelay, route is INVALID
-                if (currentTime > reqs[stop.reqId].lateTime + maxDelay) {
+            }
+            
+        } else {  // DROPOFF
+            currentLoad -= req.load;
+            activePassengers.erase(stop.reqId);
+            
+            // SOFT CONSTRAINT: Late arrival penalty
+            double lateness = max(0.0, currentTime - req.lateTime);
+            if (lateness > 0) {
+                double maxDelay = gCtx.getMaxDelay(req.priority);
+                
+                if (lateness <= maxDelay) {
+                    // Within tolerance - moderate penalty
+                    eval.penaltyCost += lateness * gCtx.lateArrivalPenaltyPerMin * getPriorityWeight(req.priority) / 10.0;
+                } else {
+                    // Exceeds tolerance - severe penalty but NOT infeasible (per WhatsApp clarification)
+                    eval.penaltyCost += maxDelay * gCtx.lateArrivalPenaltyPerMin * getPriorityWeight(req.priority) / 10.0;
+                    eval.penaltyCost += (lateness - maxDelay) * gCtx.maxDelayViolationPenalty / 100.0;
+                }
+            }
+        }
+        
+        // 5. Service time
+        currentTime += gCtx.serviceTimePerStop;
+        currentLoc = stop.loc;
+    }
+    
+    eval.totalTime = currentTime - v.availabilityTime;
+    eval.moneyCost = eval.totalDist * v.costPerKm;
+    eval.totalCost = eval.moneyCost + eval.penaltyCost;
+    
+    return eval;
+}
+
+// Quick feasibility check (cheaper than full evaluation)
+bool isRouteFeasible(const Route& r, const Vehicle& v, const vector<Request>& reqs, bool strictTimeCheck = true) {
+    if (r.stops.empty()) return true;
+    
+    // CRITICAL: Check pickup-before-dropoff constraint first
+    unordered_set<int> pickedUp;
+    for (const auto& stop : r.stops) {
+        if (stop.type == PICKUP) {
+            pickedUp.insert(stop.reqId);
+        } else {  // DROPOFF
+            if (pickedUp.find(stop.reqId) == pickedUp.end()) {
+                return false;  // Dropoff before pickup - INVALID
+            }
+        }
+    }
+    
+    double currentTime = v.availabilityTime;
+    Location currentLoc = v.startLoc;
+    double speedKmph = (v.speed > 0) ? v.speed : gCtx.defaultSpeedKmph;
+    int currentLoad = 0;
+    
+    for (const auto& stop : r.stops) {
+        const Request& req = reqs[stop.reqId];
+        
+        double dist = getDistance(currentLoc, stop.loc);
+        double travelTime = getTravelTime(dist, speedKmph);
+        currentTime += travelTime;
+        
+        if (stop.type == PICKUP) {
+            if (currentTime < req.earlyTime) {
+                currentTime = req.earlyTime;
+            }
+            currentLoad += req.load;
+            if (currentLoad > v.capacity) return false;
+        } else {
+            currentLoad -= req.load;
+            if (strictTimeCheck) {
+                double maxDelay = gCtx.getMaxDelay(req.priority);
+                if (currentTime > req.lateTime + maxDelay * 2) {  // Allow 2x tolerance in construction
                     return false;
                 }
             }
         }
+        
+        currentTime += gCtx.serviceTimePerStop;
         currentLoc = stop.loc;
     }
+    
     return true;
 }
 
-double calculateRouteCost(Route& r, const Vehicle& v, const vector<Request>& reqs, bool allowLate) {
-    double totalDist = 0;
-    double totalTravelTime = 0; // simple sum of travel times
-    double penaltyCost = 0;
+// ============== SOLUTION EVALUATION ==============
 
-    double currentTime = v.availabilityTime;
-    Location currentLoc = v.startLoc;
+void evaluateSolution(Solution& sol, const vector<Vehicle>& vehicles, const vector<Request>& reqs) {
+    sol.totalMoneyCost = 0;
+    sol.totalPenaltyCost = 0;
     
-    int load = 0; 
-    vector<int> activeReqs;
-
-    r.totalDist = 0;
-    
-    double routeStartTime = currentTime;
-
-    for (auto& stop : r.stops) {
-        double dist = getDistance(currentLoc, stop.loc);
-        double travel = dist; // Assume 1km = 1min implies speed 60km/h? 
-                              // Text says dist in km. Speed is unknown. 
-                              // Metadata implies haversine (km).
-                              // If using map API, we'd get time.
-                              // Assuming avg speed 30km/h for city? 2 min per km?
-                              // Or just use distance as proxy for time if no speed given.
-                              // WhatsApp: "allow_external_maps only for dist/time... otherwise haversine"
-                              // If haversine, we usually assume 1 unit dist = 1 unit cost.
-                              // Let's assume Time = Dist for now unless speed provided.
-                              
-        r.totalDist += dist;
-        currentTime += travel;
-        
-        // Update load for checking sharing constraints
-        if (stop.type == PICKUP) {
-            load += reqs[stop.reqId].load;
-            activeReqs.push_back(stop.reqId);
-            currentTime = max(currentTime, reqs[stop.reqId].earlyTime);
-        } else {
-            load -= reqs[stop.reqId].load;
-            auto it = find(activeReqs.begin(), activeReqs.end(), stop.reqId);
-            if (it != activeReqs.end()) activeReqs.erase(it);
-        }
-    
-        stop.arrivalTime = currentTime;
-        currentLoc = stop.loc;
-        
-        // Sharing Limit Penalty
-        for (int activeId : activeReqs) {
-            if (load > reqs[activeId].sharingLimit) {
-                penaltyCost += 5000.0; // Significant penalty per violation per stop
-            }
+    for (auto& route : sol.routes) {
+        if (route.stops.empty()) {
+            route.totalDist = route.totalTime = route.totalCost = route.penaltyCost = route.totalRouteCost = 0;
+            continue;
         }
         
-        // Vehicle Preference Penalty
-        if (stop.type == PICKUP) {
-            const auto& req = reqs[stop.reqId];
-            if (req.vehiclePreference != "any" && !v.type.empty() && v.type != "any" && req.vehiclePreference != v.type) {
-                penaltyCost += 5000.0;
-            }
+        auto eval = evaluateRoute(route, vehicles[route.vehicleId], reqs);
+        route.totalDist = eval.totalDist;
+        route.totalTime = eval.totalTime;
+        route.totalCost = eval.moneyCost;
+        route.penaltyCost = eval.penaltyCost;
+        route.totalRouteCost = eval.totalCost;
+        
+        // Update stop arrival times
+        for (size_t i = 0; i < route.stops.size() && i < eval.arrivalTimes.size(); ++i) {
+            route.stops[i].arrivalTime = eval.arrivalTimes[i];
+            route.stops[i].waitTime = eval.waitTimes[i];
         }
-
-        if (stop.type == DROPOFF) {
-            // Lateness penalty (soft window violation)
-            double lateness = max(0.0, currentTime - reqs[stop.reqId].lateTime);
-            if (lateness > 0.0) {
-                 penaltyCost += lateness * priorityWeight(reqs[stop.reqId].priority);
-                 
-                 // Check Max Delay violation for Forced Assignments
-                 double maxDelay = 30.0;
-                 if (gCtx.maxDelayMap.count(reqs[stop.reqId].priority)) {
-                    maxDelay = gCtx.maxDelayMap[reqs[stop.reqId].priority];
-                 }
-                 if (lateness > maxDelay) {
-                     // MASSIVE PENALTY to flag this as a "Forced but Infeasible" assignment
-                     penaltyCost += 1000000.0 + (lateness - maxDelay) * 1000.0;
-                 }
-            }
-        }
+        
+        sol.totalMoneyCost += eval.moneyCost;
+        sol.totalPenaltyCost += eval.penaltyCost;
     }
     
-    // Objective Function: 
-    // Cost = (TotalDist * CostPerKm * 0.7) + (TotalDist * 0.3) + Penalties
-    // Assuming Time Approx = Dist (1 min/km? 30km/h = 0.5km/min -> 2 min/km. Let's use 1.0)
+    // Unassigned penalty
+    sol.totalPenaltyCost += sol.unassignedReqs.size() * gCtx.unassignedPenalty;
     
-    double moneyCost = r.totalDist * v.costPerKm;
-    double timeCost = r.totalDist; // Proxy if no speed given
-    
-    // Note: Weights are 0.7 for cost, 0.3 for time
-    r.totalCost = (moneyCost * gCtx.wCost) + (timeCost * gCtx.wTime) + penaltyCost;
-    return r.totalCost;
+    // Global cost = weighted combination
+    sol.globalCost = (sol.totalMoneyCost * gCtx.wCost) + 
+                     (sol.totalPenaltyCost * gCtx.wTime) + 
+                     sol.totalPenaltyCost;
 }
 
-double getSolutionCost(Solution& sol, const vector<Vehicle>& vehicles, const vector<Request>& reqs, bool allowLate) {
-    double total = 0;
-    for (auto &rt : sol.routes) total += calculateRouteCost(rt, vehicles[rt.vehicleId], reqs, allowLate);
-    total += sol.unassignedReqs.size() * 10000.0;
-    sol.globalCost = total;
-    return total;
-}
+// ============== INSERTION HEURISTIC (Solomon I1) ==============
 
-struct InsertResult {
+struct InsertionResult {
     bool feasible{false};
-    double newCost{0};
+    int pickupPos{-1};
+    int dropoffPos{-1};
+    double costIncrease{numeric_limits<double>::max()};
     Route newRoute;
 };
 
-static InsertResult bestInsertion(const Route& route, int reqId, const Vehicle& v, const vector<Request>& reqs, bool checkDelay) {
-    InsertResult best;
-    best.newCost = numeric_limits<double>::max();
+InsertionResult findBestInsertion(const Route& route, int reqId, const Vehicle& v, 
+                                   const vector<Request>& reqs, bool relaxedMode = false) {
+    InsertionResult best;
+    const Request& req = reqs[reqId];
+    
     int n = static_cast<int>(route.stops.size());
+    
+    // Try all valid pickup-dropoff position pairs
     for (int p = 0; p <= n; ++p) {
         for (int d = p + 1; d <= n + 1; ++d) {
             Route trial = route;
-            Stop pu{reqId, PICKUP, reqs[reqId].pickup};
-            Stop dof{reqId, DROPOFF, reqs[reqId].dropoff};
-            trial.stops.insert(trial.stops.begin() + p, pu);
-            trial.stops.insert(trial.stops.begin() + d, dof);
             
-            if (!isValidRoute(trial, v, reqs, checkDelay)) continue;
+            // Insert pickup at position p
+            Stop pickup{reqId, PICKUP, req.pickup, 0, 0, 0};
+            trial.stops.insert(trial.stops.begin() + p, pickup);
             
-            double cost = calculateRouteCost(trial, v, reqs, true);
-            if (cost < best.newCost) {
+            // Insert dropoff at position d
+            Stop dropoff{reqId, DROPOFF, req.dropoff, 0, 0, 0};
+            trial.stops.insert(trial.stops.begin() + d, dropoff);
+            
+            // Check feasibility
+            if (!isRouteFeasible(trial, v, reqs, !relaxedMode)) continue;
+            
+            // Evaluate cost
+            auto eval = evaluateRoute(trial, v, reqs);
+            if (!eval.feasible) continue;
+            
+            // Calculate cost increase
+            double oldCost = route.stops.empty() ? 0 : evaluateRoute(route, v, reqs).totalCost;
+            double costInc = eval.totalCost - oldCost;
+            
+            if (costInc < best.costIncrease) {
                 best.feasible = true;
-                best.newCost = cost;
+                best.pickupPos = p;
+                best.dropoffPos = d;
+                best.costIncrease = costInc;
                 best.newRoute = std::move(trial);
             }
         }
     }
+    
     return best;
 }
 
-static void removeRequestFromRoute(Route& r, int reqId) {
-    r.stops.erase(remove_if(r.stops.begin(), r.stops.end(), [&](const Stop& s){ return s.reqId == reqId; }), r.stops.end());
-}
+// ============== CONSTRUCTION HEURISTIC ==============
 
-static vector<int> uniqueReqsInRoute(const Route& r) {
-    unordered_set<int> seen;
-    vector<int> out;
-    for (const auto& s : r.stops) {
-        if (seen.insert(s.reqId).second) out.push_back(s.reqId);
-    }
-    return out;
-}
-
-Solution constructInitialSolution(const vector<Request>& reqs, const vector<Vehicle>& vehicles, bool allowLate, mt19937& gen) {
+Solution constructInitialSolution(const vector<Request>& reqs, const vector<Vehicle>& vehicles, mt19937& gen) {
     Solution sol;
     sol.routes.resize(vehicles.size());
-    for (size_t i=0;i<vehicles.size();++i) sol.routes[i].vehicleId = i;
-    vector<int> idx(reqs.size()); iota(idx.begin(), idx.end(), 0);
-    sort(idx.begin(), idx.end(), [&](int a,int b){
-        if (reqs[a].priority!=reqs[b].priority) return reqs[a].priority < reqs[b].priority;
+    for (size_t i = 0; i < vehicles.size(); ++i) {
+        sol.routes[i].vehicleId = static_cast<int>(i);
+    }
+    
+    // Sort requests by priority (ascending) then by latest drop time (ascending)
+    vector<int> reqOrder(reqs.size());
+    iota(reqOrder.begin(), reqOrder.end(), 0);
+    sort(reqOrder.begin(), reqOrder.end(), [&](int a, int b) {
+        if (reqs[a].priority != reqs[b].priority) return reqs[a].priority < reqs[b].priority;
         return reqs[a].lateTime < reqs[b].lateTime;
     });
-    // Small randomization within same priority bucket
-    for (size_t i = 0; i < idx.size();) {
+    
+    // Slight randomization within same priority bucket
+    for (size_t i = 0; i < reqOrder.size();) {
         size_t j = i + 1;
-        while (j < idx.size() && reqs[idx[j]].priority == reqs[idx[i]].priority) ++j;
-        shuffle(idx.begin() + i, idx.begin() + j, gen);
+        while (j < reqOrder.size() && reqs[reqOrder[j]].priority == reqs[reqOrder[i]].priority) ++j;
+        shuffle(reqOrder.begin() + i, reqOrder.begin() + j, gen);
         i = j;
     }
-
-    for (int rId : idx) {
-        double bestIncrease = numeric_limits<double>::max();
-        int bestV = -1;
+    
+    // Insert each request using best insertion
+    for (int reqId : reqOrder) {
+        double bestCost = numeric_limits<double>::max();
+        int bestVehicle = -1;
         Route bestRoute;
         
-        // 1. Try Normal Insertion (Strict Delay Check)
-        for (int v=0; v<vehicles.size(); ++v) {
-            auto ins = bestInsertion(sol.routes[v], rId, vehicles[v], reqs, true);
-            if (!ins.feasible) continue;
-            double oldC = sol.routes[v].totalCost;
-            double inc = ins.newCost - oldC;
-            if (inc < bestIncrease) {
-                bestIncrease = inc;
-                bestV = v;
+        // Try strict insertion first (respecting all constraints)
+        for (size_t v = 0; v < vehicles.size(); ++v) {
+            auto ins = findBestInsertion(sol.routes[v], reqId, vehicles[v], reqs, false);
+            if (ins.feasible && ins.costIncrease < bestCost) {
+                bestCost = ins.costIncrease;
+                bestVehicle = static_cast<int>(v);
                 bestRoute = std::move(ins.newRoute);
             }
         }
         
-        // 2. If Failed, Try Forced Insertion (Relax Delay Check) - "Employee must go"
-        if (bestV < 0) {
-             for (int v=0; v<vehicles.size(); ++v) {
-                // Pass checkDelay = false
-                auto ins = bestInsertion(sol.routes[v], rId, vehicles[v], reqs, false);
-                if (!ins.feasible) continue; // Might still fail on Capacity
-                double oldC = sol.routes[v].totalCost;
-                double inc = ins.newCost - oldC;
-                if (inc < bestIncrease) {
-                    bestIncrease = inc;
-                    bestV = v;
+        // If strict insertion failed, try relaxed mode
+        if (bestVehicle < 0) {
+            for (size_t v = 0; v < vehicles.size(); ++v) {
+                auto ins = findBestInsertion(sol.routes[v], reqId, vehicles[v], reqs, true);
+                if (ins.feasible && ins.costIncrease < bestCost) {
+                    bestCost = ins.costIncrease;
+                    bestVehicle = static_cast<int>(v);
                     bestRoute = std::move(ins.newRoute);
                 }
             }
         }
-
-        if (bestV>=0) {
-            sol.routes[bestV] = std::move(bestRoute);
-            calculateRouteCost(sol.routes[bestV], vehicles[bestV], reqs, allowLate);
+        
+        if (bestVehicle >= 0) {
+            sol.routes[bestVehicle] = std::move(bestRoute);
         } else {
-            sol.unassignedReqs.push_back(rId);
+            sol.unassignedReqs.push_back(reqId);
         }
     }
-    getSolutionCost(sol, vehicles, reqs, allowLate);
+    
+    evaluateSolution(sol, vehicles, reqs);
     return sol;
 }
 
-static Solution getNeighbor(const Solution& current, const vector<Request>& reqs, const vector<Vehicle>& vehicles, bool allowLate, mt19937& gen) {
-    Solution neighbor = current; // Deep copy
-    
-    // 1. Pick a route that has requests
-    vector<int> activeRoutes;
-    for(size_t i=0; i<neighbor.routes.size(); ++i) {
-        if(!neighbor.routes[i].stops.empty()) activeRoutes.push_back(i);
-    }
-    if(activeRoutes.empty()) return current;
+// ============== LOCAL SEARCH OPERATORS ==============
 
-    uniform_int_distribution<> dRoute(0, (int)activeRoutes.size()-1);
-    int sourceV = activeRoutes[dRoute(gen)];
-    
-    // 2. Pick a request in that route
-    vector<int> rIds = uniqueReqsInRoute(neighbor.routes[sourceV]);
-    if(rIds.empty()) return current;
-    uniform_int_distribution<> dReq(0, (int)rIds.size()-1);
-    int reqId = rIds[dReq(gen)];
-
-    // 3. Remove from source
-    removeRequestFromRoute(neighbor.routes[sourceV], reqId);
-    // If strict validity fails here, we continue anyway (maybe it was already invalid)
-    calculateRouteCost(neighbor.routes[sourceV], vehicles[sourceV], reqs, allowLate); 
-
-    // 4. Insert into random target route (could be same)
-    uniform_int_distribution<> dTarget(0, (int)vehicles.size()-1);
-    int targetV = dTarget(gen);
-
-    // Try normal insertion first
-    auto res = bestInsertion(neighbor.routes[targetV], reqId, vehicles[targetV], reqs, true);
-    
-    if (!res.feasible) {
-        // Try forced insertion if strict fails
-        res = bestInsertion(neighbor.routes[targetV], reqId, vehicles[targetV], reqs, false);
-    }
-
-    if (!res.feasible) {
-        // If still infeasible, invalid move
-        return current; 
-    }
-
-    neighbor.routes[targetV] = std::move(res.newRoute);
-    calculateRouteCost(neighbor.routes[targetV], vehicles[targetV], reqs, allowLate);
-
-    // Update global cost
-    getSolutionCost(neighbor, vehicles, reqs, allowLate);
-    
-    return neighbor;
+void removeRequestFromRoute(Route& r, int reqId) {
+    r.stops.erase(
+        remove_if(r.stops.begin(), r.stops.end(), 
+                  [reqId](const Stop& s) { return s.reqId == reqId; }),
+        r.stops.end()
+    );
 }
 
-static Solution improveSolution(const Solution& initSol, const vector<Request>& reqs, const vector<Vehicle>& vehicles, bool allowLate) {
-    mt19937 gen(12345);
-    Solution current = initSol;
-    Solution best = initSol;
+vector<int> getRequestsInRoute(const Route& r) {
+    unordered_set<int> seen;
+    vector<int> result;
+    for (const auto& s : r.stops) {
+        if (seen.insert(s.reqId).second) result.push_back(s.reqId);
+    }
+    return result;
+}
+
+// Relocate: Move a request from one route to another
+Solution relocateMove(const Solution& current, const vector<Request>& reqs, 
+                      const vector<Vehicle>& vehicles, mt19937& gen) {
+    Solution neighbor = current;
     
-    double T = 200.0;
-    double alpha = 0.99;
-    double minT = 0.1;
-    int maxIter = 5000; 
+    // Find routes with requests
+    vector<int> nonEmptyRoutes;
+    for (size_t i = 0; i < neighbor.routes.size(); ++i) {
+        if (!neighbor.routes[i].stops.empty()) nonEmptyRoutes.push_back(static_cast<int>(i));
+    }
+    if (nonEmptyRoutes.empty()) return current;
+    
+    // Pick random source route and request
+    uniform_int_distribution<> routeDist(0, static_cast<int>(nonEmptyRoutes.size()) - 1);
+    int srcRouteIdx = nonEmptyRoutes[routeDist(gen)];
+    
+    auto reqIds = getRequestsInRoute(neighbor.routes[srcRouteIdx]);
+    if (reqIds.empty()) return current;
+    
+    uniform_int_distribution<> reqDist(0, static_cast<int>(reqIds.size()) - 1);
+    int reqId = reqIds[reqDist(gen)];
+    
+    // Remove from source
+    removeRequestFromRoute(neighbor.routes[srcRouteIdx], reqId);
+    
+    // Try to insert into a different (or same) route
+    uniform_int_distribution<> tgtDist(0, static_cast<int>(vehicles.size()) - 1);
+    int tgtRouteIdx = tgtDist(gen);
+    
+    auto ins = findBestInsertion(neighbor.routes[tgtRouteIdx], reqId, vehicles[tgtRouteIdx], reqs, true);
+    
+    if (ins.feasible) {
+        neighbor.routes[tgtRouteIdx] = std::move(ins.newRoute);
+        evaluateSolution(neighbor, vehicles, reqs);
+        return neighbor;
+    }
+    
+    return current;  // Move failed
+}
 
-    for (int i = 0; i < maxIter && T > minT; ++i) {
-        Solution next = getNeighbor(current, reqs, vehicles, allowLate, gen);
-        
-        // If move failed (returned current), skip
-        if (abs(next.globalCost - current.globalCost) < 1e-6) {
-           continue;
-        }
+// Exchange: Swap requests between two routes
+Solution exchangeMove(const Solution& current, const vector<Request>& reqs,
+                      const vector<Vehicle>& vehicles, mt19937& gen) {
+    Solution neighbor = current;
+    
+    vector<int> nonEmptyRoutes;
+    for (size_t i = 0; i < neighbor.routes.size(); ++i) {
+        if (!neighbor.routes[i].stops.empty()) nonEmptyRoutes.push_back(static_cast<int>(i));
+    }
+    if (nonEmptyRoutes.size() < 2) return current;
+    
+    uniform_int_distribution<> routeDist(0, static_cast<int>(nonEmptyRoutes.size()) - 1);
+    int r1Idx = nonEmptyRoutes[routeDist(gen)];
+    int r2Idx;
+    do { r2Idx = nonEmptyRoutes[routeDist(gen)]; } while (r2Idx == r1Idx);
+    
+    auto reqs1 = getRequestsInRoute(neighbor.routes[r1Idx]);
+    auto reqs2 = getRequestsInRoute(neighbor.routes[r2Idx]);
+    if (reqs1.empty() || reqs2.empty()) return current;
+    
+    uniform_int_distribution<> req1Dist(0, static_cast<int>(reqs1.size()) - 1);
+    uniform_int_distribution<> req2Dist(0, static_cast<int>(reqs2.size()) - 1);
+    int reqId1 = reqs1[req1Dist(gen)];
+    int reqId2 = reqs2[req2Dist(gen)];
+    
+    // Remove both
+    removeRequestFromRoute(neighbor.routes[r1Idx], reqId1);
+    removeRequestFromRoute(neighbor.routes[r2Idx], reqId2);
+    
+    // Insert swapped
+    auto ins1 = findBestInsertion(neighbor.routes[r1Idx], reqId2, vehicles[r1Idx], reqs, true);
+    auto ins2 = findBestInsertion(neighbor.routes[r2Idx], reqId1, vehicles[r2Idx], reqs, true);
+    
+    if (ins1.feasible && ins2.feasible) {
+        neighbor.routes[r1Idx] = std::move(ins1.newRoute);
+        neighbor.routes[r2Idx] = std::move(ins2.newRoute);
+        evaluateSolution(neighbor, vehicles, reqs);
+        return neighbor;
+    }
+    
+    return current;
+}
 
-        double delta = next.globalCost - current.globalCost;
-        
-        bool accept = false;
-        if (delta < 0) {
-            accept = true;
-        } else {
-            uniform_real_distribution<> prob(0.0, 1.0);
-            if (prob(gen) < exp(-delta / T)) {
+// 2-opt within a single route
+Solution twoOptMove(const Solution& current, const vector<Request>& reqs,
+                    const vector<Vehicle>& vehicles, mt19937& gen) {
+    Solution neighbor = current;
+    
+    vector<int> nonEmptyRoutes;
+    for (size_t i = 0; i < neighbor.routes.size(); ++i) {
+        if (neighbor.routes[i].stops.size() >= 4) nonEmptyRoutes.push_back(static_cast<int>(i));
+    }
+    if (nonEmptyRoutes.empty()) return current;
+    
+    uniform_int_distribution<> routeDist(0, static_cast<int>(nonEmptyRoutes.size()) - 1);
+    int routeIdx = nonEmptyRoutes[routeDist(gen)];
+    Route& route = neighbor.routes[routeIdx];
+    
+    int n = static_cast<int>(route.stops.size());
+    uniform_int_distribution<> posDist(0, n - 1);
+    int i = posDist(gen);
+    int j = posDist(gen);
+    if (i > j) swap(i, j);
+    if (j - i < 2) return current;
+    
+    // Reverse segment [i, j]
+    reverse(route.stops.begin() + i, route.stops.begin() + j + 1);
+    
+    // Check if still feasible
+    if (isRouteFeasible(route, vehicles[routeIdx], reqs, false)) {
+        evaluateSolution(neighbor, vehicles, reqs);
+        return neighbor;
+    }
+    
+    return current;
+}
+
+// ============== SIMULATED ANNEALING ==============
+
+Solution simulatedAnnealing(const Solution& initial, const vector<Request>& reqs,
+                            const vector<Vehicle>& vehicles) {
+    mt19937 gen(chrono::steady_clock::now().time_since_epoch().count());
+    
+    Solution current = initial;
+    Solution best = initial;
+    
+    // SA parameters
+    double T = 1000.0;
+    double Tmin = 0.1;
+    double alpha = 0.995;
+    int maxIterPerTemp = 100;
+    int maxNoImprove = 2000;
+    
+    int noImproveCount = 0;
+    int iteration = 0;
+    
+    while (T > Tmin && noImproveCount < maxNoImprove) {
+        for (int iter = 0; iter < maxIterPerTemp; ++iter) {
+            ++iteration;
+            
+            // Choose random move
+            uniform_int_distribution<> moveDist(0, 2);
+            Solution neighbor;
+            
+            switch (moveDist(gen)) {
+                case 0: neighbor = relocateMove(current, reqs, vehicles, gen); break;
+                case 1: neighbor = exchangeMove(current, reqs, vehicles, gen); break;
+                case 2: neighbor = twoOptMove(current, reqs, vehicles, gen); break;
+            }
+            
+            // Skip if move failed
+            if (abs(neighbor.globalCost - current.globalCost) < 1e-9 && 
+                neighbor.unassignedReqs.size() == current.unassignedReqs.size()) {
+                continue;
+            }
+            
+            double delta = neighbor.globalCost - current.globalCost;
+            
+            bool accept = false;
+            if (delta < 0) {
                 accept = true;
+            } else {
+                uniform_real_distribution<> prob(0.0, 1.0);
+                if (prob(gen) < exp(-delta / T)) {
+                    accept = true;
+                }
+            }
+            
+            if (accept) {
+                current = std::move(neighbor);
+                
+                if (current.globalCost < best.globalCost) {
+                    best = current;
+                    noImproveCount = 0;
+                } else {
+                    ++noImproveCount;
+                }
+            } else {
+                ++noImproveCount;
             }
         }
-
-        if (accept) {
-            current = std::move(next);
-            if (current.globalCost < best.globalCost) {
-                best = current;
-            }
-        }
+        
         T *= alpha;
     }
+    
+    cout << "SA completed: " << iteration << " iterations, final temp: " << T << endl;
     return best;
 }
 
-int main(int argc, char** argv) {
-    string inputPath = (argc>1? argv[1] : "input.json");
-    string outputPath = (argc>2? argv[2] : "solution.json");
-    // Read input JSON
-    ifstream in(inputPath);
-    if (!in.is_open()) { cerr<<"Failed to open "<<inputPath<<"\n"; return 1; }
-    json j; in >> j; in.close();
+// ============== MAIN ==============
 
-    // Config
-    bool allowExternal = false; string mapsKey;
-    if (j.contains("config")) { 
-        allowExternal = j["config"].value("allow_external_maps", false); 
-        mapsKey = j["config"].value("maps_api_key", ""); 
+int main(int argc, char** argv) {
+    string inputPath = (argc > 1) ? argv[1] : "input.json";
+    string outputPath = (argc > 2) ? argv[2] : "solution.json";
+    
+    // Read input
+    ifstream in(inputPath);
+    if (!in.is_open()) {
+        cerr << "Failed to open " << inputPath << endl;
+        return 1;
+    }
+    json j;
+    in >> j;
+    in.close();
+    
+    cout << "========================================" << endl;
+    cout << "VELORA MOBILITY OPTIMIZER - HVRPSTW" << endl;
+    cout << "========================================" << endl;
+    
+    // Parse config
+    bool allowExternal = false;
+    string mapsKey;
+    
+    if (j.contains("config")) {
+        auto& cfg = j["config"];
+        allowExternal = cfg.value("allow_external_maps", false);
+        mapsKey = cfg.value("maps_api_key", "");
         
-        // Load Weights
-        if (j["config"].contains("weights")) {
-            gCtx.wCost = j["config"]["weights"].value("cost", 0.7);
-            gCtx.wTime = j["config"]["weights"].value("time", 0.3);
+        if (cfg.contains("weights")) {
+            gCtx.wCost = cfg["weights"].value("cost", 0.7);
+            gCtx.wTime = cfg["weights"].value("time", 0.3);
         }
         
-        // Load Tolerances
-        if (j["config"].contains("tolerances")) {
-            auto& tols = j["config"]["tolerances"];
-            for (auto it = tols.begin(); it != tols.end(); ++it) {
+        if (cfg.contains("tolerances")) {
+            for (auto& [key, val] : cfg["tolerances"].items()) {
                 try {
-                    int p = stoi(it.key());
-                    double val = it.value();
-                    gCtx.maxDelayMap[p] = val;
-                } catch(...) {}
+                    int p = stoi(key);
+                    gCtx.maxDelayByPriority[p] = val.get<double>();
+                } catch (...) {}
             }
         }
     }
-    // Always allow late (soft constraint) but use stricter penalties/checks inside
-    bool allowLate = true; 
     
     MapDistance mapDist(allowExternal, mapsKey);
     gMapDist = &mapDist;
-
+    
     // Parse requests
     vector<Request> requests;
-    for (auto &jr : j["requests"]) {
+    for (auto& jr : j["requests"]) {
         Request r;
-        r.id = jr.value("id", -1);
-        r.priority = clampPriority(jr.value("priority", 3));
+        r.id = jr.value("id", static_cast<int>(requests.size()));
+        r.employeeId = jr.value("employee_id", "");
+        r.priority = max(1, min(5, jr.value("priority", 3)));
         r.earlyTime = jr.value("earlyTime", 0.0);
-        r.lateTime = jr.value("lateTime", 1e6);
+        r.lateTime = jr.value("lateTime", 1440.0);  // Default to end of day
         r.load = jr.value("load", 1);
         r.pickup.lat = jr["pickup"].value("lat", 0.0);
         r.pickup.lon = jr["pickup"].value("lon", 0.0);
@@ -499,45 +776,139 @@ int main(int argc, char** argv) {
         r.sharingLimit = jr.value("sharingLimit", 100);
         requests.push_back(r);
     }
-
+    
+    // Parse vehicles
     vector<Vehicle> vehicles;
-    for (auto &jv : j["vehicles"]) {
-        Vehicle v; v.id = jv.value("id", 0); v.capacity = jv.value("capacity", 4); v.costPerKm = jv.value("costPerKm", 1.0);
-        v.startLoc.lat = jv["startLoc"].value("lat", 0.0); v.startLoc.lon = jv["startLoc"].value("lon", 0.0);
+    for (auto& jv : j["vehicles"]) {
+        Vehicle v;
+        v.id = jv.value("id", static_cast<int>(vehicles.size()));
+        v.vehicleId = jv.value("vehicle_id", "");
+        v.capacity = jv.value("capacity", 4);
+        v.costPerKm = jv.value("costPerKm", 10.0);
+        v.startLoc.lat = jv["startLoc"].value("lat", 0.0);
+        v.startLoc.lon = jv["startLoc"].value("lon", 0.0);
         v.availabilityTime = jv.value("availabilityTime", 0.0);
-        v.type = jv.value("type", "any");
+        // CRITICAL: Use vehicle's own speed
+        v.speed = jv.value("avg_speed_kmph", jv.value("avgSpeedKmph", gCtx.defaultSpeedKmph));
+        v.type = jv.value("type", jv.value("vehicle_type", "any"));
+        v.category = jv.value("category", "");
+        v.fuelType = jv.value("fuel_type", "");
         vehicles.push_back(v);
     }
-
-    cout << "Running greedy constructive heuristic...\n";
-    random_device rd; mt19937 gen(rd());
+    
+    // Parse baseline if available
+    if (j.contains("baseline")) {
+        for (auto& jb : j["baseline"]) {
+            BaselineEntry b;
+            b.employeeId = jb.value("employee_id", "");
+            b.baselineCost = jb.value("baseline_cost", 0.0);
+            b.baselineTime = jb.value("baseline_time_min", 0.0);
+            gCtx.baseline.push_back(b);
+        }
+    }
+    
+    cout << "Input: " << requests.size() << " requests, " << vehicles.size() << " vehicles" << endl;
+    cout << "Weights: cost=" << gCtx.wCost << ", time=" << gCtx.wTime << endl;
+    
+    // Multiple restarts for better solution
+    cout << "\nPhase 1: Constructive Heuristic (multi-start)..." << endl;
+    mt19937 gen(42);
     Solution bestInit;
-    double bestInitCost = numeric_limits<double>::max();
-    for (int seed = 0; seed < 5; ++seed) {
-        Solution init = constructInitialSolution(requests, vehicles, allowLate, gen);
-        if (init.globalCost < bestInitCost) {
+    bestInit.globalCost = numeric_limits<double>::max();
+    
+    for (int restart = 0; restart < 10; ++restart) {
+        Solution init = constructInitialSolution(requests, vehicles, gen);
+        if (init.globalCost < bestInit.globalCost) {
             bestInit = std::move(init);
-            bestInitCost = bestInit.globalCost;
         }
     }
-    cout << "Initial cost: "<< bestInit.globalCost <<"\n";
-    cout << "Running local search improvements...\n";
-    Solution finalSol = improveSolution(bestInit, requests, vehicles, allowLate);
-    cout << "Final cost: "<< finalSol.globalCost <<"\n";
-
-    // Serialize to JSON
+    
+    cout << "Initial solution: cost=" << fixed << setprecision(2) << bestInit.totalMoneyCost 
+         << ", penalty=" << bestInit.totalPenaltyCost 
+         << ", unassigned=" << bestInit.unassignedReqs.size() << endl;
+    
+    // Improve with SA
+    cout << "\nPhase 2: Simulated Annealing optimization..." << endl;
+    Solution finalSol = simulatedAnnealing(bestInit, requests, vehicles);
+    
+    cout << "\nFinal solution: cost=" << fixed << setprecision(2) << finalSol.totalMoneyCost 
+         << ", penalty=" << finalSol.totalPenaltyCost 
+         << ", global=" << finalSol.globalCost
+         << ", unassigned=" << finalSol.unassignedReqs.size() << endl;
+    
+    // Output JSON
     json out;
-    out["globalCost"] = finalSol.globalCost;
-    out["unassigned"] = finalSol.unassignedReqs;
+    out["summary"] = {
+        {"totalMoneyCost", finalSol.totalMoneyCost},
+        {"totalPenaltyCost", finalSol.totalPenaltyCost},
+        {"globalCost", finalSol.globalCost},
+        {"unassignedCount", finalSol.unassignedReqs.size()},
+        {"vehiclesUsed", 0},
+        {"totalDistance", 0.0},
+        {"totalTime", 0.0}
+    };
+    
+    double totalDist = 0, totalTime = 0;
+    int vehiclesUsed = 0;
+    
     out["routes"] = json::array();
-    for (auto &rt : finalSol.routes) {
-        json jr; jr["vehicleId"] = rt.vehicleId; jr["totalDist"] = rt.totalDist; jr["totalCost"] = rt.totalCost; jr["stops"] = json::array();
-        for (auto &s : rt.stops) {
-            jr["stops"].push_back({{"reqId", s.reqId}, {"type", s.type==PICKUP?"P":"D"}, {"lat", s.loc.lat}, {"lon", s.loc.lon}, {"arrival", s.arrivalTime}});
+    for (auto& rt : finalSol.routes) {
+        json jr;
+        jr["vehicleId"] = rt.vehicleId;
+        jr["vehicleIdStr"] = (rt.vehicleId < static_cast<int>(vehicles.size())) ? vehicles[rt.vehicleId].vehicleId : "";
+        jr["totalDist"] = rt.totalDist;
+        jr["totalTime"] = rt.totalTime;
+        jr["totalCost"] = rt.totalCost;
+        jr["penaltyCost"] = rt.penaltyCost;
+        jr["stops"] = json::array();
+        
+        for (auto& s : rt.stops) {
+            json js;
+            js["reqId"] = s.reqId;
+            js["employeeId"] = requests[s.reqId].employeeId;
+            js["type"] = (s.type == PICKUP) ? "pickup" : "dropoff";
+            js["lat"] = s.loc.lat;
+            js["lon"] = s.loc.lon;
+            js["arrivalTime"] = s.arrivalTime;
+            js["waitTime"] = s.waitTime;
+            jr["stops"].push_back(js);
         }
+        
         out["routes"].push_back(jr);
+        
+        if (!rt.stops.empty()) {
+            ++vehiclesUsed;
+            totalDist += rt.totalDist;
+            totalTime += rt.totalTime;
+        }
     }
-    ofstream fo(outputPath); fo<<setw(2)<<out<<"\n"; fo.close();
-    cout<<"Solution written to "<<outputPath<<"\n";
+    
+    out["summary"]["vehiclesUsed"] = vehiclesUsed;
+    out["summary"]["totalDistance"] = totalDist;
+    out["summary"]["totalTime"] = totalTime;
+    out["unassigned"] = finalSol.unassignedReqs;
+    
+    // Add request mapping for report
+    out["requestDetails"] = json::array();
+    for (const auto& req : requests) {
+        out["requestDetails"].push_back({
+            {"id", req.id},
+            {"employeeId", req.employeeId},
+            {"priority", req.priority},
+            {"earlyTime", req.earlyTime},
+            {"lateTime", req.lateTime},
+            {"vehiclePreference", req.vehiclePreference},
+            {"sharingLimit", req.sharingLimit}
+        });
+    }
+    
+    // Write output
+    ofstream fo(outputPath);
+    fo << setw(2) << out << endl;
+    fo.close();
+    
+    cout << "\nSolution written to: " << outputPath << endl;
+    cout << "========================================" << endl;
+    
     return 0;
 }
