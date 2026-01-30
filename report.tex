@@ -488,18 +488,17 @@ For modelling purposes, we define the following decision variables:
 \begin{itemize}
     \item $x_{uv}^k \in \{0,1\}$: equals 1 if vehicle $k$ traverses arc $(u,v)$,
     \item $t_u^k \ge 0$: arrival time of vehicle $k$ at node $u$,
-    \item $q_u^k \ge 0$: number of passengers onboard vehicle $k$ after leaving node $u$,
-    \item $z_i \ge 0$: lateness of employee $i$ at the common drop location.
+    \item $q_u^k \ge 0$: number of passengers onboard vehicle $k$ after leaving node $u$.
 \end{itemize}
 
 ---
 
 \subsection{Objective Function}
 
-The objective is to minimize total operational and service penalty cost:
+The objective is to minimize total operational cost plus penalty for late arrivals and unassigned employees:
 
 \begin{equation}
-\min \; Z = Z_{\text{dist}} + Z_{\text{late}} + Z_{\text{unassigned}}.
+\min \; Z = Z_{\text{dist}} + Z_{\text{penalty}} + Z_{\text{unassigned}}.
 \end{equation}
 
 \subsubsection{Operating Cost}
@@ -509,20 +508,28 @@ Z_{\text{dist}} =
 C_k \, d_{uv} \, x_{uv}^k.
 \end{equation}
 
-\subsubsection{Lateness and Priority Penalty}
-For each employee $i$, let $f(P_i)$ denote the priority-based tolerance (grace period). The penalty is:
+\subsubsection{Lateness Penalty (Two-Tier Structure)}
+For each employee $i$, let $t_c^k$ denote the arrival time at the office (drop-off node $c$) by their assigned vehicle $k$. Let $f(P_i)$ denote the priority-based tolerance (grace period) in minutes. The penalty is:
 \begin{equation}
 \text{Penalty}_i = 
 \begin{cases}
-0 & \text{if } t_c^k \leq L_i + f(P_i) \\
-(t_c^k - L_i - f(P_i)) \cdot M \cdot w(P_i) & \text{if } t_c^k > L_i + f(P_i)
+0 & \text{if } t_c^k \leq L_i + f(P_i) \quad \text{(on-time or within tolerance)} \\[0.3cm]
+(t_c^k - L_i - f(P_i)) \cdot M \cdot w(P_i) & \text{if } t_c^k > L_i + f(P_i) \quad \text{(exceeds tolerance)}
 \end{cases}
 \end{equation}
-where $M$ is a large penalty multiplier and $w(P_i) = (6 - P_i)$ is the priority weight.
+where:
+\begin{itemize}
+    \item $L_i$ is the latest acceptable drop-off time for employee $i$
+    \item $f(P_i)$ is the priority-based tolerance: $f(1)=5$, $f(2)=10$, $f(3)=15$, $f(4)=20$, $f(5)=30$ minutes
+    \item $M = 1000.0$ is the severe violation penalty multiplier
+    \item $w(P_i) = (6 - P_i)$ is the priority weight (higher priority $\Rightarrow$ higher penalty)
+\end{itemize}
+
+\textbf{Key insight:} There is \textbf{no penalty} as long as the employee arrives within $L_i + f(P_i)$. Only arrivals \textit{exceeding} this tolerance deadline incur a severe penalty.
 
 The total lateness penalty is:
 \begin{equation}
-Z_{\text{late}} = \sum_{i\in P} \text{Penalty}_i.
+Z_{\text{penalty}} = \sum_{i\in P} \text{Penalty}_i.
 \end{equation}
 
 \subsubsection{Unassigned Penalty}
