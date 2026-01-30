@@ -224,6 +224,31 @@ TC04 (10 requests, infeasible) & \rupee4,420 & \rupee2,044.20 & \textbf{53.8\%} 
     \item[$\checkmark$] Full documentation and working Git repository
 \end{itemize}
 
+\subsection*{Mid-Term Submission Requirements Compliance}
+\begin{center}
+\begin{tabular}{|p{7cm}|c|p{5cm}|}
+\hline
+\textbf{Requirement} & \textbf{Status} & \textbf{Location in Report} \\
+\hline
+Approach to problem statement & $\checkmark$ & Sections 1--4 \\
+\hline
+Assumptions made & $\checkmark$ & Section 1.3 \\
+\hline
+Modelling choices & $\checkmark$ & Section 2 \\
+\hline
+Optimization strategy & $\checkmark$ & Sections 3--4 \\
+\hline
+\textbf{Test case interpretation \& handling} & $\checkmark$ & \textbf{Section 6} (dedicated) \\
+\hline
+Technical development summary & $\checkmark$ & Section 5, 7 \\
+\hline
+Working Git repository link & $\checkmark$ & Title page, Section 10 \\
+\hline
+Links to supporting documents & $\checkmark$ & Section 10.4 \\
+\hline
+\end{tabular}
+\end{center}
+
 \newpage
 
 % ===== ABSTRACT =====
@@ -1044,7 +1069,29 @@ D_{road} \approx 1.4\cdot D_{haversine}.
 \section{Test Case Interpretation and Handling}
 \label{sec:testcases}
 
-This section provides a detailed explanation of how each provided test case is interpreted and handled by our system. Understanding the specific characteristics and challenges of each test case is crucial for validating the correctness and robustness of the optimization approach.
+\textbf{This section provides a detailed explanation of how each provided test case is interpreted and handled by our system.} Understanding the specific characteristics and challenges of each test case is crucial for validating the correctness and robustness of the optimization approach.
+
+\subsection{Test Case Handling Summary (Quick Reference)}
+
+\begin{center}
+\begin{tabular}{|l|c|c|p{4.5cm}|p{4.5cm}|}
+\hline
+\textbf{TC} & \textbf{Reqs} & \textbf{Vehs} & \textbf{Key Challenge} & \textbf{How We Handle It} \\
+\hline
+TC01 & 8 & 3 & Basic feasibility & Standard insertion + SA \\
+\hline
+TC02 & 12 & 5 & Scale \& vehicle mix & Load balancing across fleet \\
+\hline
+TC03 & 15 & 5 & Overlapping time windows & Geographic batching + SA refinement \\
+\hline
+TC04 & 10 & 5 & \textbf{Infeasible request (E10)} & \textbf{Three-tier forced assignment with penalty} \\
+\hline
+TC05 & 100 & 30 & Computational scale & Multi-start diversity + fast evaluation \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Key Policy}: No employee is ever left unassigned. If time windows are impossible to satisfy, the system applies penalties but still transports the employee (``must-go'' policy).
 
 \subsection{Input Data Format}
 
@@ -1531,7 +1578,69 @@ if (res != CURLE_OK) {
 \textbf{Outcome}: System remains fast and reliable regardless of network conditions.
 
 % ============================================================================
-% 9. CONCLUSION AND FUTURE WORK
+% 9. TECHNICAL DEVELOPMENT SUMMARY
+% ============================================================================
+\section{Technical Development Summary}
+\label{sec:dev-summary}
+
+This section consolidates the technical development completed for the mid-term evaluation.
+
+\subsection{Components Developed}
+
+\begin{center}
+\begin{tabular}{|l|l|l|c|}
+\hline
+\textbf{Component} & \textbf{Language} & \textbf{File(s)} & \textbf{Status} \\
+\hline
+Core Optimization Solver & C++17 & \texttt{solver/src/main.cpp} & $\checkmark$ Complete \\
+\hline
+Distance Calculator & C++17 & \texttt{solver/src/map\_distance.cpp} & $\checkmark$ Complete \\
+\hline
+Excel Parser & Python 3 & \texttt{parser/excel\_to\_json.py} & $\checkmark$ Complete \\
+\hline
+Report Generator & Python 3 & \texttt{scripts/json\_to\_report.py} & $\checkmark$ Complete \\
+\hline
+Test Runner & Python 3 & \texttt{scripts/test\_runner.py} & $\checkmark$ Complete \\
+\hline
+Build System & CMake & \texttt{CMakeLists.txt}, \texttt{build.sh} & $\checkmark$ Complete \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Lines of Code}
+\begin{itemize}
+    \item \textbf{C++ Solver}: $\sim$900 lines (main.cpp) + $\sim$150 lines (map\_distance.cpp)
+    \item \textbf{Python Scripts}: $\sim$400 lines total
+    \item \textbf{Documentation}: $\sim$1800 lines (this report) + README + design docs
+\end{itemize}
+
+\subsection{Test Case Execution Results}
+
+All five test cases have been successfully processed:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Test Case} & \textbf{Parsed} & \textbf{Optimized} & \textbf{Report Generated} & \textbf{All Assigned} \\
+\hline
+TC01 & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ (8/8) \\
+TC02 & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ (12/12) \\
+TC03 & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ (15/15) \\
+TC04 & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ (10/10) \\
+TC05 & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ (100/100) \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Key Milestones Achieved}
+\begin{enumerate}
+    \item \textbf{Week 1}: Problem analysis, literature review, mathematical formulation
+    \item \textbf{Week 2}: Core solver implementation (construction heuristic)
+    \item \textbf{Week 3}: SA implementation, data pipeline, penalty handling
+    \item \textbf{Week 4}: Testing, debugging TC04 infeasibility, report writing
+\end{enumerate}
+
+% ============================================================================
+% 10. CONCLUSION AND FUTURE WORK
 % ============================================================================
 \section{Conclusion and Future Work}
 
@@ -1651,6 +1760,35 @@ python3 scripts/test_runner.py all
 # View results
 bash scripts/view_all_results.sh
 \end{lstlisting}
+
+\subsection{Supporting Documents and Links}
+\label{subsec:supporting-docs}
+
+All supporting documents and resources are available at the following locations:
+
+\begin{center}
+\begin{tabular}{|p{4.5cm}|p{9cm}|}
+\hline
+\textbf{Document/Resource} & \textbf{Link} \\
+\hline
+\textbf{Git Repository} & \url{https://github.com/badri41/velora-mobility-optimizer} \\
+\hline
+Source Code (Solver) & \url{https://github.com/badri41/velora-mobility-optimizer/tree/main/solver/src} \\
+\hline
+Data Pipeline Scripts & \url{https://github.com/badri41/velora-mobility-optimizer/tree/main/scripts} \\
+\hline
+Test Case Inputs (JSON) & \url{https://github.com/badri41/velora-mobility-optimizer/tree/main/data/json} \\
+\hline
+Test Case Outputs & \texttt{data/tc01\_report.txt} through \texttt{data/tc05\_report.txt} \\
+\hline
+Algorithm Design Doc & \url{https://github.com/badri41/velora-mobility-optimizer/blob/main/docs/algorithm_design.md} \\
+\hline
+Architecture Doc & \url{https://github.com/badri41/velora-mobility-optimizer/blob/main/docs/architecture.md} \\
+\hline
+Build Instructions & \texttt{README.md} in repository root \\
+\hline
+\end{tabular}
+\end{center}
 
 \subsection{External Resources and References}
 
