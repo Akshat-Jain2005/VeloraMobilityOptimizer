@@ -523,7 +523,7 @@ For modelling purposes, we define the following decision variables:
 The objective is to minimize total operational cost plus penalty for late arrivals and unassigned employees:
 
 \begin{equation}
-\min \; Z = Z_{\text{dist}} + Z_{\text{penalty}} + Z_{\text{unassigned}}.
+\min \; Z = w_c \cdot Z_{\text{dist}} + w_t \cdot Z_{\text{time}} +  Z_{\text{late}} + Z_{\text{unassigned}}
 \end{equation}
 
 \subsubsection{Operating Cost}
@@ -532,6 +532,26 @@ Z_{\text{dist}} =
 \sum_{k \in K} \sum_{(u,v)\in A}
 C_k \, d_{uv} \, x_{uv}^k.
 \end{equation}
+
+\subsubsection{Operating Time}
+\begin{equation}
+Z_{\text{time}} = \sum_{k \in K} T_k
+\end{equation}
+
+where $T_k$ is the total travel time for vehicle $k$:
+
+\begin{equation}
+T_k = \sum_{(u,v) \in A} \tau_{uv} \cdot x_{uv}^k
+\end{equation}
+
+Here:
+\begin{itemize}
+    \item $T_k$ is the summation of travel times for all route segments taken by vehicle $k$,
+    \item $\tau_{uv}$ is the travel time on arc $(u,v) \in A$,
+    \item $x_{uv}^k$ is the binary decision variable indicating whether vehicle $k$ traverses arc $(u,v)$,
+    \item $T_k$ represents the total operational travel time for vehicle $k$ across all paths.
+\end{itemize}
+
 
 \subsubsection{Lateness Penalty (Two-Tier Structure)}
 For each employee $i$, let $t_c^k$ denote the arrival time at the office (drop-off node $c$) by their assigned vehicle $k$. Let $f(P_i)$ denote the priority-based tolerance (grace period) in minutes. The penalty is:
@@ -607,6 +627,10 @@ t_v^k \ge t_u^k + \tau_{uv} - (1-x_{uv}^k)M''
 t_{d(k)}^k \ge A_k \qquad \forall k\in K.
 \end{equation}
 
+\subsubsection{Pickup Time Window}
+\begin{equation}
+t_i^k \ge E_i - (1 - \sum_{v \in V} x_{iv}^k) \cdot M \qquad \forall i \in P, \forall k \in K.
+\end{equation}
 ---
 
 \subsection{Computational Complexity}
@@ -1094,8 +1118,6 @@ TC05 & 100 & 30 & Computational scale & Multi-start diversity + fast evaluation 
 \textbf{Key Policy}: No employee is ever left unassigned. If time windows are impossible to satisfy, the system applies penalties but still transports the employee (``must-go'' policy).
 
 \subsection{Input Data Format}
-
-All test cases are provided as Excel files (\texttt{.xlsx}) located in the \texttt{Velora Kriti\_2026 TCs/} directory. Each file contains the following sheets:
 
 \subsubsection{Employees Sheet}
 Contains employee transportation requests with columns:
