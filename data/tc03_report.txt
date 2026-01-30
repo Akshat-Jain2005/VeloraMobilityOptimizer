@@ -1,7 +1,7 @@
 ================================================================================
               VELORA MOBILITY OPTIMIZER - SOLUTION REPORT
 ================================================================================
-Generated: 2026-01-28 19:27:42
+Generated: 2026-01-30 12:47:03
 Output file: /Users/mac/Coding/Projects/Kriti/velora-mobility-optimizer/data/json/tc03_output.json
 Input file: auto-detected
 
@@ -10,7 +10,7 @@ SUMMARY
 --------------------------------------------------------------------------------
   CTC (Cost to Company):     1,482.44
   Total Penalty Cost:        48.75
-  Global Objective:          957.71
+  Global Objective:          1,086.00
   Total Distance:            163.33 km
   Total Time:                369.5 minutes
   Vehicles Used:             3
@@ -87,12 +87,12 @@ VEHICLE ROUTES (3 active vehicles)
 │  4   Dropoff  E15        08:56   -      (12.9716, 77.5946)       
 │  5   Pickup   E12        09:07   -      (12.9330, 77.6050)       
 │  6   Dropoff  E12        09:18   -      (12.9716, 77.5946)       
-│  7   Pickup   E04        09:31   -      (12.9400, 77.6300)       
-│  8   Dropoff  E04        09:43   -      (12.9716, 77.5946)       
-│  9   Pickup   E08        09:59   -      (12.9270, 77.6420)       
-│  10  Dropoff  E08        10:16   -      (12.9716, 77.5946)       
-│  11  Pickup   E10        10:28   -      (12.9250, 77.6000)       
-│  12  Dropoff  E10        10:40   -      (12.9716, 77.5946)       
+│  7   Pickup   E10        09:31   -      (12.9250, 77.6000)       
+│  8   Dropoff  E10        09:43   -      (12.9716, 77.5946)       
+│  9   Pickup   E04        09:56   -      (12.9400, 77.6300)       
+│  10  Dropoff  E04        10:08   -      (12.9716, 77.5946)       
+│  11  Pickup   E08        10:24   -      (12.9270, 77.6420)       
+│  12  Dropoff  E08        10:40   -      (12.9716, 77.5946)       
 └───────────────────────────────────────────────────────────────────────────────
 
 --------------------------------------------------------------------------------
@@ -180,11 +180,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Assigned Vehicle: V05
   │  └─ 2w | petrol | normal
   │
-  ├─ Pickup Time: 09:31
-  ├─ Dropoff Time: 09:43
+  ├─ Pickup Time: 09:56
+  ├─ Dropoff Time: 10:08
   ├─ Road Distance: 7.28 km (pickup → dropoff)
   │
-  ├─ Status: ✓ ON-TIME
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 390.00
@@ -276,20 +276,20 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Assigned Vehicle: V05
   │  └─ 2w | petrol | normal
   │
-  ├─ Pickup Time: 09:59
-  ├─ Dropoff Time: 10:16
+  ├─ Pickup Time: 10:24
+  ├─ Dropoff Time: 10:40
   ├─ Road Distance: 10.00 km (pickup → dropoff)
   │
-  ├─ Status: ✓ ON-TIME
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 400.00
   │  └─ Time: 57 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 138.37 (shared)
+     ├─ Cost: 79.97 (shared)
      ├─ Time: 16 min (includes shared ride detours)
-     └─ Savings: 261.63 (65.4%)
+     └─ Savings: 320.03 (80.0%)
 
   Employee: E09
   ├─ Priority: P5
@@ -324,8 +324,8 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Assigned Vehicle: V05
   │  └─ 2w | petrol | normal
   │
-  ├─ Pickup Time: 10:28
-  ├─ Dropoff Time: 10:40
+  ├─ Pickup Time: 09:31
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 7.30 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -335,9 +335,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 60 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 58.40 (shared)
+     ├─ Cost: 116.67 (shared)
      ├─ Time: 12 min (includes shared ride detours)
-     └─ Savings: 396.60 (87.2%)
+     └─ Savings: 338.33 (74.4%)
 
   Employee: E11
   ├─ Priority: P2
@@ -383,9 +383,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 53 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 107.97 (shared)
+     ├─ Cost: 108.11 (shared)
      ├─ Time: 11 min (includes shared ride detours)
-     └─ Savings: 287.03 (72.7%)
+     └─ Savings: 286.89 (72.6%)
 
   Employee: E13
   ├─ Priority: P1
@@ -468,15 +468,15 @@ Emp    Veh   Type  Fuel    Base$    Opt$     Save$    BaseT  OptT   Status
 E01    V02   4w    electr  450      157.4    292.6    42     16     On-time   
 E02    V02   4w    electr  440      79.0     361.0    43     16     On-time   
 E03    V05   2w    petrol  410      116.4    293.6    50     13     On-time   
-E04    V05   2w    petrol  390      138.2    251.8    55     12     On-time   
+E04    V05   2w    petrol  390      138.2    251.8    55     12     Delay     
 E05    V01   4w    electr  470      48.3     421.7    62     34     On-time   
 E06    V01   4w    electr  420      119.3    300.7    48     19     On-time   
 E07    V01   4w    electr  460      105.1    354.9    41     15     On-time   
-E08    V05   2w    petrol  400      138.4    261.6    57     16     On-time   
+E08    V05   2w    petrol  400      80.0     320.0    57     16     Delay     
 E09    V01   4w    electr  380      24.3     355.7    65     18     On-time   
-E10    V05   2w    petrol  455      58.4     396.6    60     12     On-time   
+E10    V05   2w    petrol  455      116.7    338.3    60     12     On-time   
 E11    V01   4w    electr  430      52.3     377.7    49     23     On-time   
-E12    V05   2w    petrol  395      108.0    287.0    53     11     On-time   
+E12    V05   2w    petrol  395      108.1    286.9    53     11     On-time   
 E13    V01   4w    electr  465      117.6    347.4    40     12     On-time   
 E14    V01   4w    electr  460      51.7     408.3    63     35     On-time   
 E15    V05   2w    petrol  425      106.9    318.1    47     12     On-time   

@@ -1,26 +1,26 @@
 ================================================================================
               VELORA MOBILITY OPTIMIZER - SOLUTION REPORT
 ================================================================================
-Generated: 2026-01-28 19:27:42
+Generated: 2026-01-30 12:47:04
 Output file: /Users/mac/Coding/Projects/Kriti/velora-mobility-optimizer/data/json/tc04_output.json
 Input file: auto-detected
 
 --------------------------------------------------------------------------------
 SUMMARY
 --------------------------------------------------------------------------------
-  CTC (Cost to Company):     2,044.20
-  Total Penalty Cost:        75,661.41
-  Global Objective:          99,790.77
+  CTC (Cost to Company):     2,010.66
+  Total Penalty Cost:        3,737,247.28
+  Global Objective:          3,738,765.02
   Total Distance:            154.48 km
-  Total Time:                372.4 minutes
+  Total Time:                367.6 minutes
   Vehicles Used:             4
   Unassigned Requests:       0
 
   === COST COMPARISON (vs Individual Cabs) ===
   Total Baseline Cost:       4,420.00 (Ola/Uber/Rapido prices)
   Total Baseline Time:       485 min (sum of individual trips)
-  Optimized CTC:             2,044.20
-  Net Savings:               2,375.80 (53.8%)
+  Optimized CTC:             2,010.66
+  Net Savings:               2,409.34 (54.5%)
 
 --------------------------------------------------------------------------------
 VEHICLE ROUTES (4 active vehicles)
@@ -30,8 +30,8 @@ VEHICLE ROUTES (4 active vehicles)
 │  Type: 4w | Fuel: electric | Category: premium
 │  Capacity: 2 | Speed: 30.0 km/h | Cost: 10.0/km
 │  Start Location: (12.9350, 77.6200)
-│  Route Distance: 21.89 km | Route Time: 60.5 min
-│  Route Cost (CTC contribution): 218.93
+│  Route Distance: 55.43 km | Route Time: 139.6 min
+│  Route Cost (CTC contribution): 554.26
 │
 │  Stops:
 │  --------------------------------------------------------------------------
@@ -41,14 +41,20 @@ VEHICLE ROUTES (4 active vehicles)
 │  2   Dropoff  E01        08:26   -      (12.9716, 77.5946)       
 │  3   Pickup   E04        08:42   -      (12.9420, 77.6300)       
 │  4   Dropoff  E04        08:58   -      (12.9716, 77.5946)       
+│  5   Pickup   E06        09:15   -      (12.9280, 77.6180)       
+│  6   Pickup   E05        09:18   -      (12.9300, 77.6200)       
+│  7   Dropoff  E06        09:35   -      (12.9716, 77.5946)       
+│  8   Dropoff  E05        09:37   -      (12.9716, 77.5946)       
+│  9   Pickup   E09        09:57   -      (12.9150, 77.6050)       
+│  10  Dropoff  E09        10:17   -      (12.9716, 77.5946)       
 └───────────────────────────────────────────────────────────────────────────────
 
 ┌─ Vehicle: V02
 │  Type: 4w | Fuel: electric | Category: premium
 │  Capacity: 2 | Speed: 28.0 km/h | Cost: 11.0/km
 │  Start Location: (12.9400, 77.6250)
-│  Route Distance: 40.95 km | Route Time: 118.0 min
-│  Route Cost (CTC contribution): 450.49
+│  Route Distance: 7.42 km | Route Time: 34.2 min
+│  Route Cost (CTC contribution): 81.63
 │
 │  Stops:
 │  --------------------------------------------------------------------------
@@ -56,12 +62,6 @@ VEHICLE ROUTES (4 active vehicles)
 │  --------------------------------------------------------------------------
 │  1   Pickup   E02        08:15   14m    (12.9380, 77.6260)       
 │  2   Dropoff  E02        08:32   -      (12.9716, 77.5946)       
-│  3   Pickup   E05        08:50   -      (12.9300, 77.6200)       
-│  4   Pickup   E06        08:53   -      (12.9280, 77.6180)       
-│  5   Dropoff  E06        09:11   -      (12.9716, 77.5946)       
-│  6   Dropoff  E05        09:13   -      (12.9716, 77.5946)       
-│  7   Pickup   E09        09:34   -      (12.9150, 77.6050)       
-│  8   Dropoff  E09        09:56   -      (12.9716, 77.5946)       
 └───────────────────────────────────────────────────────────────────────────────
 
 ┌─ Vehicle: V03
@@ -146,9 +146,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 42 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 160.72 (shared)
+     ├─ Cost: 77.82 (shared)
      ├─ Time: 17 min (includes shared ride detours)
-     └─ Savings: 264.28 (62.2%)
+     └─ Savings: 347.18 (81.7%)
 
   Employee: E03
   ├─ Priority: P1
@@ -194,9 +194,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 44 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 70.76 (shared)
+     ├─ Cost: 147.36 (shared)
      ├─ Time: 16 min (includes shared ride detours)
-     └─ Savings: 364.24 (83.7%)
+     └─ Savings: 287.64 (66.1%)
 
   Employee: E05
   ├─ Priority: P2
@@ -204,23 +204,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 2 passengers
   │
-  ├─ Assigned Vehicle: V02
+  ├─ Assigned Vehicle: V01
   │  └─ 4w | electric | premium
   │
-  ├─ Pickup Time: 08:50
-  ├─ Dropoff Time: 09:13
+  ├─ Pickup Time: 09:18
+  ├─ Dropoff Time: 09:37
   ├─ Road Distance: 7.54 km (pickup → dropoff)
   │
-  ├─ Status: ✓ ON-TIME
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 400.00
   │  └─ Time: 50 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 145.37 (shared)
-     ├─ Time: 23 min (includes shared ride detours)
-     └─ Savings: 254.63 (63.7%)
+     ├─ Cost: 127.19 (shared)
+     ├─ Time: 19 min (includes shared ride detours)
+     └─ Savings: 272.81 (68.2%)
 
   Employee: E06
   ├─ Priority: P2
@@ -228,23 +228,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 2 passengers
   │
-  ├─ Assigned Vehicle: V02
+  ├─ Assigned Vehicle: V01
   │  └─ 4w | electric | premium
   │
-  ├─ Pickup Time: 08:53
-  ├─ Dropoff Time: 09:11
+  ├─ Pickup Time: 09:15
+  ├─ Dropoff Time: 09:35
   ├─ Road Distance: 7.66 km (pickup → dropoff)
   │
-  ├─ Status: ✓ ON-TIME
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 395.00
   │  └─ Time: 50 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 42.13 (shared)
-     ├─ Time: 18 min (includes shared ride detours)
-     └─ Savings: 352.87 (89.3%)
+     ├─ Cost: 42.03 (shared)
+     ├─ Time: 20 min (includes shared ride detours)
+     └─ Savings: 352.97 (89.4%)
 
   Employee: E07
   ├─ Priority: P3
@@ -300,11 +300,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 3 passengers
   │
-  ├─ Assigned Vehicle: V02
+  ├─ Assigned Vehicle: V01
   │  └─ 4w | electric | premium
   │
-  ├─ Pickup Time: 09:34
-  ├─ Dropoff Time: 09:56
+  ├─ Pickup Time: 09:57
+  ├─ Dropoff Time: 10:17
   ├─ Road Distance: 8.95 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -314,9 +314,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 65 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 98.46 (shared)
-     ├─ Time: 21 min (includes shared ride detours)
-     └─ Savings: 351.54 (78.1%)
+     ├─ Cost: 89.51 (shared)
+     ├─ Time: 20 min (includes shared ride detours)
+     └─ Savings: 360.49 (80.1%)
 
   Employee: E10
   ├─ Priority: P1
@@ -349,17 +349,17 @@ QUICK REFERENCE TABLE
 Emp    Veh   Type  Fuel    Base$    Opt$     Save$    BaseT  OptT   Status    
 ------------------------------------------------------------------------------
 E01    V01   4w    electr  420      141.9    278.1    40     16     On-time   
-E02    V02   4w    electr  425      160.7    264.3    42     17     On-time   
+E02    V02   4w    electr  425      77.8     347.2    42     17     On-time   
 E03    V04   van   diesel  430      251.1    178.9    43     15     On-time   
-E04    V01   4w    electr  435      70.8     364.2    44     16     On-time   
-E05    V02   4w    electr  400      145.4    254.6    50     23     On-time   
-E06    V02   4w    electr  395      42.1     352.9    50     18     On-time   
+E04    V01   4w    electr  435      147.4    287.6    44     16     On-time   
+E05    V01   4w    electr  400      127.2    272.8    50     19     Delay     
+E06    V01   4w    electr  395      42.0     353.0    50     20     Delay     
 E07    V04   van   diesel  380      62.9     317.1    58     17     On-time   
 E08    V04   van   diesel  385      70.7     314.3    58     18     On-time   
-E09    V02   4w    electr  450      98.5     351.5    65     21     On-time   
+E09    V01   4w    electr  450      89.5     360.5    65     20     On-time   
 E10    V03   4w    petrol  700      468.4    231.6    35     59     LATE      
 ------------------------------------------------------------------------------
-TOTAL                      4420     1512.5   2907.5  
+TOTAL                      4420     1479.0   2941.0  
 
 ================================================================================
 NOTES:

@@ -130,11 +130,65 @@
           "reqId": 3,
           "type": "dropoff",
           "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 555.8527898968445,
+          "employeeId": "E06",
+          "lat": 12.928,
+          "lon": 77.618,
+          "reqId": 5,
+          "type": "pickup",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 558.7223177485528,
+          "employeeId": "E05",
+          "lat": 12.93,
+          "lon": 77.62,
+          "reqId": 4,
+          "type": "pickup",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 575.793883608025,
+          "employeeId": "E06",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 5,
+          "type": "dropoff",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 577.793883608025,
+          "employeeId": "E05",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 4,
+          "type": "dropoff",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 597.6963848334573,
+          "employeeId": "E09",
+          "lat": 12.915,
+          "lon": 77.605,
+          "reqId": 8,
+          "type": "pickup",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 617.5988860588895,
+          "employeeId": "E09",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 8,
+          "type": "dropoff",
+          "waitTime": 0.0
         }
       ],
-      "totalCost": 218.93221600274705,
-      "totalDist": 21.893221600274707,
-      "totalTime": 60.53336901124749,
+      "totalCost": 554.2598012409575,
+      "totalDist": 55.42598012409575,
+      "totalTime": 139.59888605888955,
       "vehicleId": 0,
       "vehicleIdStr": "V01"
     },
@@ -158,70 +212,16 @@
           "reqId": 1,
           "type": "dropoff",
           "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 530.3083064722264,
-          "employeeId": "E05",
-          "lat": 12.93,
-          "lon": 77.62,
-          "reqId": 4,
-          "type": "pickup",
-          "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 533.2399434561995,
-          "employeeId": "E06",
-          "lat": 12.928,
-          "lon": 77.618,
-          "reqId": 5,
-          "type": "pickup",
-          "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 551.6536086907677,
-          "employeeId": "E06",
-          "lat": 12.9716,
-          "lon": 77.5946,
-          "reqId": 5,
-          "type": "dropoff",
-          "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 553.6536086907677,
-          "employeeId": "E05",
-          "lat": 12.9716,
-          "lon": 77.5946,
-          "reqId": 4,
-          "type": "dropoff",
-          "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 574.8348600037309,
-          "employeeId": "E09",
-          "lat": 12.915,
-          "lon": 77.605,
-          "reqId": 8,
-          "type": "pickup",
-          "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 596.0161113166942,
-          "employeeId": "E09",
-          "lat": 12.9716,
-          "lon": 77.5946,
-          "reqId": 8,
-          "type": "dropoff",
-          "waitTime": 0.0
         }
       ],
-      "totalCost": 450.4925055752089,
-      "totalDist": 40.95386414320081,
-      "totalTime": 118.01611131669415,
+      "totalCost": 81.63216181317742,
+      "totalDist": 7.421105619379766,
+      "totalTime": 34.160200194220465,
       "vehicleId": 1,
       "vehicleIdStr": "V02"
     },
     {
-      "penaltyCost": 75281.34441146898,
+      "penaltyCost": 3736867.220573449,
       "stops": [
         {
           "arrivalTime": 540.3719399454476,
@@ -314,11 +314,11 @@
     }
   ],
   "summary": {
-    "globalCost": 99790.76533965471,
+    "globalCost": 3738765.0172399483,
     "totalDistance": 154.4847313954032,
-    "totalMoneyCost": 2044.195873019227,
-    "totalPenaltyCost": 75661.40632964711,
-    "totalTime": 372.35895465526676,
+    "totalMoneyCost": 2010.6631144954058,
+    "totalPenaltyCost": 3737247.282491627,
+    "totalTime": 367.56856058043513,
     "unassignedCount": 0,
     "vehiclesUsed": 4
   },

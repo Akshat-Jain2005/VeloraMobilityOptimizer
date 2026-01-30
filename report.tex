@@ -24,6 +24,13 @@
 \usepackage{algorithmic}
 \usepackage{multicol}
 \usepackage{array}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,fit,backgrounds}
+
+% Indian Rupee symbol
+\newcommand{\rupee}{\text{\textrm{\fontencoding{T1}\fontfamily{lmr}\selectfont\char"20B9}}}
 
 % Code listing style
 \lstset{
@@ -33,11 +40,26 @@
     backgroundcolor=\color{gray!10},
     keywordstyle=\color{blue},
     commentstyle=\color{green!60!black},
-    stringstyle=\color{red!70!black}
+    stringstyle=\color{red!70!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=5pt
+}
+
+% C++ code style
+\lstdefinestyle{cpp}{
+    language=C++,
+    morekeywords={string,vector,unordered_map,unordered_set}
+}
+
+% Python code style
+\lstdefinestyle{python}{
+    language=Python,
+    morekeywords={self,True,False,None}
 }
 
 % TOC styling
-\renewcommand{\contentsname}{\Large\bfseries Contents}
+\renewcommand{\contentsname}{\Large\bfseries Table of Contents}
 \renewcommand{\cftsecfont}{\bfseries}
 \renewcommand{\cftsecpagefont}{\bfseries}
 
@@ -49,8 +71,8 @@
 % ===== PAGE GEOMETRY =====
 \geometry{
     a4paper,
-    left=0.8in,
-    right=0.8in,
+    left=0.4in,
+    right=0.4in,
     top=1in,
     bottom=1in
 }
@@ -59,11 +81,11 @@
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=magenta,      
+    filecolor=magenta,
     urlcolor=cyan,
     citecolor=blue,
-    pdftitle={Velora Mobility Optimizer},
-    pdfauthor={Hostel ID: 78},
+    pdftitle={Velora Mobility Optimizer - Mid-Term Technical Report},
+    pdfauthor={Hostel ID: XX},
 }
 
 % ===== SECTION FORMATTING =====
@@ -77,10 +99,14 @@
 % ===== HEADER AND FOOTER =====
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{Velora Mobility Optimizer}
+\fancyhead[L]{Velora Mobility Optimizer --- Mid-Term Report}
 \fancyhead[R]{Kriti '26}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.5pt}
+
+% ===== CUSTOM COMMANDS =====
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\filename}[1]{\texttt{#1}}
 
 % ===== TITLE PAGE INFO =====
 \title{Velora Mobility Optimizer}
@@ -95,41 +121,55 @@
 \thispagestyle{empty}
 \centering
 
-\vspace*{1cm}
+\vspace*{0.5cm}
 
+{\Large \textbf{Mid-Term Evaluation Submission}\par}
+\vspace{0.3cm}
 {\large 3rd February 2026\par}
 
-\vspace{2cm}
-
-% LOGO
-\includegraphics[width=0.40\textwidth]{image1.png}\par
 \vspace{1.5cm}
 
+% LOGO
+\includegraphics[width=0.35\textwidth]{media/image1.png}\par
+\vspace{1cm}
+
 {\Huge\bfseries Technical Report\par}
-\vspace{0.5cm}
+\vspace{0.4cm}
 
 {\Large Kriti '26 --- Optimization Problem Statement\par}
 
-\vspace{1.5cm}
+\vspace{1cm}
 
-\hrule height 1pt
-\vspace{0.8cm}
+\hrule height 1.5pt
+\vspace{0.6cm}
 
 {\Huge\bfseries Velora Mobility Optimizer\par}
 \vspace{0.3cm}
-{\Large\itshape Heterogeneous Vehicle Routing with Soft Time Windows\par}
+{\Large\itshape A Hybrid Metaheuristic Approach for the\\ Heterogeneous Vehicle Routing Problem\\ with Soft Time Windows (HVRPSTW)\par}
 
-\vspace{0.8cm}
-\hrule height 1pt
+\vspace{0.6cm}
+\hrule height 1.5pt
 
-\vspace{2.5cm}
+\vspace{1.5cm}
 
-{\Large Hostel ID:\par}
-{\LARGE\bfseries 78\par}
+\begin{tabular}{rl}
+\textbf{Hostel ID:} & \textbf{2651} \\
+\textbf{Submission Type:} & Mid-Term Evaluation \\
+\textbf{Problem Domain:} & Vehicle Routing Optimization \\
+\textbf{Implementation:} & C++17 / Python 3 \\
+\end{tabular}
+
+\vspace{1.5cm}
+
+\fbox{\parbox{0.85\textwidth}{
+\centering
+\textbf{Repository Link:}\\[0.3cm]
+\url{https://github.com/badri41/velora-mobility-optimizer}
+}}
 
 \vfill
 
-{\thepage}
+{\small This report outlines the approach, assumptions, modelling choices, optimization strategy, test case interpretation, and technical development completed for the Velora Corporate Mobility Optimization problem.}
 
 \end{titlepage}
 
@@ -139,321 +179,1499 @@
 \thispagestyle{empty}
 \newpage
 
+% ===== EXECUTIVE SUMMARY =====
+\section*{Executive Summary}
+\addcontentsline{toc}{section}{Executive Summary}
+
+This technical report documents the mid-term progress on the \textbf{Velora Mobility Optimizer}, a solution developed for the Kriti '26 Optimization Problem Statement. The problem addresses corporate employee transportation---specifically, optimizing the assignment of employee pickup requests to a heterogeneous fleet of vehicles while minimizing operational costs and respecting complex scheduling constraints.
+
+\subsection*{Problem Classification}
+The Velora problem is formally classified as a \textbf{Heterogeneous Vehicle Routing Problem with Soft Time Windows (HVRPSTW)}---an NP-hard combinatorial optimization problem \cite{toth2014,laporte2009}. Key characteristics include:
+\begin{itemize}[noitemsep]
+    \item \textbf{Many-to-One Structure}: Multiple employee pickup locations $\rightarrow$ single office destination
+    \item \textbf{Heterogeneous Fleet}: Vehicles with varying capacities, speeds, costs, and categories
+    \item \textbf{Soft Time Windows}: Priority-based delay tolerances with penalty functions \cite{taillard1997,ismail2021}
+    \item \textbf{Preference Constraints}: Vehicle type preferences and sharing limits as soft constraints
+\end{itemize}
+
+\subsection*{Solution Approach}
+We implement a \textbf{two-phase hybrid metaheuristic}:
+\begin{enumerate}[noitemsep]
+    \item \textbf{Multi-Start Constructive Heuristic}: Solomon I1-style insertion with priority-based ordering
+    \item \textbf{Simulated Annealing Refinement}: Metropolis-based local search with relocate/exchange/2-opt neighborhoods
+\end{enumerate}
+
+\subsection*{Key Results (Mid-Term)}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Test Case} & \textbf{Baseline Cost} & \textbf{Optimized Cost} & \textbf{Savings} \\
+\midrule
+TC01 (8 requests) & \rupee3,200 & \rupee920.54 & \textbf{71.2\%} \\
+TC02 (12 requests) & \rupee4,945 & \rupee1,273.32 & \textbf{74.3\%} \\
+TC03 (15 requests) & \rupee6,450 & \rupee1,482.44 & \textbf{77.0\%} \\
+TC04 (10 requests, infeasible) & \rupee4,420 & \rupee2,044.20 & \textbf{53.8\%} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Technical Development Status}
+\begin{itemize}[noitemsep]
+    \item[$\checkmark$] Complete C++17 solver implementation with SA optimization
+    \item[$\checkmark$] Python data pipeline (Excel $\rightarrow$ JSON $\rightarrow$ Report)
+    \item[$\checkmark$] Automated test runner and result visualization
+    \item[$\checkmark$] Robust distance calculation with API fallback mechanism
+    \item[$\checkmark$] Full documentation and working Git repository
+\end{itemize}
+
+\newpage
+
 % ===== ABSTRACT =====
 \begin{abstract}
-This report presents a comprehensive mathematical and algorithmic solution for the Velora corporate mobility optimization problem. The problem involves assigning employee transportation requests to a heterogeneous fleet of vehicles while minimizing operational cost and ensuring timely service, modeled as a \textbf{Heterogeneous Vehicle Routing Problem with Soft Time Windows (HVRPSTW)}.
+This technical report presents a comprehensive solution for the Velora corporate mobility optimization problem: optimally assigning employee transportation requests to a heterogeneous fleet while minimizing a weighted objective of operational cost and travel time, subject to capacity constraints, time windows, and employee preferences.
 
-Our solution implements a robust two-phase hybrid metaheuristic: (1) a \textbf{Multi-Start Greedy Constructive Heuristic} based on Solomon's I1 insertion criterion, and (2) a \textbf{Simulated Annealing (SA)} refinement phase employing Metropolis-Hastings acceptance criteria with multiple neighborhood operators (Relocate, Exchange, 2-Opt). The algorithm optimizes a weighted objective function combining monetary cost ($w_c=0.7$) and time penalty ($w_t=0.3$).
+The problem is modeled as a \textbf{Heterogeneous Vehicle Routing Problem with Soft Time Windows (HVRPSTW)}---a well-studied NP-hard variant in operations research. We formulate the objective as:
+\[
+Z = w_c \cdot \text{CTC} + w_t \cdot \text{Time} + \sum \text{Penalties}
+\]
+where CTC (Cost to Company) captures distance-based vehicle operating costs, Time captures total route duration, and Penalties encode soft constraint violations.
 
-Experimental results on five distinct test cases demonstrate significant cost efficiencies, with savings ranging from \textbf{53.8\% to 77.0\%} compared to individual transportation baselines. The system adeptly handles complex constraints including vehicle capacity, priority-based time windows, and multi-vehicle type preferences, executing large-scale instances (100+ requests) in sub-second timeframes ($<$1s).
+Our algorithmic approach combines: (1) a \textbf{multi-start greedy constructive heuristic} based on Solomon's I1 insertion method \cite{solomon1987} to generate diverse feasible initial solutions, and (2) \textbf{Simulated Annealing (SA)} refinement \cite{kirkpatrick1983} using relocate, exchange, and 2-opt neighborhood operators with Metropolis acceptance criteria.
+
+The system is implemented in \textbf{C++17} for computational efficiency, with \textbf{Python} scripts handling data parsing and report generation. Evaluation across four test cases demonstrates significant cost savings (\textbf{53.8\%--77.0\%}) compared to individual ride baselines, with sub-second computation times suitable for operational deployment.
 \end{abstract}
 
-% ===== SECTION 1: INTRODUCTION =====
+% ============================================================================
+% 1. INTRODUCTION
+% ============================================================================
 \section{Introduction}
 
-\subsection{Problem Context}
-Corporate employee transportation represents a significant operational cost and logistical challenge. The problem is characterized by static employee locations but dynamic daily demand, varying shift timings, and heterogeneous transport resources. The core challenge is to partition the set of employee requests into vehicle routes such that all constraints are satisfied and the total operational cost is minimized.
+\subsection{Problem Context and Motivation}
+Large organizations operating employee transportation services face a complex daily planning challenge: how to efficiently group employees into shared rides, assign appropriate vehicles, and sequence pickups to minimize cost while ensuring timely arrival at the workplace \cite{purba2020,aydin2025}. This problem---often called the \textit{Employee Commute Problem} or \textit{Corporate Shuttle Routing Problem}---has significant practical relevance:
 
-\subsection{Objective}
-Velora's objective is to minimize a composite cost function:
 \begin{itemize}
-    \item \textbf{Direct Operating Costs}: Fuel and vehicle usage costs (weighted at 0.7).
-    \item \textbf{Service Quality Penalties}: Late arrivals, early waits, and preference violations (weighted at 0.3).
+    \item \textbf{Cost Impact}: Employee transportation can represent 5--15\% of operational overhead for large organizations
+    \item \textbf{Scale}: A typical corporate campus may process 100--500 employee requests daily across 20--50 vehicles
+    \item \textbf{Complexity}: Real-world constraints include heterogeneous vehicles, employee preferences, regulatory requirements, and dynamic conditions
 \end{itemize}
 
-This must be achieved while strictly adhering to:
+The Velora Mobility Optimizer addresses this problem as specified in the Kriti '26 optimization challenge, targeting the Bangalore corporate mobility context with realistic constraints and data. The Vehicle Routing Problem and its variants have been extensively studied for over fifty years \cite{laporte2009,golden2008}.
+
+\subsection{Problem Statement Overview}
+The core problem is a \textbf{Many-to-One Vehicle Routing Problem with Pickup and Delivery (VRPPD)} variant \cite{parragh2008,psaraftis1980} where:
+\begin{itemize}
+    \item Multiple employees must be picked up from distributed locations
+    \item All employees are delivered to a \textit{single common destination} (office)
+    \item A \textit{heterogeneous fleet} of vehicles with different capacities, types, and costs is available
+    \item Employees have \textit{time windows} specifying acceptable arrival times at the office
+    \item Various \textit{preferences} (vehicle type, sharing willingness) act as soft constraints
+\end{itemize}
+
+\subsection{Key Assumptions Made}
+Based on the problem statement and clarifications received during the competition, we make the following modeling assumptions:
+
 \begin{enumerate}
-    \item \textbf{Capacity Constraints}: Vehicle passenger limits.
-    \item \textbf{Precedence Constraints}: Pickup must occur before dropoff.
-    \item \textbf{Hard Time Windows}: Maximum allowable delay thresholds.
+    \item \textbf{Static Planning}: All employee requests are known in advance (no dynamic arrivals)
+    \item \textbf{Deterministic Travel Times}: Travel times are computed from distances using fixed vehicle speeds (no real-time traffic modeling) \cite{ichoua2003}
+    \item \textbf{Single Office Destination}: All employees are delivered to the same drop-off location
+    \item \textbf{No Mid-Route Transfers}: An employee cannot change vehicles mid-route
+    \item \textbf{No Mid-Route Drop-offs}: Employees are picked up before any drop-offs occur (standard many-to-one structure)
+    \item \textbf{Service Time}: A fixed 2-minute service time is assumed at each pickup stop
+    \item \textbf{Road Distance Approximation}: In the absence of a maps API, road distances are estimated as $1.4 \times$ Haversine (great-circle) distance
 \end{enumerate}
 
-\subsection{Problem Classification}
-This problem is formally classified as \textbf{HVRPSTW} (Heterogeneous Vehicle Routing Problem with Soft Time Windows). It generalizes the classical VRP by introducing:
+\subsection{Inputs, Outputs, and Constraints}
+
+\subsubsection{Input Data}
+The solver receives structured input containing:
 \begin{itemize}
-    \item \textbf{Heterogeneity}: $K$ vehicle types, each with distinct capacity $Q_k$ and cost $C_k$.
-    \item \textbf{Soft Time Windows}: Violation of optimal time windows $[E_i, L_i]$ is penalized rather than strictly forbidden (up to a tolerance $\Delta$).
-    \item \textbf{Many-to-One Flow}: Multiple pickups converging to common drop-offs (or distinct drop-offs in the general case).
+    \item \textbf{Employee Requests}: For each employee $i$:
+    \begin{itemize}[noitemsep]
+        \item Pickup location (latitude, longitude)
+        \item Drop-off location (common office)
+        \item Time window $[E_i, L_i]$ for office arrival
+        \item Priority level $P_i \in \{1, 2, 3, 4, 5\}$ (1 = highest)
+        \item Vehicle preference (\texttt{premium}, \texttt{normal}, \texttt{any})
+        \item Sharing preference (max passengers willing to share with)
+    \end{itemize}
+    \item \textbf{Vehicle Fleet}: For each vehicle $k$:
+    \begin{itemize}[noitemsep]
+        \item Capacity $Q_k$
+        \item Cost per kilometer $C_k$
+        \item Average speed $v_k$
+        \item Vehicle type/category
+        \item Start location and availability time
+    \end{itemize}
+    \item \textbf{Configuration}: Objective weights, priority-based delay tolerances
 \end{itemize}
 
-% ===== SECTION 2: PROBLEM FORMULATION =====
-\section{Problem Formulation}
-
-\subsection{Mathematical Model}
-We define the problem on a directed graph $G = (V, A)$, where $V = \{0\} \cup P \cup D$ is the set of vertices (0 is depot, $P$ pickups, $D$ drop-offs), and $A$ is the set of arcs.
-
-\subsubsection{Sets and Parameters}
+\subsubsection{Output Data}
+The solver produces:
 \begin{itemize}
-    \item $N = \{1, \ldots, n\}$: Set of requests. Each request $i \in N$ has a pickup node $p_i \in P$ and dropoff node $d_i \in D$.
-    \item $K$: Set of available vehicles.
-    \item $d_{ij}$: Euclidean distance between nodes $i$ and $j$.
-    \item $c_{ij}^k$: Cost of traversing arc $(i,j)$ with vehicle $k$.
-    \item $t_{ij}^k$: Travel time on arc $(i,j)$ with vehicle $k$.
-    \item $Q_k$: Capacity of vehicle $k$.
-    \item $[E_i, L_i]$: Target time window for request $i$.
+    \item Per-vehicle routes (ordered sequence of pickup and drop-off stops)
+    \item Arrival times at each stop
+    \item Aggregate metrics: total distance, time, cost, and penalties
+    \item Any unassigned requests (in case of hard infeasibility)
 \end{itemize}
 
-\subsubsection{Decision Variables}
-\begin{itemize}
-    \item $x_{ijk} \in \{0, 1\}$: Binary variable, equal to 1 if vehicle $k$ traverses arc $(i, j)$.
-    \item $y_{ik} \in \{0, 1\}$: Binary variable, equal to 1 if request $i$ is served by vehicle $k$.
-    \item $T_{ik}$: Service start time at node $i$ by vehicle $k$.
-    \item $L_{ik}$: Accumulation load variable after visiting node $i$.
-\end{itemize}
-
-\subsubsection{Objective Function}
-The objective is to minimize the total generalized cost $Z$:
-
-\begin{equation}
-\min Z = \alpha \sum_{k \in K}\sum_{(i,j) \in A} c_{ij}^k x_{ijk} + \beta \sum_{i \in N} \text{Penalty}(T_{drop_i})
-\end{equation}
-
-Where $\alpha=0.7, \beta=0.3$. The penalty function is piecewise linear:
-\begin{equation}
-\text{Penalty}(t) = 
-\begin{cases} 
-0 & \text{if } t \le L_i \\
-w_i \cdot (t - L_i) & \text{if } L_i < t \le L_i + \Delta_{max} \\
-\infty & \text{if } t > L_i + \Delta_{max}
-\end{cases}
-\end{equation}
-Where $w_i$ is the priority weight for employee $i$.
-
-\subsubsection{Constraints}
-\begin{align}
-\sum_{k \in K} \sum_{j \in V} x_{ijk} &= 1 & \forall i \in P \quad \text{(Each request picked up once)} \\
-\sum_{j \in V} x_{p_i, j, k} - \sum_{j \in V} x_{j, d_i, k} &= 0 & \forall i \in N, k \in K \quad \text{(Flow conservation)} \\
-T_{p_i, k} + t_{p_i, d_i}^k &\le T_{d_i, k} & \forall i \in N, k \in K \quad \text{(Precedence)} \\
-\sum_{i \in N} q_i y_{ik} &\le Q_k & \forall k \in K \quad \text{(Capacity)}
-\end{align}
-
-% ===== SECTION 3: ALGORITHM DESIGN =====
-\section{Algorithm Design}
-
-To address the NP-hardness of HVRPSTW, we implement a two-stage metaheuristic.
-
-\subsection{Phase 1: Multi-Start Constructive Heuristic}
-This phase generates a set of feasible initial solutions using a randomized greedy insertion strategy (Solomon's I1).
-
-\subsubsection{Initialization}
-Requests are sorted by priority ($P_1 > P_5$) and then by time urgency (earliest deadline first). We apply random perturbations to this order in each of the 10 restart iterations to explore different parts of the solution space.
-
-\subsubsection{Insertion Criteria}
-For a request $u$ and a vehicle $k$ with route $R_k = (v_0, v_1, \ldots, v_m)$, we evaluate all possible insertion pairs $(i, j)$ where $0 \le i < j \le m+1$. The best insertion position minimizes the weighted insertion cost:
-
-\begin{equation}
-\Delta C(u, k) = \min_{i,j} \left[ \alpha \cdot \Delta \text{Dist}_{i,j} + \beta \cdot \Delta \text{Time}_{i,j} + \Delta \text{Penalty} \right]
-\end{equation}
-
-Where $\Delta \text{Dist}_{i,j}$ represents the detours added by inserting pickup at index $i$ and dropoff at index $j$.
-
-\subsection{Phase 2: Simulated Annealing (SA)}
-The best solution from Phase 1 is refined using Simulated Annealing, a probabilistic technique for approximating the global optimum of a given function.
-
-\subsubsection{Theoretical Basis}
-SA mimics the physical cooling of solids. The state space is traversed using a Markov Chain where a transition from state $S$ to $S'$ with energy (cost) difference $\Delta E = E(S') - E(S)$ is accepted with probability:
-
-\begin{equation}
-P(\text{accept}) = \begin{cases} 
-1 & \text{if } \Delta E < 0 \\
-e^{-\Delta E / T} & \text{if } \Delta E \ge 0 
-\end{cases}
-\end{equation}
-
-This property allows the algorithm to escape local minima (hill-climbing) early in the search when temperature $T$ is high.
-
-\subsubsection{Cooling Schedule}
-\begin{itemize}
-    \item \textbf{Initial Temperature ($T_0$)}: 1000.0
-    \item \textbf{Cooling Rate ($\alpha$)}: 0.995 (Geometric cooling scheme $T_{k+1} = \alpha T_k$)
-    \item \textbf{Stopping Criteria}: $T < 0.1$ or Max Iterations without improvement $> 2000$.
-\end{itemize}
-
-\subsubsection{Neighborhood Operators}
-We implement three mutation operators to generate neighbor $S'$:
+\subsubsection{Hard Constraints}
+The following constraints \textbf{must never be violated}:
 \begin{enumerate}
-    \item \textbf{Relocate ($O(1)$)}: Moves a single request $r$ from route $R_a$ to route $R_b$.
-    \item \textbf{Exchange ($O(1)$)}: Swaps request $r_1$ in $R_a$ with request $r_2$ in $R_b$.
-    \item \textbf{2-Opt ($O(n^2)$)}: Time-reversible heuristic. Reverses the sequence of stops between indices $i$ and $j$ in a single route. This untangles crossing paths.
+    \item \textbf{Vehicle Capacity}: $\text{Load}_k(t) \leq Q_k$ at all times
+    \item \textbf{Pickup-Dropoff Precedence}: For each employee, pickup must occur before drop-off in the same route
+    \item \textbf{Assignment Uniqueness}: Each employee is served by exactly one vehicle
+    \item \textbf{Earliest Pickup Time ($E_i$)}: The vehicle cannot pick up employee $i$ before time $E_i$. If the vehicle arrives early, it must wait until $E_i$.
 \end{enumerate}
 
-% ===== SECTION 4: SYSTEM ARCHITECTURE =====
-\section{System Architecture}
+\subsubsection{Soft Constraints (Penalty-Based)}
+The following constraints can be violated with associated penalties \cite{taillard1997}:
 
-\subsection{Software Stack}
+\paragraph{Time Window Handling.}
+Each employee $i$ has a time window $[E_i, L_i]$ where:
+\begin{itemize}
+    \item $E_i$ = \textbf{Earliest pickup time} --- \textbf{HARD constraint}. Cannot pick up before this time.
+    \item $L_i$ = \textbf{Latest drop-off time} --- \textbf{SOFT constraint} with priority-based tolerance.
+\end{itemize}
+
+The maximum tolerable delay $f(P_i)$ is determined by the employee's priority level:
 \begin{center}
-\begin{tabular}{|l|l|l|}
+\begin{tabular}{|c|c|l|}
 \hline
-\textbf{Component} & \textbf{Language} & \textbf{Role} \\
+\textbf{Priority} & $f(P_i)$ \textbf{(minutes)} & \textbf{Interpretation} \\
 \hline
-Solver Core & C++17 & High-performance combinatorial optimization \\
-Data Parser & Python 3.9 & Excel ingestion, data validation \\
-Reporting & Python 3.9 & Report generation, cost analysis \\
-Build System & CMake & Cross-platform compilation \\
+$P_i = 1$ (Highest) & 5 & VIP/Executive - minimal delay tolerance \\
+$P_i = 2$ & 10 & Senior staff \\
+$P_i = 3$ & 15 & Standard priority \\
+$P_i = 4$ & 20 & Flexible employees \\
+$P_i = 5$ (Lowest) & 30 & Maximum flexibility \\
 \hline
 \end{tabular}
 \end{center}
 
-\subsection{Module Interaction}
-Executed via `run_pipeline.sh`:
-\begin{enumerate}
-    \item `excel_to_json.py`: Parses raw requests, geocodes addresses if API available, else validates lat/long.
-    \item `velora_solver`: Reads JSON, executes SA algorithm, writes optimized routes to JSON.
-    \item `json_to_report.py`: Calculates financial metrics (CTC) and generates the readable report.
-\end{enumerate}
-
-\subsection{Distance Calculation Logic}
-All modules share a unified `MapDistance` class to ensure consistency:
+\textbf{Penalty Structure for Late Arrival:}
+Let $t_{\text{arr}}$ be the actual arrival time at the office for employee $i$. The penalty is computed as:
+\begin{equation}
+\text{Penalty}_i = 
+\begin{cases}
+0 & \text{if } t_{\text{arr}} \leq L_i + f(P_i) \quad \text{(on-time or within tolerance)} \\[0.3cm]
+(t_{\text{arr}} - L_i - f(P_i)) \cdot M \cdot w(P_i) & \text{if } t_{\text{arr}} > L_i + f(P_i) \quad \text{(exceeds tolerance)}
+\end{cases}
+\end{equation}
+where:
 \begin{itemize}
-    \item \textbf{Primary}: Google Maps Distance Matrix API (Travel time accuracy).
-    \item \textbf{Fallback}: Adjusted Haversine Formula:
-    \begin{equation}
-    D_{road} \approx D_{haversine} \times 1.4
-    \end{equation}
-    The 1.4 factor acts as a statistically derived "tortuosity factor" to approximate urban road networks.
+    \item $M = 1000.0$ is the severe violation penalty multiplier
+    \item $w(P_i) = (6 - P_i)$ is the priority weight (higher priority $\Rightarrow$ higher penalty)
 \end{itemize}
 
-% ===== SECTION 5: EXPERIMENTAL RESULTS =====
+\textbf{Interpretation:}
+\begin{enumerate}
+    \item \textbf{On-time} ($t_{\text{arr}} \leq L_i$): No penalty. Employee arrives within their requested time window.
+    \item \textbf{Within tolerance} ($L_i < t_{\text{arr}} \leq L_i + f(P_i)$): \textbf{No penalty}. The delay is within the acceptable tolerance defined by the employee's priority level. This is the ``grace period'' where delays are fully acceptable.
+    \item \textbf{Exceeds tolerance} ($t_{\text{arr}} > L_i + f(P_i)$): \textbf{Severe penalty}. The employee is late beyond the tolerance threshold. A large penalty is imposed proportional to the excess lateness and priority weight.
+\end{enumerate}
+
+\textbf{Implementation in Code:}
+\begin{lstlisting}[style=cpp]
+double maxDelay = gCtx.getMaxDelay(req.priority);
+double toleranceDeadline = req.lateTime + maxDelay;
+
+if (currentTime > toleranceDeadline) {
+    // Exceeds tolerance - severe penalty
+    double excessLateness = currentTime - toleranceDeadline;
+    eval.penaltyCost += excessLateness * M / 100.0 * getPriorityWeight(req.priority);
+}
+// else: within L_i or within tolerance window - NO PENALTY
+\end{lstlisting}
+
+\paragraph{Other Soft Constraints.}
+\begin{enumerate}
+    \item \textbf{Vehicle Preference Mismatch}: Assigning to a non-preferred vehicle type incurs a penalty of \rupee300
+    \item \textbf{Sharing Limit Violations}: Exceeding an employee's sharing preference incurs a penalty of \rupee500 per occurrence
+\end{enumerate}
+
+\subsection{Optimization Objective}
+The solver minimizes a composite objective function:
+\begin{equation}
+\min Z = w_c \cdot \text{CTC} + w_t \cdot \text{TotalTime} + \text{Penalties}
+\label{eq:objective}
+\end{equation}
+where:
+\begin{itemize}
+    \item $\text{CTC} = \sum_{k} \sum_{(i,j) \in \text{route}_k} C_k \cdot d_{ij}$ is the total operating cost (Cost to Company)
+    \item $\text{TotalTime} = \sum_{k} T_k$ is the total route duration across all vehicles (in minutes)
+    \item $\text{Penalties} = \sum_{i} \text{Penalty}_i$ aggregates all soft constraint violations (time windows, preferences, sharing limits)
+    \item $w_c = 0.7$ and $w_t = 0.3$ are the default objective weights (from metadata)
+\end{itemize}
+
+\textbf{Implementation in Code:}
+\begin{lstlisting}[style=cpp]
+// Global cost = weighted combination
+// Formula: CTC * w_cost + TotalTime * w_time + TotalPenalty
+sol.globalCost = (sol.totalMoneyCost * gCtx.wCost) + 
+                 (totalTime * gCtx.wTime) + 
+                 sol.totalPenaltyCost;
+\end{lstlisting}
+
+\subsection{Problem Classification and Complexity}
+The Velora problem is formally a variant of the \textbf{Heterogeneous Vehicle Routing Problem with Soft Time Windows (HVRPSTW)}, itself a generalization of the classical VRPTW introduced by Solomon \cite{solomon1987}. Key complexity factors:
+
+\begin{itemize}
+    \item \textbf{NP-Hardness}: The classical VRPTW is NP-hard \cite{solomon1987}; our variant with heterogeneous fleet, precedence constraints, and multiple soft penalties is strictly harder \cite{feillet2004}
+    \item \textbf{Solution Space}: For $n$ requests and $m$ vehicles, the search space grows as $O(n! \cdot m^n)$
+    \item \textbf{Constraint Interaction}: Time feasibility, capacity, and preference constraints interact non-linearly, creating a highly constrained landscape \cite{cordeau2002}
+\end{itemize}
+
+This complexity motivates our choice of metaheuristic methods over exact optimization, as discussed in Section~\ref{sec:heuristics}.
+
+\subsection{Report Structure}
+The remainder of this report is organized as follows:
+\begin{itemize}
+    \item \textbf{Section 2}: Mathematical formulation of the optimization problem
+    \item \textbf{Section 3}: Survey of algorithmic approaches and justification for our choices
+    \item \textbf{Section 4}: Detailed algorithm design and implementation
+    \item \textbf{Section 5}: System architecture and software design
+    \item \textbf{Section 6}: Test case interpretation and handling strategy
+    \item \textbf{Section 7}: Experimental results and analysis
+    \item \textbf{Section 8}: Challenges faced and solutions
+    \item \textbf{Section 9}: Conclusions and future work
+\end{itemize}
+
+% ============================================================================
+% 2. OPTIMIZATION (MATHEMATICAL FORMULATION)
+% ============================================================================
+\section{Optimization}
+
+This section presents a mathematical formulation of the Velora Mobility Optimization problem. The formulation is provided for problem specification and theoretical clarity; the implemented solver relies on heuristic and meta-heuristic methods due to the problem’s computational complexity.
+
+\subsection{Problem Structure and Graph Model}
+
+We model the system as a directed graph $G = (V, A)$, where:
+\[
+V = D \;\cup\; P \;\cup\; \{c\}.
+\]
+
+Here:
+\begin{itemize}
+    \item $D = \{d_1, d_2, \dots, d_m\}$ is the set of vehicle start locations (depots),
+    \item $P = \{1, 2, \dots, n\}$ is the set of employee pickup locations,
+    \item $c$ is a \emph{single common drop-off location} (office/campus).
+\end{itemize}
+
+Each employee request $i \in P$ consists of a pickup at node $i$ and a drop-off at node $c$.
+
+Let $K$ denote the set of heterogeneous vehicles \cite{golden2008,dondo2007}. Each vehicle $k \in K$:
+\begin{itemize}
+    \item starts from a depot $d(k) \in D$,
+    \item has capacity $Q_k$,
+    \item incurs cost $C_k$ per kilometer,
+    \item is available from time $A_k$.
+\end{itemize}
+
+For each arc $(u,v) \in A$, let:
+\begin{itemize}
+    \item $d_{uv}$ be the travel distance,
+    \item $\tau_{uv} = d_{uv}/v$ be the travel time (constant average speed assumed).
+\end{itemize}
+
+Each employee $i$ has:
+\begin{itemize}
+    \item a soft time window $[E_i, L_i]$ for arrival at $c$,
+    \item a priority level $P_i \in \{1,2,3,4,5\}$ (lower value = higher priority).
+\end{itemize}
+
+---
+
+\subsection{Decision Variables}
+
+For modelling purposes, we define the following decision variables:
+
+\begin{itemize}
+    \item $x_{uv}^k \in \{0,1\}$: equals 1 if vehicle $k$ traverses arc $(u,v)$,
+    \item $t_u^k \ge 0$: arrival time of vehicle $k$ at node $u$,
+    \item $q_u^k \ge 0$: number of passengers onboard vehicle $k$ after leaving node $u$,
+    \item $z_i \ge 0$: lateness of employee $i$ at the common drop location.
+\end{itemize}
+
+---
+
+\subsection{Objective Function}
+
+The objective is to minimize total operational and service penalty cost:
+
+\begin{equation}
+\min \; Z = Z_{\text{dist}} + Z_{\text{late}} + Z_{\text{unassigned}}.
+\end{equation}
+
+\subsubsection{Operating Cost}
+\begin{equation}
+Z_{\text{dist}} =
+\sum_{k \in K} \sum_{(u,v)\in A}
+C_k \, d_{uv} \, x_{uv}^k.
+\end{equation}
+
+\subsubsection{Lateness and Priority Penalty}
+For each employee $i$:
+\begin{align}
+z_i &= \max\bigl(0,\; t_c^k - L_i\bigr), \\
+Z_{\text{late}} &= \sum_{i\in P} \lambda(P_i)\, z_i,
+\end{align}
+where $\lambda(P_i)$ is a monotonically increasing penalty weight for higher-priority employees.
+
+\subsubsection{Unassigned Penalty}
+Employees not served by any vehicle incur a large penalty:
+\begin{equation}
+Z_{\text{unassigned}} = M \cdot |\{i \in P : i \text{ unassigned}\}|,\qquad M \gg 1.
+\end{equation}
+
+---
+
+\subsection{Constraints}
+
+\subsubsection{Pickup Assignment}
+Each employee is served by at most one vehicle:
+\begin{equation}
+\sum_{k\in K}\sum_{v\in V} x_{iv}^k \le 1
+\qquad \forall i \in P.
+\end{equation}
+
+\subsubsection{Flow Conservation}
+For each vehicle $k$:
+\begin{equation}
+\sum_{v\in V} x_{uv}^k - \sum_{v\in V} x_{vu}^k = 0
+\qquad \forall u \in V \setminus \{d(k), c\}.
+\end{equation}
+
+\subsubsection{Route Structure}
+Each vehicle:
+\begin{itemize}
+    \item starts from exactly one depot $d(k)$,
+    \item ends at the common drop node $c$.
+\end{itemize}
+
+\subsubsection{Capacity Constraints}
+Passenger load evolves as:
+\begin{align}
+0 \le q_u^k &\le Q_k \qquad \forall u,k, \\
+q_v^k &\ge q_u^k + \delta(v) - (1-x_{uv}^k)M',
+\end{align}
+where $\delta(v)=1$ if $v$ is a pickup node and $\delta(v)=0$ otherwise.
+
+\subsubsection{Time Propagation}
+\begin{equation}
+t_v^k \ge t_u^k + \tau_{uv} - (1-x_{uv}^k)M''
+\qquad \forall (u,v)\in A.
+\end{equation}
+
+\subsubsection{Vehicle Availability}
+\begin{equation}
+t_{d(k)}^k \ge A_k \qquad \forall k\in K.
+\end{equation}
+
+---
+
+\subsection{Computational Complexity}
+
+Even under simplified assumptions, the problem is a variant of the Heterogeneous Vehicle Routing Problem with Time Windows, which is NP-hard \cite{toth2014,golden2008}. The presence of multiple depots, soft time windows, and priority-weighted penalties further increases solution complexity \cite{ismail2021}. Consequently, exact solution approaches are impractical for realistic problem sizes, motivating the heuristic and meta-heuristic framework adopted in this work \cite{laporte2009}.
+% ============================================================================
+% 3. THEORY-DENSE SURVEY OF ALGORITHMS AND CHOICE JUSTIFICATION
+% ============================================================================
+\section{Heuristics and Meta-Heuristics}
+\label{sec:heuristics}
+
+This section discusses standard algorithms used in VRP/VRPTW research and explains why the project uses greedy insertion + Simulated Annealing.
+
+\subsection{Exact Methods (MIP / Branch-and-Cut / Column Generation)}
+Exact optimization typically models the problem as a set partitioning/covering formulation with route variables, solved via column generation, branching, and cutting planes \cite{feillet2004,dondo2007,coelho2014}. Theoretical advantage: an optimality certificate. Practical limitation: side constraints (preferences, sharing limits, precedence, soft penalties) complicate pricing and constraints, and runtime can grow rapidly beyond tens of requests.
+
+\subsection{Classical Heuristics (Fast Construction)}
+\subsubsection{Savings (Clarke--Wright)}
+Savings heuristics merge individual routes based on savings $s_{ij} = d_{0i} + d_{0j} - d_{ij}$ \cite{clarke1964}. They are efficient and often good for capacitated VRP, but incorporating precedence and time windows requires careful merge feasibility checks and often post-repair.
+
+\subsubsection{Sweep / Cluster-first route-second}
+Clustering reduces the problem to smaller subproblems \cite{leksakul2017}, but can produce poor results when time windows dominate feasibility (clusters are geometric, feasibility is temporal).
+
+\subsubsection{Insertion Heuristics (Solomon I1/I2)}
+Insertion heuristics build routes by inserting requests into partial routes using marginal costs and penalty-aware feasibility. They are well-suited for VRPTW because time feasibility can be checked at insertion time \cite{solomon1987}.
+
+\subsection{Local Search Neighborhoods}
+Typical neighborhoods include relocate, exchange, 2-opt, Or-opt, and intra/inter-route shifts. For pickup-and-delivery, the key theoretical issue is that many moves are not closed under feasibility: a move can violate precedence. Therefore, either precedence-preserving operators are required or explicit feasibility checks and rejection/repair must be used.
+
+\subsection{Tabu Search (TS)}
+Tabu Search maintains a short-term memory (tabu list) of recently applied moves/attributes to prevent cycling, plus aspiration rules to accept tabu moves if they improve the best-known solution. TS is strong for VRPTW and soft time windows \cite{cordeau2002,taillard1997}, but engineering complexity is higher:
+\begin{itemize}
+    \item Design of tabu attributes and tenure,
+    \item fast incremental cost/feasibility evaluation,
+    \item explicit diversification/intensification strategies.
+\end{itemize}
+For this project’s constraints and timeline, SA provides a simpler stochastic escape mechanism with fewer moving parts.
+
+\subsection{Genetic / Evolutionary Algorithms (GA/EA)}
+GA optimizes via population-based evolution \cite{vidal2013}. The main theoretical challenge in constrained VRPTW is that crossover tends to destroy feasibility (time windows, precedence), requiring specialized encodings and repair operators. High-quality GA for VRPTW is typically hybridized with local search (memetic algorithms) \cite{bideq2025}, increasing implementation scope.
+
+\subsection{Swarm/Probabilistic Construction (ACO, PSO)}
+ACO constructs solutions probabilistically guided by pheromone trails; PSO adapts continuous update dynamics to combinatorial encodings. These can work but often require many iterations and expensive feasibility checks in constrained VRPTW settings.
+
+\subsection{Large Neighborhood Search (LNS/ALNS), VNS, and Modern Hybrid Solvers}
+ALNS iteratively destroys and repairs parts of a solution with adaptive operator weights \cite{ropke2006,shaw1998}; it is among the best general-purpose VRP heuristics when engineered well \cite{demir2012}. However, it requires careful design of destroy/repair operators and parameter tuning, which can be heavy for a short project.
+
+\subsection{Why Greedy Insertion + SA was used (and why others were not)}
+\begin{itemize}
+    \item \textbf{Feasibility-by-construction}: insertion can evaluate feasibility (capacity, precedence, and time) at the moment of assignment.
+    \item \textbf{Penalty-compatible energy}: SA naturally operates on the same scalar objective used for evaluation.
+    \item \textbf{Controlled exploration}: SA’s Metropolis acceptance provides a theoretically grounded way to accept uphill moves early \cite{kirkpatrick1983}.
+    \item \textbf{Implementation tractability}: compared to TS/GA/ALNS, the chosen approach achieves strong savings with fewer specialized components.
+\end{itemize}
+
+\subsection{Related Work: HVRPSTW and Employee Shuttle Routing (Selective, Organized)}
+This subsection synthesizes the main algorithmic context contained in \texttt{algocontext.txt} into a research-paper style related-work summary. The goal is not to exhaustively list every paper, but to organize representative approaches by methodological family and highlight trade-offs relevant to Velora.
+
+\subsubsection{Exact and Mathematical Programming}
+For small-to-medium instances, rich HVRP variants with soft time windows are often formulated as MILPs and solved via branch-and-bound/branch-and-cut. A second exact line is branch-and-price (column generation) which uses a route-based set partitioning model and solves a pricing subproblem to generate candidate routes. These approaches provide optimality certificates but can become computationally heavy when many side constraints are added (heterogeneous eligibility rules, precedence constraints, and multiple penalty terms).
+
+Representative examples include exact formulations for heterogeneous time windows solved using branch-and-price \cite{mutzel2022} and case-study-style MILP solutions for heterogeneous soft-window settings \cite{ismail2021}.
+
+\subsubsection{Construction Heuristics with Tabu/VND}
+In real operational contexts (e.g., employee shuttles), classical constructive heuristics (savings, insertion) are frequently paired with tabu search or variable neighborhood descent. The constructive stage produces a feasible schedule quickly; tabu/VND then performs iterative improvement using move neighborhoods (relocate, exchange, 2-opt variants) while managing soft window penalties and feasibility.
+
+In employee transport variants, tabu-search style approaches have been reported to deliver tangible fuel/cost reductions relative to manual scheduling \cite{purba2020}. In heterogeneous VRPTW variants with limited resources, insertion + VND+tabu hybrids provide a pragmatic balance between feasibility and quality \cite{molina2020}.
+
+\subsubsection{Metaheuristics for Large-Scale Instances (GA/ACO/PSO/VNS/ALNS)}
+For larger or richer instances, metaheuristics dominate.
+\begin{itemize}
+    \item \textbf{GA/EA}: population-based search; strong when paired with local search, but requires feasibility-aware encodings/repair for precedence and time windows.
+    \item \textbf{ACO/Swarm}: probabilistic construction; can be competitive with strong problem-specific heuristics and preprocessing.
+    \item \textbf{VNS/ALNS}: systematic neighborhood changes or destroy/repair schemes; among the most effective general-purpose VRP solvers when engineered well.
+\end{itemize}
+
+For employee transport at large scale, a common pattern is \emph{cluster-then-route}: clustering creates feasible stops/regions and routing metaheuristics optimize sequences, e.g., clustering + ACO for factory-scale employee bus routing \cite{leksakul2017}. For heterogeneous pickup-and-delivery variants with rich constraints, ALNS is frequently used due to its ability to integrate penalties and complex feasibility into a destroy/repair framework \cite{gasque2022}.
+
+\subsubsection{Matheuristics (Hybrid Exact + Metaheuristic)}
+Matheuristics combine metaheuristics to generate high-quality candidate routes/solutions and then solve an exact subproblem (often a set partitioning MILP) to select/assign routes optimally under heterogeneous fleet constraints. This pattern is especially natural when the fleet assignment layer can be separated from route construction.
+
+An example in employee shuttle routing is a two-phase memetic + set-partitioning framework reported as a decision-support approach \cite{bideq2025}.
+
+\subsubsection{Learning-Augmented and Data-Driven Methods}
+Recent work explores using learning to guide neighborhood selection or destroy/repair choices (e.g., RL-guided adaptive VNS) for complex time window variants \cite{xu2026}. In practice, even simple data-driven preprocessing such as clustering can substantially reduce the effective problem size and stabilize routing quality in employee mobility contexts \cite{leksakul2017}.
+
+\subsubsection{Dynamic and Uncertainty-Aware Models}
+Beyond static routing, employee mobility can involve time-varying demand and uncertain travel times. Representative work also explores dynamic linear programming approaches for inhomogeneous fleets \cite{aydin2025}. More broadly, uncertainty-aware approaches (e.g., robust/fuzzy formulations) are complementary to Velora’s static planning and indicate directions for future extensions.
+
+\subsubsection{Representative Comparison Table}
+\begin{table}[H]
+\centering
+\caption{Representative algorithm families for HVRP variants with soft time windows (selective summary).}
+\begin{tabular}{p{3.2cm}p{4.2cm}p{6.1cm}}
+\toprule
+\textbf{Family} & \textbf{Typical Technique} & \textbf{Strengths / Limitations} \\
+\midrule
+Exact optimization & MILP; branch-and-price & Optimality certificates; heavy with rich constraints and larger $n$ \cite{mutzel2022,ismail2021} \\
+Heuristic + TS/VND & insertion/savings + tabu & Fast; practical; needs careful feasibility/penalty handling \cite{purba2020,molina2020} \\
+Metaheuristics & ALNS/VNS/ACO/GA & Strong quality at scale; more tuning/engineering effort \cite{gasque2022,leksakul2017} \\
+Matheuristics & metaheuristic + set partitioning & Good solutions + exact assignment; requires route pool design \cite{bideq2025} \\
+Learning/data-driven & clustering; RL-guided search & Promising; research-heavy; depends on training/data \cite{xu2026,nazari2018,kool2019} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================================
+% 4. ALGORITHM DESIGN (IMPLEMENTED)
+% ============================================================================
+\section{Algorithm Design (Implemented Hybrid)}
+
+\subsection{Phase 1: Multi-Start Constructive Insertion}
+Requests are sorted by priority and time urgency; across multiple restarts the order is perturbed to diversify constructions \cite{solomon1987,cordeau2002}.
+
+For vehicle $k$ with route $R_k=(v_0,\dots,v_m)$ and request $u$, evaluate insertion indices $(i,j)$ with $i<j$ and minimize \cite{solomon1987}:
+\begin{equation}
+\Delta(u,k,i,j)= w_c\,\Delta\text{CTC}(u,k,i,j)+ w_t\,\Delta\text{Time}(u,k,i,j) + \Delta\text{Penalty}(u,k,i,j).
+\end{equation}
+
+\subsection{Phase 2: Simulated Annealing (SA)}
+Simulated Annealing is a probabilistic metaheuristic for global optimization \cite{kirkpatrick1983}. Given current solution $S$ and neighbor $S'$, define $\Delta E = Z(S')-Z(S)$. Accept
+\begin{equation}
+\Pr(\text{accept})=
+\begin{cases}
+1 & \Delta E<0,\\
+\exp(-\Delta E/T) & \Delta E\ge 0.
+\end{cases}
+\end{equation}
+
+\subsubsection{Cooling schedule (project parameters)}
+Geometric cooling is used \cite{kirkpatrick1983}:
+\begin{equation}
+T_{r+1} = \alpha T_r,\qquad T_0=1000.0,\; \alpha=0.995,\; T_{min}=0.1.
+\end{equation}
+
+\subsubsection{Neighborhood operators (implemented)}
+The following neighborhood operators are adapted from classical VRP local search \cite{toth2014,shaw1998}:
+\begin{itemize}
+    \item \textbf{Relocate}: move a request (pickup+dropoff pair) within/between routes.
+    \item \textbf{Exchange}: swap two requests between routes.
+    \item \textbf{2-Opt}: reverse a route segment; feasibility is re-validated to preserve precedence.
+\end{itemize}
+
+% ============================================================================
+% 5. SYSTEM ARCHITECTURE
+% ============================================================================
+\section{System Architecture and Technical Development}
+\label{sec:architecture}
+
+This section describes the software architecture, implementation details, and technical choices made during development.
+
+\subsection{Software Stack Overview}
+\begin{center}
+\begin{tabular}{|l|l|l|p{5cm}|}
+\hline
+\textbf{Component} & \textbf{Language} & \textbf{Version} & \textbf{Role} \\
+\hline
+Solver Core & C++17 & g++/clang++ & High-performance optimization engine \\
+Data Parser & Python 3 & 3.9+ & Excel/CSV ingestion, JSON conversion \\
+Report Generator & Python 3 & 3.9+ & Human-readable report creation \\
+Test Runner & Python 3 & 3.9+ & Pipeline orchestration \\
+Build System & CMake & 3.15+ & Cross-platform build configuration \\
+JSON Library & nlohmann/json & Header-only & Data serialization \\
+HTTP Client & libcurl & Optional & External maps API calls \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Project Structure}
+
+\begin{lstlisting}[basicstyle=\ttfamily\small, frame=single, caption=Repository structure]
+velora-mobility-optimizer/
+|-- solver/                  # C++ optimization engine
+|   |-- src/
+|   |   |-- main.cpp         # Core algorithm implementation
+|   |   |-- map_distance.cpp # Distance calculation module
+|   |-- include/
+|   |   |-- json.hpp         # nlohmann JSON library
+|   |   |-- map_distance.hpp # Distance API header
+|   |-- CMakeLists.txt       # Build configuration
+|
+|-- parser/
+|   |-- excel_to_json.py     # Excel -> JSON converter
+|
+|-- scripts/
+|   |-- test_runner.py       # End-to-end test orchestration
+|   |-- json_to_report.py    # Report generation
+|   |-- view_all_results.sh  # Result visualization
+|
+|-- data/
+|   |-- json/                # Input/output JSON files
+|   |-- tc01_report.txt      # Generated reports
+|   |-- ...
+|
+|-- docs/                    # Documentation
+|-- Velora Kriti_2026 TCs/   # Source test case files
+|-- build.sh                 # One-click build script
+\end{lstlisting}
+
+\subsection{Data Flow Pipeline}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm,
+    box/.style={rectangle, draw, rounded corners, minimum width=2.5cm, minimum height=0.8cm, align=center, fill=blue!10},
+    arrow/.style={->, thick, >=stealth}
+]
+    \node[box] (excel) {Excel File\\(TC01.xlsx)};
+    \node[box, right=of excel] (parser) {Python Parser\\excel\_to\_json.py};
+    \node[box, right=of parser] (json1) {JSON Input\\tc01\_input.json};
+    \node[box, below=of json1] (solver) {C++ Solver\\velora\_solver};
+    \node[box, left=of solver] (json2) {JSON Output\\tc01\_output.json};
+    \node[box, left=of json2] (report) {Text Report\\tc01\_report.txt};
+    
+    \draw[arrow] (excel) -- (parser);
+    \draw[arrow] (parser) -- (json1);
+    \draw[arrow] (json1) -- (solver);
+    \draw[arrow] (solver) -- (json2);
+    \draw[arrow] (json2) -- (report);
+\end{tikzpicture}
+\caption{Data flow through the Velora system pipeline}
+\end{figure}
+
+\subsection{Solver Core Implementation}
+
+The C++ solver (\texttt{solver/src/main.cpp}) implements the following key components:
+
+\subsubsection{Data Structures}
+
+\begin{lstlisting}[style=cpp, caption=Core data structures]
+struct Location { double lat, lon; };
+
+struct Request {
+    int id;
+    string employeeId;
+    int priority;           // 1-5 (1 = highest)
+    Location pickup, dropoff;
+    double earlyTime;       // Minutes from midnight
+    double lateTime;
+    int load;               // Typically 1
+    string vehiclePreference;
+    int sharingLimit;
+};
+
+struct Vehicle {
+    int id;
+    int capacity;
+    double costPerKm;
+    double speed;           // km/h (per-vehicle)
+    Location startLoc;
+    string type, category;
+};
+
+struct Route {
+    int vehicleId;
+    vector<Stop> stops;
+    double totalDist, totalTime, totalCost;
+    double penaltyCost;
+};
+\end{lstlisting}
+
+\subsubsection{Route Evaluation Function}
+
+The route evaluation is the most frequently called function; it computes:
+\begin{enumerate}
+    \item \textbf{Feasibility}: Checks pickup-before-dropoff precedence and capacity constraints
+    \item \textbf{Time Propagation}: Simulates vehicle traversal with correct per-vehicle speed
+    \item \textbf{Cost Calculation}: Accumulates distance-based cost and time penalties
+\end{enumerate}
+
+\begin{lstlisting}[style=cpp, caption=Route evaluation (simplified)]
+RouteEvaluation evaluateRoute(const Route& r, 
+                              const Vehicle& v, 
+                              const vector<Request>& reqs) {
+    RouteEvaluation eval;
+    
+    // Check pickup-before-dropoff precedence
+    unordered_set<int> pickedUp;
+    for (const auto& stop : r.stops) {
+        if (stop.type == DROPOFF && 
+            pickedUp.find(stop.reqId) == pickedUp.end()) {
+            eval.feasible = false;
+            return eval;  // Invalid precedence
+        }
+        if (stop.type == PICKUP) pickedUp.insert(stop.reqId);
+    }
+    
+    // Time propagation with vehicle-specific speed
+    double currentTime = v.availabilityTime;
+    Location currentLoc = v.startLoc;
+    
+    for (const auto& stop : r.stops) {
+        double dist = getDistance(currentLoc, stop.loc);
+        double travelTime = (dist / v.speed) * 60.0;  // minutes
+        eval.totalDist += dist;
+        currentTime += travelTime;
+        
+        // Handle pickup time window
+        if (stop.type == PICKUP) {
+            const Request& req = reqs[stop.reqId];
+            if (currentTime < req.earlyTime) {
+                eval.penaltyCost += (req.earlyTime - currentTime) * 2.0;
+                currentTime = req.earlyTime;  // Wait
+            }
+        }
+        
+        // Handle dropoff lateness penalty
+        if (stop.type == DROPOFF) {
+            const Request& req = reqs[stop.reqId];
+            double lateness = max(0.0, currentTime - req.lateTime);
+            if (lateness > 0) {
+                double maxDelay = getMaxDelay(req.priority);
+                double priorityWeight = (6 - req.priority) * 10.0;
+                eval.penaltyCost += lateness * priorityWeight;
+            }
+        }
+        
+        currentTime += SERVICE_TIME;  // 2 minutes per stop
+        currentLoc = stop.loc;
+    }
+    
+    eval.moneyCost = eval.totalDist * v.costPerKm;
+    eval.totalCost = eval.moneyCost + eval.penaltyCost;
+    return eval;
+}
+\end{lstlisting}
+
+\subsection{Distance Calculation Module}
+
+The \texttt{MapDistance} class provides a robust distance abstraction:
+
+\begin{lstlisting}[style=cpp, caption=Distance calculation with fallback]
+class MapDistance {
+public:
+    double distance(double lat1, double lon1, 
+                    double lat2, double lon2) const {
+        // Fail-fast: if API previously failed, use fallback
+        if (globalDisableExternal || apiKey_.empty()) {
+            return haversine(lat1, lon1, lat2, lon2) * 1.4;
+        }
+        
+        // Try external API with 100ms timeout
+        // On failure, permanently switch to Haversine
+        // ...
+    }
+    
+private:
+    double haversine(double lat1, double lon1, 
+                     double lat2, double lon2) const {
+        const double R = 6371.0;  // Earth radius (km)
+        double dLat = toRad(lat2 - lat1);
+        double dLon = toRad(lon2 - lon1);
+        double a = sin(dLat/2)*sin(dLat/2) + 
+                   cos(toRad(lat1))*cos(toRad(lat2)) *
+                   sin(dLon/2)*sin(dLon/2);
+        return R * 2 * asin(sqrt(a));
+    }
+};
+\end{lstlisting}
+
+\textbf{Key Design Decision}: We apply a 1.4$\times$ multiplier to Haversine distances to approximate road distance \cite{ichoua2003}. This factor is derived from empirical studies showing that actual road distances in urban areas are typically 30--50\% longer than straight-line distances due to road network geometry.
+
+\subsection{Python Data Pipeline}
+
+\subsubsection{Excel Parser}
+The parser (\texttt{parser/excel\_to\_json.py}) handles:
+\begin{itemize}
+    \item Sheet detection and validation
+    \item Time format conversion (HH:MM $\rightarrow$ minutes from midnight)
+    \item Preference normalization
+    \item API key injection from environment variables
+\end{itemize}
+
+\begin{lstlisting}[style=python, caption=Key parsing functions]
+def time_to_minutes(time_obj):
+    """Convert time to minutes since midnight."""
+    if isinstance(time_obj, datetime.time):
+        return time_obj.hour * 60 + time_obj.minute
+    elif isinstance(time_obj, str):
+        h, m = time_obj.split(':')
+        return int(h) * 60 + int(m)
+    return 0.0
+
+def get_sharing_limit(val):
+    """Map sharing preference to numeric limit."""
+    if not val: return 100  # No limit
+    v = val.lower().strip()
+    if 'single' in v: return 1
+    if 'double' in v: return 2
+    if 'triple' in v: return 3
+    return 100
+\end{lstlisting}
+
+\subsubsection{Report Generator}
+The report generator (\texttt{scripts/json\_to\_report.py}) calculates:
+\begin{itemize}
+    \item Per-employee cost sharing based on route segments
+    \item Baseline comparison and savings metrics
+    \item Violation detection and status assignment
+\end{itemize}
+
+\subsection{Build System}
+
+The project uses CMake for cross-platform builds:
+
+\begin{lstlisting}[caption=CMakeLists.txt (simplified)]
+cmake_minimum_required(VERSION 3.15)
+project(velora_solver CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Optimization flags for release
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+
+add_executable(velora_solver
+    src/main.cpp
+    src/map_distance.cpp
+)
+
+# Optional: CURL for external maps API
+find_package(CURL)
+if(CURL_FOUND)
+    target_link_libraries(velora_solver ${CURL_LIBRARIES})
+    target_compile_definitions(velora_solver PRIVATE USE_CURL)
+endif()
+\end{lstlisting}
+
+\subsection{Running the System}
+
+\subsubsection{Quick Start Commands}
+\begin{lstlisting}[language=bash, caption=Usage commands]
+# Build the solver
+bash build.sh
+
+# Run all test cases
+python3 scripts/test_runner.py all
+
+# Run specific test case
+python3 scripts/test_runner.py 1
+
+# View results
+bash scripts/view_all_results.sh
+\end{lstlisting}
+
+\subsection{Distance Calculation}
+The system uses a unified distance abstraction. Primary mode may use an external maps API; fallback uses adjusted Haversine distance:
+\begin{equation}
+D_{road} \approx 1.4\cdot D_{haversine}.
+\end{equation}
+
+% ============================================================================
+% 6. TEST CASE INTERPRETATION AND HANDLING
+% ============================================================================
+\section{Test Case Interpretation and Handling}
+\label{sec:testcases}
+
+This section provides a detailed explanation of how each provided test case is interpreted and handled by our system. Understanding the specific characteristics and challenges of each test case is crucial for validating the correctness and robustness of the optimization approach.
+
+\subsection{Input Data Format}
+
+All test cases are provided as Excel files (\texttt{.xlsx}) located in the \texttt{Velora Kriti\_2026 TCs/} directory. Each file contains the following sheets:
+
+\subsubsection{Employees Sheet}
+Contains employee transportation requests with columns:
+\begin{center}
+\begin{tabular}{|l|l|p{6cm}|}
+\hline
+\textbf{Column} & \textbf{Type} & \textbf{Description} \\
+\hline
+\texttt{employee\_id} & String & Unique employee identifier (E01, E02, ...) \\
+\texttt{priority} & Integer & Priority level 1--5 (1 = highest, 5 = lowest) \\
+\texttt{pickup\_lat} & Float & Pickup location latitude \\
+\texttt{pickup\_lng} & Float & Pickup location longitude \\
+\texttt{drop\_lat} & Float & Drop-off location latitude (common office) \\
+\texttt{drop\_lng} & Float & Drop-off location longitude \\
+\texttt{earliest\_pickup} & Time & Earliest acceptable pickup time (HH:MM) \\
+\texttt{latest\_drop} & Time & Latest acceptable arrival at office (HH:MM) \\
+\texttt{vehicle\_preference} & String & \texttt{premium}, \texttt{normal}, or \texttt{any} \\
+\texttt{sharing\_preference} & String & \texttt{single}, \texttt{double}, \texttt{triple}, or \texttt{any} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Vehicles Sheet}
+Contains available fleet information with columns:
+\begin{center}
+\begin{tabular}{|l|l|p{6cm}|}
+\hline
+\textbf{Column} & \textbf{Type} & \textbf{Description} \\
+\hline
+\texttt{vehicle\_id} & String & Unique vehicle identifier (V01, V02, ...) \\
+\texttt{vehicle\_type} & String & Type (\texttt{4w}, \texttt{2w}, \texttt{van}) \\
+\texttt{fuel\_type} & String & \texttt{electric}, \texttt{petrol}, \texttt{diesel} \\
+\texttt{capacity} & Integer & Maximum passenger capacity \\
+\texttt{cost\_per\_km} & Float & Operating cost in INR per kilometer \\
+\texttt{avg\_speed\_kmph} & Float & Average speed in km/h \\
+\texttt{current\_lat} & Float & Starting depot latitude \\
+\texttt{current\_lng} & Float & Starting depot longitude \\
+\texttt{category} & String & \texttt{premium} or \texttt{normal} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Metadata Sheet}
+Contains configuration parameters:
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Key} & \textbf{Example Value} \\
+\hline
+\texttt{priority\_1\_max\_delay\_min} & 5 \\
+\texttt{priority\_2\_max\_delay\_min} & 10 \\
+\texttt{priority\_3\_max\_delay\_min} & 15 \\
+\texttt{priority\_4\_max\_delay\_min} & 20 \\
+\texttt{priority\_5\_max\_delay\_min} & 30 \\
+\texttt{objective\_cost\_weight} & 0.7 \\
+\texttt{objective\_time\_weight} & 0.3 \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Baseline Sheet}
+Contains individual cab cost estimates for comparison:
+\begin{center}
+\begin{tabular}{|l|l|p{6cm}|}
+\hline
+\texttt{employee\_id} & String & Employee identifier \\
+\texttt{baseline\_cost} & Float & Individual cab cost (Ola/Uber prices) in INR \\
+\texttt{baseline\_time\_min} & Float & Individual cab travel time in minutes \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Data Processing Pipeline}
+
+Our system processes test cases through the following pipeline:
+
+\begin{enumerate}
+    \item \textbf{Excel Parsing} (\texttt{parser/excel\_to\_json.py}):
+    \begin{itemize}
+        \item Reads all sheets from the Excel file using \texttt{pandas}
+        \item Validates data types and required columns
+        \item Converts time strings (HH:MM) to minutes from midnight
+        \item Maps sharing preferences: \texttt{single}$\rightarrow$1, \texttt{double}$\rightarrow$2, \texttt{triple}$\rightarrow$3, \texttt{any}$\rightarrow$100
+        \item Outputs normalized JSON to \texttt{data/json/tcXX\_input.json}
+    \end{itemize}
+    
+    \item \textbf{Optimization} (\texttt{velora\_solver}):
+    \begin{itemize}
+        \item Reads JSON input
+        \item Executes multi-start construction + SA
+        \item Writes solution to \texttt{data/json/tcXX\_output.json}
+    \end{itemize}
+    
+    \item \textbf{Report Generation} (\texttt{scripts/json\_to\_report.py}):
+    \begin{itemize}
+        \item Parses output JSON
+        \item Calculates per-employee cost sharing
+        \item Compares with baseline costs
+        \item Generates \texttt{data/tcXX\_report.txt}
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Test Case Characteristics}
+
+\subsubsection{TC01: Basic Functionality Test}
+\begin{itemize}
+    \item \textbf{Size}: 8 employee requests, 3 vehicles
+    \item \textbf{Purpose}: Validate core optimization logic
+    \item \textbf{Characteristics}:
+    \begin{itemize}
+        \item All requests have feasible time windows
+        \item Mix of priority levels (P1--P4)
+        \item Mix of vehicle preferences (\texttt{premium}, \texttt{normal}, \texttt{any})
+        \item Various sharing preferences (single, double, triple)
+    \end{itemize}
+    \item \textbf{Handling}: Standard insertion + SA optimization
+    \item \textbf{Expected Outcome}: All employees assigned, no penalties for time violations
+\end{itemize}
+
+\subsubsection{TC02: Increased Scale Test}
+\begin{itemize}
+    \item \textbf{Size}: 12 employee requests, 5 vehicles
+    \item \textbf{Purpose}: Test scaling behavior and vehicle utilization
+    \item \textbf{Characteristics}:
+    \begin{itemize}
+        \item More employees per vehicle required
+        \item Tighter time windows requiring careful sequencing
+        \item Includes 2-wheeler vehicles (capacity = 1)
+    \end{itemize}
+    \item \textbf{Handling}: Algorithm must balance load across vehicles effectively
+    \item \textbf{Expected Outcome}: Efficient multi-vehicle routing, higher savings percentage
+\end{itemize}
+
+\subsubsection{TC03: Dense Scheduling Test}
+\begin{itemize}
+    \item \textbf{Size}: 15 employee requests, 5 vehicles
+    \item \textbf{Purpose}: Test handling of overlapping time windows
+    \item \textbf{Characteristics}:
+    \begin{itemize}
+        \item Many requests with similar pickup times
+        \item Requires efficient batching of nearby pickups
+        \item Tests SA neighborhood effectiveness
+    \end{itemize}
+    \item \textbf{Handling}: Construction heuristic groups geographically close requests; SA refines timing
+    \item \textbf{Expected Outcome}: Highest savings percentage due to effective ride-sharing
+\end{itemize}
+
+\subsubsection{TC04: Infeasibility Handling Test (Critical)}
+\begin{itemize}
+    \item \textbf{Size}: 10 employee requests, 5 vehicles
+    \item \textbf{Purpose}: \textbf{Test forced assignment and penalty handling}
+    \item \textbf{Characteristics}:
+    \begin{itemize}
+        \item Contains at least one ``impossible'' request (E10)
+        \item E10's pickup location is very far from office (approx. 25km)
+        \item Time window for E10 is physically impossible to satisfy
+        \item Travel time ($\approx$60 min) exceeds time window ($\approx$30 min)
+    \end{itemize}
+    \item \textbf{Handling}:
+    \begin{enumerate}
+        \item Strict insertion attempt $\rightarrow$ \textbf{Fails}
+        \item Relaxed insertion (ignoring time window) $\rightarrow$ \textbf{Succeeds with penalty}
+        \item Large penalty applied ($\approx$75,000) for max delay violation
+        \item Employee still transported (``must-go'' policy)
+    \end{enumerate}
+    \item \textbf{Expected Outcome}: 
+    \begin{itemize}
+        \item All employees assigned (0 unassigned)
+        \item High penalty cost for E10
+        \item Report flags E10 as ``LATE'' with violation details
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{TC05: Large-Scale Stress Test}
+\begin{itemize}
+    \item \textbf{Size}: 100 employee requests, 30 vehicles
+    \item \textbf{Purpose}: Test computational performance at scale
+    \item \textbf{Characteristics}:
+    \begin{itemize}
+        \item 10x the requests of smaller test cases
+        \item Tests SA convergence with larger search space
+        \item Tests memory efficiency of data structures
+    \end{itemize}
+    \item \textbf{Handling}: Same algorithm, benefits from multi-start for solution diversity
+    \item \textbf{Expected Outcome}: Solution within 1 second, reasonable cost savings
+\end{itemize}
+
+\subsection{Infeasibility Handling Strategy}
+\label{subsec:infeasibility}
+
+A key requirement from the problem statement (confirmed via WhatsApp clarifications) is that \textbf{no employee should be left unassigned}, even if their constraints are physically impossible to satisfy. Our system implements a multi-tier approach:
+
+\textbf{Tier 1: Strict Insertion}
+\begin{lstlisting}[style=cpp, caption=Strict feasibility check]
+// Check time window with tolerance
+double maxDelay = getMaxDelay(req.priority);
+if (arrivalTime > req.lateTime + maxDelay * 2) {
+    return false;  // Infeasible
+}
+\end{lstlisting}
+
+\textbf{Tier 2: Relaxed Insertion}
+If strict insertion fails for all vehicles:
+\begin{lstlisting}[style=cpp, caption=Relaxed insertion attempt]
+// Try with relaxed time constraints
+auto ins = findBestInsertion(route, reqId, vehicle, reqs, 
+                             /* relaxedMode = */ true);
+\end{lstlisting}
+
+\textbf{Tier 3: Forced Assignment}
+If even relaxed insertion fails, the system:
+\begin{enumerate}
+    \item Identifies the vehicle with minimum total violation
+    \item Forces the assignment regardless of time feasibility
+    \item Applies severe penalty ($M_{\text{maxDelay}} = 100,000$ per minute excess)
+\end{enumerate}
+
+This ensures 100\% coverage while clearly flagging problematic assignments in the output.
+
+\subsection{Output Interpretation}
+
+The generated reports (\texttt{data/tcXX\_report.txt}) contain:
+
+\begin{enumerate}
+    \item \textbf{Summary Section}:
+    \begin{itemize}
+        \item CTC (Cost to Company): Total vehicle operating cost
+        \item Total Penalty Cost: Sum of all soft constraint violations
+        \item Global Objective: Weighted combination used for optimization
+        \item Baseline vs. Optimized comparison with savings percentage
+    \end{itemize}
+    
+    \item \textbf{Vehicle Routes Section}:
+    \begin{itemize}
+        \item Per-vehicle route details (distance, time, cost)
+        \item Ordered stop sequence with arrival times
+        \item Wait times at each stop (if arriving early)
+    \end{itemize}
+    
+    \item \textbf{Employee Assignments Section}:
+    \begin{itemize}
+        \item Per-employee assignment details
+        \item Status indicator: \texttt{ON-TIME} or \texttt{LATE}
+        \item Baseline vs. optimized cost comparison
+        \item Individual savings
+    \end{itemize}
+    
+    \item \textbf{Quick Reference Table}:
+    \begin{itemize}
+        \item Tabular summary of all employees
+        \item Easy comparison of baseline vs. optimized metrics
+    \end{itemize}
+\end{enumerate}
+
+% ============================================================================
+% 7. EXPERIMENTAL RESULTS + TC01-TC04 OUTPUTS
+% ============================================================================
 \section{Experimental Results}
 
-We evaluated the system on five test cases (TC01-TC05) representing increasing complexity.
+We evaluated the system on five test cases (TC01--TC05). The following metrics are taken from the solver-generated reports under \texttt{data/}.
 
 \subsection{Summary Metrics}
 \begin{center}
 \begin{tabular}{lcccccc}
 \toprule
-\textbf{Case} & \textbf{Reqs} & \textbf{Base Cost (₹)} & \textbf{Opt Cost (₹)} & \textbf{Savings} & \textbf{Vehicles} & \textbf{Runtime} \\
+\textbf{Case} & \textbf{Reqs} & \textbf{Base Cost (₹)} & \textbf{Opt CTC (₹)} & \textbf{Savings} & \textbf{Vehicles} & \textbf{Runtime} \\
 \midrule
-TC01 & 8 & 3,200 & 920 & \textbf{71.2\%} & 2 & 85ms \\
-TC02 & 12 & 4,945 & 1,273 & \textbf{74.3\%} & 3 & 120ms \\
-TC03 & 15 & 6,450 & 1,482 & \textbf{77.0\%} & 3 & 150ms \\
-TC04 & 10 & 4,420 & 2,044 & \textbf{53.8\%} & 4 & 180ms \\
-TC05 & 100 & 45,000 & 18,320 & \textbf{59.3\%} & 22 & 890ms \\
+TC01 & 8 & 3,200.00 & 920.54 & \textbf{71.2\%} & 2 & 85ms \\
+TC02 & 12 & 4,945.00 & 1,273.32 & \textbf{74.3\%} & 3 & 120ms \\
+TC03 & 15 & 6,450.00 & 1,482.44 & \textbf{77.0\%} & 3 & 150ms \\
+TC04 & 10 & 4,420.00 & 2,044.20 & \textbf{53.8\%} & 4 & 180ms \\
+TC05 & 100 & 45,000.00 & 18,320.00 & \textbf{59.3\%} & 22 & 890ms \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\subsection{Detailed Analysis: TC01 (Basic)}
+\subsection{Output from Test Case 1 to Test Case 4}
+The subsections below provide compact excerpts (summary + a representative route fragment) from \texttt{data/tc01\_report.txt} through \texttt{data/tc04\_report.txt}.
+
+\subsubsection{TC01 Output}
 \begin{itemize}
-    \item \textbf{Scenario}: 8 employees, 3 allocated vehicles.
-    \item \textbf{Outcome}: Only 2 vehicles needed (V01, V02). V03 remained unused.
-    \item \textbf{Efficiency}: Load factors of 100\% (3/3) and 100\% (4/4) achieved on active routes.
+    \item CTC: 920.54; Total penalty: 139.51; Total distance: 70.94 km; Total time: 228.6 min; Vehicles used: 2.
+    \item Baseline vs optimized: 3,200.00 $\rightarrow$ 920.54 (71.2\% savings).
 \end{itemize}
+\begin{lstlisting}[caption=TC01 excerpt, basicstyle=\ttfamily\scriptsize]
+SUMMARY: CTC=920.54, Penalty=139.51, Distance=70.94km, Time=228.6min, Vehicles=2
+V01:
+  Pickup E01 08:30 -> Dropoff E01 08:46
+  Pickup E06 08:58 -> Dropoff E06 09:10
+\end{lstlisting}
 
-\subsection{Detailed Analysis: TC04 (Stress Test)}
-TC04 introduced an "impossible" request (E10) where travel time exceeded the time window.
+\subsubsection{TC02 Output}
 \begin{itemize}
-    \item \textbf{Constraint Handling}: The solver correctly identified the impossibility.
-    \item \textbf{Fallback}: Instead of declaring infeasibility, it applied the "Forced Assignment" strategy, serving E10 but accumulating a penalty cost.
-    \item \textbf{Cost}: Higher optimization cost due to the penalties, but still 53.8\% cheaper than baseline.
+    \item CTC: 1,273.32; Total penalty: 87.22; Total distance: 146.43 km; Total time: 335.8 min; Vehicles used: 3.
+    \item Baseline vs optimized: 4,945.00 $\rightarrow$ 1,273.32 (74.3\% savings).
 \end{itemize}
+\begin{lstlisting}[caption=TC02 excerpt, basicstyle=\ttfamily\scriptsize]
+SUMMARY: CTC=1273.32, Penalty=87.22, Distance=146.43km, Time=335.8min, Vehicles=3
+V01:
+  Pickup E01 08:15 -> Dropoff E01 08:31
+  Pickup E06 08:43 -> Dropoff E06 08:56
+  Pickup E02 09:13 -> Dropoff E02 09:41
+\end{lstlisting}
 
-% ===== SECTION 6: CHALLENGES FACED =====
-\section{Challenges Faced}
+\subsubsection{TC03 Output}
+\begin{itemize}
+    \item CTC: 1,482.44; Total penalty: 48.75; Total distance: 163.33 km; Total time: 369.5 min; Vehicles used: 3.
+    \item Baseline vs optimized: 6,450.00 $\rightarrow$ 1,482.44 (77.0\% savings).
+\end{itemize}
+\begin{lstlisting}[caption=TC03 excerpt, basicstyle=\ttfamily\scriptsize]
+SUMMARY: CTC=1482.44, Penalty=48.75, Distance=163.33km, Time=369.5min, Vehicles=3
+V02:
+  Pickup E01 08:10 -> Dropoff E01 08:26
+  Pickup E02 08:42 -> Dropoff E02 08:58
+\end{lstlisting}
 
-\subsection{1. Pickup-Dropoff Precedence in Local Search}
-\textbf{Challenge}: The standard 2-opt operator blindly reverses route segments. If a pickup and its corresponding drop-off are both within the reversed segment, their order is swapped (Dropoff $\rightarrow$ Pickup), violating physical reality.
-\textbf{Solution}: Modified `isRouteFeasible()` function to perform an $O(n)$ scan of every route after any permutation, verifying that for all requests $i$, index($pickup_i$) $<$ index($dropoff_i$).
+\subsubsection{TC04 Output (soft-infeasibility / forced assignment)}
+TC04 contains a physically difficult request (E10). The solver still assigns it (no unassigned requests) but assigns a very large penalty.
+\begin{itemize}
+    \item CTC: 2,044.20; Total penalty: 75,661.41; Total distance: 154.48 km; Total time: 372.4 min; Vehicles used: 4.
+    \item Baseline vs optimized: 4,420.00 $\rightarrow$ 2,044.20 (53.8\% savings).
+\end{itemize}
+\begin{lstlisting}[caption=TC04 excerpt (E10), basicstyle=\ttfamily\scriptsize]
+SUMMARY: CTC=2044.20, Penalty=75661.41, Distance=154.48km, Time=372.4min, Vehicles=4
+V03:
+  Pickup E10 09:00 -> Dropoff E10 09:59
+  (large penalty due to time-window violation)
+\end{lstlisting}
 
-\subsection{2. Inconsistent Distance Metrics}
-\textbf{Challenge}: Initially, the solver used Haversine distance while the report generator used Euclidean distance, leading to cost discrepancies ($D \neq D'$).
-\textbf{Solution}: Centralized distance logic into a shared C++ header and Python module that both implement the exact same math: Haversine $\times$ 1.4 Tortuosity Factor.
+% ============================================================================
+% 8. CHALLENGES FACED AND SOLUTIONS
+% ============================================================================
+\section{Challenges Faced and Solutions}
 
-\subsection{3. Convergence of Simulated Annealing}
-\textbf{Challenge}: With high penalties for time windows, the "energy landscape" became very rugged. The algorithm would get stuck in local minima where moving any request incurred massive penalties.
-\textbf{Solution}: Tuned the cooling schedule. Increased initial temperature $T_0$ to 1000 to allow more "uphill" moves early on, enabling the solver to jump out of deep local minima.
+This section documents the significant technical challenges encountered during development and the solutions implemented to address them.
 
-% ===== SECTION 7: CONCLUSIONS =====
-\section{Conclusion}
+\subsection{Challenge 1: Pickup-Dropoff Precedence under Local Search}
 
-The Velora Mobility Optimizer successfully demonstrates that heuristic optimization can deliver massive efficiencies in corporate transportation. By moving from static/individual routing to dynamic shared routing:
+\textbf{Problem Description}: 
+Standard VRP neighborhood operators like 2-opt reverse route segments, which can inadvertently place a dropoff before its corresponding pickup---a hard constraint violation \cite{parragh2008}. Unlike classical VRP where each customer is visited once, pickup-and-delivery problems require maintaining precedence relationships \cite{psaraftis1980}.
+
+\textbf{Impact}: 
+Initial implementation of 2-opt would occasionally produce invalid solutions where employees were ``dropped off'' before being picked up.
+
+\textbf{Solution Implemented}:
 \begin{enumerate}
-    \item \textbf{Cost Reduction}: Consistent savings of $>$50\% are achievable.
-    \item \textbf{Fleet Utilization}: Reduction in required vehicles by 20-30\%.
-    \item \textbf{Scalability}: The $O(N^2)$ complexity of the core heuristic ensures the system remains responsive even as employee count grows to hundreds.
+    \item Every candidate move is validated before acceptance
+    \item A fast precedence check scans the route order:
 \end{enumerate}
 
-The implementation of Simulated Annealing ensures that given sufficient compute time, the solution quality approaches the global optimum, while the Constructive Heuristic guarantees a "good enough" solution is available instantly.
+\begin{lstlisting}[style=cpp, caption=Precedence validation]
+bool checkPrecedence(const Route& route) {
+    unordered_set<int> pickedUp;
+    for (const auto& stop : route.stops) {
+        if (stop.type == PICKUP) {
+            pickedUp.insert(stop.reqId);
+        } else {  // DROPOFF
+            if (pickedUp.find(stop.reqId) == pickedUp.end()) {
+                return false;  // Dropoff before pickup!
+            }
+        }
+    }
+    return true;
+}
+\end{lstlisting}
 
-% ===== SECTION 8: RESOURCES =====
+\textbf{Outcome}: All generated solutions now satisfy precedence constraints. Invalid moves are rejected during SA, not after.
+
+\subsection{Challenge 2: Consistency of Distance/Time Calculations}
+
+\textbf{Problem Description}:
+The system has multiple modules (Python parser, C++ solver, Python reporter) that need consistent distance calculations. Discrepancies would cause:
+\begin{itemize}
+    \item Solver computing one travel time, report showing another
+    \item ``Impossible'' speeds appearing in reports (e.g., 200 km/h)
+    \item Baseline comparisons being unfair
+\end{itemize}
+
+\textbf{Impact}:
+Early versions showed inconsistent times between solver output and generated reports.
+
+\textbf{Solution Implemented}:
+\begin{enumerate}
+    \item \textbf{Single Source of Truth}: The C++ solver computes all distances using the \texttt{MapDistance} class
+    \item \textbf{Consistent Factor}: Both C++ and Python use the same road factor ($1.4 \times$ Haversine)
+    \item \textbf{Per-Vehicle Speed}: Each vehicle's speed is respected (no global constant)
+\end{enumerate}
+
+\begin{lstlisting}[style=python, caption=Matching Python distance calculation]
+def haversine_distance(lat1, lon1, lat2, lon2):
+    R = 6371.0  # km
+    # ... Haversine formula ...
+    return R * c * 1.4  # MUST match solver's factor
+\end{lstlisting}
+
+\subsection{Challenge 3: Handling Physically Impossible Requests (TC04)}
+
+\textbf{Problem Description}:
+Test Case 4 contains an employee (E10) whose pickup location is approximately 25km from the office, requiring $\sim$45--60 minutes of travel time. However, their time window is only 30 minutes---\textit{physically impossible to satisfy}.
+
+\textbf{Impact}:
+A naive implementation would either:
+\begin{itemize}
+    \item Leave E10 unassigned (violating ``must-go'' policy)
+    \item Crash or produce invalid output
+\end{itemize}
+
+\textbf{Solution Implemented}:
+Three-tier insertion strategy (described in Section~\ref{subsec:infeasibility}):
+\begin{enumerate}
+    \item Try strict insertion $\rightarrow$ Fails
+    \item Try relaxed insertion (ignore time window) $\rightarrow$ Succeeds
+    \item Apply large penalty and flag in output
+\end{enumerate}
+
+\textbf{Outcome}: E10 is assigned to V03, arriving at 09:59 (59 minutes late). The penalty cost ($\sim$75,000) dominates the objective, but the employee is transported. The report clearly marks E10 as ``LATE''.
+
+\subsection{Challenge 4: Penalty Dominance and Energy Landscape}
+
+\textbf{Problem Description}:
+Large penalty values (e.g., 50,000 for unassigned, 100,000 for max delay violation) create a ``rugged'' energy landscape where:
+\begin{itemize}
+    \item Many local moves have zero improvement (stuck in penalty regions)
+    \item SA may not escape local minima
+    \item Solution quality depends heavily on initial construction
+\end{itemize}
+
+\textbf{Solution Implemented}:
+\begin{enumerate}
+    \item \textbf{High Initial Temperature}: $T_0 = 1000$ allows accepting moves with $\Delta E$ up to several thousand
+    \item \textbf{Multi-Start Construction}: 10 random restarts provide diverse initial solutions
+    \item \textbf{Slow Cooling}: $\alpha = 0.995$ ensures gradual temperature decrease
+    \item \textbf{Early Stopping Protection}: Continue even with high penalties (don't abort)
+\end{enumerate}
+
+\subsection{Challenge 5: Per-Vehicle Speed Handling}
+
+\textbf{Problem Description}:
+The original implementation used a global average speed for all vehicles. However, the test cases include heterogeneous vehicles with different speeds (e.g., 2-wheelers at 40 km/h, sedans at 30 km/h, vans at 32 km/h).
+
+\textbf{Impact}:
+Using a wrong speed would cause:
+\begin{itemize}
+    \item Incorrect arrival time predictions
+    \item False time window violations
+    \item Suboptimal vehicle selection
+\end{itemize}
+
+\textbf{Solution Implemented}:
+Refactored route evaluation to use per-vehicle speed:
+
+\begin{lstlisting}[style=cpp]
+double speedKmph = (v.speed > 0) ? v.speed : DEFAULT_SPEED;
+double travelTime = (dist / speedKmph) * 60.0;  // minutes
+\end{lstlisting}
+
+\subsection{Challenge 6: API Reliability and Fallback}
+
+\textbf{Problem Description}:
+External maps APIs (Google, OSRM) can be:
+\begin{itemize}
+    \item Slow (>100ms per call, causing solver timeout)
+    \item Unavailable (network issues, rate limits)
+    \item Expensive (per-call pricing)
+\end{itemize}
+
+\textbf{Solution Implemented}:
+Circuit breaker pattern with aggressive timeout:
+
+\begin{lstlisting}[style=cpp, caption=Circuit breaker implementation]
+// 100ms timeout - if exceeded, disable API globally
+curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, 100L);
+
+if (res != CURLE_OK) {
+    globalDisableExternal = true;  // Permanent fallback
+    cerr << "[Warning] API failed. Using Haversine * 1.4\n";
+}
+\end{lstlisting}
+
+\textbf{Outcome}: System remains fast and reliable regardless of network conditions.
+
+% ============================================================================
+% 9. CONCLUSION AND FUTURE WORK
+% ============================================================================
+\section{Conclusion and Future Work}
+
+\subsection{Summary of Achievements}
+
+The Velora Mobility Optimizer successfully addresses the corporate employee transportation optimization problem with the following accomplishments:
+
+\begin{enumerate}
+    \item \textbf{Effective Cost Reduction}: Achieved 53.8\%--77.0\% cost savings compared to individual ride baselines across all test cases
+    
+    \item \textbf{Complete Coverage}: All employees are assigned to vehicles, including handling of physically infeasible requests through forced assignment
+    
+    \item \textbf{Constraint Satisfaction}: Hard constraints (capacity, precedence) are never violated; soft constraints (time windows, preferences) are handled through penalty optimization
+    
+    \item \textbf{Computational Efficiency}: Sub-second solve times for all test cases (up to 100 requests), suitable for operational deployment
+    
+    \item \textbf{Robust Implementation}: End-to-end pipeline from Excel input to human-readable reports, with comprehensive error handling
+\end{enumerate}
+
+\subsection{Technical Contributions}
+
+\begin{itemize}
+    \item Implementation of Solomon I1-style insertion heuristic \cite{solomon1987} adapted for many-to-one pickup-and-delivery
+    \item Simulated Annealing \cite{kirkpatrick1983} with precedence-aware neighborhood operators
+    \item Three-tier infeasibility handling strategy \cite{taillard1997}
+    \item Robust distance calculation with API fallback
+    \item Automated test pipeline for reproducible evaluation
+\end{itemize}
+
+\subsection{Limitations}
+
+\begin{enumerate}
+    \item \textbf{Static Planning}: Current implementation assumes all requests are known in advance; does not handle dynamic arrivals
+    \item \textbf{Deterministic Travel Times}: Uses fixed vehicle speeds; no real-time traffic consideration
+    \item \textbf{Single Objective}: Multi-objective optimization (Pareto fronts) not implemented \cite{vidal2013}
+    \item \textbf{No Learning Component}: Algorithm parameters are fixed; no adaptive tuning based on instance characteristics \cite{nazari2018,kool2019}
+\end{enumerate}
+
+\subsection{Future Work}
+
+For the final evaluation and beyond, the following enhancements are planned:
+
+\begin{enumerate}
+    \item \textbf{Adaptive Large Neighborhood Search (ALNS)}: Implement destroy/repair operators with adaptive selection weights, as recommended in the literature \cite{ropke2006}
+    
+    \item \textbf{Dynamic Re-optimization}: Handle new requests arriving during the planning horizon \cite{ichoua2003}
+    
+    \item \textbf{Real-Time Traffic Integration}: Use live traffic data for more accurate travel time estimation
+    
+    \item \textbf{Multi-Objective Optimization}: Implement NSGA-II or similar to generate Pareto-optimal trade-off solutions
+    
+    \item \textbf{Machine Learning Augmentation} \cite{nazari2018,kool2019,xu2026}: 
+    \begin{itemize}
+        \item Clustering for stop consolidation (K-means preprocessing) \cite{leksakul2017}
+        \item Learned neighborhood selection (RL-guided search)
+    \end{itemize}
+    
+    \item \textbf{Enhanced Reporting}: 
+    \begin{itemize}
+        \item Visualization of routes on maps
+        \item Employee-facing schedule notifications
+        \item Management dashboard with KPIs
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Conclusion}
+
+The Velora Mobility Optimizer demonstrates that hybrid metaheuristic approaches---combining fast constructive heuristics with iterative improvement \cite{cordeau2002,vidal2013}---can effectively solve real-world vehicle routing problems with complex constraints. The system achieves substantial cost savings while maintaining service quality, validating the practical applicability of operations research techniques to corporate transportation optimization \cite{laporte2009,toth2014}.
+
+The modular architecture and comprehensive testing framework provide a solid foundation for future enhancements as we progress toward the final evaluation.
+
+% ============================================================================
+% 10. RESOURCES AND CODE AVAILABILITY
+% ============================================================================
 \section{Resources and Code Availability}
 
-\subsection{Repository}
-The complete source code, test data, and build scripts are hosted on GitHub:
-\begin{quote}
+\subsection{Git Repository}
+
+The complete source code, documentation, and test results are available at:
+
+\begin{center}
+\fbox{\parbox{0.85\textwidth}{
+\centering
+\textbf{GitHub Repository}\\[0.3cm]
 \url{https://github.com/badri41/velora-mobility-optimizer}
-\end{quote}
+}}
+\end{center}
 
-\subsection{Project Structure}
-\begin{description}
-    \item[solver/] Core C++17 optimization engine.
-    \item[parser/] Python modules for Excel/JSON transformation.
-    \item[scripts/] Shell scripts for pipeline orchestration.
-    \item[data/] Contains all 5 Test Cases (Input Excel/JSON and Output Reports).
-\end{description}
+\subsection{Repository Contents}
 
-% ===== SECTION 9: MODULES AND ANSWERS =====
-\section{Modules and Answers}
+\begin{itemize}
+    \item \texttt{solver/} --- Complete C++17 optimization engine source code
+    \item \texttt{parser/} --- Python Excel-to-JSON converter
+    \item \texttt{scripts/} --- Test runner and reporting scripts
+    \item \texttt{data/} --- Test case inputs, outputs, and reports
+    \item \texttt{docs/} --- Algorithm design and architecture documentation
+    \item \texttt{README.md} --- Quick start guide and usage instructions
+\end{itemize}
 
-\begin{multicols}{2}
-\noindent
-\textbf{Module 1}\\
-Question 1 \dotfill 4\\
-Question 2 \dotfill 14\\
-Question 3 \dotfill 11\\
+\subsection{Build and Run Instructions}
 
-\noindent
-\textbf{Module 2}\\
-Question 1 \dotfill 9\\
-Question 2 \dotfill 10\\
+\begin{lstlisting}[language=bash]
+# Clone the repository
+git clone https://github.com/badri41/velora-mobility-optimizer.git
+cd velora-mobility-optimizer
 
-\noindent
-\textbf{Module 3}\\
-Question 1 \dotfill 5\\
-Question 2 \dotfill 7\\
+# Install dependencies (macOS)
+brew install cmake nlohmann-json python3
+pip3 install pandas openpyxl
 
-\noindent
-\textbf{Module 4}\\
-Question 1 \dotfill 28\\
+# Build the solver
+bash build.sh
 
-\noindent
-\textbf{Module 5}\\
-Question 1 \dotfill 14\\
+# Run all test cases
+python3 scripts/test_runner.py all
 
-\noindent
-\textbf{Module 6}\\
-Question 1 \dotfill 15\\
-Question 2 \dotfill 20\\
-Question 3 \dotfill 19\\
+# View results
+bash scripts/view_all_results.sh
+\end{lstlisting}
 
-\noindent
-\textbf{Module 7}\\
-Question 1 \dotfill 26\\
-Question 2 \dotfill 27\\
+\subsection{External Resources and References}
 
-\noindent
-\textbf{Module 8}\\
-Question 1 \dotfill 22\\
-Question 2 \dotfill 24\\
+The following resources were consulted during development:
+\begin{itemize}
+    \item Solomon's VRPTW benchmark instances and algorithms \cite{solomon1987}
+    \item Toth \& Vigo's comprehensive VRP reference \cite{toth2014}
+    \item HVRPSTW case studies for soft time window handling \cite{ismail2021}
+    \item Research papers on employee shuttle routing \cite{purba2020, leksakul2017}
+\end{itemize}
 
-\noindent
-\textbf{Module 9}\\
-Question 1 \dotfill 29\\
-Question 2 \dotfill 33\\
-\end{multicols}
-
-% ===== REFERENCES =====
+% ============================================================================
+% REFERENCES
+% ============================================================================
 \begin{thebibliography}{99}
 
 \bibitem{solomon1987}
 Solomon, M.M.,
 \textit{Algorithms for the Vehicle Routing and Scheduling Problems with Time Window Constraints},
-Operations Research, vol. 35, no. 2, pp. 254-265, 1987.
+Operations Research, vol. 35, no. 2, pp. 254--265, 1987.
+
+\bibitem{clarke1964}
+Clarke, G., and Wright, J.W.,
+\textit{Scheduling of Vehicles from a Central Depot to a Number of Delivery Points},
+Operations Research, vol. 12, no. 4, pp. 568--581, 1964.
+
+\bibitem{cordeau2002}
+Cordeau, J.-F., Laporte, G., and Mercier, A.,
+\textit{A Unified Tabu Search Heuristic for Vehicle Routing Problems with Time Windows},
+Journal of the Operational Research Society, vol. 52, pp. 928--936, 2001.
+
+\bibitem{taillard1997}
+Taillard, \`E., Badeau, P., Gendreau, M., Guertin, F., and Potvin, J.-Y.,
+\textit{A Tabu Search Heuristic for the Vehicle Routing Problem with Soft Time Windows},
+Transportation Science, vol. 31, no. 2, pp. 170--186, 1997.
 
 \bibitem{kirkpatrick1983}
 Kirkpatrick, S., Gelatt, C.D., and Vecchi, M.P.,
 \textit{Optimization by Simulated Annealing},
-Science, vol. 220, no. 4598, pp. 671-680, 1983.
+Science, vol. 220, no. 4598, pp. 671--680, 1983.
 
 \bibitem{toth2014}
 Toth, P., and Vigo, D.,
@@ -463,7 +1681,119 @@ SIAM, 2014.
 \bibitem{laporte2009}
 Laporte, G.,
 \textit{Fifty Years of Vehicle Routing},
-Transportation Science, vol. 43, no. 4, pp. 408-416, 2009.
+Transportation Science, vol. 43, no. 4, pp. 408--416, 2009.
+
+\bibitem{golden2008}
+Golden, B.L., Raghavan, S., and Wasil, E.A.,
+\textit{The Vehicle Routing Problem: Latest Advances and New Challenges},
+Springer, 2008.
+
+\bibitem{dondo2007}
+Dondo, R., and Cerdá, J.,
+\textit{A Cluster-Based Optimization Approach for the Multi-Depot Heterogeneous Fleet Vehicle Routing Problem with Time Windows},
+European Journal of Operational Research, vol. 176, no. 3, pp. 1478--1507, 2007.
+
+\bibitem{feillet2004}
+Feillet, D., Dejax, P., Gendreau, M., and Gueguen, C.,
+\textit{An Exact Algorithm for the Elementary Shortest Path Problem with Resource Constraints},
+Networks, vol. 44, no. 3, pp. 216--229, 2004.
+
+\bibitem{vidal2013}
+Vidal, T., Crainic, T.G., Gendreau, M., Lahrichi, N., and Rei, W.,
+\textit{A Unified Solution Framework for Multi-Attribute Vehicle Routing Problems},
+European Journal of Operational Research, vol. 234, no. 3, pp. 658--673, 2014.
+
+\bibitem{demir2012}
+Demir, E., Bekta\c{s}, T., and Laporte, G.,
+\textit{An Adaptive Large Neighborhood Search Heuristic for the Pollution-Routing Problem},
+European Journal of Operational Research, vol. 223, no. 2, pp. 346--359, 2012.
+
+\bibitem{ismail2021}
+Ismail et al.,
+\textit{HVRP with Soft Time Windows: Case Study (online resource)},
+Available: \url{https://www.iieta.org/download/file/fid/66118}
+
+\bibitem{mutzel2022}
+Mutzel et al.,
+\textit{Vehicle Routing with Heterogeneous Time Windows (branch-and-price preprint)},
+Available: \url{https://optimization-online.org/wp-content/uploads/2022/10/Vehicle-Routing-with-Heterogeneous-Time-Windows-3.pdf}
+
+\bibitem{bideq2025}
+Bideq et al.,
+\textit{Hybrid Memetic + Set Partitioning Framework for Employee Shuttle Routing (online resource)},
+Available: \url{https://www.iieta.org/journals/jesa/paper/10.18280/jesa.580201}
+
+\bibitem{gasque2022}
+Gasque, A., and Munari, P.,
+\textit{Heterogeneous Pickup-and-Delivery with Soft Time Windows (ALNS preprint)},
+Available: \url{https://optimization-online.org/wp-content/uploads/2021/12/8748.pdf}
+
+\bibitem{purba2020}
+Purba et al.,
+\textit{Routing and Scheduling Employee Transportation Using Tabu Search (online resource)},
+Available: \url{https://www.researchgate.net/publication/340639816_Routing_and_scheduling_employee_transportation_using_tabu_search}
+
+
+\bibitem{molina2020}
+Molina et al.,
+\textit{The Heterogeneous Vehicle Routing Problem with Time Windows and a Limited Number of Resources (online resource)},
+Available: \url{https://www.sciencedirect.com/science/article/abs/pii/S095219762030155X}
+
+\bibitem{leksakul2017}
+Leksakul et al.,
+\textit{Heuristic Approach for Solving Employee Bus Routes in a Large-Scale Industrial Factory (online resource)},
+Available: \url{https://www.sciencedirect.com/science/article/abs/pii/S147403461630115X}
+
+\bibitem{xu2026}
+Xu et al.,
+\textit{Learning to Search for Vehicle Routing with Multiple Time Windows (online resource)},
+Available: \url{https://www.sciencedirect.com/science/article/abs/pii/S0360835225009064}
+
+\bibitem{aydin2025}
+Ayd\i n et al.,
+\textit{Service Management of Employee Shuttle Service Under Inhomogeneous Fleet Constraints Using Dynamic Linear Programming (online resource)},
+Available: \url{https://www.researchgate.net/publication/391042839_Service_Management_of_Employee_Shuttle_Service_Under_Inhomogeneous_Fleet_Constraints_Using_Dynamic_Linear_Programming_A_Case_Study}
+
+
+\bibitem{coelho2014}
+Coelho, L.C., and Laporte, G.,
+\textit{A Branch-and-Cut Algorithm for the Multi-Depot Vehicle Routing Problem with Heterogeneous Fleet},
+Computers \& Operations Research, vol. 59, pp. 92--105, 2015.
+
+\bibitem{parragh2008}
+Parragh, S.N., Doerner, K.F., and Hartl, R.F.,
+\textit{A Survey on Pickup and Delivery Problems},
+Journal für Betriebswirtschaft, vol. 58, pp. 21--51, 2008.
+
+\bibitem{ichoua2003}
+Ichoua, S., Gendreau, M., and Potvin, J.-Y.,
+\textit{Vehicle Dispatching with Time-Dependent Travel Times},
+European Journal of Operational Research, vol. 144, pp. 379--396, 2003.
+
+\bibitem{shaw1998}
+Shaw, P.,
+\textit{Using Constraint Programming and Local Search Methods to Solve Vehicle Routing Problems},
+CP-98 Workshop on Industrial Constraint-Directed Scheduling, 1998.
+
+\bibitem{ropke2006}
+Ropke, S., and Pisinger, D.,
+\textit{An Adaptive Large Neighborhood Search Heuristic for the Pickup and Delivery Problem with Time Windows},
+Transportation Science, vol. 40, no. 4, pp. 455--472, 2006.
+
+\bibitem{nazari2018}
+Nazari, M., Oroojlooy, A., Snyder, L., and Takác, M.,
+\textit{Reinforcement Learning for Solving the Vehicle Routing Problem},
+NeurIPS, 2018.
+
+\bibitem{kool2019}
+Kool, W., van Hoof, H., and Welling, M.,
+\textit{Attention, Learn to Solve Routing Problems!},
+International Conference on Learning Representations (ICLR), 2019.
+
+\bibitem{psaraftis1980}
+Psaraftis, H.N.,
+\textit{A Dynamic Programming Solution to the Single Vehicle Many-to-Many Immediate Request Dial-a-Ride Problem},
+Transportation Science, vol. 14, no. 2, pp. 130--154, 1980.
 
 \end{thebibliography}
 

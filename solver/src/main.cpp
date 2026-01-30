@@ -269,19 +269,19 @@ RouteEvaluation evaluateRoute(const Route& r, const Vehicle& v, const vector<Req
             activePassengers.erase(stop.reqId);
             
             // SOFT CONSTRAINT: Late arrival penalty
-            double lateness = max(0.0, currentTime - req.lateTime);
-            if (lateness > 0) {
-                double maxDelay = gCtx.getMaxDelay(req.priority);
-                
-                if (lateness <= maxDelay) {
-                    // Within tolerance - moderate penalty
-                    eval.penaltyCost += lateness * gCtx.lateArrivalPenaltyPerMin * getPriorityWeight(req.priority) / 10.0;
-                } else {
-                    // Exceeds tolerance - severe penalty but NOT infeasible (per WhatsApp clarification)
-                    eval.penaltyCost += maxDelay * gCtx.lateArrivalPenaltyPerMin * getPriorityWeight(req.priority) / 10.0;
-                    eval.penaltyCost += (lateness - maxDelay) * gCtx.maxDelayViolationPenalty / 100.0;
-                }
+            // Time window: [E_i, L_i] with tolerance f(P_i)
+            // - Arrival <= L_i: ON-TIME, no penalty
+            // - L_i < Arrival <= L_i + f(P_i): WITHIN TOLERANCE, no penalty
+            // - Arrival > L_i + f(P_i): EXCEEDS TOLERANCE, severe penalty
+            double maxDelay = gCtx.getMaxDelay(req.priority);
+            double toleranceDeadline = req.lateTime + maxDelay;
+            
+            if (currentTime > toleranceDeadline) {
+                // Exceeds tolerance - severe penalty
+                double excessLateness = currentTime - toleranceDeadline;
+                eval.penaltyCost += excessLateness * gCtx.maxDelayViolationPenalty / 100.0 * getPriorityWeight(req.priority);
             }
+            // else: within L_i or within tolerance window - NO PENALTY
         }
         
         // 5. Service time
@@ -379,9 +379,16 @@ void evaluateSolution(Solution& sol, const vector<Vehicle>& vehicles, const vect
     // Unassigned penalty
     sol.totalPenaltyCost += sol.unassignedReqs.size() * gCtx.unassignedPenalty;
     
+    // Calculate total time across all routes (for weighted objective)
+    double totalTime = 0;
+    for (const auto& route : sol.routes) {
+        totalTime += route.totalTime;
+    }
+    
     // Global cost = weighted combination
+    // Formula: CTC * w_cost + TotalTime * w_time + TotalPenalty
     sol.globalCost = (sol.totalMoneyCost * gCtx.wCost) + 
-                     (sol.totalPenaltyCost * gCtx.wTime) + 
+                     (totalTime * gCtx.wTime) + 
                      sol.totalPenaltyCost;
 }
 
@@ -750,7 +757,9 @@ int main(int argc, char** argv) {
                 try {
                     int p = stoi(key);
                     gCtx.maxDelayByPriority[p] = val.get<double>();
-                } catch (...) {}
+                } catch (...) {
+                    throw std::runtime_error("Invalid priority key in tolerances: " + key);
+                }
             }
         }
     }
