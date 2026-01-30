@@ -510,12 +510,20 @@ C_k \, d_{uv} \, x_{uv}^k.
 \end{equation}
 
 \subsubsection{Lateness and Priority Penalty}
-For each employee $i$:
-\begin{align}
-z_i &= \max\bigl(0,\; t_c^k - L_i\bigr), \\
-Z_{\text{late}} &= \sum_{i\in P} \lambda(P_i)\, z_i,
-\end{align}
-where $\lambda(P_i)$ is a monotonically increasing penalty weight for higher-priority employees.
+For each employee $i$, let $f(P_i)$ denote the priority-based tolerance (grace period). The penalty is:
+\begin{equation}
+\text{Penalty}_i = 
+\begin{cases}
+0 & \text{if } t_c^k \leq L_i + f(P_i) \\
+(t_c^k - L_i - f(P_i)) \cdot M \cdot w(P_i) & \text{if } t_c^k > L_i + f(P_i)
+\end{cases}
+\end{equation}
+where $M$ is a large penalty multiplier and $w(P_i) = (6 - P_i)$ is the priority weight.
+
+The total lateness penalty is:
+\begin{equation}
+Z_{\text{late}} = \sum_{i\in P} \text{Penalty}_i.
+\end{equation}
 
 \subsubsection{Unassigned Penalty}
 Employees not served by any vehicle incur a large penalty:
@@ -874,15 +882,19 @@ RouteEvaluation evaluateRoute(const Route& r,
             }
         }
         
-        // Handle dropoff lateness penalty
+        // Handle dropoff lateness penalty (two-tier structure)
         if (stop.type == DROPOFF) {
             const Request& req = reqs[stop.reqId];
-            double lateness = max(0.0, currentTime - req.lateTime);
-            if (lateness > 0) {
-                double maxDelay = getMaxDelay(req.priority);
-                double priorityWeight = (6 - req.priority) * 10.0;
-                eval.penaltyCost += lateness * priorityWeight;
+            double maxDelay = getMaxDelay(req.priority);
+            double toleranceDeadline = req.lateTime + maxDelay;
+            
+            if (currentTime > toleranceDeadline) {
+                // Exceeds tolerance - severe penalty
+                double excessLateness = currentTime - toleranceDeadline;
+                double priorityWeight = (6 - req.priority);
+                eval.penaltyCost += excessLateness * M * priorityWeight;
             }
+            // else: within L_i or tolerance window - NO PENALTY
         }
         
         currentTime += SERVICE_TIME;  // 2 minutes per stop
