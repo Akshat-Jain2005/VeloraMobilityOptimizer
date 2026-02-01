@@ -138,7 +138,6 @@ struct SolverContext {
         int p = max(1, min(5, priority));
         auto it = maxDelayByPriority.find(p);
         if (it != maxDelayByPriority.end()) return it->second;
-        // Default tolerances: P1=5min, P2=10min, P3=15min, P4=20min, P5=30min
         static const double defaults[] = {5, 10, 15, 20, 30};
         return defaults[p - 1];
     }

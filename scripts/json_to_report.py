@@ -56,6 +56,12 @@ def calculate_shared_costs(routes, vehicle_map, request_map):
     Logic: For each segment of the route, divide the segment cost by the number
     of passengers in the vehicle during that segment.
     
+    Key insight: 
+    - At PICKUP: passenger boards BEFORE the vehicle moves to next stop
+    - At DROPOFF: passenger exits BEFORE the vehicle moves to next stop
+    
+    So passengers only pay for segments where they are INSIDE the vehicle.
+    
     Returns: dict mapping employee_id -> their_share_of_cost
     """
     employee_costs = {}
@@ -77,10 +83,16 @@ def calculate_shared_costs(routes, vehicle_map, request_map):
             emp_id = stop.get("employeeId")
             stop_type = stop.get("type")
             
+            # Update passengers BEFORE calculating segment cost
+            # At pickup: passenger boards here
+            # At dropoff: passenger exits here (before traveling to next stop)
             if stop_type == "pickup":
                 passengers_in_vehicle.add(emp_id)
+            elif stop_type == "dropoff":
+                passengers_in_vehicle.discard(emp_id)
             
             # Calculate segment cost to NEXT stop (if exists)
+            # Only passengers currently in vehicle pay for this segment
             if i < len(stops) - 1:
                 next_stop = stops[i + 1]
                 
@@ -99,9 +111,7 @@ def calculate_shared_costs(routes, vehicle_map, request_map):
                         if passenger not in employee_costs:
                             employee_costs[passenger] = 0
                         employee_costs[passenger] += cost_per_passenger
-            
-            if stop_type == "dropoff":
-                passengers_in_vehicle.discard(emp_id)
+                # If no passengers, cost is absorbed by company (deadhead miles)
     
     return employee_costs
 
