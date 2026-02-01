@@ -1,89 +1,294 @@
 ================================================================================
-VELORA MOBILITY OPTIMIZER - TEST CASE TC01
-⚠️  SYSTEM WARNING: [Warning] Maps API Key is empty. Switching to Haversine * 1.4x globally.
+              VELORA MOBILITY OPTIMIZER - SOLUTION REPORT
 ================================================================================
+Generated: 2026-02-01 10:57:59
+Output file: /Users/mac/Coding/Projects/Kriti/velora-mobility-optimizer/data/json/tc01_output.json
+Input file: auto-detected
 
-INPUT SUMMARY
 --------------------------------------------------------------------------------
-Total Requests:    8
-Total Vehicles:    3
+SUMMARY
+--------------------------------------------------------------------------------
+  CTC (Cost to Company):     863.78
+  Total Penalty Cost:        177.50
+  Global Objective:          859.82
+  Total Distance:            73.64 km
+  Total Time:                258.9 minutes
+  Vehicles Used:             2
+  Unassigned Requests:       0
 
-VEHICLES:
-  V00 | Capacity:   3 | Cost/km: $10.00 | Start: (12.9350, 77.6200)
-  V01 | Capacity:   4 | Cost/km: $14.00 | Start: (12.9200, 77.6100)
-  V02 | Capacity:   6 | Cost/km: $18.00 | Start: (12.9500, 77.6300)
+  === COST COMPARISON (vs Individual Cabs) ===
+  Total Baseline Cost:       3,200.00 (Ola/Uber/Rapido prices)
+  Total Baseline Time:       425 min (sum of individual trips)
+  Optimized CTC:             863.78
+  Net Savings:               2,336.22 (73.0%)
 
-REQUESTS:
-  R00 | Priority: P1     | Load: 1 | Window: [ 510.0,    570.0]
-  R01 | Priority: P2     | Load: 1 | Window: [ 525.0,    600.0]
-  R02 | Priority: P3     | Load: 1 | Window: [ 540.0,    630.0]
-  R03 | Priority: P2     | Load: 1 | Window: [ 510.0,    585.0]
-  R04 | Priority: P4     | Load: 1 | Window: [ 555.0,    660.0]
-  R05 | Priority: P1     | Load: 1 | Window: [ 495.0,    555.0]
-  R06 | Priority: P3     | Load: 1 | Window: [ 570.0,    660.0]
-  R07 | Priority: P5     | Load: 1 | Window: [ 600.0,    720.0]
+--------------------------------------------------------------------------------
+VEHICLE ROUTES (2 active vehicles)
+--------------------------------------------------------------------------------
+
+┌─ Vehicle: V01
+│  Type: 4w | Fuel: electric | Category: premium
+│  Capacity: 3 | Speed: 30.0 km/h | Cost: 10.0/km
+│  Start Location: (12.9350, 77.6200)
+│  Route Distance: 41.80 km | Route Time: 109.9 min
+│  Route Cost (CTC contribution): 417.97
+│
+│  Stops:
+│  --------------------------------------------------------------------------
+│  #   Type     Employee   Time    Wait   Location                 
+│  --------------------------------------------------------------------------
+│  1   Pickup   E06        08:15   10m    (12.9500, 77.6200)       
+│  2   Dropoff  E06        08:27   -      (12.9716, 77.5946)       
+│  3   Pickup   E01        08:43   -      (12.9352, 77.6245)       
+│  4   Dropoff  E01        09:00   -      (12.9716, 77.5946)       
+│  5   Pickup   E02        09:17   -      (12.9298, 77.6210)       
+│  6   Pickup   E04        09:30   -      (12.9600, 77.6380)       
+│  7   Dropoff  E02        09:45   -      (12.9716, 77.5946)       
+│  8   Dropoff  E04        09:47   -      (12.9716, 77.5946)       
+└───────────────────────────────────────────────────────────────────────────────
+
+┌─ Vehicle: V02
+│  Type: 4w | Fuel: petrol | Category: normal
+│  Capacity: 4 | Speed: 35.0 km/h | Cost: 14.0/km
+│  Start Location: (12.9200, 77.6100)
+│  Route Distance: 31.84 km | Route Time: 149.0 min
+│  Route Cost (CTC contribution): 445.81
+│
+│  Stops:
+│  --------------------------------------------------------------------------
+│  #   Type     Employee   Time    Wait   Location                 
+│  --------------------------------------------------------------------------
+│  1   Pickup   E05        09:15   74m    (12.9150, 77.6100)       
+│  2   Pickup   E07        09:30   5m     (12.9250, 77.6400)       
+│  3   Dropoff  E05        09:49   -      (12.9716, 77.5946)       
+│  4   Dropoff  E07        09:51   -      (12.9716, 77.5946)       
+│  5   Pickup   E03        10:00   -      (12.9440, 77.6000)       
+│  6   Pickup   E08        10:10   -      (12.9400, 77.6300)       
+│  7   Dropoff  E08        10:25   -      (12.9716, 77.5946)       
+│  8   Dropoff  E03        10:27   -      (12.9716, 77.5946)       
+└───────────────────────────────────────────────────────────────────────────────
+
+--------------------------------------------------------------------------------
+DETAILED EMPLOYEE ASSIGNMENTS
+--------------------------------------------------------------------------------
+
+  Employee: E01
+  ├─ Priority: P1
+  ├─ Time Window: 08:30 - 09:30
+  ├─ Vehicle Preference: premium
+  ├─ Sharing Preference: Max 1 passengers
+  │
+  ├─ Assigned Vehicle: V01
+  │  └─ 4w | electric | premium
+  │
+  ├─ Pickup Time: 08:43
+  ├─ Dropoff Time: 09:00
+  ├─ Road Distance: 7.26 km (pickup → dropoff)
+  │
+  ├─ Status: ✓ ON-TIME
+  │
+  ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
+  │  ├─ Cost: 420.00
+  │  └─ Time: 45 min
+  │
+  └─ OPTIMIZED (Shared Ride):
+     ├─ Cost: 72.59 (shared)
+     ├─ Time: 17 min (includes shared ride detours)
+     └─ Savings: 347.41 (82.7%)
+
+  Employee: E02
+  ├─ Priority: P2
+  ├─ Time Window: 08:45 - 10:00
+  ├─ Vehicle Preference: any
+  ├─ Sharing Preference: Max 2 passengers
+  │
+  ├─ Assigned Vehicle: V01
+  │  └─ 4w | electric | premium
+  │
+  ├─ Pickup Time: 09:17
+  ├─ Dropoff Time: 09:45
+  ├─ Road Distance: 7.64 km (pickup → dropoff)
+  │
+  ├─ Status: ✓ ON-TIME
+  │
+  ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
+  │  ├─ Cost: 380.00
+  │  └─ Time: 50 min
+  │
+  └─ OPTIMIZED (Shared Ride):
+     ├─ Cost: 87.76 (shared)
+     ├─ Time: 28 min (includes shared ride detours)
+     └─ Savings: 292.24 (76.9%)
+
+  Employee: E03
+  ├─ Priority: P3
+  ├─ Time Window: 09:00 - 10:30
+  ├─ Vehicle Preference: normal
+  ├─ Sharing Preference: Max 3 passengers
+  │
+  ├─ Assigned Vehicle: V02
+  │  └─ 4w | petrol | normal
+  │
+  ├─ Pickup Time: 10:00
+  ├─ Dropoff Time: 10:27
+  ├─ Road Distance: 4.37 km (pickup → dropoff)
+  │
+  ├─ Status: ✓ ON-TIME
+  │
+  ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
+  │  ├─ Cost: 360.00
+  │  └─ Time: 55 min
+  │
+  └─ OPTIMIZED (Shared Ride):
+     ├─ Cost: 115.30 (shared)
+     ├─ Time: 26 min (includes shared ride detours)
+     └─ Savings: 244.70 (68.0%)
+
+  Employee: E04
+  ├─ Priority: P2
+  ├─ Time Window: 08:30 - 09:45
+  ├─ Vehicle Preference: any
+  ├─ Sharing Preference: Max 2 passengers
+  │
+  ├─ Assigned Vehicle: V01
+  │  └─ 4w | electric | premium
+  │
+  ├─ Pickup Time: 09:30
+  ├─ Dropoff Time: 09:47
+  ├─ Road Distance: 6.83 km (pickup → dropoff)
+  │
+  ├─ Status: ⚠ MINOR DELAY
+  │
+  ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
+  │  ├─ Cost: 400.00
+  │  └─ Time: 48 min
+  │
+  └─ OPTIMIZED (Shared Ride):
+     ├─ Cost: 34.14 (shared)
+     ├─ Time: 18 min (includes shared ride detours)
+     └─ Savings: 365.86 (91.5%)
+
+  Employee: E05
+  ├─ Priority: P4
+  ├─ Time Window: 09:15 - 11:00
+  ├─ Vehicle Preference: any
+  ├─ Sharing Preference: Max 3 passengers
+  │
+  ├─ Assigned Vehicle: V02
+  │  └─ 4w | petrol | normal
+  │
+  ├─ Pickup Time: 09:15
+  ├─ Dropoff Time: 09:49
+  ├─ Road Distance: 9.12 km (pickup → dropoff)
+  │
+  ├─ Status: ✓ ON-TIME
+  │
+  ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
+  │  ├─ Cost: 450.00
+  │  └─ Time: 60 min
+  │
+  └─ OPTIMIZED (Shared Ride):
+     ├─ Cost: 137.37 (shared)
+     ├─ Time: 34 min (includes shared ride detours)
+     └─ Savings: 312.63 (69.5%)
+
+  Employee: E06
+  ├─ Priority: P1
+  ├─ Time Window: 08:15 - 09:15
+  ├─ Vehicle Preference: premium
+  ├─ Sharing Preference: Max 1 passengers
+  │
+  ├─ Assigned Vehicle: V01
+  │  └─ 4w | electric | premium
+  │
+  ├─ Pickup Time: 08:15
+  ├─ Dropoff Time: 08:27
+  ├─ Road Distance: 5.11 km (pickup → dropoff)
+  │
+  ├─ Status: ✓ ON-TIME
+  │
+  ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
+  │  ├─ Cost: 430.00
+  │  └─ Time: 44 min
+  │
+  └─ OPTIMIZED (Shared Ride):
+     ├─ Cost: 51.14 (shared)
+     ├─ Time: 12 min (includes shared ride detours)
+     └─ Savings: 378.86 (88.1%)
+
+  Employee: E07
+  ├─ Priority: P3
+  ├─ Time Window: 09:30 - 11:00
+  ├─ Vehicle Preference: normal
+  ├─ Sharing Preference: Max 2 passengers
+  │
+  ├─ Assigned Vehicle: V02
+  │  └─ 4w | petrol | normal
+  │
+  ├─ Pickup Time: 09:30
+  ├─ Dropoff Time: 09:51
+  ├─ Road Distance: 10.00 km (pickup → dropoff)
+  │
+  ├─ Status: ✓ ON-TIME
+  │
+  ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
+  │  ├─ Cost: 390.00
+  │  └─ Time: 58 min
+  │
+  └─ OPTIMIZED (Shared Ride):
+     ├─ Cost: 70.02 (shared)
+     ├─ Time: 21 min (includes shared ride detours)
+     └─ Savings: 319.98 (82.0%)
+
+  Employee: E08
+  ├─ Priority: P5
+  ├─ Time Window: 10:00 - 12:00
+  ├─ Vehicle Preference: any
+  ├─ Sharing Preference: Max 3 passengers
+  │
+  ├─ Assigned Vehicle: V02
+  │  └─ 4w | petrol | normal
+  │
+  ├─ Pickup Time: 10:10
+  ├─ Dropoff Time: 10:25
+  ├─ Road Distance: 7.28 km (pickup → dropoff)
+  │
+  ├─ Status: ✓ ON-TIME
+  │
+  ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
+  │  ├─ Cost: 370.00
+  │  └─ Time: 65 min
+  │
+  └─ OPTIMIZED (Shared Ride):
+     ├─ Cost: 50.98 (shared)
+     ├─ Time: 14 min (includes shared ride detours)
+     └─ Savings: 319.02 (86.2%)
+
+--------------------------------------------------------------------------------
+QUICK REFERENCE TABLE
+--------------------------------------------------------------------------------
+
+Emp    Veh   Type  Fuel    Base$    Opt$     Save$    BaseT  OptT   Status    
+------------------------------------------------------------------------------
+E01    V01   4w    electr  420      72.6     347.4    45     17     On-time   
+E02    V01   4w    electr  380      87.8     292.2    50     28     On-time   
+E03    V02   4w    petrol  360      115.3    244.7    55     26     On-time   
+E04    V01   4w    electr  400      34.1     365.9    48     18     Delay     
+E05    V02   4w    petrol  450      137.4    312.6    60     34     On-time   
+E06    V01   4w    electr  430      51.1     378.9    44     12     On-time   
+E07    V02   4w    petrol  390      70.0     320.0    58     21     On-time   
+E08    V02   4w    petrol  370      51.0     319.0    65     14     On-time   
+------------------------------------------------------------------------------
+TOTAL                      3200     619.3    2580.7  
 
 ================================================================================
-OPTIMIZATION RESULTS
+NOTES:
+- Base$ = Baseline cost (individual cab like Ola/Uber/Rapido)
+- Opt$ = Optimized cost (employee's share of shared ride)
+- Save$ = Savings per employee (Base$ - Opt$)
+- BaseT = Baseline time (individual cab)
+- OptT = Optimized time (may be higher due to shared ride detours)
+- CTC = Cost to Company = Total operational cost
 ================================================================================
-Global Cost:       $0.00
-Routes Assigned:   3
-Requests Assigned: 8
-Requests Unassigned: 0
-
-BASELINE COMPARISON
---------------------------------------------------------------------------------
-  Baseline Total Cost:   $   3200.00
-  Optimized Total Cost:  $      0.00
-  - Improvement:         $   3200.00  (+100.0%)
-
-DETAILED ROUTES
---------------------------------------------------------------------------------
-Vehicle V00:
-  Total Distance: 18.17 km
-  Total Cost:     $181.70
-  Stops: 4
-
-    1. DROPOFF Request R00 @    0.00 | Window: [510.0, 570.0] | (12.9352, 77.6245)
-    2. DROPOFF Request R00 @    0.00 | Window: [510.0, 570.0] | (12.9716, 77.5946)
-    3. DROPOFF Request R05 @    0.00 | Window: [495.0, 555.0] | (12.9500, 77.6200)
-    4. DROPOFF Request R05 @    0.00 | Window: [495.0, 555.0] | (12.9716, 77.5946)
-
-Vehicle V01:
-  Total Distance: 52.77 km
-  Total Cost:     $738.84
-  Stops: 12
-
-    1. DROPOFF Request R01 @    0.00 | Window: [525.0, 600.0] | (12.9298, 77.6210)
-    2. DROPOFF Request R03 @    0.00 | Window: [510.0, 585.0] | (12.9600, 77.6380)
-    3. DROPOFF Request R01 @    0.00 | Window: [525.0, 600.0] | (12.9716, 77.5946)
-    4. DROPOFF Request R03 @    0.00 | Window: [510.0, 585.0] | (12.9716, 77.5946)
-    5. DROPOFF Request R02 @    0.00 | Window: [540.0, 630.0] | (12.9440, 77.6000)
-    6. DROPOFF Request R04 @    0.00 | Window: [555.0, 660.0] | (12.9150, 77.6100)
-    7. DROPOFF Request R04 @    0.00 | Window: [555.0, 660.0] | (12.9716, 77.5946)
-    8. DROPOFF Request R02 @    0.00 | Window: [540.0, 630.0] | (12.9716, 77.5946)
-    9. DROPOFF Request R07 @    0.00 | Window: [600.0, 720.0] | (12.9400, 77.6300)
-    10. DROPOFF Request R06 @    0.00 | Window: [570.0, 660.0] | (12.9250, 77.6400)
-    11. DROPOFF Request R06 @    0.00 | Window: [570.0, 660.0] | (12.9716, 77.5946)
-    12. DROPOFF Request R07 @    0.00 | Window: [600.0, 720.0] | (12.9716, 77.5946)
-
-Vehicle V02: (EMPTY)
-INFEASIBILITY ANALYSIS & RELAXED CONSTRAINTS
---------------------------------------------------------------------------------
-RELAXED CONSTRAINTS (SOFT INFEASIBILITY):
-  No soft constraints were relaxed.
-
-COST BREAKDOWN
---------------------------------------------------------------------------------
-  Vehicle V00:      $    181.70  (  0.0%)
-  Vehicle V01:      $    738.84  (  0.0%)
-  Vehicle V02:      $      0.00  (  0.0%)
---------------------------------------------------------------------------------
-  TOTAL:             $      0.00  (100.0%)
-
-FILE REFERENCES
---------------------------------------------------------------------------------
-Input JSON:  /Users/mac/Coding/Projects/Kriti/velora-mobility-optimizer/data/json/tc01_input.json
-Output JSON: /Users/mac/Coding/Projects/Kriti/velora-mobility-optimizer/data/json/tc01_output.json
-
+END OF REPORT
 ================================================================================
