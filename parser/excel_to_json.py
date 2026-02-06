@@ -105,7 +105,12 @@ def main():
     # Default tolerances (minutes)
     tolerances = {1: 30, 2: 20, 3: 15, 4: 10, 5: 5} # Fallback
     weights = {"cost": 0.7, "time": 0.3}
-    
+
+    # Map provider configuration defaults
+    map_provider = "haversine"  # Default: fast Haversine * 1.4 approximation
+    map_timeout_ms = 2000
+    map_max_retries = 2
+
     if 'metadata' in xls.sheet_names:
         df = xls.parse('metadata')
         meta = {}
@@ -114,34 +119,52 @@ def main():
             v = r.get('value', None)
             if k and v is not None:
                 meta[k] = v
-        
+
         # Update config
         if 'allow_external_maps' in meta:
             result['config']['allow_external_maps'] = (str(meta['allow_external_maps']).lower() == 'true')
-        
+
+        # Parse map provider settings
+        # Valid providers: haversine, osrm, openrouteservice (ors), google_maps (google)
+        if 'map_provider' in meta:
+            map_provider = str(meta['map_provider']).lower().strip()
+        if 'map_timeout_ms' in meta:
+            map_timeout_ms = int(meta['map_timeout_ms'])
+        if 'map_max_retries' in meta:
+            map_max_retries = int(meta['map_max_retries'])
+
         # Parse tolerances
         for i in range(1, 6):
             k = f'priority_{i}_max_delay_min'
             if k in meta:
                 tolerances[i] = int(meta[k])
-                
+
         # Parse weights
         if 'objective_cost_weight' in meta: weights['cost'] = float(meta['objective_cost_weight'])
         if 'objective_time_weight' in meta: weights['time'] = float(meta['objective_time_weight'])
 
     result['config']['tolerances'] = tolerances
     result['config']['weights'] = weights
+    result['config']['map_provider'] = map_provider
+    result['config']['map_timeout_ms'] = map_timeout_ms
+    result['config']['map_max_retries'] = map_max_retries
 
-    # Always source the API key from environment (metadata never provides it)
+    # Source the API key from environment (metadata never provides it for security)
     maps_api_key = os.getenv('MAPS_API_KEY', '')
     result['config']['maps_api_key'] = maps_api_key
-    
-    # CRITICAL: If API key is present, automatically enable external maps
-    # If no API key, the solver will use Haversine * 1.4 for road distance approximation
+
+    # If API key is present, enable external maps and use appropriate provider
     if maps_api_key:
         result['config']['allow_external_maps'] = True
+        # Auto-select provider based on API key format if not specified
+        if map_provider == 'haversine':
+            # If key starts with 'AIza' it's Google, otherwise assume OpenRouteService
+            if maps_api_key.startswith('AIza'):
+                result['config']['map_provider'] = 'google'
+            else:
+                result['config']['map_provider'] = 'openrouteservice'
     else:
-        result['config']['allow_external_maps'] = True  # Still True - MapDistance handles the fallback
+        result['config']['allow_external_maps'] = True  # MapDistance handles fallback
 
     if 'employees' in xls.sheet_names:
         df = xls.parse('employees')

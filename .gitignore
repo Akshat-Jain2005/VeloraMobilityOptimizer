@@ -6,3 +6,12 @@ temp.json
 *.dSYM
 __pycache__/
 *.pyc
+
+# Web application
+frontend/node_modules/
+frontend/dist/
+backend/node_modules/
+backend/uploads/*
+backend/jobs/*
+!backend/uploads/.gitkeep
+!backend/jobs/.gitkeep

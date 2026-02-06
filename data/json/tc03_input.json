@@ -1,7 +1,7 @@
 {
   "config": {
     "allow_external_maps": true,
-    "maps_api_key": "",
+    "maps_api_key": "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVjNTI5YTlhZWQ2MTRiNmFhMmJmMGVmYTllODQxYjFkIiwiaCI6Im11cm11cjY0In0=",
     "tolerances": {
       "1": 5,
       "2": 8,
@@ -12,7 +12,10 @@
     "weights": {
       "cost": 0.6,
       "time": 0.4
-    }
+    },
+    "map_provider": "openrouteservice",
+    "map_timeout_ms": 2000,
+    "map_max_retries": 2
   },
   "vehicles": [
     {

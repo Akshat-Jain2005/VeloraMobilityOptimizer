@@ -1,0 +1,712 @@
+\documentclass[a4paper,11pt]{article}
+
+% --- PACKAGES ---
+\usepackage[margin=0.5in]{geometry} % Maximize page usage
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{float}
+\usepackage{array}
+\usepackage{multirow}
+
+% --- COLORS ---
+\definecolor{velorablue}{RGB}{28, 56, 121}    % Professional Deep Blue
+\definecolor{statusgreen}{RGB}{34, 139, 34}   % Forest Green
+\definecolor{statuswarn}{RGB}{204, 102, 0}    % Burnt Orange
+\definecolor{headergray}{RGB}{240, 240, 240}  % Light Gray for headers
+
+% --- SPACING TWEAKS ---
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+\pagestyle{empty}
+
+% --- HEADER ---
+\begin{center}
+    {\Huge \textbf{\color{velorablue} VELORA MOBILITY OPTIMIZER}} \\
+    \vspace{0.2cm}
+    {\Large \textbf{SOLUTION REPORT: MID-TERM EVALUATION}} \\
+    \vspace{0.1cm}
+    \large Generated: 2026-02-01 10:57:59 \quad | \quad \textbf{Global Objective Score: 859.82}
+\end{center}
+
+\hrule height 1.5pt \vspace{0.3cm}
+
+% --- SECTION 1: EXECUTIVE SUMMARY ---
+\section*{\uppercase{\color{velorablue} Executive Summary}}
+\vspace{-0.2cm}
+\begin{table}[h]
+    \centering
+    \large % Maximizing font size for summary
+    \renewcommand{\arraystretch}{1.4}
+    \setlength{\tabcolsep}{12pt}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r | l r | l r }
+        \toprule
+        \multicolumn{2}{l}{\textbf{Operational Metrics}} & \multicolumn{2}{l}{\textbf{Cost Analysis}} & \multicolumn{2}{l}{\textbf{Savings Impact}} \\
+        \midrule
+        Total Distance & \textbf{73.64 km} & Baseline Cost & \$3,200.00 & \textbf{Net Savings} & \textbf{\color{velorablue}\$2,336.22} \\
+        Total Time & 258.9 min & Optimized CTC & \textbf{\$863.78} & Savings \% & \textbf{\color{velorablue}73.0\%} \\
+        Vehicles Used & 2 & Penalty Cost & \$177.50 & Unassigned & \textbf{\color{statusgreen}0} \\
+        \bottomrule
+    \end{tabular*}
+\end{table}
+
+\vspace{0.3cm}
+
+% --- SECTION 2: VEHICLE ROUTES (Side-by-Side) ---
+\section*{\uppercase{\color{velorablue} Vehicle Route Details}}
+\vspace{-0.2cm}
+
+\noindent
+\begin{minipage}[t]{0.49\textwidth}
+    \centering
+    % Header Box
+    \colorbox{velorablue}{\parbox{\dimexpr\linewidth-2\fboxsep}{\centering \color{white}\large\textbf{V01: Premium Electric}}} \\
+    \vspace{0.1cm}
+    {\small \textbf{Cap:} 3 \quad \textbf{Cost:} \$10/km \quad \textbf{Stats:} 41.80 km / 109.9 min}
+    
+    \vspace{0.2cm}
+    
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{c l l c l}
+        \toprule
+        \textbf{\#} & \textbf{Type} & \textbf{Emp} & \textbf{Time} & \textbf{Loc} \\
+        \midrule
+        1 & \color{velorablue}Pick & E06 & 08:15 & Start \\
+        \rowcolor{headergray} 2 & Drop & E06 & 08:27 & Hub \\
+        3 & \color{velorablue}Pick & E01 & 08:43 & Res \\
+        \rowcolor{headergray} 4 & Drop & E01 & 09:00 & Hub \\
+        5 & \color{velorablue}Pick & E02 & 09:17 & Res \\
+        \rowcolor{headergray} 6 & \color{velorablue}Pick & E04 & 09:30 & Res \\
+        7 & Drop & E02 & 09:45 & Hub \\
+        \rowcolor{headergray} 8 & Drop & E04 & 09:47 & Hub \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.49\textwidth}
+    \centering
+    % Header Box
+    \colorbox{velorablue}{\parbox{\dimexpr\linewidth-2\fboxsep}{\centering \color{white}\large\textbf{V02: Normal Petrol}}} \\
+    \vspace{0.1cm}
+    {\small \textbf{Cap:} 4 \quad \textbf{Cost:} \$14/km \quad \textbf{Stats:} 31.84 km / 149.0 min}
+    
+    \vspace{0.2cm}
+
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{c l l c l}
+        \toprule
+        \textbf{\#} & \textbf{Type} & \textbf{Emp} & \textbf{Time} & \textbf{Loc} \\
+        \midrule
+        1 & \color{velorablue}Pick & E05 & 09:15 & Start \\
+        \rowcolor{headergray} 2 & \color{velorablue}Pick & E07 & 09:30 & Res \\
+        3 & Drop & E05 & 09:49 & Hub \\
+        \rowcolor{headergray} 4 & Drop & E07 & 09:51 & Hub \\
+        5 & \color{velorablue}Pick & E03 & 10:00 & Res \\
+        \rowcolor{headergray} 6 & \color{velorablue}Pick & E08 & 10:10 & Res \\
+        7 & Drop & E08 & 10:25 & Hub \\
+        \rowcolor{headergray} 8 & Drop & E03 & 10:27 & Hub \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+
+\vspace{0.5cm}
+
+% --- SECTION 3: EMPLOYEE ASSIGNMENTS (Maximized Width) ---
+\section*{\uppercase{\color{velorablue} Detailed Employee Assignments \& Financials}}
+\vspace{-0.2cm}
+
+\begin{table}[h]
+    \centering
+    \normalsize % Maximized readability
+    \renewcommand{\arraystretch}{1.3}
+    % This expands the table to fill the exact page width
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l c l r r r c c l }
+        \toprule
+        \textbf{Emp} & \textbf{Veh} & \textbf{Type} & \textbf{Base\$} & \textbf{Opt\$} & \textbf{Save\$} & \textbf{BaseT} & \textbf{OptT} & \textbf{Status} \\
+        \midrule
+        \textbf{E01} & V01 & Prem (4w) & 420.00 & 72.59 & \textbf{347.41} & 45m & 17m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E02} & V01 & Prem (4w) & 380.00 & 87.76 & \textbf{292.24} & 50m & 28m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E03} & V02 & Norm (4w) & 360.00 & 115.30 & \textbf{244.70} & 55m & 26m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E04} & V01 & Prem (4w) & 400.00 & 34.14 & \textbf{365.86} & 48m & 18m & \textbf{\textcolor{statuswarn}{MINOR DELAY}} \\
+        \textbf{E05} & V02 & Norm (4w) & 450.00 & 137.37 & \textbf{312.63} & 60m & 34m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E06} & V01 & Prem (4w) & 430.00 & 51.14 & \textbf{378.86} & 44m & 12m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E07} & V02 & Norm (4w) & 390.00 & 70.02 & \textbf{319.98} & 58m & 21m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E08} & V02 & Norm (4w) & 370.00 & 50.98 & \textbf{319.02} & 65m & 14m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \midrule
+        \multicolumn{3}{r}{\textbf{TOTALS:}} & \textbf{3,200.00} & \textbf{619.30} & \textbf{\color{velorablue} 2,580.70} & -- & -- & -- \\
+        \bottomrule
+    \end{tabular*}
+    
+    \vspace{0.2cm}
+    \footnotesize \textit{Key: Base\$ = Estimated Cab Cost | Opt\$ = Optimized Share Cost | OptT = Shared Trip Time}
+\end{table}
+
+
+\newpage
+
+
+% --- COLORS ---
+\definecolor{velorablue}{RGB}{28, 56, 121}    % Professional Deep Blue
+\definecolor{statusgreen}{RGB}{34, 139, 34}   % Forest Green
+\definecolor{statuswarn}{RGB}{204, 102, 0}    % Burnt Orange
+\definecolor{headergray}{RGB}{240, 240, 240}  % Light Gray for headers
+
+% --- SPACING TWEAKS ---
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+
+
+% --- HEADER ---
+\begin{center}
+    {\Huge \textbf{\color{velorablue} VELORA MOBILITY OPTIMIZER}} \\
+    \vspace{0.15cm}
+    {\Large \textbf{SOLUTION REPORT: MID-TERM EVALUATION}} \\
+    \vspace{0.1cm}
+    \large Generated: 2026-02-01 10:57:59 \quad | \quad \textbf{Global Objective Score: 1,030.64}
+\end{center}
+
+\hrule height 1.5pt \vspace{0.3cm}
+
+% --- SECTION 1: EXECUTIVE SUMMARY ---
+\section*{\uppercase{\color{velorablue} Executive Summary}}
+\vspace{-0.2cm}
+\begin{table}[h]
+    \centering
+    \large % Large font for high-level metrics
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r | l r | l r }
+        \toprule
+        \multicolumn{2}{l}{\textbf{Operational Metrics}} & \multicolumn{2}{l}{\textbf{Cost Analysis}} & \multicolumn{2}{l}{\textbf{Savings Impact}} \\
+        \midrule
+        Total Distance & \textbf{143.07 km} & Baseline Cost & \$4,945.00 & \textbf{Net Savings} & \textbf{\color{velorablue}\$3,703.56} \\
+        Total Time & 338.5 min & Optimized CTC & \textbf{\$1,241.44} & Savings \% & \textbf{\color{velorablue}74.9\%} \\
+        Vehicles Used & 3 & Penalty Cost & \$105.23 & Unassigned & \textbf{\color{statusgreen}0} \\
+        \bottomrule
+    \end{tabular*}
+\end{table}
+
+\vspace{0.2cm}
+
+% --- SECTION 2: VEHICLE ROUTES (3 Columns) ---
+\section*{\uppercase{\color{velorablue} Vehicle Route Details}}
+\vspace{-0.2cm}
+
+\noindent
+% --- V01 ---
+\begin{minipage}[t]{0.32\textwidth}
+    \centering
+    \colorbox{velorablue}{\parbox{\dimexpr\linewidth-2\fboxsep}{\centering \color{white}\textbf{V01: Premium Electric}}} \\
+    \vspace{0.05cm}
+    {\scriptsize \textbf{Cap:} 3 | \textbf{Cost:} \$10/km \\ \textbf{Stats:} 35.48 km / 113.2 min}
+    \vspace{0.1cm}
+    
+    \renewcommand{\arraystretch}{1.1}
+    \setlength{\tabcolsep}{2pt}
+    \scriptsize
+    \begin{tabular}{c l l c l}
+        \toprule
+        \textbf{\#} & \textbf{Typ} & \textbf{Emp} & \textbf{Time} & \textbf{Loc} \\
+        \midrule
+        1 & Pick & E01 & 08:15 & Start \\
+        \rowcolor{headergray} 2 & Drop & E01 & 08:31 & Hub \\
+        3 & Pick & E06 & 08:43 & Res \\
+        \rowcolor{headergray} 4 & Drop & E06 & 08:56 & Hub \\
+        5 & Pick & E11 & 09:10 & Res \\
+        \rowcolor{headergray} 6 & Pick & E05 & 09:30 & Res \\
+        7 & Drop & E05 & 09:49 & Hub \\
+        \rowcolor{headergray} 8 & Drop & E11 & 09:51 & Hub \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+\hfill
+% --- V04 ---
+\begin{minipage}[t]{0.32\textwidth}
+    \centering
+    \colorbox{velorablue}{\parbox{\dimexpr\linewidth-2\fboxsep}{\centering \color{white}\textbf{V04: Premium Electric}}} \\
+    \vspace{0.05cm}
+    {\scriptsize \textbf{Cap:} 3 | \textbf{Cost:} \$11/km \\ \textbf{Stats:} 8.65 km / 22.5 min}
+    \vspace{0.1cm}
+    
+    \renewcommand{\arraystretch}{1.1}
+    \setlength{\tabcolsep}{2pt}
+    \scriptsize
+    \begin{tabular}{c l l c l}
+        \toprule
+        \textbf{\#} & \textbf{Typ} & \textbf{Emp} & \textbf{Time} & \textbf{Loc} \\
+        \midrule
+        1 & Pick & E12 & 08:21 & Start \\
+        \rowcolor{headergray} 2 & Drop & E12 & 08:35 & Hub \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+\hfill
+% --- V05 ---
+\begin{minipage}[t]{0.32\textwidth}
+    \centering
+    \colorbox{velorablue}{\parbox{\dimexpr\linewidth-2\fboxsep}{\centering \color{white}\textbf{V05: Normal (2w)}}} \\
+    \vspace{0.05cm}
+    {\scriptsize \textbf{Cap:} 1 | \textbf{Cost:} \$8/km \\ \textbf{Stats:} 98.94 km / 202.8 min}
+    \vspace{0.1cm}
+    
+    \renewcommand{\arraystretch}{1.0} % Tighter spacing for long list
+    \setlength{\tabcolsep}{2pt}
+    \scriptsize
+    \begin{tabular}{c l l c l}
+        \toprule
+        \textbf{\#} & \textbf{Typ} & \textbf{Emp} & \textbf{Time} & \textbf{Loc} \\
+        \midrule
+        1 & Pick & E09 & 08:30 & Start \\
+        \rowcolor{headergray} 2 & Drop & E09 & 08:44 & Hub \\
+        3 & Pick & E02 & 08:58 & Res \\
+        \rowcolor{headergray} 4 & Drop & E02 & 09:11 & Hub \\
+        5 & Pick & E07 & 09:28 & Res \\
+        \rowcolor{headergray} 6 & Drop & E07 & 09:45 & Hub \\
+        7 & Pick & E04 & 09:57 & Res \\
+        \rowcolor{headergray} 8 & Drop & E04 & 10:09 & Hub \\
+        9 & Pick & E03 & 10:19 & Res \\
+        \rowcolor{headergray} 10 & Drop & E03 & 10:29 & Hub \\
+        11 & Pick & E08 & 10:42 & Res \\
+        \rowcolor{headergray} 12 & Drop & E08 & 10:55 & Hub \\
+        13 & Pick & E10 & 11:08 & Res \\
+        \rowcolor{headergray} 14 & Drop & E10 & 11:20 & Hub \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+
+\vspace{0.4cm}
+
+% --- SECTION 3: EMPLOYEE ASSIGNMENTS (Maximized Width) ---
+\section*{\uppercase{\color{velorablue} Detailed Employee Assignments \& Financials}}
+\vspace{-0.2cm}
+
+\begin{table}[h]
+    \centering
+    \small % Optimized for readability fitting 12 rows
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l c l r r r c c l }
+        \toprule
+        \textbf{Emp} & \textbf{Veh} & \textbf{Type} & \textbf{Base\$} & \textbf{Opt\$} & \textbf{Save\$} & \textbf{BaseT} & \textbf{OptT} & \textbf{Status} \\
+        \midrule
+        \textbf{E01} & V01 & Prem (4w) & 430.00 & 72.10 & \textbf{357.90} & 45m & 16m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E02} & V05 & Norm (2w) & 390.00 & 59.86 & \textbf{330.14} & 50m & 13m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E03} & V05 & Norm (2w) & 370.00 & 41.33 & \textbf{328.67} & 55m & 10m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E04} & V05 & Norm (2w) & 410.00 & 55.04 & \textbf{355.00} & 48m & 12m & \textbf{\textcolor{statuswarn}{MINOR DELAY}} \\
+        \textbf{E05} & V01 & Prem (4w) & 460.00 & 42.94 & \textbf{417.10} & 60m & 19m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E06} & V01 & Prem (4w) & 440.00 & 51.56 & \textbf{388.44} & 44m & 12m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E07} & V05 & Norm (2w) & 395.00 & 80.00 & \textbf{315.00} & 58m & 17m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E08} & V05 & Norm (2w) & 380.00 & 58.34 & \textbf{321.70} & 65m & 13m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E09} & V05 & Norm (2w) & 400.00 & 68.87 & \textbf{331.13} & 50m & 15m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E10} & V05 & Norm (2w) & 450.00 & 57.17 & \textbf{392.83} & 62m & 13m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E11} & V01 & Prem (4w) & 385.00 & 66.73 & \textbf{318.30} & 53m & 41m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E12} & V04 & Prem (4w) & 435.00 & 62.57 & \textbf{372.43} & 45m & 14m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \midrule
+        \multicolumn{3}{r}{\textbf{TOTALS:}} & \textbf{4,945.00} & \textbf{716.50} & \textbf{\color{velorablue} 4,228.50} & -- & -- & -- \\
+        \bottomrule
+    \end{tabular*}
+    
+    \vspace{0.2cm}
+    \footnotesize \textit{Key: Base\$ = Estimated Cab Cost | Opt\$ = Optimized Share Cost | OptT = Shared Trip Time}
+\end{table}
+\newpage
+
+% --- COLORS ---
+\definecolor{velorablue}{RGB}{28, 56, 121}    % Professional Deep Blue
+\definecolor{statusgreen}{RGB}{34, 139, 34}   % Forest Green
+\definecolor{statuswarn}{RGB}{204, 102, 0}    % Burnt Orange
+\definecolor{headergray}{RGB}{240, 240, 240}  % Light Gray for headers
+
+% --- SPACING TWEAKS ---
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3em}
+
+
+% --- COLORS ---
+\definecolor{velorablue}{RGB}{28, 56, 121}    
+\definecolor{statusgreen}{RGB}{34, 139, 34}   
+\definecolor{statuswarn}{RGB}{204, 102, 0}    
+\definecolor{headergray}{RGB}{240, 240, 240}  
+
+% --- SPACING TWEAKS ---
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.2em} % Reduced paragraph skip
+
+
+% --- HEADER ---
+\begin{center}
+    {\Huge \textbf{\color{velorablue} VELORA MOBILITY OPTIMIZER}} \\
+    \vspace{0.1cm}
+    {\Large \textbf{SOLUTION REPORT: MID-TERM EVALUATION}} \\
+    \small Generated: 2026-02-01 10:57:59 \quad | \quad \textbf{Global Objective Score: 1,086.00}
+\end{center}
+
+\hrule height 1pt \vspace{0.2cm}
+
+% --- SECTION 1: EXECUTIVE SUMMARY ---
+\section*{\uppercase{\color{velorablue} Executive Summary}}
+\vspace{-0.3cm}
+\begin{table}[h]
+    \centering
+    \small 
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r | l r | l r }
+        \toprule
+        \multicolumn{2}{l}{\textbf{Operational Metrics}} & \multicolumn{2}{l}{\textbf{Cost Analysis}} & \multicolumn{2}{l}{\textbf{Savings Impact}} \\
+        \midrule
+        Total Distance & \textbf{163.33 km} & Baseline Cost & \$6,450.00 & \textbf{Net Savings} & \textbf{\color{velorablue}\$4,967.56} \\
+        Total Time & 369.5 min & Optimized CTC & \textbf{\$1,482.44} & Savings \% & \textbf{\color{velorablue}77.0\%} \\
+        Vehicles Used & 3 & Penalty Cost & \$48.75 & Unassigned & \textbf{\color{statusgreen}0} \\
+        \bottomrule
+    \end{tabular*}
+\end{table}
+
+\vspace{0.1cm}
+
+% --- SECTION 2: VEHICLE ROUTES (COMPRESSED) ---
+\section*{\uppercase{\color{velorablue} Vehicle Route Details}}
+\vspace{-0.3cm}
+
+\noindent
+% --- V01 (Long Route) ---
+\begin{minipage}[t]{0.32\textwidth}
+    \centering
+    \colorbox{velorablue}{\parbox{\dimexpr\linewidth-2\fboxsep}{\centering \color{white}\textbf{V01: Premium Electric}}} \\
+    \vspace{0.05cm}
+    {\tiny \textbf{Cap:} 3 | \textbf{Cost:} \$10/km \\ \textbf{Stats:} 54.8 km / 145.5 min}
+    \vspace{0.05cm}
+    
+    % Using TINY font and 0.85 spacing to fit 14 rows
+    \renewcommand{\arraystretch}{0.85}
+    \setlength{\tabcolsep}{1pt}
+    \tiny 
+    \begin{tabular}{c l l c l}
+        \toprule
+        \textbf{\#} & \textbf{Type} & \textbf{Emp} & \textbf{Time} & \textbf{Loc} \\
+        \midrule
+        1 & Pick & E07 & 08:06 & Start \\
+        \rowcolor{headergray} 2 & Drop & E07 & 08:20 & Hub \\
+        3 & Pick & E13 & 08:32 & Res \\
+        \rowcolor{headergray} 4 & Drop & E13 & 08:44 & Hub \\
+        5 & Pick & E11 & 09:02 & Res \\
+        \rowcolor{headergray} 6 & Pick & E06 & 09:07 & Res \\
+        7 & Drop & E11 & 09:24 & Hub \\
+        \rowcolor{headergray} 8 & Drop & E06 & 09:26 & Hub \\
+        9 & Pick & E14 & 09:46 & Res \\
+        \rowcolor{headergray} 10 & Pick & E05 & 09:49 & Res \\
+        11 & Pick & E09 & 10:01 & Res \\
+        \rowcolor{headergray} 12 & Drop & E09 & 10:19 & Hub \\
+        13 & Drop & E14 & 10:21 & Hub \\
+        \rowcolor{headergray} 14 & Drop & E05 & 10:23 & Hub \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+\hfill
+% --- V02 (Short Route) ---
+\begin{minipage}[t]{0.32\textwidth}
+    \centering
+    \colorbox{velorablue}{\parbox{\dimexpr\linewidth-2\fboxsep}{\centering \color{white}\textbf{V02: Premium Electric}}} \\
+    \vspace{0.05cm}
+    {\tiny \textbf{Cap:} 3 | \textbf{Cost:} \$11/km \\ \textbf{Stats:} 22.0 km / 61.0 min}
+    \vspace{0.05cm}
+    
+    \renewcommand{\arraystretch}{0.85}
+    \setlength{\tabcolsep}{1pt}
+    \tiny
+    \begin{tabular}{c l l c l}
+        \toprule
+        \textbf{\#} & \textbf{Type} & \textbf{Emp} & \textbf{Time} & \textbf{Loc} \\
+        \midrule
+        1 & Pick & E01 & 08:10 & Start \\
+        \rowcolor{headergray} 2 & Drop & E01 & 08:26 & Hub \\
+        3 & Pick & E02 & 08:42 & Res \\
+        \rowcolor{headergray} 4 & Drop & E02 & 08:58 & Hub \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+\hfill
+% --- V05 (Medium Route) ---
+\begin{minipage}[t]{0.32\textwidth}
+    \centering
+    \colorbox{velorablue}{\parbox{\dimexpr\linewidth-2\fboxsep}{\centering \color{white}\textbf{V05: Normal (2w)}}} \\
+    \vspace{0.05cm}
+    {\tiny \textbf{Cap:} 1 | \textbf{Cost:} \$8/km \\ \textbf{Stats:} 86.5 km / 163.0 min}
+    \vspace{0.05cm}
+    
+    \renewcommand{\arraystretch}{0.85}
+    \setlength{\tabcolsep}{1pt}
+    \tiny
+    \begin{tabular}{c l l c l}
+        \toprule
+        \textbf{\#} & \textbf{Type} & \textbf{Emp} & \textbf{Time} & \textbf{Loc} \\
+        \midrule
+        1 & Pick & E03 & 08:20 & Start \\
+        \rowcolor{headergray} 2 & Drop & E03 & 08:32 & Hub \\
+        3 & Pick & E15 & 08:44 & Res \\
+        \rowcolor{headergray} 4 & Drop & E15 & 08:56 & Hub \\
+        5 & Pick & E12 & 09:07 & Res \\
+        \rowcolor{headergray} 6 & Drop & E12 & 09:18 & Hub \\
+        7 & Pick & E10 & 09:31 & Res \\
+        \rowcolor{headergray} 8 & Drop & E10 & 09:43 & Hub \\
+        9 & Pick & E04 & 09:56 & Res \\
+        \rowcolor{headergray} 10 & Drop & E04 & 10:08 & Hub \\
+        11 & Pick & E08 & 10:24 & Res \\
+        \rowcolor{headergray} 12 & Drop & E08 & 10:40 & Hub \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+
+\vspace{0.2cm}
+
+% --- SECTION 3: EMPLOYEE ASSIGNMENTS (Maximized Width) ---
+\section*{\uppercase{\color{velorablue} Detailed Employee Assignments \& Financials}}
+\vspace{-0.3cm}
+
+\begin{table}[h]
+    \centering
+    \footnotesize % Reduced from small to ensure fit
+    \renewcommand{\arraystretch}{1.05} % Slightly tighter rows
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l c l r r r c c l }
+        \toprule
+        \textbf{Emp} & \textbf{Veh} & \textbf{Type} & \textbf{Base\$} & \textbf{Opt\$} & \textbf{Save\$} & \textbf{BaseT} & \textbf{OptT} & \textbf{Status} \\
+        \midrule
+        \textbf{E01} & V02 & Prem (4w) & 450.00 & 78.44 & \textbf{371.56} & 42m & 16m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E02} & V02 & Prem (4w) & 440.00 & 78.97 & \textbf{361.03} & 43m & 16m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E03} & V05 & Norm (2w) & 410.00 & 59.22 & \textbf{350.78} & 50m & 13m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E04} & V05 & Norm (2w) & 390.00 & 58.26 & \textbf{331.74} & 55m & 12m & \textbf{\textcolor{statuswarn}{MINOR DELAY}} \\
+        \textbf{E05} & V01 & Prem (4w) & 470.00 & 48.27 & \textbf{421.73} & 62m & 34m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E06} & V01 & Prem (4w) & 420.00 & 34.95 & \textbf{385.05} & 48m & 19m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E07} & V01 & Prem (4w) & 460.00 & 58.75 & \textbf{401.25} & 41m & 15m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E08} & V05 & Norm (2w) & 400.00 & 79.97 & \textbf{320.03} & 57m & 16m & \textbf{\textcolor{statuswarn}{MINOR DELAY}} \\
+        \textbf{E09} & V01 & Prem (4w) & 380.00 & 24.31 & \textbf{355.69} & 65m & 18m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E10} & V05 & Norm (2w) & 455.00 & 58.40 & \textbf{396.60} & 60m & 12m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E11} & V01 & Prem (4w) & 430.00 & 52.27 & \textbf{377.73} & 49m & 23m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E12} & V05 & Norm (2w) & 395.00 & 49.70 & \textbf{345.30} & 53m & 11m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E13} & V01 & Prem (4w) & 465.00 & 46.40 & \textbf{418.60} & 40m & 12m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E14} & V01 & Prem (4w) & 460.00 & 51.68 & \textbf{408.32} & 63m & 35m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E15} & V05 & Norm (2w) & 425.00 & 57.17 & \textbf{367.83} & 47m & 12m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \midrule
+        \multicolumn{3}{r}{\textbf{TOTALS:}} & \textbf{6,450.00} & \textbf{836.80} & \textbf{\color{velorablue} 5,613.20} & -- & -- & -- \\
+        \bottomrule
+    \end{tabular*}
+    
+    \vspace{0.1cm}
+    \tiny \textit{Key: Base\$ = Estimated Cab Cost | Opt\$ = Optimized Share Cost | OptT = Shared Trip Time}
+\end{table}
+\newpage
+
+% --- COLORS ---
+\definecolor{velorablue}{RGB}{28, 56, 121}    
+\definecolor{statusgreen}{RGB}{34, 139, 34}   
+\definecolor{statuswarn}{RGB}{204, 102, 0}    
+\definecolor{statusred}{RGB}{200, 0, 0}       % Critical Red for LATE status
+\definecolor{headergray}{RGB}{240, 240, 240}  
+
+% --- SPACING TWEAKS ---
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.2em}
+
+
+% --- HEADER ---
+\begin{center}
+    {\Huge \textbf{\color{velorablue} VELORA MOBILITY OPTIMIZER}} \\
+    \vspace{0.1cm}
+    {\Large \textbf{SOLUTION REPORT: MID-TERM EVALUATION}} \\
+    \small Generated: 2026-02-01 10:57:59 \quad | \quad \textbf{Global Objective Score: 3,738,765.02}
+\end{center}
+
+\hrule height 1pt \vspace{0.2cm}
+
+% --- SECTION 1: EXECUTIVE SUMMARY ---
+\section*{\uppercase{\color{velorablue} Executive Summary}}
+\vspace{-0.3cm}
+\begin{table}[h]
+    \centering
+    \small 
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r | l r | l r }
+        \toprule
+        \multicolumn{2}{l}{\textbf{Operational Metrics}} & \multicolumn{2}{l}{\textbf{Cost Analysis}} & \multicolumn{2}{l}{\textbf{Savings Impact}} \\
+        \midrule
+        Total Distance & \textbf{154.48 km} & Baseline Cost & \$4,420.00 & \textbf{Net Savings} & \textbf{\color{velorablue}\$2,409.34} \\
+        Total Time & 367.6 min & Optimized CTC & \textbf{\$2,010.66} & Savings \% & \textbf{\color{velorablue}54.5\%} \\
+        Vehicles Used & 4 & Penalty Cost & \color{statusred}\$3,737,247 & Unassigned & \textbf{\color{statusgreen}0} \\
+        \bottomrule
+    \end{tabular*}
+\end{table}
+
+\vspace{0.1cm}
+
+% --- SECTION 2: VEHICLE ROUTES (4 Column Layout) ---
+\section*{\uppercase{\color{velorablue} Vehicle Route Details}}
+\vspace{-0.3cm}
+
+\noindent
+% --- V01 ---
+\begin{minipage}[t]{0.24\textwidth}
+    \centering
+    \colorbox{velorablue}{\parbox{\dimexpr\linewidth-2\fboxsep}{\centering \color{white}\textbf{V01: Premium}}} \\
+    \vspace{0.05cm}
+    {\tiny \textbf{Cap:} 2 | \textbf{Cost:} \$10/km \\ \textbf{Stats:} 55.4 km / 139.6 min}
+    \vspace{0.05cm}
+    
+    \renewcommand{\arraystretch}{0.9}
+    \setlength{\tabcolsep}{1pt}
+    \tiny
+    \begin{tabular}{c l l c l}
+        \toprule
+        \textbf{\#} & \textbf{Typ} & \textbf{Emp} & \textbf{Time} & \textbf{Loc} \\
+        \midrule
+        1 & Pick & E01 & 08:10 & Start \\
+        \rowcolor{headergray} 2 & Drop & E01 & 08:26 & Hub \\
+        3 & Pick & E04 & 08:42 & Res \\
+        \rowcolor{headergray} 4 & Drop & E04 & 08:58 & Hub \\
+        5 & Pick & E06 & 09:15 & Res \\
+        \rowcolor{headergray} 6 & Pick & E05 & 09:18 & Res \\
+        7 & Drop & E06 & 09:35 & Hub \\
+        \rowcolor{headergray} 8 & Drop & E05 & 09:37 & Hub \\
+        9 & Pick & E09 & 09:57 & Res \\
+        \rowcolor{headergray} 10 & Drop & E09 & 10:17 & Hub \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+\hfill
+% --- V02 ---
+\begin{minipage}[t]{0.24\textwidth}
+    \centering
+    \colorbox{velorablue}{\parbox{\dimexpr\linewidth-2\fboxsep}{\centering \color{white}\textbf{V02: Premium}}} \\
+    \vspace{0.05cm}
+    {\tiny \textbf{Cap:} 2 | \textbf{Cost:} \$11/km \\ \textbf{Stats:} 7.42 km / 34.2 min}
+    \vspace{0.05cm}
+    
+    \renewcommand{\arraystretch}{0.9}
+    \setlength{\tabcolsep}{1pt}
+    \tiny
+    \begin{tabular}{c l l c l}
+        \toprule
+        \textbf{\#} & \textbf{Typ} & \textbf{Emp} & \textbf{Time} & \textbf{Loc} \\
+        \midrule
+        1 & Pick & E02 & 08:15 & Start \\
+        \rowcolor{headergray} 2 & Drop & E02 & 08:32 & Hub \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+\hfill
+% --- V03 ---
+\begin{minipage}[t]{0.24\textwidth}
+    \centering
+    \colorbox{velorablue}{\parbox{\dimexpr\linewidth-2\fboxsep}{\centering \color{white}\textbf{V03: Normal}}} \\
+    \vspace{0.05cm}
+    {\tiny \textbf{Cap:} 4 | \textbf{Cost:} \$14/km \\ \textbf{Stats:} 68.7 km / 121.7 min}
+    \vspace{0.05cm}
+    
+    \renewcommand{\arraystretch}{0.9}
+    \setlength{\tabcolsep}{1pt}
+    \tiny
+    \begin{tabular}{c l l c l}
+        \toprule
+        \textbf{\#} & \textbf{Typ} & \textbf{Emp} & \textbf{Time} & \textbf{Loc} \\
+        \midrule
+        1 & Pick & E10 & 09:00 & Start \\
+        \rowcolor{headergray} 2 & Drop & E10 & 09:59 & Hub \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+\hfill
+% --- V04 ---
+\begin{minipage}[t]{0.24\textwidth}
+    \centering
+    \colorbox{velorablue}{\parbox{\dimexpr\linewidth-2\fboxsep}{\centering \color{white}\textbf{V04: Van (Dsl)}}} \\
+    \vspace{0.05cm}
+    {\tiny \textbf{Cap:} 6 | \textbf{Cost:} \$18/km \\ \textbf{Stats:} 23.0 km / 72.1 min}
+    \vspace{0.05cm}
+    
+    \renewcommand{\arraystretch}{0.9}
+    \setlength{\tabcolsep}{1pt}
+    \tiny
+    \begin{tabular}{c l l c l}
+        \toprule
+        \textbf{\#} & \textbf{Typ} & \textbf{Emp} & \textbf{Time} & \textbf{Loc} \\
+        \midrule
+        1 & Pick & E03 & 08:20 & Start \\
+        \rowcolor{headergray} 2 & Drop & E03 & 08:35 & Hub \\
+        3 & Pick & E08 & 08:50 & Res \\
+        \rowcolor{headergray} 4 & Pick & E07 & 08:52 & Res \\
+        5 & Drop & E08 & 09:08 & Hub \\
+        \rowcolor{headergray} 6 & Drop & E07 & 09:10 & Hub \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        & & & & \\
+        \bottomrule
+    \end{tabular}
+\end{minipage}
+
+\vspace{0.2cm}
+
+% --- SECTION 3: EMPLOYEE ASSIGNMENTS (Maximized Width) ---
+\section*{\uppercase{\color{velorablue} Detailed Employee Assignments \& Financials}}
+\vspace{-0.3cm}
+
+\begin{table}[h]
+    \centering
+    \small % Optimal size for 10 rows
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l c l r r r c c l }
+        \toprule
+        \textbf{Emp} & \textbf{Veh} & \textbf{Type} & \textbf{Base\$} & \textbf{Opt\$} & \textbf{Save\$} & \textbf{BaseT} & \textbf{OptT} & \textbf{Status} \\
+        \midrule
+        \textbf{E01} & V01 & Prem (4w) & 420.00 & 71.14 & \textbf{348.86} & 40m & 16m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E02} & V02 & Prem (4w) & 425.00 & 77.82 & \textbf{347.18} & 42m & 17m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E03} & V04 & Van (Dsl) & 430.00 & 127.12 & \textbf{302.88} & 43m & 15m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E04} & V01 & Prem (4w) & 435.00 & 70.76 & \textbf{364.24} & 44m & 16m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E05} & V01 & Prem (4w) & 400.00 & 37.68 & \textbf{362.32} & 50m & 19m & \textbf{\textcolor{statuswarn}{MINOR DELAY}} \\
+        \rowcolor{headergray} \textbf{E06} & V01 & Prem (4w) & 395.00 & 42.03 & \textbf{352.97} & 50m & 20m & \textbf{\textcolor{statuswarn}{MINOR DELAY}} \\
+        \textbf{E07} & V04 & Van (Dsl) & 380.00 & 62.92 & \textbf{317.08} & 58m & 17m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E08} & V04 & Van (Dsl) & 385.00 & 70.74 & \textbf{314.26} & 58m & 18m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \textbf{E09} & V01 & Prem (4w) & 450.00 & 89.51 & \textbf{360.49} & 65m & 20m & \textbf{\textcolor{statusgreen}{On-Time}} \\
+        \rowcolor{headergray} \textbf{E10} & V03 & Norm (4w) & 700.00 & 468.44 & \textbf{231.56} & 35m & 59m & \textbf{\textcolor{statusred}{LATE (+80m)}} \\
+        \midrule
+        \multicolumn{3}{r}{\textbf{TOTALS:}} & \textbf{4,420.00} & \textbf{1,118.16} & \textbf{\color{velorablue} 3,301.84} & -- & -- & -- \\
+        \bottomrule
+    \end{tabular*}
+    
+    \vspace{0.1cm}
+    \footnotesize \textit{Key: Base\$ = Estimated Cab Cost | Opt\$ = Optimized Share Cost | OptT = Shared Trip Time}
+\end{table}
+
+
+\newpage
+
+
+
+\end{document}

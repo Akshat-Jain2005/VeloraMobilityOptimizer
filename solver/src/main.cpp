@@ -740,17 +740,36 @@ int main(int argc, char** argv) {
     // Parse config
     bool allowExternal = false;
     string mapsKey;
-    
+    MapProvider mapProvider = MapProvider::OSRM;  // Default: OSRM (free, no key needed)
+    long mapTimeoutMs = 2000;
+    int mapMaxRetries = 2;
+
     if (j.contains("config")) {
         auto& cfg = j["config"];
         allowExternal = cfg.value("allow_external_maps", false);
         mapsKey = cfg.value("maps_api_key", "");
-        
+
+        // Parse map provider setting
+        string providerStr = cfg.value("map_provider", "osrm");
+        if (providerStr == "google" || providerStr == "google_maps") {
+            mapProvider = MapProvider::GOOGLE_MAPS;
+        } else if (providerStr == "ors" || providerStr == "openrouteservice") {
+            mapProvider = MapProvider::OPENROUTESERVICE;
+        } else if (providerStr == "osrm") {
+            mapProvider = MapProvider::OSRM;
+        } else if (providerStr == "haversine" || providerStr == "none") {
+            mapProvider = MapProvider::HAVERSINE;
+        }
+
+        // Parse timeout and retry settings
+        mapTimeoutMs = cfg.value("map_timeout_ms", 2000);
+        mapMaxRetries = cfg.value("map_max_retries", 2);
+
         if (cfg.contains("weights")) {
             gCtx.wCost = cfg["weights"].value("cost", 0.7);
             gCtx.wTime = cfg["weights"].value("time", 0.3);
         }
-        
+
         if (cfg.contains("tolerances")) {
             for (auto& [key, val] : cfg["tolerances"].items()) {
                 try {
@@ -762,8 +781,17 @@ int main(int argc, char** argv) {
             }
         }
     }
-    
-    MapDistance mapDist(allowExternal, mapsKey);
+
+    // Initialize MapDistance with provider configuration
+    MapDistance mapDist(allowExternal, mapsKey, mapProvider);
+    mapDist.setTimeout(mapTimeoutMs);
+    mapDist.setMaxRetries(mapMaxRetries);
+
+    // Log configuration
+    const char* providerNames[] = {"Haversine", "Google Maps", "OpenRouteService", "OSRM"};
+    cout << "Map distance: provider=" << providerNames[static_cast<int>(mapProvider)]
+         << ", external=" << (allowExternal ? "enabled" : "disabled")
+         << ", timeout=" << mapTimeoutMs << "ms" << endl;
     gMapDist = &mapDist;
     
     // Parse requests

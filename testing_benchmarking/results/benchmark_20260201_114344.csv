@@ -1,0 +1,5 @@
+test_case,employees,vehicles_used,vehicles_available,baseline_cost,optimized_cost,ctc_cost,savings,savings_pct,on_time,delay,late,distance_km,penalty_cost
+TC01,8,2,3,3200.00,619.30,863.78,2580.70,80.65,7,1,0,73.64,177.50
+TC02,12,3,5,4945.00,716.48,1241.44,4228.52,85.51,11,1,0,143.07,105.23
+TC03,15,3,6,6450.00,836.77,1482.44,5613.23,87.03,13,2,0,163.33,48.75
+TC04,10,4,4,4420.00,1118.16,2010.66,3301.84,74.70,7,2,1,154.48,3737247.28

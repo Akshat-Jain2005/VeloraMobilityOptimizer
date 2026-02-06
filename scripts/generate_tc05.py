@@ -2,7 +2,6 @@ import pandas as pd
 import random
 import os
 
-# --- Constants for Bangalore Locations ---
 LOCATIONS = {
     "Koramangala (Depot)": (12.9279, 77.6271),
     "Indiranagar": (12.9716, 77.6412),
@@ -12,7 +11,7 @@ LOCATIONS = {
     "Jayanagar": (12.9308, 77.5838),
     "Marathahalli": (12.9591, 77.6974),
     "Manyata Tech Park (Office)": (13.0500, 77.6150),
-    "Bannerghatta (Far)": (12.8000, 77.5700) # Edge case location
+    "Bannerghatta (Far)": (12.8000, 77.5700) 
 }
 
 OFFICE_LAT, OFFICE_LON = LOCATIONS["Manyata Tech Park (Office)"]
