@@ -89,7 +89,7 @@ struct Route {
     double totalTime{0};       // Total time in minutes
     double totalCost{0};       // Monetary cost (distance * costPerKm)
     double penaltyCost{0};     // Penalty cost for constraint violations
-    double totalRouteCost{0};  // totalCost + penaltyCost
+    double totalRouteCost{0};  // wCost*moneyCost + wTime*totalTime + penaltyCost
 };
 
 struct Solution {
@@ -118,7 +118,7 @@ struct SolverContext {
     double wTime{0.3};
     
     // Penalty weights (tuned based on research papers)
-    double earlyArrivalPenaltyPerMin{2.0};      // Waiting cost
+    double earlyArrivalPenaltyPerMin{0.0};      // Waiting cost
     double lateArrivalPenaltyPerMin{10.0};      // Base late penalty
     double sharingViolationPenalty{500.0};      // Per occurrence
     double vehiclePrefViolationPenalty{300.0};  // Per request
@@ -290,7 +290,7 @@ RouteEvaluation evaluateRoute(const Route& r, const Vehicle& v, const vector<Req
     
     eval.totalTime = currentTime - v.availabilityTime;
     eval.moneyCost = eval.totalDist * v.costPerKm;
-    eval.totalCost = eval.moneyCost + eval.penaltyCost;
+    eval.totalCost = (eval.moneyCost * gCtx.wCost) + (eval.totalTime * gCtx.wTime) + eval.penaltyCost;
     
     return eval;
 }
