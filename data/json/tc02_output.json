@@ -111,28 +111,10 @@
   ],
   "routes": [
     {
-      "penaltyCost": 52.44438493784821,
+      "penaltyCost": 0.0,
       "stops": [
         {
-          "arrivalTime": 495.0,
-          "employeeId": "E01",
-          "lat": 12.936,
-          "lon": 77.625,
-          "reqId": 0,
-          "type": "pickup",
-          "waitTime": 13.451160772088372
-        },
-        {
-          "arrivalTime": 511.4199859335378,
-          "employeeId": "E01",
-          "lat": 12.9716,
-          "lon": 77.5946,
-          "reqId": 0,
-          "type": "dropoff",
-          "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 523.732764572975,
+          "arrivalTime": 485.32755609543403,
           "employeeId": "E06",
           "lat": 12.952,
           "lon": 77.622,
@@ -141,7 +123,7 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 536.0455432124122,
+          "arrivalTime": 495.64033473487126,
           "employeeId": "E06",
           "lat": 12.9716,
           "lon": 77.5946,
@@ -150,45 +132,27 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 550.4708783186298,
-          "employeeId": "E11",
-          "lat": 12.933,
-          "lon": 77.605,
-          "reqId": 10,
+          "arrivalTime": 507.01610297207156,
+          "employeeId": "E12",
+          "lat": 12.955,
+          "lon": 77.628,
+          "reqId": 11,
           "type": "pickup",
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 570.0,
-          "employeeId": "E05",
-          "lat": 12.918,
-          "lon": 77.608,
-          "reqId": 4,
-          "type": "pickup",
-          "waitTime": 12.771031696835735
-        },
-        {
-          "arrivalTime": 589.1763281148784,
-          "employeeId": "E05",
+          "arrivalTime": 518.3918712092718,
+          "employeeId": "E12",
           "lat": 12.9716,
           "lon": 77.5946,
-          "reqId": 4,
-          "type": "dropoff",
-          "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 591.1763281148784,
-          "employeeId": "E11",
-          "lat": 12.9716,
-          "lon": 77.5946,
-          "reqId": 10,
+          "reqId": 11,
           "type": "dropoff",
           "waitTime": 0.0
         }
       ],
-      "totalCost": 354.770678229772,
-      "totalDist": 35.4770678229772,
-      "totalTime": 113.1763281148784,
+      "totalCost": 191.959356046359,
+      "totalDist": 19.1959356046359,
+      "totalTime": 38.39187120927181,
       "vehicleId": 0,
       "vehicleIdStr": "V01"
     },
@@ -214,27 +178,27 @@
       "penaltyCost": 0.0,
       "stops": [
         {
-          "arrivalTime": 501.3448746214316,
-          "employeeId": "E12",
-          "lat": 12.955,
-          "lon": 77.628,
-          "reqId": 11,
+          "arrivalTime": 500.05599238232963,
+          "employeeId": "E01",
+          "lat": 12.936,
+          "lon": 77.625,
+          "reqId": 0,
           "type": "pickup",
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 515.5331977327176,
-          "employeeId": "E12",
+          "arrivalTime": 515.5059773111202,
+          "employeeId": "E01",
           "lat": 12.9716,
           "lon": 77.5946,
-          "reqId": 11,
+          "reqId": 0,
           "type": "dropoff",
           "waitTime": 0.0
         }
       ],
-      "totalCost": 95.13708169461697,
-      "totalDist": 8.648825608601543,
-      "totalTime": 22.533197732717554,
+      "totalCost": 105.26401686375019,
+      "totalDist": 9.569456078522744,
+      "totalTime": 20.505977311120205,
       "vehicleId": 3,
       "vehicleIdStr": "V04"
     },
@@ -251,7 +215,7 @@
           "waitTime": 26.39194150728889
         },
         {
-          "arrivalTime": 524.9125247965289,
+          "arrivalTime": 522.9125247965289,
           "employeeId": "E09",
           "lat": 12.9716,
           "lon": 77.5946,
@@ -260,43 +224,7 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 538.1363136010548,
-          "employeeId": "E02",
-          "lat": 12.931,
-          "lon": 77.621,
-          "reqId": 1,
-          "type": "pickup",
-          "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 551.3601024055806,
-          "employeeId": "E02",
-          "lat": 12.9716,
-          "lon": 77.5946,
-          "reqId": 1,
-          "type": "dropoff",
-          "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 568.354052033326,
-          "employeeId": "E07",
-          "lat": 12.927,
-          "lon": 77.642,
-          "reqId": 6,
-          "type": "pickup",
-          "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 585.3480016610713,
-          "employeeId": "E07",
-          "lat": 12.9716,
-          "lon": 77.5946,
-          "reqId": 6,
-          "type": "dropoff",
-          "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 597.6684739405424,
+          "arrivalTime": 533.2329970760001,
           "employeeId": "E04",
           "lat": 12.9605,
           "lon": 77.6385,
@@ -305,7 +233,7 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 609.9889462200135,
+          "arrivalTime": 543.5534693554712,
           "employeeId": "E04",
           "lat": 12.9716,
           "lon": 77.5946,
@@ -314,7 +242,43 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 619.7384922623161,
+          "arrivalTime": 552.8724706851343,
+          "employeeId": "E11",
+          "lat": 12.933,
+          "lon": 77.605,
+          "reqId": 10,
+          "type": "pickup",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 562.1914720147975,
+          "employeeId": "E11",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 10,
+          "type": "dropoff",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 573.4152608193233,
+          "employeeId": "E02",
+          "lat": 12.931,
+          "lon": 77.621,
+          "reqId": 1,
+          "type": "pickup",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 584.6390496238491,
+          "employeeId": "E02",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 1,
+          "type": "dropoff",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 592.3885956661517,
           "employeeId": "E03",
           "lat": 12.942,
           "lon": 77.61,
@@ -323,7 +287,7 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 629.4880383046186,
+          "arrivalTime": 600.1381417084542,
           "employeeId": "E03",
           "lat": 12.9716,
           "lon": 77.5946,
@@ -332,25 +296,43 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 642.4274349124868,
-          "employeeId": "E08",
-          "lat": 12.941,
-          "lon": 77.631,
-          "reqId": 7,
+          "arrivalTime": 613.020387794613,
+          "employeeId": "E05",
+          "lat": 12.918,
+          "lon": 77.608,
+          "reqId": 4,
           "type": "pickup",
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 655.3668315203549,
-          "employeeId": "E08",
+          "arrivalTime": 625.9026338807719,
+          "employeeId": "E05",
           "lat": 12.9716,
           "lon": 77.5946,
-          "reqId": 7,
+          "reqId": 4,
           "type": "dropoff",
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 668.0854678028547,
+          "arrivalTime": 640.8965835085172,
+          "employeeId": "E07",
+          "lat": 12.927,
+          "lon": 77.642,
+          "reqId": 6,
+          "type": "pickup",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 655.8905331362625,
+          "employeeId": "E07",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 6,
+          "type": "dropoff",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 666.6091694187623,
           "employeeId": "E10",
           "lat": 12.948,
           "lon": 77.635,
@@ -359,28 +341,46 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 680.8041040853545,
+          "arrivalTime": 677.3278057012622,
           "employeeId": "E10",
           "lat": 12.9716,
           "lon": 77.5946,
           "reqId": 9,
           "type": "dropoff",
           "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 688.2672023091303,
+          "employeeId": "E08",
+          "lat": 12.941,
+          "lon": 77.631,
+          "reqId": 7,
+          "type": "pickup",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 699.2065989169985,
+          "employeeId": "E08",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 7,
+          "type": "dropoff",
+          "waitTime": 0.0
         }
       ],
-      "totalCost": 791.5315337496852,
-      "totalDist": 98.94144171871065,
-      "totalTime": 202.80410408535454,
+      "totalCost": 1028.344839518453,
+      "totalDist": 128.54310493980662,
+      "totalTime": 219.20659891699847,
       "vehicleId": 4,
       "vehicleIdStr": "V05"
     }
   ],
   "summary": {
-    "globalCost": 1030.6435793171067,
-    "totalDistance": 143.06733515028938,
-    "totalMoneyCost": 1241.4392936740742,
-    "totalPenaltyCost": 105.228267952426,
-    "totalTime": 338.5136299329505,
+    "globalCost": 1011.7397776962299,
+    "totalDistance": 157.30849662296527,
+    "totalMoneyCost": 1325.5682124285622,
+    "totalPenaltyCost": 52.78388301457778,
+    "totalTime": 278.1044474373905,
     "unassignedCount": 0,
     "vehiclesUsed": 3
   },

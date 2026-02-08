@@ -126,7 +126,7 @@ struct SolverContext {
     double maxDelayViolationPenalty{100000.0};  // Hard constraint violation
     
     // Service time per stop (loading/unloading)
-    double serviceTimePerStop{2.0};  // minutes
+    double serviceTimePerStop{0.0};  // minutes
     
     // Default speed if not specified
     double defaultSpeedKmph{30.0};
@@ -333,7 +333,7 @@ bool isRouteFeasible(const Route& r, const Vehicle& v, const vector<Request>& re
             currentLoad -= req.load;
             if (strictTimeCheck) {
                 double maxDelay = gCtx.getMaxDelay(req.priority);
-                if (currentTime > req.lateTime + maxDelay * 2) {  // Allow 2x tolerance in construction
+                if (currentTime > req.lateTime + maxDelay) {
                     return false;
                 }
             }
