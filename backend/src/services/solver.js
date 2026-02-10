@@ -1,7 +1,9 @@
-const { runProcess } = require('../utils/processRunner');
-const path = require('path');
+const { runProcess } = require("../utils/processRunner");
+const path = require("path");
 
-const SOLVER_PATH = path.join(__dirname, '../../../build/solver/velora_solver');
+const SOLVER_NAME =
+  process.platform === "win32" ? "velora_solver.exe" : "velora_solver";
+const SOLVER_PATH = path.join(__dirname, "../../../build/solver", SOLVER_NAME);
 const TIMEOUT_MS = 2 * 60 * 1000; // 2 minutes
 
 async function run(inputPath, outputPath) {
@@ -9,14 +11,16 @@ async function run(inputPath, outputPath) {
 
   const result = await runProcess(SOLVER_PATH, [inputPath, outputPath], {
     timeout: TIMEOUT_MS,
-    cwd: path.join(__dirname, '../../..')
+    cwd: path.join(__dirname, "../../.."),
   });
 
   if (result.exitCode !== 0) {
-    throw new Error(`Solver failed with exit code ${result.exitCode}: ${result.stderr}`);
+    throw new Error(
+      `Solver failed with exit code ${result.exitCode}: ${result.stderr}`,
+    );
   }
 
-  console.log('Solver completed successfully');
+  console.log("Solver completed successfully");
   return result;
 }
 

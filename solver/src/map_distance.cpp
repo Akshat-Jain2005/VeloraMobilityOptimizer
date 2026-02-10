@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include "map_distance.hpp"
 #include <cmath>
 #include <iostream>

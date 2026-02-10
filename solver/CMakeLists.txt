@@ -29,6 +29,10 @@ set_target_properties(velora_solver PROPERTIES
     CXX_EXTENSIONS OFF
 )
 
+# Find and link threads (required for std::mutex)
+find_package(Threads REQUIRED)
+target_link_libraries(velora_solver PRIVATE Threads::Threads)
+
 message(STATUS "[Solver] Include dir: ${SOLVER_INCLUDE_DIR}")
 message(STATUS "[Solver] Source dir: ${SOLVER_SOURCE_DIR}")
 
