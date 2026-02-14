@@ -1,0 +1,33 @@
+[Unit]
+Description=Velora Mobility Optimizer Backend API
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=velora
+Group=velora
+WorkingDirectory=/opt/velora/backend
+
+Environment=NODE_ENV=production
+EnvironmentFile=/opt/velora/backend/.env
+
+ExecStart=/usr/bin/node /opt/velora/backend/src/app.js
+Restart=always
+RestartSec=10
+StartLimitInterval=60s
+StartLimitBurst=3
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=velora-backend
+
+LimitNOFILE=65536
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/velora/backend/uploads /opt/velora/backend/outputs /opt/velora/backend/jobs
+
+[Install]
+WantedBy=multi-user.target
