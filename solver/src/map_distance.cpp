@@ -91,20 +91,25 @@ double MapDistance::openRouteServiceDistance(double lat1, double lon1, double la
         return fallbackDistance;
     }
 
-    // Build URL - ORS uses lon,lat order (GeoJSON format)
-    std::ostringstream urlStream;
-    urlStream << "https://api.openrouteservice.org/v2/directions/driving-car"
-              << "?start=" << std::fixed << std::setprecision(6) << lon1 << "," << lat1
-              << "&end=" << lon2 << "," << lat2;
-    std::string url = urlStream.str();
+    // ORS v2 requires POST with JSON body, lon/lat order (GeoJSON format)
+    std::string url = "https://api.openrouteservice.org/v2/directions/driving-car";
+
+    // Build JSON request body
+    std::ostringstream bodyStream;
+    bodyStream << "{\"coordinates\":[[" << std::fixed << std::setprecision(6)
+               << lon1 << "," << lat1 << "],[" << lon2 << "," << lat2 << "]]}";
+    std::string body = bodyStream.str();
 
     std::string response;
     struct curl_slist* headers = nullptr;
-    std::string authHeader = "Authorization: " + apiKey_;
+    std::string authHeader = "Authorization: Bearer " + apiKey_;
     headers = curl_slist_append(headers, authHeader.c_str());
     headers = curl_slist_append(headers, "Accept: application/json");
+    headers = curl_slist_append(headers, "Content-Type: application/json");
 
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curl, CURLOPT_POST, 1L);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, body.c_str());
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, curlWriteCallback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
@@ -158,8 +163,16 @@ double MapDistance::openRouteServiceDistance(double lat1, double lon1, double la
     try {
         json doc = json::parse(response);
 
-        // Response format: { features: [ { properties: { summary: { distance: meters } } } ] }
-        if (doc.contains("features") && !doc["features"].empty()) {
+        // POST response format: { routes: [ { summary: { distance: meters } } ] }
+        // Also handle GET format: { features: [ { properties: { summary: { distance: meters } } } ] }
+        if (doc.contains("routes") && !doc["routes"].empty()) {
+            auto& route = doc["routes"][0];
+            if (route.contains("summary") && route["summary"].contains("distance")) {
+                double meters = route["summary"]["distance"].get<double>();
+                apiSuccessCount++;
+                return meters / 1000.0; // Convert to km
+            }
+        } else if (doc.contains("features") && !doc["features"].empty()) {
             auto& feature = doc["features"][0];
             if (feature.contains("properties") && feature["properties"].contains("summary")) {
                 auto& summary = feature["properties"]["summary"];
@@ -381,3 +394,8 @@ void MapDistance::printStats() {
               << ", Cache size: " << getCacheSize()
               << "\n";
 }
+
+int MapDistance::getApiCallCount() { return apiCallCount.load(); }
+int MapDistance::getApiSuccessCount() { return apiSuccessCount.load(); }
+int MapDistance::getTimeoutFallbackCount() { return timeoutFallbackCount.load(); }
+int MapDistance::getErrorFallbackCount() { return errorFallbackCount.load(); }

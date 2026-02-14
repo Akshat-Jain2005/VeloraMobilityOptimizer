@@ -36,6 +36,16 @@ public:
     // Print API call statistics (for debugging)
     void printStats();
 
+    // Get API call statistics for JSON output
+    static int getApiCallCount();
+    static int getApiSuccessCount();
+    static int getTimeoutFallbackCount();
+    static int getErrorFallbackCount();
+
+    // Get provider info
+    bool isExternalEnabled() const { return allowExternal_; }
+    MapProvider getProvider() const { return provider_; }
+
 private:
     bool allowExternal_;
     std::string apiKey_;

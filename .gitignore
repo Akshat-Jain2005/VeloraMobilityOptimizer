@@ -46,3 +46,6 @@ pdf24_convertPdfTo/
 Whatsapp SSs/
 *.pdf
 *.docx
+
+.cache/
+.claude/

@@ -27,7 +27,6 @@
 #include <numeric>
 #include <unordered_set>
 #include <unordered_map>
-#include <chrono>
 
 #include "json.hpp"
 #include "map_distance.hpp"
@@ -648,8 +647,7 @@ Solution twoOptMove(const Solution& current, const vector<Request>& reqs,
 // ============== SIMULATED ANNEALING ==============
 
 Solution simulatedAnnealing(const Solution& initial, const vector<Request>& reqs,
-                            const vector<Vehicle>& vehicles) {
-    mt19937 gen(chrono::steady_clock::now().time_since_epoch().count());
+                            const vector<Vehicle>& vehicles, mt19937& gen) {
     
     Solution current = initial;
     Solution best = initial;
@@ -865,7 +863,7 @@ int main(int argc, char** argv) {
     
     // Improve with SA
     cout << "\nPhase 2: Simulated Annealing optimization..." << endl;
-    Solution finalSol = simulatedAnnealing(bestInit, requests, vehicles);
+    Solution finalSol = simulatedAnnealing(bestInit, requests, vehicles, gen);
     
     cout << "\nFinal solution: cost=" << fixed << setprecision(2) << finalSol.totalMoneyCost 
          << ", penalty=" << finalSol.totalPenaltyCost 
@@ -923,6 +921,23 @@ int main(int argc, char** argv) {
     out["summary"]["totalDistance"] = totalDist;
     out["summary"]["totalTime"] = totalTime;
     out["unassigned"] = finalSol.unassignedReqs;
+
+    // Distance method metadata for frontend fallback notice
+    {
+        const char* provNames[] = {"haversine", "google_maps", "openrouteservice", "osrm"};
+        int tFallbacks = MapDistance::getTimeoutFallbackCount();
+        int eFallbacks = MapDistance::getErrorFallbackCount();
+        bool fallbackUsed = (tFallbacks > 0 || eFallbacks > 0 || !allowExternal);
+        out["summary"]["distanceMethod"] = {
+            {"provider", provNames[static_cast<int>(mapProvider)]},
+            {"apiCalls", MapDistance::getApiCallCount()},
+            {"apiSuccess", MapDistance::getApiSuccessCount()},
+            {"timeoutFallbacks", tFallbacks},
+            {"errorFallbacks", eFallbacks},
+            {"fallbackUsed", fallbackUsed},
+            {"externalEnabled", allowExternal}
+        };
+    }
     
     // Add request mapping for report
     out["requestDetails"] = json::array();

@@ -1,6 +1,9 @@
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "../.env") });
+
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
+const fs = require("fs");
 const optimizationRoutes = require("./routes/optimization");
 
 const app = express();
@@ -8,34 +11,68 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 
 // Serve static output files
-app.use("/outputs", express.static(path.join(__dirname, "..", "outputs")));
+app.use("/outputs", express.static(path.join(__dirname, "../outputs")));
 
 // Root route
 app.get("/", (req, res) => {
   res.json({
-    message: "VELORA Backend API Server",
-    frontend: "http://localhost:5173",
+    message: "Velora Mobility Optimizer API",
     endpoints: {
-      health: "/api/health",
-      optimize: "POST /api/optimize/json",
+      health: "GET /api/health",
+      optimize: "POST /api/optimize",
+      optimizeJson: "POST /api/optimize/json",
       results: "GET /api/results/:jobId",
+      testcases: "GET /api/testcases",
     },
   });
 });
 
 // Health check
 app.get("/api/health", (req, res) => {
-  res.json({ status: "ok", timestamp: new Date().toISOString() });
+  const solverName =
+    process.platform === "win32" ? "velora_solver.exe" : "velora_solver";
+  const solverPath = path.join(__dirname, "../../build/solver", solverName);
+  const parserPath = path.join(__dirname, "../../parser/excel_to_json.py");
+
+  res.json({
+    status: "ok",
+    timestamp: new Date().toISOString(),
+    solver: fs.existsSync(solverPath) ? "found" : "missing",
+    parser: fs.existsSync(parserPath) ? "found" : "missing",
+  });
 });
 
 // Routes
 app.use("/api", optimizationRoutes);
 
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ error: "Route not found" });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error("[ERROR]", err.message);
+  res.status(500).json({ error: "Internal server error", details: err.message });
+});
+
+// Start server
 app.listen(PORT, () => {
-  console.log(`Velora Backend running on port ${PORT}`);
+  console.log(`\n  Velora Backend API running on http://localhost:${PORT}`);
+  console.log(`  Health: http://localhost:${PORT}/api/health\n`);
+
+  // Startup checks
+  const solverName =
+    process.platform === "win32" ? "velora_solver.exe" : "velora_solver";
+  const solverPath = path.join(__dirname, "../../build/solver", solverName);
+
+  if (!fs.existsSync(solverPath)) {
+    console.warn(`  Warning: Solver not found at ${solverPath}`);
+    console.warn("  Run 'bash build.sh' to compile the solver.\n");
+  }
 });
 
 module.exports = app;
