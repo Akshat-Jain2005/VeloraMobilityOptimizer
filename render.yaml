@@ -19,6 +19,6 @@ services:
       - key: PORT
         value: 3001
       - key: FRONTEND_URL
-        sync: false  # Set manually in dashboard: https://your-app.vercel.app
+        value: https://velora-jext.onrender.com
       - key: MAPS_API_KEY
         sync: false  # Optional: Set in dashboard if you have Google Maps API key
