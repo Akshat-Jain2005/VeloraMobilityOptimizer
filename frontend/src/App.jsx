@@ -21,6 +21,7 @@ import HomePage from "./components/HomePage.jsx";
 import Header from "./components/Header.jsx";
 import FileUpload from "./components/FileUpload.jsx";
 import ResultsSection from "./components/ResultsSection.jsx";
+import PenaltyForm, { DEFAULT_PENALTY_WEIGHTS } from "./components/PenaltyForm.jsx";
 import { getSolution, submitOptimization, parseExcelFile } from "./api.js";
 
 const defaultStatus = "idle";
@@ -98,6 +99,7 @@ export default function App() {
   const [solution, setSolution] = useState(null);
   const [submitError, setSubmitError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [penaltyWeights, setPenaltyWeights] = useState({ ...DEFAULT_PENALTY_WEIGHTS });
 
   const isReady = useMemo(
     () => inputData?.vehicles?.length && inputData?.requests?.length,
@@ -259,7 +261,10 @@ export default function App() {
 
     try {
       const payload = {
-        config: inputData.config,
+        config: {
+          ...(inputData.config || {}),
+          penalty_weights: penaltyWeights,
+        },
         vehicles: inputData.vehicles,
         requests: inputData.requests,
         metadata: inputData.metadata,
@@ -368,6 +373,8 @@ export default function App() {
           <div className="workflow-main">
             <FileUpload onFile={handleFile} fileName={fileName} isParsing={isParsing} onClear={handleClear} error={parseError} />
           </div>
+
+          <PenaltyForm weights={penaltyWeights} onChange={setPenaltyWeights} />
 
           <AnimatePresence>
             {fileName && (

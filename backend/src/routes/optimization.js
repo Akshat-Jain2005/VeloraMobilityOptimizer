@@ -56,10 +56,14 @@ function validateInput(data) {
 // ─── Stage 6: Input Preparation ───────────────────────────────────────────────
 
 function prepareInput(data) {
+  const incomingConfig = data.config || {};
   const prepared = {
-    config: data.config || {
-      allow_external_maps: false,
-      maps_api_key: "",
+    config: {
+      allow_external_maps: incomingConfig.allow_external_maps || false,
+      maps_api_key: incomingConfig.maps_api_key || "",
+      ...(incomingConfig.weights ? { weights: incomingConfig.weights } : {}),
+      ...(incomingConfig.tolerances ? { tolerances: incomingConfig.tolerances } : {}),
+      ...(incomingConfig.penalty_weights ? { penalty_weights: incomingConfig.penalty_weights } : {}),
     },
     vehicles: data.vehicles.map((v, i) => ({
       id: v.id !== undefined ? v.id : i,

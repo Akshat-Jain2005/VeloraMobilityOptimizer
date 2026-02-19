@@ -852,6 +852,21 @@ int main(int argc, char** argv) {
                 }
             }
         }
+
+        if (cfg.contains("penalty_weights")) {
+            auto& pw = cfg["penalty_weights"];
+            gCtx.lateArrivalPenaltyPerMin = pw.value("lateArrivalPenaltyPerMin", gCtx.lateArrivalPenaltyPerMin);
+            gCtx.sharingViolationPenalty = pw.value("sharingViolationPenalty", gCtx.sharingViolationPenalty);
+            gCtx.vehiclePrefViolationPenalty = pw.value("vehiclePrefViolationPenalty", gCtx.vehiclePrefViolationPenalty);
+            gCtx.unassignedPenalty = pw.value("unassignedPenalty", gCtx.unassignedPenalty);
+            gCtx.maxDelayViolationPenalty = pw.value("maxDelayViolationPenalty", gCtx.maxDelayViolationPenalty);
+            cout << "Custom penalty weights loaded: "
+                 << "latePerMin=" << gCtx.lateArrivalPenaltyPerMin
+                 << ", sharing=" << gCtx.sharingViolationPenalty
+                 << ", vehPref=" << gCtx.vehiclePrefViolationPenalty
+                 << ", unassigned=" << gCtx.unassignedPenalty
+                 << ", maxDelay=" << gCtx.maxDelayViolationPenalty << endl;
+        }
     }
 
     // Initialize MapDistance with provider configuration
@@ -959,7 +974,18 @@ int main(int argc, char** argv) {
         {"unassignedCount", finalSol.unassignedReqs.size()},
         {"vehiclesUsed", 0},
         {"totalDistance", 0.0},
-        {"totalTime", 0.0}
+        {"totalTime", 0.0},
+        {"penaltyWeightsUsed", {
+            {"lateArrivalPenaltyPerMin", gCtx.lateArrivalPenaltyPerMin},
+            {"sharingViolationPenalty", gCtx.sharingViolationPenalty},
+            {"vehiclePrefViolationPenalty", gCtx.vehiclePrefViolationPenalty},
+            {"unassignedPenalty", gCtx.unassignedPenalty},
+            {"maxDelayViolationPenalty", gCtx.maxDelayViolationPenalty}
+        }},
+        {"objectiveWeightsUsed", {
+            {"wCost", gCtx.wCost},
+            {"wTime", gCtx.wTime}
+        }}
     };
     
     double totalDist = 0, totalTime = 0;
