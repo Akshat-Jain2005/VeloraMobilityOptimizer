@@ -1,0 +1,218 @@
+.
+├── .claude
+│   └── settings.local.json
+├── .dockerignore
+├── .github
+│   └── workflows
+│       └── deploy.yml
+├── .gitignore
+├── backend
+│   ├── .env
+│   ├── .gitignore
+│   ├── jobs
+│   │   └── .gitkeep
+│   ├── outputs
+│   │   ├── 1202aa1a-c864-4180-a9e9-731a4e929dc3_output.json
+│   │   ├── 16e54eb6-5cc2-4e85-8362-955ebfa49e8a_output.json
+│   │   ├── 2470f3ea-ae48-4fd2-b034-8b3fa6edeaf2_output.json
+│   │   ├── d52195d5-8791-4704-b18f-db03395bbff0_output.json
+│   │   ├── d713b5ec-f365-4ea0-9905-2e5674c6adb9_output.json
+│   │   └── fe59bdbf-48f4-4444-8862-b14e229e68c6_output.json
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── requirements.txt
+│   ├── src
+│   │   ├── app.js
+│   │   ├── controllers
+│   │   │   └── optimizationController.js
+│   │   ├── middleware
+│   │   │   └── upload.js
+│   │   ├── routes
+│   │   │   └── optimization.js
+│   │   ├── services
+│   │   │   ├── excelParser.js
+│   │   │   ├── jobQueue.js
+│   │   │   └── solver.js
+│   │   └── utils
+│   │       └── processRunner.js
+│   └── uploads
+│       ├── .gitkeep
+│       ├── 0e04e0c6-e583-4a1b-9b0d-0b03badc1110.json
+│       ├── 0e04e0c6-e583-4a1b-9b0d-0b03badc1110.xlsx
+│       ├── 1202aa1a-c864-4180-a9e9-731a4e929dc3_input.json
+│       ├── 16e54eb6-5cc2-4e85-8362-955ebfa49e8a_input.json
+│       ├── 2470f3ea-ae48-4fd2-b034-8b3fa6edeaf2_input.json
+│       ├── 3480d5c6-f4a2-487e-8901-0c4608772966.json
+│       ├── 3480d5c6-f4a2-487e-8901-0c4608772966.xlsx
+│       ├── 7e45e8ee-4908-41bc-b343-c98f32bf70c0.json
+│       ├── 7e45e8ee-4908-41bc-b343-c98f32bf70c0.xlsx
+│       ├── b1ed29ed-b5bc-4e9e-b565-922728cd24f5.json
+│       ├── b1ed29ed-b5bc-4e9e-b565-922728cd24f5.xlsx
+│       ├── d52195d5-8791-4704-b18f-db03395bbff0_input.json
+│       ├── d713b5ec-f365-4ea0-9905-2e5674c6adb9_input.json
+│       ├── dea56afe-e0a0-4429-a370-3183fa86f8d2.json
+│       ├── dea56afe-e0a0-4429-a370-3183fa86f8d2.xlsx
+│       ├── fa6c5a59-1ca5-4c32-b4c2-98851c11735b.json
+│       ├── fa6c5a59-1ca5-4c32-b4c2-98851c11735b.xlsx
+│       └── fe59bdbf-48f4-4444-8862-b14e229e68c6_input.json
+├── build
+│   └── CMakeFiles
+│       ├── 4.2.1
+│       │   └── CompilerIdCXX
+│       │       └── tmp
+│       └── pkgRedirects
+├── build.sh
+├── CMakeLists.txt
+├── data
+│   └── json
+├── deploy
+│   ├── deploy.sh
+│   ├── nginx.conf
+│   ├── setup-server.sh
+│   └── velorabackend-kri-2651-ti.service
+├── Dockerfile
+├── env
+│   └── .env
+├── FLUTTER_APP_PROMPT.md
+├── frontend
+│   ├── .DS_Store
+│   ├── .env
+│   ├── .env.production
+│   ├── .vite
+│   │   └── deps
+│   │       ├── _metadata.json
+│   │       ├── chunk-32E4H3EV.js
+│   │       ├── chunk-32E4H3EV.js.map
+│   │       ├── chunk-G3PMV62Z.js
+│   │       ├── chunk-G3PMV62Z.js.map
+│   │       ├── chunk-GKVACACG.js
+│   │       ├── chunk-GKVACACG.js.map
+│   │       ├── chunk-TNTPHDQH.js
+│   │       ├── chunk-TNTPHDQH.js.map
+│   │       ├── framer-motion.js
+│   │       ├── framer-motion.js.map
+│   │       ├── leaflet.js
+│   │       ├── leaflet.js.map
+│   │       ├── lucide-react.js
+│   │       ├── lucide-react.js.map
+│   │       ├── package.json
+│   │       ├── react-dom_client.js
+│   │       ├── react-dom_client.js.map
+│   │       ├── react-leaflet.js
+│   │       ├── react-leaflet.js.map
+│   │       ├── react.js
+│   │       └── react.js.map
+│   ├── dist
+│   │   ├── assets
+│   │   │   ├── index-BCQtyofr.js
+│   │   │   └── index-BQzuN1cz.css
+│   │   └── index.html
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── src
+│   │   ├── api.js
+│   │   ├── App.jsx
+│   │   ├── components
+│   │   │   ├── CostComparison.jsx
+│   │   │   ├── EmployeeResults.jsx
+│   │   │   ├── FileUpload.jsx
+│   │   │   ├── Header.jsx
+│   │   │   ├── HomePage.jsx
+│   │   │   ├── InputPreview.jsx
+│   │   │   ├── MetricsCards.jsx
+│   │   │   ├── OptimizationMetrics.jsx
+│   │   │   ├── ResultsPanel.jsx
+│   │   │   ├── ResultsSection.jsx
+│   │   │   ├── RouteMap.jsx
+│   │   │   ├── RoutesTable.jsx
+│   │   │   └── StatusPanel.jsx
+│   │   ├── homePageStyles.css
+│   │   ├── main.jsx
+│   │   ├── resultsSection.css
+│   │   └── styles.css
+│   ├── vercel.json
+│   └── vite.config.js
+├── parser
+│   └── excel_to_json.py
+├── project_tree.txt
+├── README.md
+├── render.yaml
+├── scripts
+│   ├── json_to_report.py
+│   ├── plot_convergence.py
+│   └── test_runner.py
+├── solver
+│   ├── build
+│   │   ├── cmake_install.cmake
+│   │   ├── CMakeCache.txt
+│   │   ├── CMakeFiles
+│   │   │   ├── 4.2.1
+│   │   │   │   ├── CMakeCCompiler.cmake
+│   │   │   │   ├── CMakeCXXCompiler.cmake
+│   │   │   │   ├── CMakeDetermineCompilerABI_C.bin
+│   │   │   │   ├── CMakeDetermineCompilerABI_CXX.bin
+│   │   │   │   ├── CMakeSystem.cmake
+│   │   │   │   ├── CompilerIdC
+│   │   │   │   │   ├── a.out
+│   │   │   │   │   ├── apple-sdk.c
+│   │   │   │   │   ├── CMakeCCompilerId.c
+│   │   │   │   │   └── tmp
+│   │   │   │   └── CompilerIdCXX
+│   │   │   │       ├── a.out
+│   │   │   │       ├── apple-sdk.cpp
+│   │   │   │       ├── CMakeCXXCompilerId.cpp
+│   │   │   │       └── tmp
+│   │   │   ├── cmake.check_cache
+│   │   │   ├── CMakeConfigureLog.yaml
+│   │   │   ├── CMakeDirectoryInformation.cmake
+│   │   │   ├── InstallScripts.json
+│   │   │   ├── Makefile.cmake
+│   │   │   ├── Makefile2
+│   │   │   ├── pkgRedirects
+│   │   │   ├── progress.marks
+│   │   │   ├── TargetDirectories.txt
+│   │   │   └── velora_solver.dir
+│   │   │       ├── build.make
+│   │   │       ├── cmake_clean.cmake
+│   │   │       ├── compiler_depend.internal
+│   │   │       ├── compiler_depend.make
+│   │   │       ├── compiler_depend.ts
+│   │   │       ├── depend.make
+│   │   │       ├── DependInfo.cmake
+│   │   │       ├── flags.make
+│   │   │       ├── link.txt
+│   │   │       ├── progress.make
+│   │   │       └── src
+│   │   │           ├── main.cpp.o
+│   │   │           ├── main.cpp.o.d
+│   │   │           ├── map_distance.cpp.o
+│   │   │           └── map_distance.cpp.o.d
+│   │   ├── Makefile
+│   │   └── velora_solver
+│   ├── CMakeLists.txt
+│   ├── include
+│   │   ├── json.hpp
+│   │   └── map_distance.hpp
+│   ├── src
+│   │   ├── main.cpp
+│   │   └── map_distance.cpp
+│   └── third_party
+│       └── nlohmann
+│           └── json.hpp
+├── testing
+│   ├── benchmark.py
+│   ├── README.md
+│   ├── results
+│   │   └── .gitkeep
+│   └── test_deployment.py
+├── Velora Kriti_2026 TCs
+│   ├── TestCase_TC01.xlsx
+│   ├── TestCase_TC02.xlsx
+│   ├── TestCase_TC03.xlsx
+│   ├── TestCase_TC04.xlsx
+│   └── TestCase_TC05.xlsx
+├── velora_mobile
+└── velora.py
+
+931 directories, 8983 files

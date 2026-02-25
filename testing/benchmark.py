@@ -435,7 +435,7 @@ class Benchmarker:
             vehicle_metrics=vehicle_metrics
         )
     
-    def run_all_benchmarks(self, test_cases: List[int] = None) -> BenchmarkSummary:
+    def run_all_benchmarks(self, test_cases: List[int] = [1, 2, 3, 4, 5]) -> BenchmarkSummary:
         """Run benchmarks for all or specified test cases."""
         if test_cases is None:
             test_cases = [1, 2, 3, 4, 5]  # Default test cases

@@ -1,0 +1,412 @@
+{
+  "requestDetails": [
+    {
+      "earlyTime": 490.0,
+      "employeeId": "E01",
+      "id": 0,
+      "lateTime": 525.0,
+      "priority": 1,
+      "sharingLimit": 1,
+      "vehiclePreference": "premium"
+    },
+    {
+      "earlyTime": 495.0,
+      "employeeId": "E02",
+      "id": 1,
+      "lateTime": 530.0,
+      "priority": 1,
+      "sharingLimit": 1,
+      "vehiclePreference": "premium"
+    },
+    {
+      "earlyTime": 500.0,
+      "employeeId": "E03",
+      "id": 2,
+      "lateTime": 535.0,
+      "priority": 1,
+      "sharingLimit": 1,
+      "vehiclePreference": "premium"
+    },
+    {
+      "earlyTime": 505.0,
+      "employeeId": "E04",
+      "id": 3,
+      "lateTime": 540.0,
+      "priority": 1,
+      "sharingLimit": 1,
+      "vehiclePreference": "premium"
+    },
+    {
+      "earlyTime": 510.0,
+      "employeeId": "E05",
+      "id": 4,
+      "lateTime": 570.0,
+      "priority": 2,
+      "sharingLimit": 2,
+      "vehiclePreference": "any"
+    },
+    {
+      "earlyTime": 510.0,
+      "employeeId": "E06",
+      "id": 5,
+      "lateTime": 570.0,
+      "priority": 2,
+      "sharingLimit": 2,
+      "vehiclePreference": "any"
+    },
+    {
+      "earlyTime": 525.0,
+      "employeeId": "E07",
+      "id": 6,
+      "lateTime": 600.0,
+      "priority": 3,
+      "sharingLimit": 3,
+      "vehiclePreference": "normal"
+    },
+    {
+      "earlyTime": 525.0,
+      "employeeId": "E08",
+      "id": 7,
+      "lateTime": 600.0,
+      "priority": 3,
+      "sharingLimit": 3,
+      "vehiclePreference": "normal"
+    },
+    {
+      "earlyTime": 570.0,
+      "employeeId": "E09",
+      "id": 8,
+      "lateTime": 660.0,
+      "priority": 4,
+      "sharingLimit": 3,
+      "vehiclePreference": "any"
+    },
+    {
+      "earlyTime": 480.0,
+      "employeeId": "E10",
+      "id": 9,
+      "lateTime": 520.0,
+      "priority": 1,
+      "sharingLimit": 1,
+      "vehiclePreference": "premium"
+    }
+  ],
+  "routes": [
+    {
+      "availabilityTime": 480.0,
+      "baselineCost": 2095.0,
+      "baselineTime": 248.0,
+      "capacity": 2,
+      "category": "premium",
+      "costPerKm": 10.0,
+      "fuelType": "electric",
+      "penaltyCost": 0.0,
+      "speed": 30.0,
+      "startLat": 12.935,
+      "startLon": 77.62,
+      "stops": [
+        {
+          "arrivalTime": 490.0,
+          "employeeId": "E01",
+          "lat": 12.936,
+          "lon": 77.624,
+          "reqId": 0,
+          "type": "pickup",
+          "vehiclePreference": "premium",
+          "waitTime": 8.624199999999973
+        },
+        {
+          "arrivalTime": 504.4406,
+          "employeeId": "E01",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 0,
+          "type": "dropoff",
+          "vehiclePreference": "premium",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 520.6764000000001,
+          "employeeId": "E03",
+          "lat": 12.94,
+          "lon": 77.628,
+          "reqId": 2,
+          "type": "pickup",
+          "vehiclePreference": "premium",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 534.8746000000001,
+          "employeeId": "E03",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 2,
+          "type": "dropoff",
+          "vehiclePreference": "premium",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 549.1310000000001,
+          "employeeId": "E05",
+          "lat": 12.93,
+          "lon": 77.62,
+          "reqId": 4,
+          "type": "pickup",
+          "vehiclePreference": "any",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 551.2814000000001,
+          "employeeId": "E06",
+          "lat": 12.928,
+          "lon": 77.618,
+          "reqId": 5,
+          "type": "pickup",
+          "vehiclePreference": "any",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 568.2448,
+          "employeeId": "E06",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 5,
+          "type": "dropoff",
+          "vehiclePreference": "any",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 568.2448,
+          "employeeId": "E05",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 4,
+          "type": "dropoff",
+          "vehiclePreference": "any",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 584.056,
+          "employeeId": "E09",
+          "lat": 12.915,
+          "lon": 77.605,
+          "reqId": 8,
+          "type": "pickup",
+          "vehiclePreference": "any",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 603.75,
+          "employeeId": "E09",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 8,
+          "type": "dropoff",
+          "vehiclePreference": "any",
+          "waitTime": 0.0
+        }
+      ],
+      "totalCost": 575.629,
+      "totalDist": 57.5629,
+      "totalTime": 123.75,
+      "vehicleId": 0,
+      "vehicleIdStr": "V01",
+      "vehicleType": "4w"
+    },
+    {
+      "availabilityTime": 480.0,
+      "baselineCost": 860.0,
+      "baselineTime": 86.0,
+      "capacity": 2,
+      "category": "premium",
+      "costPerKm": 11.0,
+      "fuelType": "electric",
+      "penaltyCost": 0.0,
+      "speed": 28.0,
+      "startLat": 12.94,
+      "startLon": 77.625,
+      "stops": [
+        {
+          "arrivalTime": 495.0,
+          "employeeId": "E02",
+          "lat": 12.938,
+          "lon": 77.626,
+          "reqId": 1,
+          "type": "pickup",
+          "vehiclePreference": "premium",
+          "waitTime": 13.256142857142834
+        },
+        {
+          "arrivalTime": 509.6717142857143,
+          "employeeId": "E02",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 1,
+          "type": "dropoff",
+          "vehiclePreference": "premium",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 526.0461428571429,
+          "employeeId": "E04",
+          "lat": 12.942,
+          "lon": 77.63,
+          "reqId": 3,
+          "type": "pickup",
+          "vehiclePreference": "premium",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 540.1686428571428,
+          "employeeId": "E04",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 3,
+          "type": "dropoff",
+          "vehiclePreference": "premium",
+          "waitTime": 0.0
+        }
+      ],
+      "totalCost": 240.8175,
+      "totalDist": 21.8925,
+      "totalTime": 60.1686428571428,
+      "vehicleId": 1,
+      "vehicleIdStr": "V02",
+      "vehicleType": "4w"
+    },
+    {
+      "availabilityTime": 480.0,
+      "baselineCost": 700.0,
+      "baselineTime": 35.0,
+      "capacity": 4,
+      "category": "normal",
+      "costPerKm": 14.0,
+      "fuelType": "petrol",
+      "penaltyCost": 3108685.714285714,
+      "speed": 35.0,
+      "startLat": 12.92,
+      "startLon": 77.61,
+      "stops": [
+        {
+          "arrivalTime": 536.3696571428571,
+          "employeeId": "E10",
+          "lat": 13.05,
+          "lon": 77.8,
+          "reqId": 9,
+          "type": "pickup",
+          "vehiclePreference": "premium",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 587.1677142857143,
+          "employeeId": "E10",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 9,
+          "type": "dropoff",
+          "vehiclePreference": "premium",
+          "waitTime": 0.0
+        }
+      ],
+      "totalCost": 875.203,
+      "totalDist": 62.5145,
+      "totalTime": 107.16771428571428,
+      "vehicleId": 2,
+      "vehicleIdStr": "V03",
+      "vehicleType": "4w"
+    },
+    {
+      "availabilityTime": 480.0,
+      "baselineCost": 765.0,
+      "baselineTime": 116.0,
+      "capacity": 6,
+      "category": "normal",
+      "costPerKm": 18.0,
+      "fuelType": "diesel",
+      "penaltyCost": 0.0,
+      "speed": 32.0,
+      "startLat": 12.95,
+      "startLon": 77.63,
+      "stops": [
+        {
+          "arrivalTime": 525.0,
+          "employeeId": "E08",
+          "lat": 12.948,
+          "lon": 77.633,
+          "reqId": 7,
+          "type": "pickup",
+          "vehiclePreference": "normal",
+          "waitTime": 43.78106250000002
+        },
+        {
+          "arrivalTime": 525.9793125,
+          "employeeId": "E07",
+          "lat": 12.95,
+          "lon": 77.635,
+          "reqId": 6,
+          "type": "pickup",
+          "vehiclePreference": "normal",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 539.957625,
+          "employeeId": "E08",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 7,
+          "type": "dropoff",
+          "vehiclePreference": "normal",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 539.957625,
+          "employeeId": "E07",
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 6,
+          "type": "dropoff",
+          "vehiclePreference": "normal",
+          "waitTime": 0.0
+        }
+      ],
+      "totalCost": 155.29500000000002,
+      "totalDist": 8.627500000000001,
+      "totalTime": 59.95762500000001,
+      "vehicleId": 3,
+      "vehicleIdStr": "V04",
+      "vehicleType": "van"
+    }
+  ],
+  "summary": {
+    "distanceMethod": {
+      "apiCalls": 1,
+      "apiSuccess": 1,
+      "errorFallbacks": 0,
+      "externalEnabled": true,
+      "fallbackUsed": false,
+      "provider": "openrouteservice",
+      "timeoutFallbacks": 0
+    },
+    "globalCost": 3110083.888630357,
+    "objectiveWeightsUsed": {
+      "wCost": 0.7,
+      "wTime": 0.3
+    },
+    "penaltyWeightsUsed": {
+      "lateArrivalPenaltyPerMin": 10.0,
+      "maxDelayViolationPenalty": 100000.0,
+      "sharingViolationPenalty": 500.0,
+      "unassignedPenalty": 50000.0,
+      "vehiclePrefViolationPenalty": 300.0
+    },
+    "totalBaselineCost": 4420.0,
+    "totalBaselineTime": 485.0,
+    "totalDistance": 150.5974,
+    "totalMoneyCost": 1846.9445,
+    "totalPenaltyCost": 3108685.714285714,
+    "totalTime": 351.0439821428571,
+    "unassignedCount": 0,
+    "vehiclesUsed": 4
+  },
+  "unassigned": []
+}

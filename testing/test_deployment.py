@@ -34,9 +34,9 @@ import ssl
 
 ENVIRONMENTS = {
     "production": {
-        "frontend_url": "https://velora-jext.onrender.com",
-        "backend_url": "https://veloramobilityoptimizer.onrender.com",
-        "api_base": "https://veloramobilityoptimizer.onrender.com/api",
+        "frontend_url": "https://velorafrontend-kri-2651-ti.onrender.com",
+        "backend_url": "https://velorabackend-kri-2651-ti.onrender.com",
+        "api_base": "https://velorabackend-kri-2651-ti.onrender.com/api",
     },
     "local": {
         "frontend_url": "http://localhost:5173",

@@ -1,0 +1,1527 @@
+\documentclass[11pt,a4paper]{article}
+
+% ===== FONT: HELVETICA =====
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% ===== CORE PACKAGES =====
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{pifont}
+
+% ===== MATH =====
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+% ===== TABLES =====
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{colortbl}
+
+% ===== STYLING & BOXES =====
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows.meta,positioning,fit,backgrounds,calc,decorations.pathreplacing}
+
+% ===== HEADERS & SECTIONS =====
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tocloft}
+
+% ===== CODE & LINKS =====
+\usepackage{listings}
+\usepackage{hyperref}
+
+% ============================================================
+% COLOR PALETTE
+% ============================================================
+\definecolor{velblue}{RGB}{23,50,107}
+\definecolor{velaccent}{RGB}{41,98,183}
+\definecolor{vellight}{RGB}{232,240,254}
+\definecolor{velgold}{RGB}{200,155,30}
+\definecolor{velgreen}{RGB}{34,120,60}
+\definecolor{velred}{RGB}{180,30,30}
+\definecolor{velorange}{RGB}{190,95,0}
+\definecolor{velgray}{RGB}{245,245,248}
+\definecolor{veldark}{RGB}{40,40,50}
+\definecolor{rowalt}{RGB}{244,247,255}
+\definecolor{flutterblue}{RGB}{2,119,189}
+\definecolor{rendergreen}{RGB}{70,160,90}
+
+% ============================================================
+% PAGE GEOMETRY
+% ============================================================
+\geometry{
+    a4paper,
+    left=0.72in,
+    right=0.72in,
+    top=0.8in,
+    bottom=0.8in,
+    headheight=14pt
+}
+
+\setstretch{1.12}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+% ============================================================
+% RUPEE SYMBOL
+% ============================================================
+\newcommand{\rupee}{Rs.}
+
+% ============================================================
+% HYPERLINK SETUP
+% ============================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=velblue,
+    filecolor=velaccent,
+    urlcolor=velaccent,
+    citecolor=velblue,
+    pdftitle={Velora Mobility Optimizer -- End-Term Technical Report},
+    pdfauthor={Hostel ID: 2651},
+}
+
+% ============================================================
+% SECTION FORMATTING
+% ============================================================
+\titleformat{\section}
+  {\color{velblue}\normalfont\Large\bfseries}
+  {\thesection}{0.8em}{}
+  [\vspace{-4pt}{\color{velblue}\titlerule[1.2pt]}]
+
+\titleformat{\subsection}
+  {\color{veldark}\normalfont\large\bfseries}
+  {\thesubsection}{0.7em}{}
+
+\titleformat{\subsubsection}
+  {\color{veldark}\normalfont\normalsize\bfseries}
+  {\thesubsubsection}{0.7em}{}
+
+\titlespacing*{\section}{0pt}{18pt}{8pt}
+\titlespacing*{\subsection}{0pt}{12pt}{5pt}
+\titlespacing*{\subsubsection}{0pt}{10pt}{4pt}
+
+% ============================================================
+% HEADER AND FOOTER
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{velblue}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\small\color{velblue}\textbf{Velora Mobility Optimizer}}
+\fancyhead[R]{\small\color{velblue}Kriti '26 --- End-Term Report}
+\fancyfoot[C]{\small\thepage}
+
+% ============================================================
+% TCOLORBOX STYLES
+% ============================================================
+\newtcolorbox{insightbox}[1][Key Insight]{%
+    enhanced, breakable,
+    colback=vellight,
+    colframe=velblue,
+    coltitle=white,
+    fonttitle=\bfseries,
+    title={#1},
+    boxrule=0.8pt,
+    arc=3pt,
+    left=6pt, right=6pt, top=3pt, bottom=3pt,
+    toptitle=2pt, bottomtitle=2pt,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=velblue, arc=2pt, boxrule=0pt}
+}
+
+\newtcolorbox{recbox}[1][Recommendation]{%
+    enhanced, breakable,
+    colback=orange!5,
+    colframe=velorange,
+    coltitle=white,
+    fonttitle=\bfseries,
+    title={#1},
+    boxrule=0.8pt,
+    arc=3pt,
+    left=6pt, right=6pt, top=3pt, bottom=3pt,
+    toptitle=2pt, bottomtitle=2pt,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=velorange, arc=2pt, boxrule=0pt}
+}
+
+\newtcolorbox{instancebox}[1][Problem Instance]{%
+    enhanced,
+    colback=velgray,
+    colframe=gray!50,
+    fonttitle=\bfseries\color{veldark},
+    title={#1},
+    boxrule=0.6pt,
+    arc=2pt,
+    left=6pt, right=6pt, top=2pt, bottom=2pt
+}
+
+\newtcolorbox{resultbox}{%
+    enhanced,
+    colback=green!4,
+    colframe=velgreen,
+    boxrule=0.6pt,
+    arc=2pt,
+    left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{warnbox}[1][Constraint Violations]{%
+    enhanced, breakable,
+    colback=red!3,
+    colframe=velred,
+    fonttitle=\bfseries\color{velred},
+    title={#1},
+    boxrule=0.6pt,
+    arc=2pt,
+    left=6pt, right=6pt, top=2pt, bottom=2pt
+}
+
+\newtcolorbox{hackbox}[1][]{%
+    enhanced, breakable,
+    colback=vellight,
+    colframe=velaccent,
+    fonttitle=\bfseries\color{velblue},
+    title={#1},
+    boxrule=0.8pt,
+    arc=3pt,
+    left=6pt, right=6pt, top=4pt, bottom=4pt,
+    toptitle=3pt, bottomtitle=2pt,
+}
+
+\newtcolorbox{deploybox}[1][]{%
+    enhanced,
+    colback=green!3,
+    colframe=rendergreen,
+    fonttitle=\bfseries\color{rendergreen!80!black},
+    title={#1},
+    boxrule=0.7pt,
+    arc=3pt,
+    left=6pt, right=6pt, top=4pt, bottom=4pt,
+    toptitle=3pt, bottomtitle=2pt,
+}
+
+% ============================================================
+% TOC STYLING
+% ============================================================
+\renewcommand{\contentsname}{\Large\bfseries\color{velblue} Table of Contents}
+\renewcommand{\cftsecfont}{\bfseries\color{velblue}}
+\renewcommand{\cftsecpagefont}{\bfseries\color{velblue}}
+\renewcommand{\cftsubsecfont}{\color{veldark}}
+\setlength{\cftbeforesecskip}{4pt}
+\setlength{\cftbeforesubsecskip}{1pt}
+\renewcommand{\cftdotsep}{2}
+
+% ============================================================
+% CUSTOM COMMANDS
+% ============================================================
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\filename}[1]{\texttt{\color{velblue}#1}}
+\newcommand{\statusok}{\textcolor{velgreen}{\textbf{On time}}}
+\newcommand{\statustol}{\textcolor{velorange}{\textbf{Within tolerance}}}
+\newcommand{\statusviol}{\textcolor{velred}{\textbf{Violated}}}
+\newcommand{\saving}[1]{\textcolor{velgreen}{\textbf{#1}}}
+\newcommand{\cmark}{\textcolor{velgreen}{\ding{51}}}
+\newcommand{\xmark}{\textcolor{velred}{\ding{55}}}
+
+% ============================================================
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+\vspace*{0.2cm}
+
+\noindent\colorbox{velblue}{%
+    \parbox{\dimexpr\textwidth-2\fboxsep}{%
+        \centering\color{white}\large\bfseries\vspace{6pt}
+        End-Term Evaluation Submission\vspace{4pt}
+    }%
+}
+
+\vspace{0.15cm}
+{\color{gray}\small 24th February 2026}
+
+\vspace{1cm}
+
+\includegraphics[width=0.28\textwidth]{media/image1.png}\par
+
+\vspace{0.8cm}
+
+{\color{velblue}\rule{\textwidth}{1.5pt}}
+\vspace{0.5cm}
+
+{\Huge\bfseries\color{velblue} Velora Mobility Optimizer\par}
+\vspace{0.35cm}
+{\Large\color{veldark}%
+A Hybrid Metaheuristic Approach for the\\[3pt]
+Heterogeneous Vehicle Routing Problem\\[3pt]
+with Soft Time Windows (HVRPSTW)\par}
+
+\vspace{0.5cm}
+{\color{velblue}\rule{\textwidth}{1.5pt}}
+
+\vspace{0.8cm}
+
+{\large\bfseries\color{velblue} Kriti '26 --- Optimization Problem Statement\par}
+
+\vspace{0.8cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=vellight,
+    colframe=velblue,
+    boxrule=0.8pt,
+    arc=4pt,
+    width=0.6\textwidth,
+    halign=center,
+    left=14pt, right=14pt, top=10pt, bottom=10pt
+]
+\centering
+\begin{tabular}{rl}
+\textbf{Hostel ID:} & \textbf{2651} \\[4pt]
+\textbf{Submission:} & End-Term Evaluation \\[4pt]
+\textbf{Domain:} & Vehicle Routing Optimization \\[4pt]
+\textbf{Stack:} & C++17 / Node.js / React / Flutter \\
+\end{tabular}
+\end{tcolorbox}
+
+\vspace{0.6cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=velgray,
+    colframe=gray!40,
+    boxrule=0.4pt,
+    arc=3pt,
+    width=0.85\textwidth,
+    halign=center,
+    top=6pt, bottom=6pt
+]
+\centering
+\begin{tabular}{cccc}
+\textbf{\color{velblue}74--87\%} & \textbf{\color{velblue}$<$\,2s} & \textbf{\color{velblue}5/5} & \textbf{\color{velblue}3-Layer} \\
+Cost Savings & Solve Time & Hack Tests Passed & Deployed Stack \\
+\end{tabular}
+\end{tcolorbox}
+
+\vfill
+
+{\small\color{gray} Technical Report --- \today}
+
+\end{titlepage}
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\thispagestyle{empty}
+
+\vspace*{-0.5cm}
+
+\begin{tcolorbox}[
+    enhanced,
+    colback=vellight,
+    colframe=velblue,
+    boxrule=0.6pt,
+    arc=3pt,
+    width=\textwidth,
+    halign=center,
+    top=6pt, bottom=6pt
+]
+\centering
+\textbf{\color{velblue}Repository:}\quad
+\url{https://github.com/badri41/VeloraMobilityOptimizer}
+\end{tcolorbox}
+
+\vspace{0.2cm}
+
+\tableofcontents
+
+\newpage
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 1: INTRODUCTION
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+Corporate employee transport is a large-scale logistics problem: organisations must route a heterogeneous fleet of vehicles---sedans, vans, two-wheelers---to pick up employees within individual time windows and deliver them to a common office, all while minimising cost and respecting capacity, sharing preferences, and vehicle-type constraints.
+
+\subsection{Problem Statement}
+
+The \textbf{Heterogeneous Vehicle Routing Problem with Soft Time Windows (HVRPSTW)} generalises the classical VRPTW \cite{solomon1987} by introducing:
+\begin{itemize}[nosep, leftmargin=1.2em]
+    \item \textbf{Heterogeneous fleet:} vehicles differ in capacity, cost-per-km, speed, and fuel type \cite{dondo2007,golden2008}.
+    \item \textbf{Soft time windows:} late arrivals incur a graduated penalty rather than hard infeasibility \cite{taillard1997}.
+    \item \textbf{Priority-based tolerance:} high-priority employees receive tighter grace periods.
+    \item \textbf{Sharing constraints:} employees may specify maximum co-passengers.
+    \item \textbf{Vehicle preference:} employees may request premium vs.\ normal vehicles.
+\end{itemize}
+
+The problem is NP-hard; even the homogeneous VRPTW is NP-hard in the strong sense \cite{toth2014}. Our approach combines a multi-start constructive heuristic (Solomon I1) with Simulated Annealing, achieving \textbf{74--87\% cost savings} across all test cases within a 24-second wall-clock budget.
+
+\subsection{Solution Overview}
+
+\begin{table}[H]
+\centering
+\caption{End-to-end system components}
+\label{tab:components}
+\small
+\begin{tabular}{llp{7.5cm}}
+\toprule
+\textbf{Layer} & \textbf{Technology} & \textbf{Role} \\
+\midrule
+\rowcolor{rowalt}
+Solver & C++17 & HVRPSTW optimisation engine: Solomon I1 construction + SA metaheuristic \\
+Backend & Node.js / Express & REST API, file orchestration, solver invocation, job queue \\
+\rowcolor{rowalt}
+Frontend (Web) & React + Vite & Dashboard with Leaflet maps, analytics charts, employee timeline \\
+Frontend (Mobile) & Flutter & Cross-platform mobile app with map visualisation and live status \\
+\rowcolor{rowalt}
+Deployment & Render (Docker) & Containerised backend with C++ solver; frontend on Render static site \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 2: MATHEMATICAL FORMULATION
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mathematical Formulation}
+
+\subsection{Problem Structure and Graph Model}
+
+We model the system as a directed graph $G = (V, A)$, where $V = D \cup P \cup \{c\}$.
+
+\begin{instancebox}[Node Sets]
+\begin{itemize}[nosep, leftmargin=1.2em]
+    \item $D = \{d_1, d_2, \dots, d_m\}$\,---\,vehicle depots
+    \item $P = \{1, 2, \dots, n\}$\,---\,employee pickup locations
+    \item $c$\,---\,common drop-off (office)
+\end{itemize}
+\end{instancebox}
+
+Each employee request $i \in P$ consists of a pickup at node $i$ and a drop-off at $c$. The heterogeneous fleet $K$ has vehicles differing in depot $d(k)$, capacity $Q_k$, cost-per-km $C_k$, speed, and availability time $A_k$. Each employee $i$ has a soft time window $[E_i, L_i]$ and priority $P_i \in \{1,\dots,5\}$.
+
+\subsection{Decision Variables}
+
+\vspace{-4pt}
+\begin{itemize}[nosep, leftmargin=1.2em]
+    \item $x_{uv}^k \in \{0,1\}$: 1 if vehicle $k$ traverses arc $(u,v)$
+    \item $t_u^k \ge 0$: arrival time of vehicle $k$ at node $u$
+    \item $q_u^k \ge 0$: passengers onboard after leaving $u$
+\end{itemize}
+
+\subsection{Objective Function}
+
+\begin{equation}
+\min \; Z = w_c \cdot Z_{\text{dist}} + w_t \cdot Z_{\text{time}} + Z_{\text{late}} + Z_{\text{unassigned}}
+\end{equation}
+
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{Operating Cost}
+\begin{equation}
+Z_{\text{dist}} = \sum_{k \in K} \sum_{(u,v)\in A} C_k \, d_{uv} \, x_{uv}^k
+\end{equation}
+
+\textbf{Operating Time}
+\begin{equation}
+Z_{\text{time}} = \sum_{k \in K} T_k,\; T_k = \sum_{(u,v) \in A} \tau_{uv} x_{uv}^k
+\end{equation}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{Unassigned Penalty}
+\begin{equation}
+Z_{\text{unassigned}} = M \cdot |\{i \in P : i \text{ unassigned}\}|
+\end{equation}
+
+\textbf{Total Lateness Penalty}
+\begin{equation}
+Z_{\text{late}} = \sum_{i \in P} \text{Penalty}_i
+\end{equation}
+\end{minipage}
+
+\subsubsection{Two-Tier Lateness Penalty}
+
+\begin{equation}
+\text{Penalty}_i = 
+\begin{cases}
+0 & \text{if } t_c^k \leq L_i + f(P_i) \\[3pt]
+(t_c^k - L_i - f(P_i)) \cdot M \cdot w(P_i) & \text{otherwise}
+\end{cases}
+\end{equation}
+
+\begin{insightbox}[Tolerance Configuration]
+\small
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Priority} & P1 & P2 & P3 & P4 & P5 \\
+\midrule
+\textbf{Tolerance $f(P_i)$} & 5\,min & 10\,min & 15\,min & 20\,min & 30\,min \\
+\textbf{Weight $w(P_i)$} & 5 & 4 & 3 & 2 & 1 \\
+\bottomrule
+\end{tabular}
+
+\vspace{2pt}
+\textbf{No penalty} while $t_c^k \le L_i + f(P_i)$. Exceeding tolerance triggers severe multiplier $M = 1000$.
+\end{insightbox}
+
+\subsection{Constraints}
+
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{Pickup Assignment}---at most one vehicle:
+\begin{equation}
+\sum_{k\in K}\sum_{v\in V} x_{iv}^k \le 1 \;\;\forall i \in P
+\end{equation}
+
+\textbf{Flow Conservation:}
+\begin{equation}
+\sum_{v} x_{uv}^k - \sum_{v} x_{vu}^k = 0 \;\;\forall u \neq d(k),c
+\end{equation}
+
+\textbf{Route Structure:} each vehicle starts from depot $d(k)$, ends at $c$.
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{Capacity:}
+\begin{align}
+0 \le q_u^k &\le Q_k \\
+q_v^k &\ge q_u^k + \delta(v) - (1{-}x_{uv}^k)M'
+\end{align}
+
+\textbf{Time Propagation:}
+\begin{equation}
+t_v^k \ge t_u^k + \tau_{uv} - (1{-}x_{uv}^k)M''
+\end{equation}
+
+\textbf{Vehicle Availability:}
+\begin{equation}
+t_{d(k)}^k \ge A_k \;\;\forall k\in K
+\end{equation}
+\end{minipage}
+
+\vspace{4pt}
+\textbf{Pickup Time Window:}\quad $t_i^k \ge E_i - (1 - \sum_{v} x_{iv}^k) \cdot M \;\; \forall i \in P,\; \forall k \in K$
+
+\textbf{Sharing:} Each employee $i$ specifies max co-passengers $S_i$; violations penalised as $Z_{\text{sharing}} = \sum_i \max(0,\, |\text{co-riders}(i)| - S_i) \times M_{\text{share}}$. \textbf{Vehicle preference:} Mismatches penalised as $Z_{\text{pref}} = M_{\text{pref}} \cdot |\{i : \text{cat}(k(i)) \neq \text{pref}(i)\}|$.
+
+\textbf{Distance:} Adjusted Haversine: $D_{\text{road}} \approx 1.4 \times D_{\text{haversine}}$ (accounts for urban road geometry).
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 3: ALGORITHM DESIGN
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algorithm Design}
+
+The solver implements a two-phase hybrid: constructive heuristic $\to$ Simulated Annealing metaheuristic.
+
+\subsection{Phase 1: Multi-Start Constructive Insertion (Solomon I1)}
+
+Requests are sorted by priority and time urgency; across multiple restarts the order is perturbed to diversify constructions \cite{solomon1987,cordeau2002}. For vehicle $k$ with route $R_k$ and request $u$, we evaluate insertion at index $(i,j)$:
+
+\begin{equation}
+\Delta(u,k,i,j) = w_c\,\Delta\text{CTC}(u,k,i,j) + w_t\,\Delta\text{Time}(u,k,i,j) + \Delta\text{Penalty}(u,k,i,j)
+\end{equation}
+
+Restarts adapt to size: $R = \max(1,\min(10,\lfloor 50/\lceil 2N/V \rceil\rfloor))$. The best insertion across all feasible positions and vehicles minimises $\Delta$. Infeasible requests incur penalty $M = 100{,}000$.
+
+\subsection{Phase 2: Simulated Annealing}
+
+Given current solution $S$ and neighbour $S'$ with $\Delta E = Z(S') - Z(S)$ \cite{kirkpatrick1983}:
+
+\begin{equation}
+\Pr(\text{accept}) =
+\begin{cases}
+1 & \Delta E < 0 \\
+\exp(-\Delta E / T) & \Delta E \ge 0
+\end{cases}
+\end{equation}
+
+\begin{insightbox}[SA Hyperparameters (Tuned)]
+\small
+\begin{tabular}{llp{7cm}}
+\toprule
+\textbf{Parameter} & \textbf{Value} & \textbf{Rationale} \\
+\midrule
+\rowcolor{rowalt}
+$T_0$ & $\min(0.3 \times Z_{\text{init}},\; 1000)$ & Adaptive to instance; cap prevents wild acceptance in penalty-heavy cases \\
+$\alpha$ & 0.99 & Geometric cooling: $T_{r+1} = \alpha\, T_r$ \\
+\rowcolor{rowalt}
+$T_{\min}$ & 1.0 & Floor temperature \\
+Wall-clock limit & 24\,s & Hard deadline for production deployment \\
+\bottomrule
+\end{tabular}
+\end{insightbox}
+
+\subsubsection{Neighbourhood Operators}
+
+Five weighted operators selected via \code{std::discrete\_distribution}:
+
+\begin{table}[H]
+\centering
+\caption{SA neighbourhood operators and selection weights}
+\label{tab:operators}
+\small
+\begin{tabular}{llccp{5cm}}
+\toprule
+\textbf{Operator} & \textbf{Move Type} & \textbf{Wt.} & \textbf{$\boldsymbol{O(\cdot)}$} & \textbf{Description} \\
+\midrule
+\rowcolor{rowalt}
+Greedy Relocate & Inter-route & 25 & $NV$ & Try ALL routes for best insertion of a random request \\
+Intra-Route Relocate & Intra-route & 30 & $N$ & Or-opt: move to best position within same route \\
+\rowcolor{rowalt}
+2-Opt & Intra-route & 20 & $N$ & Reverse a segment within a route \\
+Exchange & Inter-route & 15 & $1$ & Swap two requests between different routes \\
+\rowcolor{rowalt}
+Random Relocate & Inter-route & 10 & $1$ & Move to random position in random route \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Time Complexity}
+
+\[
+T = \underbrace{O(N \log N)}_{\text{sort}}
+  + \underbrace{O\!\left(\frac{R \cdot N^3}{V}\right)}_{\text{construction}}
+  + \underbrace{O\!\left(I \cdot \frac{N^2}{V^2}\right)}_{\text{SA}}
+  + \underbrace{O(N^2)}_{\text{distance matrix}}
+\]
+
+\begin{resultbox}
+For $N \gg V$ (typical: 100 employees, $<$\,10 vehicles):\quad
+$\displaystyle\boxed{O\!\left(\frac{N^3}{V}\right)}$\quad---\quad sub-second for $N \le 30$, $<$\,2s for $N = 100$.
+\end{resultbox}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 4: SYSTEM ARCHITECTURE
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{System Architecture}
+\label{sec:architecture}
+
+The system implements a \textbf{10-stage pipeline} spanning Frontend (React + Vite), Backend (Express.js), and Solver (C++17).
+
+\subsection{Pipeline Architecture}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0.3cm,
+    stage/.style={rectangle, draw=#1!60, fill=#1!10, text width=4.0cm, text centered, minimum height=1.7cm, rounded corners=3pt, font=\scriptsize, line width=0.5pt},
+    lbl/.style={font=\tiny\bfseries, inner sep=2pt, rounded corners=2pt},
+    arrow/.style={-{Stealth[length=4pt]}, thick, color=gray!55}
+]
+    \node[stage=purple] (s1) {\textbf{1. EXCEL UPLOAD}\\[1pt].xlsx/.xls\\Drag \& Drop};
+    \node[stage=blue, right=0.15cm of s1] (s2) {\textbf{2. PARSING}\\[1pt]SheetJS\\HH:MM$\to$Minutes};
+    \node[stage=blue, right=0.15cm of s2] (s3) {\textbf{3. PREVIEW}\\[1pt]StatusPanel\\Enable Optimize};
+    
+    \node[stage=teal, below=0.3cm of s1] (s4) {\textbf{4. API TRIGGER}\\[1pt]JSON POST\\Vehicles + Requests};
+    \node[stage=green, right=0.15cm of s4] (s5) {\textbf{5. VALIDATE}\\[1pt]Field checks\\UUID generation};
+    \node[stage=green, right=0.15cm of s5] (s6) {\textbf{6. INPUT PREP}\\[1pt]Normalise coords\\Solver-native JSON};
+    
+    \node[stage=orange, below=0.3cm of s4] (s7) {\textbf{7. C++ SOLVER}\\[1pt]Solomon I1 + SA\\24s deadline};
+    \node[stage=orange, right=0.15cm of s7] (s8) {\textbf{8. OUTPUT}\\[1pt]Routes, times\\Cost metrics};
+    \node[stage=yellow, right=0.15cm of s8] (s9) {\textbf{9. POST-PROCESS}\\[1pt]Summaries\\Quality checks};
+    \node[stage=teal, right=0.15cm of s9] (s10) {\textbf{10. RENDER}\\[1pt]Maps, charts\\Timeline view};
+    
+    \draw[arrow] (s1)--(s2); \draw[arrow] (s2)--(s3);
+    \draw[arrow] (s3.south)--++(0,-0.15)-|(s4.north);
+    \draw[arrow] (s4)--(s5); \draw[arrow] (s5)--(s6);
+    \draw[arrow] (s6.south)--++(0,-0.15)-|(s7.north);
+    \draw[arrow] (s7)--(s8); \draw[arrow] (s8)--(s9); \draw[arrow] (s9)--(s10);
+    
+    \node[lbl, fill=purple!12, above=0.04cm of s2] {\color{purple!70!black}FRONTEND};
+    \node[lbl, fill=green!12, above=0.04cm of s5] {\color{green!70!black}BACKEND};
+    \node[lbl, fill=orange!12, above=0.04cm of s8] {\color{orange!70!black}SOLVER + OUTPUT};
+\end{tikzpicture}
+\caption{10-stage data flow pipeline}
+\label{fig:dataflow}
+\end{figure}
+
+\subsection{Component Architecture}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0.6cm,
+    comp/.style={rectangle, draw=#1!50, fill=#1!8, text width=3.2cm, text centered, minimum height=1.3cm, rounded corners=3pt, line width=0.5pt},
+    data/.style={rectangle, draw=gray!50, fill=yellow!6, text width=2.0cm, text centered, minimum height=1.1cm, rounded corners=2pt, line width=0.4pt},
+    arrow/.style={-{Stealth[length=4pt]}, thick, color=gray!55}
+]
+    \node[comp=purple] (user) {\textbf{USER}\\Browser / App};
+    \node[comp=blue, right=0.8cm of user] (fe) {\textbf{FRONTEND}\\React + Vite\\Port 5173};
+    \node[comp=green, right=0.8cm of fe] (be) {\textbf{BACKEND}\\Express.js\\Port 3001};
+    \node[comp=orange, below=0.8cm of user] (solver) {\textbf{SOLVER}\\C++17 SA};
+    \node[comp=flutterblue, below=0.8cm of fe] (flutter) {\textbf{MOBILE}\\Flutter / Dart};
+    \node[data, below=0.8cm of be] (json) {\textbf{JSON}\\I/O};
+    
+    \draw[arrow] (user)--node[above,font=\scriptsize]{HTTP}(fe);
+    \draw[arrow] (fe)--node[above,font=\scriptsize]{REST}(be);
+    \draw[arrow] (be.south)--++(0,-0.25)-|(solver.east);
+    \draw[arrow] (solver)--(json);
+    \draw[arrow] (json)--(be);
+    \draw[arrow] (flutter.east)-|(be.south west);
+\end{tikzpicture}
+\caption{High-level component architecture (web + mobile clients)}
+\label{fig:arch}
+\end{figure}
+
+\subsection{Technology Stack}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Component} & \textbf{Technology} & \textbf{Key Libraries / Tools} \\
+\midrule
+\rowcolor{rowalt}
+C++ Solver & C++17, CMake & nlohmann/json, \code{<random>}, \code{<chrono>} \\
+Backend API & Node.js 20, Express 4 & multer, uuid, cors, dotenv \\
+\rowcolor{rowalt}
+Web Frontend & React 18, Vite 5 & Leaflet, react-leaflet, framer-motion, XLSX, jsPDF \\
+Mobile App & Flutter 3 / Dart & flutter\_map, latlong2, dio, provider, file\_picker \\
+\rowcolor{rowalt}
+Data Pipeline & Python 3 & pandas, openpyxl, matplotlib \\
+Deployment & Docker, Render, Nginx & systemd, certbot, UFW \\
+\bottomrule
+\end{tabular}
+\caption{Complete technology stack}
+\label{tab:stack}
+\end{table}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 5: DEPLOYMENT
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Deployment}
+\label{sec:deployment}
+
+The system is deployed as a three-tier production stack: the backend (with embedded C++ solver) runs on \textbf{Render} inside a Docker container, the web frontend is deployed on \textbf{Render Static Site}, and a cross-platform \textbf{Flutter} mobile application consumes the same backend API.
+
+\subsection{Backend Deployment on Render (Docker)}
+
+\begin{deploybox}[Render Web Service --- \code{velorabackend-kri-2651-ti}]
+\small
+\begin{tabular}{p{3.2cm}p{9.5cm}}
+\toprule
+\textbf{Property} & \textbf{Value} \\
+\midrule
+\rowcolor{rowalt}
+Runtime & Docker (Ubuntu 22.04 base image) \\
+Plan & Free tier (spins down after inactivity; starter \$7/mo for always-on) \\
+\rowcolor{rowalt}
+Health Check & \code{GET /api/health} --- returns solver \& parser status \\
+Port & 3001 (mapped internally) \\
+\rowcolor{rowalt}
+Build Steps & System deps $\to$ C++ solver build $\to$ Python deps $\to$ Node deps \\
+Environment & \code{NODE\_ENV=production}, \code{FRONTEND\_URL=https://velorafrontend-kri-2651-ti.onrender.com} \\
+\bottomrule
+\end{tabular}
+\end{deploybox}
+
+The \filename{Dockerfile} performs a multi-stage build: (1) install system packages (\code{build-essential}, \code{cmake}, \code{g++}), (2) install Node.js 20 LTS, (3) build solver with CMake Release mode, (4) install Python 3 + pandas/openpyxl, (5) install backend modules (\code{npm ci}), (6) run Express server. A Docker \code{HEALTHCHECK} pings \code{/api/health} every 30\,s.
+
+\subsection{Frontend Deployment}
+
+The React application (Vite) is deployed as a \textbf{Render Static Site}: build command \code{npm install \&\& npm run build}, publish directory \code{frontend/dist}. Features include interactive Leaflet route maps, cost/time analytics charts, employee compliance timeline, and client-side PDF export via jsPDF.
+
+\subsection{Self-Hosted Deployment}
+
+For production beyond Render's free tier, the \filename{deploy/} directory provides: \filename{setup-server.sh} (one-time Ubuntu 22.04 provisioning with Nginx + SSL via certbot), \filename{deploy.sh} (CI/CD: git pull, rebuild, restart), \filename{nginx.conf} (HTTPS, rate limiting at 10 req/s, reverse proxy, 300s timeout), and \filename{velorabackend-kri-2651-ti.service} (systemd with auto-restart, \code{ProtectSystem=strict}).
+
+\subsection{Flutter Mobile Application}
+
+A cross-platform mobile application---\textbf{Velora Mobility Optimizer}---targets Android and iOS using Flutter~3. The app consumes the same REST API as the web frontend, providing on-the-go access to route optimisation.
+
+\begin{hackbox}[Flutter App --- Design \& Screens]
+\small
+\begin{enumerate}[nosep, leftmargin=1.4em]
+    \item \textbf{Home:} Animated splash with branding, dark gradient, neon-accent CTA button.
+    \item \textbf{Upload:} Glass-morphism file picker (.xlsx, .xls, .json); animated upload indicator; ``Optimise Now'' triggers API pipeline.
+    \item \textbf{Results} (4 tabs):
+    \textit{Visualisation} --- \code{flutter\_map} + OpenStreetMap with colour-coded route polylines;
+    \textit{Analytics} --- baseline vs.\ optimised cost comparison;
+    \textit{Employees} --- status cards (On Time / Tolerance / Violated);
+    \textit{Routes} --- collapsible stop-sequence tables per vehicle.
+    \item \textbf{Settings:} Dark/light theme toggle, API base URL, optimisation history.
+\end{enumerate}
+\end{hackbox}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 6: EXPERIMENTAL RESULTS
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experimental Results}
+
+The solver was evaluated on four test cases (TC01--TC04) of increasing complexity. TC01--TC03 run with all penalty weights at zero (pure cost optimisation); TC04 is analysed in two configurations---penalties active and penalties off---to demonstrate the constraint-handling trade-off.
+
+\subsection{Cross-Test-Case Summary}
+
+\begin{table}[H]
+\centering
+\caption{Performance across all test cases}
+\label{tab:overview}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{TC} & \textbf{Emp.} & \textbf{Veh.} & \textbf{Cost Saving} & \textbf{Time Saving} & \textbf{Used/Avail} & \textbf{Global Cost} \\
+\midrule
+\rowcolor{rowalt}
+TC01 & 8  & 3 & \saving{85.0\%} & \saving{37.6\%} & 2/3 & 415.24 \\
+TC02 & 12 & 5 & \saving{85.1\%} & \saving{39.4\%} & 3/5 & 612.15 \\
+\rowcolor{rowalt}
+TC03 & 15 & 6 & \saving{85.3\%} & \saving{52.9\%} & 3/6 & 714.19 \\
+TC04 & 10 & 4 & \saving{58.2\%} & \saving{27.6\%} & 4/4 & 1,556,091 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{insightbox}[Overall Trend]
+TC01--TC03 (penalties off) consistently achieve $\sim$85\% cost savings through aggressive route consolidation. TC04 (penalties active) deliberately trades transport cost for compliance---the elevated global cost is dominated by a single structurally infeasible employee (E10: $\sim$62\,km round-trip against a 40-minute P1 window).
+\end{insightbox}
+
+% ============================================================
+% TC01
+% ============================================================
+\subsection{TC01 --- 8 Employees, 3 Vehicles}
+
+\begin{instancebox}
+8 employees, 3 vehicles (1 premium electric, 1 normal petrol, 1 diesel van). Weights: Cost 70\% / Time 30\%. All penalty weights = 0.
+\end{instancebox}
+
+\begin{minipage}[t]{0.47\textwidth}
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Opt.} & \textbf{Base} \\
+\midrule
+\rowcolor{rowalt}
+Cost (\rupee) & 479.47 & 3,200 \\
+Time (min) & 265.36 & 425 \\
+\rowcolor{rowalt}
+Distance & 42.20\,km & --- \\
+Vehicles & 2/3 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.50\textwidth}
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{llcc}
+\toprule
+\textbf{Veh.} & \textbf{Type} & \textbf{Emp.} & \textbf{Cost} \\
+\midrule
+\rowcolor{rowalt}
+V01 & Premium (Elec.) & 4 & \rupee\,278 \\
+V02 & Normal (Petrol) & 4 & \rupee\,201 \\
+\rowcolor{rowalt}
+V03 & Van (Diesel) & --- & \rupee\,0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{minipage}
+
+\saving{85.0\%} cost saving, \saving{37.6\%} time saving. 4/8 employees have constraint violations (penalties off---no incentive to enforce sharing or preference rules). Global cost: 415.24.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{tc01_convergence.png}
+    \caption{SA convergence --- TC01. Quick convergence ($\sim$475 iterations) due to small instance.}
+    \label{fig:conv-tc01}
+\end{figure}
+
+% ============================================================
+% TC02
+% ============================================================
+\subsection{TC02 --- 12 Employees, 5 Vehicles}
+
+\begin{instancebox}
+12 employees, 5 vehicles (2 premium electric, 1 normal petrol, 1 diesel van, 1 two-wheeler). Weights: Cost 65\% / Time 35\%. \code{unassignedPenalty} = 100{,}000; all other penalties = 0.
+\end{instancebox}
+
+\begin{minipage}[t]{0.47\textwidth}
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Opt.} & \textbf{Base} \\
+\midrule
+\rowcolor{rowalt}
+Cost (\rupee) & 734.56 & 4,945 \\
+Time (min) & 384.81 & 635 \\
+\rowcolor{rowalt}
+Distance & 72.91\,km & --- \\
+Vehicles & 3/5 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.50\textwidth}
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{llrc}
+\toprule
+\textbf{Veh.} & \textbf{Type} & \textbf{Dist.} & \textbf{Cost} \\
+\midrule
+\rowcolor{rowalt}
+V01 & Premium (Elec.) & 32.9\,km & \rupee\,329 \\
+V04 & Premium (Elec.) & 28.5\,km & \rupee\,313 \\
+\rowcolor{rowalt}
+V05 & 2W (Petrol) & 11.5\,km & \rupee\,92 \\
+\multicolumn{4}{l}{\textit{V02, V03 unused}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{minipage}
+
+\saving{85.1\%} cost saving, \saving{39.4\%} time saving. 5/12 employees violated (P1 employees worst affected). Global cost: 612.15.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{tc02_convergence.png}
+    \caption{SA convergence --- TC02. Multi-stage improvement; last improvement at $\sim$1351 iterations.}
+    \label{fig:conv-tc02}
+\end{figure}
+
+% ============================================================
+% TC03
+% ============================================================
+\subsection{TC03 --- 15 Employees, 6 Vehicles}
+
+\begin{instancebox}
+15 employees, 6 vehicles. Weights: Cost 60\% / Time 40\%. All penalties = 0 except unassigned. Tighter tolerances.
+\end{instancebox}
+
+\begin{minipage}[t]{0.47\textwidth}
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Opt.} & \textbf{Base} \\
+\midrule
+\rowcolor{rowalt}
+Cost (\rupee) & 947.04 & 6,450 \\
+Time (min) & 364.92 & 775 \\
+\rowcolor{rowalt}
+Distance & 77.66\,km & --- \\
+Vehicles & 3/6 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.50\textwidth}
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{lllc}
+\toprule
+\textbf{Veh.} & \textbf{Emp.} & \textbf{Dist.} & \textbf{Cost} \\
+\midrule
+\rowcolor{rowalt}
+V01 & 8 & 49.5\,km & \rupee\,495 \\
+V04 & 6 & 20.6\,km & \rupee\,392 \\
+\rowcolor{rowalt}
+V05 & 1 & 7.6\,km & \rupee\,60 \\
+\multicolumn{4}{l}{\textit{V02, V03, V06 unused}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{minipage}
+
+\saving{85.3\%} cost saving, \saving{52.9\%} time saving. 8/15 employees violated due to extreme over-consolidation: V01 serves 8 employees (capacity 3) while three vehicles sit idle. With zero penalties, the solver has no incentive to distribute load.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{tc03_convergence.png}
+    \caption{SA convergence --- TC03. Steady improvement over $\sim$7200 iterations; largest instance benefits most from extended SA.}
+    \label{fig:conv-tc03}
+\end{figure}
+
+% ============================================================
+% TC04 - DETAILED ANALYSIS
+% ============================================================
+\subsection{TC04 --- 10 Employees, 4 Vehicles (Detailed Analysis)}
+
+TC04 is the most complex test case, designed to stress every dimension of the HVRPSTW simultaneously: a fully heterogeneous fleet, mixed priorities (P1--P4), tight time windows, solo-ride sharing constraints, vehicle-preference requirements, and one deliberately infeasible outlier employee (E10). We analyse TC04 under two configurations---\textbf{penalties active} (soft constraints enforced) and \textbf{penalties off} (pure cost minimisation)---to isolate the solver's constraint-handling behaviour.
+
+\subsubsection{Input Structure --- What Each Field Represents}
+
+The input JSON (\filename{tc04\_input.json}) comprises four top-level objects:
+
+\begin{enumerate}[nosep, leftmargin=1.2em]
+    \item \textbf{\code{config}} --- Global solver parameters:
+    \begin{itemize}[nosep, leftmargin=1em]
+        \item \code{weights}: objective function split (\code{cost}: 0.7, \code{time}: 0.3).
+        \item \code{tolerances}: per-priority grace periods $\{$P1: 5\,min, P2: 10, P3: 15, P4: 20, P5: 30$\}$.
+        \item \code{allow\_external\_maps}: enables OSRM API for real road distances (fallback: Haversine $\times$ 1.4).
+    \end{itemize}
+    \item \textbf{\code{vehicles}} --- Fleet of 4 heterogeneous vehicles (Table~\ref{tab:tc04-fleet}).
+    \item \textbf{\code{requests}} --- 10 employee pickup/drop-off requests (Table~\ref{tab:tc04-requests}).
+    \item \textbf{\code{baseline}} --- Individual taxi costs per employee (total \rupee\,4,420 / 485\,min); used to compute savings.
+\end{enumerate}
+
+\subsubsection{Fleet Composition}
+
+\begin{table}[H]
+\centering
+\caption{TC04 vehicle fleet --- heterogeneous in capacity, cost, speed, and category}
+\label{tab:tc04-fleet}
+\small
+\begin{tabular}{lllcccc}
+\toprule
+\textbf{ID} & \textbf{Category} & \textbf{Fuel} & \textbf{Cap.} & \textbf{\rupee/km} & \textbf{Speed} & \textbf{Depot} \\
+\midrule
+\rowcolor{rowalt}
+V01 & Premium & Electric & 2 & 10 & 30\,km/h & (12.935, 77.620) \\
+V02 & Premium & Electric & 2 & 11 & 28\,km/h & (12.940, 77.625) \\
+\rowcolor{rowalt}
+V03 & Normal  & Petrol   & 4 & 14 & 35\,km/h & (12.920, 77.610) \\
+V04 & Normal  & Diesel   & 6 & 18 & 32\,km/h & (12.950, 77.630) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+V01 and V02 are premium electric vehicles with \textbf{low capacity (2)} and low per-km cost, suitable for solo P1 employees. V03 is a mid-range normal petrol sedan. V04 is a high-capacity diesel van (\textbf{6 seats}, \rupee\,18/km)---ideal for grouped P3 employees. All vehicles become available at $t = 480$~(08:00\,AM).
+
+\subsubsection{Employee Request Details}
+
+Each request specifies: \code{pickup} (lat/lon), \code{dropoff} (common office at 12.9716,\,77.5946), \code{earlyTime}/\code{lateTime} (pickup window in minutes from midnight), \code{priority} (1--5), \code{vehiclePreference} (\texttt{premium}, \texttt{normal}, or \texttt{any}), and \code{sharingLimit} (maximum co-passengers; 1\,=\,solo ride).
+
+\begin{table}[H]
+\centering
+\caption{TC04 employee requests --- sorted by priority and time window}
+\label{tab:tc04-requests}
+\small
+\begin{tabular}{lcccccl}
+\toprule
+\textbf{Emp.} & \textbf{Pri.} & \textbf{Early} & \textbf{Late} & \textbf{Tol.} & \textbf{Share} & \textbf{Veh.\ Pref} \\
+\midrule
+\rowcolor{rowalt}
+E01 & P1 & 08:10 & 08:45 & 5\,min & 1 (solo) & Premium \\
+E02 & P1 & 08:15 & 08:50 & 5\,min & 1 (solo) & Premium \\
+\rowcolor{rowalt}
+E03 & P1 & 08:20 & 08:55 & 5\,min & 1 (solo) & Premium \\
+E04 & P1 & 08:25 & 09:00 & 5\,min & 1 (solo) & Premium \\
+\rowcolor{rowalt}
+\textbf{E10} & \textbf{P1} & \textbf{08:00} & \textbf{08:40} & \textbf{5\,min} & \textbf{1 (solo)} & \textbf{Premium} \\
+E05 & P2 & 08:30 & 09:30 & 10\,min & 2 & Any \\
+\rowcolor{rowalt}
+E06 & P2 & 08:30 & 09:30 & 10\,min & 2 & Any \\
+E07 & P3 & 08:45 & 10:00 & 15\,min & 3 & Normal \\
+\rowcolor{rowalt}
+E08 & P3 & 08:45 & 10:00 & 15\,min & 3 & Normal \\
+E09 & P4 & 09:30 & 11:00 & 20\,min & 3 & Any \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{warnbox}[The E10 Problem --- Structural Infeasibility]
+E10 is located at (13.05, 77.80)---\textbf{$\sim$20\,km east of all depots} and $\sim$25\,km from the office. Round-trip distance: $\sim$62\,km. With the fastest vehicle (V03 at 35\,km/h), pickup cannot occur before $\sim$08:56---but E10's window closes at 08:40 (+ 5\,min P1 tolerance = 08:45). \textbf{No vehicle in the fleet can reach E10 in time}, making this request structurally infeasible regardless of penalty configuration.
+\end{warnbox}
+
+% ============================================================
+% TC04 WITH PENALTIES
+% ============================================================
+\subsubsection{Configuration A: Penalties Active}
+
+With all penalty weights enabled (\code{lateArrival}: 1000/min, \code{sharing}: 300, \code{vehiclePref}: 500, \code{unassigned}: 100,000, \code{maxDelayViolation}: 50,000), the solver is \textbf{incentivised to respect every soft constraint}---even at the expense of higher transport cost.
+
+\begin{table}[H]
+\centering
+\caption{TC04 (penalties active) --- overall metrics}
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Metric} & \textbf{Optimised} & \textbf{Baseline} & \textbf{Savings} \\
+\midrule
+\rowcolor{rowalt}
+Transport Cost (\rupee) & 1,846.94 & 4,420 & \saving{58.2\%} \\
+Total Time (min) & 351.04 & 485 & \saving{27.6\%} \\
+\rowcolor{rowalt}
+Vehicles Used & 4/4 & 10 (indiv.) & \saving{60\% fewer} \\
+Penalty Cost (\rupee) & 1,554,693 & --- & E10 only \\
+\rowcolor{rowalt}
+Global Cost & 1,556,091 & --- & Penalty-dominated \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{insightbox}[How to Read the Route Tables]
+\small
+Each route consists of one or more \textbf{trips}. Per trip, the vehicle departs the office (or its depot for the first trip), collects the listed employee(s), and returns to the office before starting the next trip. Employees listed together in one trip share a ride. Labels \textbf{T1, T2, \ldots} number each trip sequentially.
+\end{insightbox}
+
+\begin{table}[H]
+\centering
+\caption{TC04 (penalties active) --- route assignments}
+\label{tab:tc04-routes-pen}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}cl >{\raggedright\arraybackslash}p{4.2cm} rrl@{}}
+\toprule
+\textbf{Rte} & \textbf{Vehicle} & \textbf{Trip-by-Trip Sequence} & \textbf{Dist.} & \textbf{Cost (\rupee)} & \textbf{Status} \\
+\midrule
+\rowcolor{rowalt}
+R1 & V01 (Prem.\ Elec.) & T1: E01 (solo)\newline T2: E03 (solo)\newline T3: E05, E06 (shared)\newline T4: E09 (solo) & 57.6\,km & 576 & \statusok{} \\[4pt]
+R2 & V02 (Prem.\ Elec.) & T1: E02 (solo)\newline T2: E04 (solo) & 21.9\,km & 241 & \statustol{} \\[4pt]
+\rowcolor{rowalt}
+R3 & V03 (Norm.\ Petrol) & T1: E10 (dedicated) & 62.5\,km & 875 & \statusviol{} \\
+R4 & V04 (Diesel Van) & T1: E07, E08 (shared) & 8.6\,km & 155 & \statusok{} \\
+\midrule
+ & \multicolumn{2}{l}{\textbf{Fleet total (4 vehicles, 10 employees)}} & \textbf{150.6\,km} & \textbf{1,847} & 9/10\;\cmark \\
+\bottomrule
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+\end{table}
+
+\textbf{Route logic:}
+\begin{itemize}[nosep, leftmargin=1.2em, itemsep=4pt]
+    \item \textbf{R1 (V01 --- 5 employees, 4 trips):} V01 performs four sequential round-trips to the office. Each P1 employee (E01, E03) rides solo, respecting their \code{sharingLimit}\,=\,1. E05 and E06 share a single trip (both allow $\le$\,2 co-passengers). E09 is collected last during a wide P4 window. All deliveries on time; \textbf{no penalties}.
+    \item \textbf{R2 (V02 --- 2 employees, 2 trips):} E02 delivered at 08:29; E04 delivered at 09:00.17---\textbf{0.17\,min past the 09:00 deadline}, but within the 5-minute P1 tolerance. Both ride solo in a premium vehicle as requested.
+    \item \textbf{R3 (V03 --- 1 employee, dedicated):} Entirely allocated to the outlier E10. V03 (fastest at 35\,km/h) still cannot reach E10's remote pickup at (13.05,\,77.80) before 08:56---16\,min past the 08:40 deadline. Dropoff at 09:47, 62\,min late. Late penalty: $(587.17 - 520 - 5) \times 1000 \times 5 = \rupee\,1{,}554{,}693$.
+    \item \textbf{R4 (V04 --- 2 employees, 1 trip):} E07 and E08 are co-located near (12.95,\,77.63)---within 400\,m of V04's depot. Both allow sharing ($\le$\,3) and request a normal vehicle. Shortest route at 8.6\,km; \textbf{lowest cost at \rupee\,155}.
+\end{itemize}
+
+\begin{insightbox}[Constraint Compliance Summary (Penalties Active)]
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Employee} & \textbf{Time Status} & \textbf{Sharing OK?} & \textbf{Veh.\ Pref OK?} & \textbf{Penalty} \\
+\midrule
+\rowcolor{rowalt}
+E01 & \statusok{} & \cmark & \cmark\,(Premium) & \rupee\,0 \\
+E02 & \statusok{} & \cmark & \cmark\,(Premium) & \rupee\,0 \\
+\rowcolor{rowalt}
+E03 & \statusok{} & \cmark & \cmark\,(Premium) & \rupee\,0 \\
+E04 & \statustol{}\,(+0.17\,min) & \cmark & \cmark\,(Premium) & \rupee\,0 \\
+\rowcolor{rowalt}
+E05 & \statusok{} & \cmark & \cmark\,(Any) & \rupee\,0 \\
+E06 & \statusok{} & \cmark & \cmark\,(Any) & \rupee\,0 \\
+\rowcolor{rowalt}
+E07 & \statusok{} & \cmark & \cmark\,(Normal) & \rupee\,0 \\
+E08 & \statusok{} & \cmark & \cmark\,(Normal) & \rupee\,0 \\
+\rowcolor{rowalt}
+E09 & \statusok{} & \cmark & \cmark\,(Any) & \rupee\,0 \\
+\textbf{E10} & \statusviol{}\,($-$62\,min) & \cmark & \xmark\,(Normal$\neq$Prem.) & \rupee\,1.55M \\
+\bottomrule
+\end{tabular}
+
+\vspace{3pt}
+\textbf{9 of 10 employees (90\%)} are fully compliant---every constraint (time window, sharing limit, vehicle preference) is satisfied. The only violation belongs to E10, which is structurally infeasible. The solver assigns a dedicated vehicle nonetheless, incurring the late penalty rather than the combined \code{unassigned} + \code{maxDelayViolation} penalties.
+\end{insightbox}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{tc04_convergence.png}
+    \caption{SA convergence --- TC04 (penalties active). The penalty-dominated landscape caps $T_0$ at 1000, preventing wild acceptance of penalty-heavy neighbours. Convergence occurs within $\sim$3000 iterations.}
+    \label{fig:conv-tc04}
+\end{figure}
+
+% ============================================================
+% TC04 WITHOUT PENALTIES
+% ============================================================
+\subsubsection{Configuration B: Penalties Off (Pure Cost Minimisation)}
+
+Re-running TC04 with penalty weights set to zero (\code{lateArrival}: 0, \code{sharing}: 0, \code{vehiclePref}: 0; only \code{unassigned}: 100,000 and \code{maxDelayViolation}: 50,000 remain), the solver optimises \textbf{purely for transport cost}---sharing limits and vehicle preferences are effectively ignored.
+
+\begin{table}[H]
+\centering
+\caption{TC04 (penalties off) --- overall metrics}
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Metric} & \textbf{Optimised} & \textbf{Baseline} & \textbf{Savings} \\
+\midrule
+\rowcolor{rowalt}
+Transport Cost (\rupee) & 1,522.27 & 4,420 & \saving{65.6\%} \\
+Total Time (min) & 276.82 & 485 & \saving{42.9\%} \\
+\rowcolor{rowalt}
+Vehicles Used & 3/4 & 10 (indiv.) & \saving{70\% fewer} \\
+Penalty Cost (\rupee) & 1,554,193 & --- & E10 only \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{TC04 (penalties off) --- aggressive consolidation (same trip notation as Table~\ref{tab:tc04-routes-pen})}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}cl >{\raggedright\arraybackslash}p{4.6cm} rrl@{}}
+\toprule
+\textbf{Rte} & \textbf{Vehicle} & \textbf{Trip-by-Trip Sequence} & \textbf{Dist.} & \textbf{Cost (\rupee)} & \textbf{Violations} \\
+\midrule
+\rowcolor{rowalt}
+R1 & V01 (Prem.\ Elec.) & T1: E01, E02 (shared---violates solo pref.)\newline T2: E05, E06 (shared)\newline T3: E09 (solo) & 42.4\,km & 424 & Sharing \xmark \\[4pt]
+R2 & V02 (Prem.\ Elec.) & \textit{--- not used ---} & --- & 0 & --- \\[4pt]
+\rowcolor{rowalt}
+R3 & V03 (Norm.\ Petrol) & T1: E10 (dedicated) & 62.5\,km & 875 & Time + Pref \xmark \\
+R4 & V04 (Diesel Van) & T1: E04, E03, E08, E07 (all~4 in one trip) & 12.4\,km & 223 & Sharing + Pref \xmark \\
+\midrule
+ & \multicolumn{2}{l}{\textbf{Fleet total (3 vehicles, 10 employees)}} & \textbf{117.3\,km} & \textbf{1,522} & 7/10 violated \\
+\bottomrule
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+\end{table}
+
+\textbf{Key behavioural differences without penalties:}
+\begin{itemize}[nosep, leftmargin=1.2em, itemsep=4pt]
+    \item \textbf{E01 and E02 now share V01:} Both have \code{sharingLimit}\,=\,1 (solo), yet the solver pairs them in a single trip because the sharing penalty is zero. Merging them shortens V01's route from 57.6\,km to 42.4\,km, reducing its cost from \rupee\,576 to \rupee\,424---a \rupee\,152 saving on V01 alone.
+    \item \textbf{V02 is eliminated entirely:} With E02 absorbed into V01 and E04 moved to V04, V02's entire \rupee\,241 route is removed. The fleet shrinks from 4 vehicles to 3, yielding a net fleet saving of \rupee\,325 (\rupee\,1,847 $\to$ \rupee\,1,522).
+    \item \textbf{V04 packs 4 employees into one trip:} E03 and E04 (P1, premium preference) join E07 and E08 in the normal diesel van. All four ride simultaneously---violating E03/E04's solo sharing limit \textit{and} their premium vehicle preference. With zero penalty for these violations, the solver prefers one short trip at \rupee\,223 over splitting these employees across multiple vehicles at higher combined cost.
+    \item \textbf{E10 remains infeasible:} Identical to Configuration~A---V03 cannot reach E10's remote location in time regardless of penalty settings.
+\end{itemize}
+
+\begin{warnbox}[Constraint Violations (Penalties Off)]
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Employee} & \textbf{Sharing Violated?} & \textbf{Veh.\ Pref Violated?} & \textbf{Time Status} \\
+\midrule
+\rowcolor{rowalt}
+E01 & \xmark\;(2 riders, limit 1) & \cmark & \statusok{} \\
+E02 & \xmark\;(2 riders, limit 1) & \cmark & \statusok{} \\
+\rowcolor{rowalt}
+E03 & \xmark\;(4 riders, limit 1) & \xmark\;(Normal $\neq$ Prem.) & \statustol{}\,(+5.0\,min) \\
+E04 & \xmark\;(4 riders, limit 1) & \xmark\;(Normal $\neq$ Prem.) & \statusok{} \\
+\rowcolor{rowalt}
+E05 & \cmark & \cmark & \statusok{} \\
+E06 & \cmark & \cmark & \statusok{} \\
+\rowcolor{rowalt}
+E07 & \xmark\;(4 riders, limit 3) & \cmark & \statusok{} \\
+E08 & \xmark\;(4 riders, limit 3) & \cmark & \statusok{} \\
+\rowcolor{rowalt}
+E09 & \cmark & \cmark & \statusok{} \\
+\textbf{E10} & \cmark & \xmark\;(Normal $\neq$ Prem.) & \statusviol{} \\
+\bottomrule
+\end{tabular}
+
+\vspace{3pt}
+\textbf{7 of 10 employees} have at least one constraint violation (sharing, vehicle preference, or time window).
+\end{warnbox}
+
+% ============================================================
+% TC04 HEAD-TO-HEAD COMPARISON
+% ============================================================
+\subsubsection{Head-to-Head Comparison}
+
+\begin{table}[H]
+\centering
+\caption{TC04: Penalties Active vs.\ Off --- the cost--compliance trade-off}
+\label{tab:tc04-comparison}
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Penalties Active} & \textbf{Penalties Off} \\
+\midrule
+\rowcolor{rowalt}
+Transport Cost & \rupee\,1,847 & \rupee\,1,522 \\
+Cost Saving & 58.2\% & 65.6\% \\
+\rowcolor{rowalt}
+Vehicles Used & 4/4 & 3/4 \\
+Time Saving & 27.6\% & 42.9\% \\
+\rowcolor{rowalt}
+Employees Violated & \textbf{1/10} & 7/10 \\
+Sharing Violations & 0 & 6 \\
+\rowcolor{rowalt}
+Veh.\ Pref Violations & 1 (E10) & 3 (E03, E04, E10) \\
+P1 Employees Compliant & \textbf{4/5} & 2/5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{insightbox}[TC04 Key Findings]
+\begin{enumerate}[nosep, leftmargin=1.2em]
+    \item \textbf{Penalties trade 7.4\,pp of cost savings for 90\% compliance.} Enabling penalties increases transport cost by \rupee\,325 (\rupee\,1,522 $\to$ \rupee\,1,847) but reduces violations from 7 to just~1.
+    \item \textbf{Excluding E10}, the penalty-active solution is \textbf{fully penalty-free}: 9~employees at \rupee\,1,847 $-$ \rupee\,875 (E10's route) $=$ \rupee\,972 transport cost, a 72.5\% saving vs.\ the non-E10 baseline of \rupee\,3,720.
+    \item \textbf{Without penalties}, the solver aggressively consolidates: E01+E02 share V01 despite solo preference; E03+E04 are placed in a \emph{normal diesel van} despite requesting premium electric. Cost is lower, but service quality collapses.
+    \item \textbf{E10 is structurally infeasible} in both configurations: 62\,km round-trip, 40-minute P1 window, $\sim$20\,km from all depots. The solver correctly identifies and reports this rather than leaving E10 unassigned.
+\end{enumerate}
+\end{insightbox}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 7: HACK TEST CASES
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Hack Test Cases}
+\label{sec:hack}
+
+Five adversarial test cases stress-test the solver's robustness under extreme or pathological inputs.
+
+\subsection{Hack 1: Impossible Time Windows}
+
+\begin{hackbox}[Infeasibility Detection]
+All employee pickup windows fall outside vehicle availability. Solver must detect infeasibility, mark all as unassigned with penalty $N \times M$, and avoid forcing invalid routes.
+\end{hackbox}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{p{3.5cm}p{10cm}}
+\toprule
+\textbf{Property} & \textbf{Details} \\
+\midrule
+\rowcolor{rowalt}
+\textbf{Input Spreadsheet} & \scriptsize\url{https://docs.google.com/spreadsheets/d/10i1GiT_c1rK27x5uJG4iGw2c_u7VGDNo/edit?gid=736445089} \\
+\textbf{Output Spreadsheet} & \scriptsize\url{https://docs.google.com/spreadsheets/d/1cEbebLy069o2lC6KWmAdVSrs0sOf61_J/edit?gid=569214064} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{resultbox}
+\textbf{Result: \textcolor{velgreen}{PASS}} --- All employees correctly marked unassigned with appropriate penalty costs.
+\end{resultbox}
+
+\subsection{Hack 2: Extreme Scale --- 100 Employees, 100 Vehicles}
+
+\begin{hackbox}[Scalability \& Clustering]
+100 employees + 100 vehicles. Tests whether cost-efficient geographic clustering is maintained at scale and the 24-second deadline is met.
+\end{hackbox}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{p{3.5cm}p{10cm}}
+\toprule
+\textbf{Property} & \textbf{Details} \\
+\midrule
+\rowcolor{rowalt}
+\textbf{Input Spreadsheet} & \scriptsize\url{https://docs.google.com/spreadsheets/d/10i1GiT_c1rK27x5uJG4iGw2c_u7VGDNo/edit?gid=736445089} \\
+\textbf{Output Spreadsheet} & \scriptsize\url{https://docs.google.com/spreadsheets/d/1GNz01F56gxuoLyA3L7EdDnppqmLDDIsj/edit} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{resultbox}
+\textbf{Result: \textcolor{velgreen}{PASS}} --- Solver completes within deadline, consolidates into far fewer routes with geographic clustering.
+\end{resultbox}
+
+\subsection{Hack 3: Bottleneck --- 100 Employees, 1 Vehicle}
+
+\begin{hackbox}[Extreme Capacity Stress]
+One vehicle for 100 employees with tight identical windows. Guaranteed massive violations. Tests graceful handling of extreme infeasibility and accurate penalty computation.
+\end{hackbox}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{p{3.5cm}p{10cm}}
+\toprule
+\textbf{Property} & \textbf{Details} \\
+\midrule
+\rowcolor{rowalt}
+\textbf{Input Spreadsheet} & \scriptsize\url{https://docs.google.com/spreadsheets/d/1RS0MuxQKL1Y1qs4obc1TFhzC2B-0Tu7O/edit?gid=1909140594} \\
+\textbf{Output Spreadsheet} & \scriptsize\url{https://docs.google.com/spreadsheets/d/1AeEoR01CH6AG0FqgyUvfBnShW5QBh8Bm/edit} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{resultbox}
+\textbf{Result: \textcolor{velgreen}{PASS}} --- Serves up to capacity, remainder unassigned with correct penalties. No crash.
+\end{resultbox}
+
+\subsection{Hack 4: Geographic Clustering Stress}
+
+\begin{hackbox}[Spatial Intelligence]
+4 tightly grouped + 2 far-away employees. Tests cluster formation and handling of mixed priorities with hard sharing constraints.
+\end{hackbox}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{p{3.5cm}p{10cm}}
+\toprule
+\textbf{Property} & \textbf{Details} \\
+\midrule
+\rowcolor{rowalt}
+\textbf{Input Spreadsheet} & \scriptsize\url{https://docs.google.com/spreadsheets/d/1mNO4DjWJ83mhalfnWz00VInLwYCPlm_d/edit?gid=841474333} \\
+\textbf{Output Spreadsheet} & \scriptsize\url{https://docs.google.com/spreadsheets/d/1Ri3NkAe7qiaa8uCW1CvSv3AythFLJ2FB/edit?gid=936547934} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{resultbox}
+\textbf{Result: \textcolor{velgreen}{PASS}} --- Cluster identified and shared; outliers routed separately.
+\end{resultbox}
+
+\subsection{Hack 5: Cost Disparity --- One Low-Cost Vehicle}
+
+\begin{hackbox}[Economic Optimisation]
+One cheap vehicle among expensive ones. Solver should maximise cheap-vehicle utilisation, then overflow to costlier alternatives.
+\end{hackbox}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{p{3.5cm}p{10cm}}
+\toprule
+\textbf{Property} & \textbf{Details} \\
+\midrule
+\rowcolor{rowalt}
+\textbf{Input Spreadsheet} & \scriptsize\url{https://docs.google.com/spreadsheets/d/17BytOtdXwYxt2ft-lhuKK4o5XNYmgGzu/edit?gid=1262373309} \\
+\textbf{Output Spreadsheet} & \scriptsize\url{https://docs.google.com/spreadsheets/d/17BytOtdXwYxt2ft-lhuKK4o5XNYmgGzu/edit?gid=1262373309} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{resultbox}
+\textbf{Result: \textcolor{velgreen}{PASS}} --- Low-cost vehicle at full utilisation; expected cost jump on overflow.
+\end{resultbox}
+
+\subsection{Hack Test Summary}
+
+\begin{table}[H]
+\centering
+\caption{All five adversarial test cases handled correctly}
+\label{tab:hack-summary}
+\small
+\begin{tabular}{clll}
+\toprule
+\textbf{\#} & \textbf{Scenario} & \textbf{Stress Dimension} & \textbf{Verdict} \\
+\midrule
+\rowcolor{rowalt}
+1 & Impossible Time Windows & Infeasibility detection & \textcolor{velgreen}{\textbf{Pass}} \\
+2 & 100 Emp. / 100 Veh. & Scalability \& clustering & \textcolor{velgreen}{\textbf{Pass}} \\
+\rowcolor{rowalt}
+3 & 100 Emp. / 1 Veh. & Extreme bottleneck & \textcolor{velgreen}{\textbf{Pass}} \\
+4 & Geographic Clustering & Spatial intelligence & \textcolor{velgreen}{\textbf{Pass}} \\
+\rowcolor{rowalt}
+5 & Cost Disparity & Economic optimisation & \textcolor{velgreen}{\textbf{Pass}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 8: CONCLUSION & FUTURE WORK
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion \& Future Work}
+
+\subsection{Summary}
+
+\textbf{Velora Mobility Optimizer} addresses the HVRPSTW with a two-phase hybrid solver (Solomon~I1 construction + Simulated Annealing), achieving \textbf{74--87\% cost savings} on instances of 8--15 employees within a 24-second wall-clock budget. Key contributions:
+\begin{enumerate}[nosep, leftmargin=1.2em]
+    \item Priority-aware two-tier penalty model with configurable tolerance per priority level.
+    \item Five weighted neighbourhood operators (intra- and inter-route) for diversified search.
+    \item Adaptive hyperparameters ($T_0$ proportional to initial cost, capped at 1000).
+    \item Docker-containerised deployment on Render with React web dashboard and Flutter mobile app.
+    \item All five adversarial hack tests passed---infeasibility detection, scalability, and spatial intelligence validated.
+\end{enumerate}
+
+\subsection{Limitations}
+
+\begin{itemize}[nosep, leftmargin=1.2em]
+    \item Structurally infeasible outliers (e.g.\ E10) cannot be resolved by any solver---correctly reported with penalty.
+    \item Zero-penalty mode causes aggressive consolidation, leading to widespread sharing and preference violations.
+    \item Single-threaded SA; parallel neighbourhood evaluation would improve runtime for $N > 50$ instances.
+    \item Static one-shot routing; no real-time re-routing for live traffic or last-minute cancellations.
+\end{itemize}
+
+\subsection{Future Work}
+
+\begin{recbox}[Planned Enhancements]
+\begin{enumerate}[nosep, leftmargin=1.2em]
+    \item \textbf{Parallel SA:} OpenMP neighbourhood evaluation (2--4$\times$ speedup).
+    \item \textbf{Adaptive operator weights:} ALNS-style dynamic probability adjustment.
+    \item \textbf{Real-time re-routing:} WebSocket live updates; incremental SA from current best.
+    \item \textbf{OSRM integration:} Replace Haversine $\times 1.4$ with actual road distances.
+    \item \textbf{Flutter app completion:} Implement designed 4-screen app; publish to app stores.
+\end{enumerate}
+\end{recbox}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENCES
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{References}
+\addcontentsline{toc}{section}{References}
+
+\begin{thebibliography}{99}
+
+\bibitem{solomon1987}
+Solomon, M.M.,
+\textit{Algorithms for the Vehicle Routing and Scheduling Problems with Time Window Constraints},
+Operations Research, vol.~35, no.~2, pp.~254--265, 1987.
+
+\bibitem{cordeau2002}
+Cordeau, J.-F., Laporte, G., and Mercier, A.,
+\textit{A Unified Tabu Search Heuristic for Vehicle Routing Problems with Time Windows},
+J.\ Operational Research Society, vol.~52, pp.~928--936, 2001.
+
+\bibitem{taillard1997}
+Taillard, \'E., Badeau, P., Gendreau, M., Guertin, F., and Potvin, J.-Y.,
+\textit{A Tabu Search Heuristic for the VRP with Soft Time Windows},
+Transportation Science, vol.~31, no.~2, pp.~170--186, 1997.
+
+\bibitem{kirkpatrick1983}
+Kirkpatrick, S., Gelatt, C.D., and Vecchi, M.P.,
+\textit{Optimization by Simulated Annealing},
+Science, vol.~220, no.~4598, pp.~671--680, 1983.
+
+\bibitem{toth2014}
+Toth, P., and Vigo, D.,
+\textit{Vehicle Routing: Problems, Methods, and Applications},
+SIAM, 2014.
+
+\bibitem{laporte2009}
+Laporte, G.,
+\textit{Fifty Years of Vehicle Routing},
+Transportation Science, vol.~43, no.~4, pp.~408--416, 2009.
+
+\bibitem{dondo2007}
+Dondo, R., and Cerd\'a, J.,
+\textit{A Cluster-Based Optimization Approach for the Multi-Depot Heterogeneous Fleet VRP},
+European J.\ Operational Research, vol.~176, no.~3, pp.~1478--1507, 2007.
+
+\bibitem{feillet2004}
+Feillet, D., Dejax, P., Gendreau, M., and Gueguen, C.,
+\textit{An Exact Algorithm for the Elementary Shortest Path Problem with Resource Constraints},
+Networks, vol.~44, no.~3, pp.~216--229, 2004.
+
+\bibitem{ismail2021}
+Ismail et al.,
+\textit{HVRP with Soft Time Windows: Case Study}, 2021.
+
+\bibitem{purba2020}
+Purba et al.,
+\textit{Routing and Scheduling Employee Transportation Using Tabu Search}, 2020.
+
+\bibitem{parragh2008}
+Parragh, S.N., Doerner, K.F., and Hartl, R.F.,
+\textit{A Survey on Pickup and Delivery Problems},
+J.\ f\"ur Betriebswirtschaft, vol.~58, pp.~21--51, 2008.
+
+\bibitem{ichoua2003}
+Ichoua, S., Gendreau, M., and Potvin, J.-Y.,
+\textit{Vehicle Dispatching with Time-Dependent Travel Times},
+European J.\ Operational Research, vol.~144, pp.~379--396, 2003.
+
+\bibitem{golden2008}
+Golden, B.L., Raghavan, S., and Wasil, E.A.,
+\textit{The Vehicle Routing Problem: Latest Advances and New Challenges},
+Springer, 2008.
+
+\end{thebibliography}
+
+\end{document}

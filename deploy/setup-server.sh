@@ -121,15 +121,15 @@ echo "  written to $APP_DIR/backend/.env"
 
 # ─── 10. Systemd Service ─────────────────────────────────────────────────────
 echo "[10/11] Installing systemd service..."
-cp "$APP_DIR/deploy/velora-backend.service" /etc/systemd/system/
+cp "$APP_DIR/deploy/velorabackend-kri-2651-ti.service" /etc/systemd/system/velorabackend-kri-2651-ti.service
 systemctl daemon-reload
-systemctl enable velora-backend
-systemctl start velora-backend
+systemctl enable velorabackend-kri-2651-ti
+systemctl start velorabackend-kri-2651-ti
 sleep 2
-if systemctl is-active --quiet velora-backend; then
+if systemctl is-active --quiet velorabackend-kri-2651-ti; then
     echo "  service is running"
 else
-    echo "  WARNING: service failed to start, check: journalctl -u velora-backend"
+    echo "  WARNING: service failed to start, check: journalctl -u velorabackend-kri-2651-ti"
 fi
 
 # ─── 11. Firewall + Nginx ────────────────────────────────────────────────────
@@ -193,8 +193,8 @@ echo "============================================================"
 echo "  Setup Complete!"
 echo "============================================================"
 echo ""
-echo "  Backend:  systemctl status velora-backend"
-echo "  Logs:     journalctl -u velora-backend -f"
+echo "  Backend:  systemctl status velorabackend-kri-2651-ti"
+echo "  Logs:     journalctl -u velorabackend-kri-2651-ti -f"
 if [ -n "$DOMAIN" ]; then
     echo "  Health:   curl https://$DOMAIN/health"
 else

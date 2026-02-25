@@ -20,7 +20,7 @@ StartLimitBurst=3
 
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=velora-backend
+SyslogIdentifier=velorabackend-kri-2651-ti
 
 LimitNOFILE=65536
 NoNewPrivileges=true

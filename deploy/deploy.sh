@@ -69,13 +69,13 @@ fi
 
 # ─── 5. Restart Service ──────────────────────────────────────────────────────
 echo "[5/5] Restarting backend..."
-systemctl restart velora-backend
+systemctl restart velorabackend-kri-2651-ti
 sleep 3
 
-if systemctl is-active --quiet velora-backend; then
+if systemctl is-active --quiet velorabackend-kri-2651-ti; then
     echo "  service is running"
 else
-    echo "  ERROR: Service failed!" && systemctl status velora-backend --no-pager && exit 1
+    echo "  ERROR: Service failed!" && systemctl status velorabackend-kri-2651-ti --no-pager && exit 1
 fi
 
 # Health check
