@@ -10,6 +10,10 @@ temp.json
 __pycache__/
 *.pyc
 
+# Vite cache
+frontend/.vite/
+.vite/
+
 # Web application
 node_modules/
 frontend/node_modules/

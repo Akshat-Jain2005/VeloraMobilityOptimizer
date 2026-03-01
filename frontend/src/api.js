@@ -1,4 +1,6 @@
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:3001/api";
+// Relative "/api" routes through Vite's dev proxy → localhost:3001 on the host machine.
+// This works from any device on the local network without hardcoding an IP address.
+const API_BASE = import.meta.env.VITE_API_BASE || "/api";
 
 export async function submitOptimization(payload) {
   try {
@@ -11,7 +13,7 @@ export async function submitOptimization(payload) {
     if (!res.ok) {
       const message = await safeError(res);
       throw new Error(message || "Failed to submit optimization request");
-    }
+    } 
 
     return res.json();
   } catch (error) {
@@ -20,7 +22,7 @@ export async function submitOptimization(payload) {
       error.name === "TypeError"
     ) {
       throw new Error(
-        "Cannot connect to backend server. Make sure the backend is running on http://localhost:3001",
+        `Cannot connect to backend server. Make sure the backend is running on ${API_BASE}`,
       );
     }
     throw error;
@@ -49,7 +51,7 @@ export async function parseExcelFile(file) {
       error.name === "TypeError"
     ) {
       throw new Error(
-        "Cannot connect to backend server. Make sure the backend is running on http://localhost:3001",
+        `Cannot connect to backend server. Make sure the backend is running on ${API_BASE}`,
       );
     }
     throw error;
@@ -70,7 +72,7 @@ export async function getJobStatus(jobId) {
       error.name === "TypeError"
     ) {
       throw new Error(
-        "Cannot connect to backend server. Make sure the backend is running on http://localhost:3001",
+        `Cannot connect to backend server. Make sure the backend is running on ${API_BASE}`,
       );
     }
     throw error;
@@ -91,7 +93,7 @@ export async function getSolution(solutionId) {
       error.name === "TypeError"
     ) {
       throw new Error(
-        "Cannot connect to backend server. Make sure the backend is running on http://localhost:3001",
+        `Cannot connect to backend server. Make sure the backend is running on ${API_BASE}`,
       );
     }
     throw error;

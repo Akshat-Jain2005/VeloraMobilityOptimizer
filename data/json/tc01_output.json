@@ -90,16 +90,18 @@
         {
           "arrivalTime": 510.0,
           "employeeId": "E01",
+          "forceAssigned": false,
           "lat": 12.9352,
           "lon": 77.6245,
           "reqId": 0,
           "type": "pickup",
           "vehiclePreference": "premium",
-          "waitTime": 27.764400000000023
+          "waitTime": 27.761439999999993
         },
         {
-          "arrivalTime": 524.557,
+          "arrivalTime": 524.31584,
           "employeeId": "E01",
+          "forceAssigned": false,
           "lat": 12.9716,
           "lon": 77.5946,
           "reqId": 0,
@@ -108,8 +110,9 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 537.2276,
+          "arrivalTime": 535.85736,
           "employeeId": "E06",
+          "forceAssigned": false,
           "lat": 12.95,
           "lon": 77.62,
           "reqId": 5,
@@ -118,8 +121,9 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 547.4424,
+          "arrivalTime": 545.82116,
           "employeeId": "E06",
+          "forceAssigned": false,
           "lat": 12.9716,
           "lon": 77.5946,
           "reqId": 5,
@@ -128,8 +132,9 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 561.7358,
+          "arrivalTime": 560.98356,
           "employeeId": "E02",
+          "forceAssigned": false,
           "lat": 12.9298,
           "lon": 77.621,
           "reqId": 1,
@@ -138,8 +143,9 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 571.6946,
+          "arrivalTime": 570.9654400000001,
           "employeeId": "E04",
+          "forceAssigned": false,
           "lat": 12.96,
           "lon": 77.638,
           "reqId": 3,
@@ -148,8 +154,9 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 583.6384,
+          "arrivalTime": 583.1492800000001,
           "employeeId": "E02",
+          "forceAssigned": false,
           "lat": 12.9716,
           "lon": 77.5946,
           "reqId": 1,
@@ -158,8 +165,9 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 583.6384,
+          "arrivalTime": 583.1492800000001,
           "employeeId": "E04",
+          "forceAssigned": false,
           "lat": 12.9716,
           "lon": 77.5946,
           "reqId": 3,
@@ -168,9 +176,9 @@
           "waitTime": 0.0
         }
       ],
-      "totalCost": 379.37,
-      "totalDist": 37.937,
-      "totalTime": 103.63840000000005,
+      "totalCost": 376.93919999999997,
+      "totalDist": 37.69392,
+      "totalTime": 103.14928000000009,
       "vehicleId": 0,
       "vehicleIdStr": "V01",
       "vehicleType": "4w"
@@ -191,16 +199,18 @@
         {
           "arrivalTime": 555.0,
           "employeeId": "E05",
+          "forceAssigned": false,
           "lat": 12.915,
           "lon": 77.61,
           "reqId": 4,
           "type": "pickup",
           "vehiclePreference": "any",
-          "waitTime": 73.54199999999997
+          "waitTime": 73.53509142857143
         },
         {
-          "arrivalTime": 562.2713142857143,
+          "arrivalTime": 562.4594228571428,
           "employeeId": "E03",
+          "forceAssigned": false,
           "lat": 12.944,
           "lon": 77.6,
           "reqId": 2,
@@ -209,8 +219,9 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 571.8713142857143,
+          "arrivalTime": 571.6826914285714,
           "employeeId": "E05",
+          "forceAssigned": false,
           "lat": 12.9716,
           "lon": 77.5946,
           "reqId": 4,
@@ -219,8 +230,9 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 571.8713142857143,
+          "arrivalTime": 571.6826914285714,
           "employeeId": "E03",
+          "forceAssigned": false,
           "lat": 12.9716,
           "lon": 77.5946,
           "reqId": 2,
@@ -229,8 +241,9 @@
           "waitTime": 0.0
         },
         {
-          "arrivalTime": 587.7702857142858,
+          "arrivalTime": 588.7274914285714,
           "employeeId": "E07",
+          "forceAssigned": false,
           "lat": 12.925,
           "lon": 77.64,
           "reqId": 6,
@@ -241,37 +254,40 @@
         {
           "arrivalTime": 600.0,
           "employeeId": "E08",
+          "forceAssigned": false,
           "lat": 12.94,
           "lon": 77.63,
           "reqId": 7,
           "type": "pickup",
           "vehiclePreference": "any",
-          "waitTime": 6.459771428571344
+          "waitTime": 5.665371428571461
         },
         {
-          "arrivalTime": 611.7529714285714,
+          "arrivalTime": 611.5426285714286,
+          "employeeId": "E08",
+          "forceAssigned": false,
+          "lat": 12.9716,
+          "lon": 77.5946,
+          "reqId": 7,
+          "type": "dropoff",
+          "vehiclePreference": "any",
+          "waitTime": 0.0
+        },
+        {
+          "arrivalTime": 611.5426285714286,
           "employeeId": "E07",
+          "forceAssigned": false,
           "lat": 12.9716,
           "lon": 77.5946,
           "reqId": 6,
           "type": "dropoff",
           "vehiclePreference": "normal",
           "waitTime": 0.0
-        },
-        {
-          "arrivalTime": 611.7529714285714,
-          "employeeId": "E08",
-          "lat": 12.9716,
-          "lon": 77.5946,
-          "reqId": 7,
-          "type": "dropoff",
-          "vehiclePreference": "any",
-          "waitTime": 0.0
         }
       ],
-      "totalCost": 422.6348,
-      "totalDist": 30.1882,
-      "totalTime": 131.7529714285714,
+      "totalCost": 427.46102,
+      "totalDist": 30.53293,
+      "totalTime": 131.54262857142862,
       "vehicleId": 1,
       "vehicleIdStr": "V02",
       "vehicleType": "4w"
@@ -298,16 +314,8 @@
     }
   ],
   "summary": {
-    "distanceMethod": {
-      "apiCalls": 1,
-      "apiSuccess": 1,
-      "errorFallbacks": 0,
-      "externalEnabled": true,
-      "fallbackUsed": false,
-      "provider": "openrouteservice",
-      "timeoutFallbacks": 0
-    },
-    "globalCost": 632.0207714285714,
+    "distanceMethodUsed": "osrm",
+    "globalCost": 633.4877265714285,
     "objectiveWeightsUsed": {
       "wCost": 0.7,
       "wTime": 0.3
@@ -321,10 +329,10 @@
     },
     "totalBaselineCost": 3200.0,
     "totalBaselineTime": 425.0,
-    "totalDistance": 68.12519999999999,
-    "totalMoneyCost": 802.0047999999999,
+    "totalDistance": 68.22685,
+    "totalMoneyCost": 804.40022,
     "totalPenaltyCost": 0.0,
-    "totalTime": 235.39137142857146,
+    "totalTime": 234.6919085714287,
     "unassignedCount": 0,
     "vehiclesUsed": 2
   },

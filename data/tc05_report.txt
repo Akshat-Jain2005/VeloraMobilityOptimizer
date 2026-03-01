@@ -1,76 +1,201 @@
 ================================================================================
               VELORA MOBILITY OPTIMIZER - SOLUTION REPORT
 ================================================================================
-Generated: 2026-02-22 21:01:48
+Generated: 2026-02-26 17:58:41
 Output file: /Users/mac/Coding/Projects/Kriti/VeloraMobilityOptimizer/data/json/tc05_output.json
 Input file: auto-detected
 
 --------------------------------------------------------------------------------
 SUMMARY
 --------------------------------------------------------------------------------
-  CTC (Cost to Company):     14,835.86
+  CTC (Cost to Company):     14,160.31
   Total Penalty Cost:        2,872,728.88
-  Global Objective:          2,883,765.67
-  Total Distance:            1,007.99 km
-  Total Time:                2,172.3 minutes
-  Vehicles Used:             24
+  Global Objective:          2,883,263.69
+  Total Distance:            930.57 km
+  Total Time:                2,075.3 minutes
+  Vehicles Used:             23
   Unassigned Requests:       0
 
 --------------------------------------------------------------------------------
-VEHICLE ROUTES (24 active vehicles)
+VEHICLE ROUTES (23 active vehicles)
 --------------------------------------------------------------------------------
 
 ┌─ Vehicle: V_SUV_00
 │  Type: suv | Fuel: Petrol | Category: SUV
 │  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 52.15 km | Route Time: 104.3 min
-│  Route Cost (CTC contribution): 938.66
+│  Route Distance: 51.50 km | Route Time: 103.0 min
+│  Route Cost (CTC contribution): 927.01
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
 │  1   Pickup   EMP_036    08:32   -      (12.8302, 77.6655)       
-│  2   Pickup   EMP_078    08:41   -      (12.8567, 77.6744)       
-│  3   Pickup   EMP_060    08:57   -      (12.9071, 77.6640)       
-│  4   Pickup   EMP_018    09:02   -      (12.9215, 77.6565)       
-│  5   Pickup   EMP_087    09:16   -      (12.9644, 77.6388)       
-│  6   Pickup   EMP_080    09:21   -      (12.9783, 77.6354)       
-│  7   Dropoff  EMP_087    09:44   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_078    09:44   -      (13.0500, 77.6150)       
-│  9   Dropoff  EMP_060    09:44   -      (13.0500, 77.6150)       
-│  10  Dropoff  EMP_080    09:44   -      (13.0500, 77.6150)       
-│  11  Dropoff  EMP_018    09:44   -      (13.0500, 77.6150)       
-│  12  Dropoff  EMP_036    09:44   -      (13.0500, 77.6150)       
+│  2   Pickup   EMP_047    08:53   -      (12.8941, 77.6497)       
+│  3   Pickup   EMP_088    08:53   -      (12.8971, 77.6494)       
+│  4   Pickup   EMP_010    09:11   -      (12.9544, 77.6433)       
+│  5   Pickup   EMP_059    09:14   -      (12.9631, 77.6404)       
+│  6   Pickup   EMP_040    09:17   -      (12.9716, 77.6353)       
+│  7   Dropoff  EMP_059    09:43   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_040    09:43   -      (13.0500, 77.6150)       
+│  9   Dropoff  EMP_010    09:43   -      (13.0500, 77.6150)       
+│  10  Dropoff  EMP_088    09:43   -      (13.0500, 77.6150)       
+│  11  Dropoff  EMP_047    09:43   -      (13.0500, 77.6150)       
+│  12  Dropoff  EMP_036    09:43   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
 ┌─ Vehicle: V_SUV_01
 │  Type: suv | Fuel: Petrol | Category: SUV
 │  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 49.92 km | Route Time: 99.8 min
-│  Route Cost (CTC contribution): 898.65
+│  Route Distance: 32.51 km | Route Time: 87.3 min
+│  Route Cost (CTC contribution): 585.24
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
-│  1   Pickup   EMP_090    08:27   -      (12.9691, 77.7071)       
-│  2   Pickup   EMP_094    08:30   -      (12.9731, 77.7160)       
-│  3   Pickup   EMP_071    08:35   -      (12.9718, 77.7325)       
-│  4   Pickup   EMP_058    08:42   -      (12.9674, 77.7559)       
-│  5   Pickup   EMP_095    08:46   -      (12.9675, 77.7688)       
-│  6   Pickup   EMP_084    08:52   -      (12.9766, 77.7509)       
-│  7   Dropoff  EMP_094    09:39   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_071    09:39   -      (13.0500, 77.6150)       
-│  9   Dropoff  EMP_090    09:39   -      (13.0500, 77.6150)       
-│  10  Dropoff  EMP_058    09:39   -      (13.0500, 77.6150)       
-│  11  Dropoff  EMP_095    09:39   -      (13.0500, 77.6150)       
-│  12  Dropoff  EMP_084    09:39   -      (13.0500, 77.6150)       
+│  1   Pickup   EMP_001    08:24   14m    (12.9187, 77.5946)       
+│  2   Pickup   EMP_049    08:26   -      (12.9175, 77.5869)       
+│  3   Pickup   EMP_008    08:38   9m     (12.9124, 77.5780)       
+│  4   Pickup   EMP_072    08:58   -      (12.9582, 77.6260)       
+│  5   Pickup   EMP_075    08:58   -      (12.9593, 77.6260)       
+│  6   Pickup   EMP_029    09:01   -      (12.9686, 77.6274)       
+│  7   Dropoff  EMP_072    09:27   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_001    09:27   -      (13.0500, 77.6150)       
+│  9   Dropoff  EMP_049    09:27   -      (13.0500, 77.6150)       
+│  10  Dropoff  EMP_075    09:27   -      (13.0500, 77.6150)       
+│  11  Dropoff  EMP_008    09:27   -      (13.0500, 77.6150)       
+│  12  Dropoff  EMP_029    09:27   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
 ┌─ Vehicle: V_SUV_02
+│  Type: suv | Fuel: Petrol | Category: SUV
+│  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
+│  Start Location: (12.9279, 77.6271)
+│  Route Distance: 49.37 km | Route Time: 98.7 min
+│  Route Cost (CTC contribution): 888.69
+│
+│  Stops:
+│  --------------------------------------------------------------------------
+│  #   Type     Employee   Time    Wait   Location                 
+│  --------------------------------------------------------------------------
+│  1   Pickup   EMP_058    08:40   -      (12.9674, 77.7559)       
+│  2   Pickup   EMP_045    08:43   -      (12.9648, 77.7637)       
+│  3   Pickup   EMP_095    08:45   -      (12.9675, 77.7688)       
+│  4   Pickup   EMP_022    08:46   -      (12.9708, 77.7665)       
+│  5   Pickup   EMP_084    08:51   -      (12.9766, 77.7509)       
+│  6   Pickup   EMP_031    08:51   -      (12.9779, 77.7503)       
+│  7   Dropoff  EMP_058    09:38   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_045    09:38   -      (13.0500, 77.6150)       
+│  9   Dropoff  EMP_031    09:38   -      (13.0500, 77.6150)       
+│  10  Dropoff  EMP_084    09:38   -      (13.0500, 77.6150)       
+│  11  Dropoff  EMP_095    09:38   -      (13.0500, 77.6150)       
+│  12  Dropoff  EMP_022    09:38   -      (13.0500, 77.6150)       
+└───────────────────────────────────────────────────────────────────────────────
+
+┌─ Vehicle: V_SUV_03
+│  Type: suv | Fuel: Petrol | Category: SUV
+│  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
+│  Start Location: (12.9279, 77.6271)
+│  Route Distance: 55.08 km | Route Time: 110.2 min
+│  Route Cost (CTC contribution): 991.47
+│
+│  Stops:
+│  --------------------------------------------------------------------------
+│  #   Type     Employee   Time    Wait   Location                 
+│  --------------------------------------------------------------------------
+│  1   Pickup   EMP_015    08:35   -      (12.8210, 77.6707)       
+│  2   Pickup   EMP_097    08:39   -      (12.8320, 77.6670)       
+│  3   Pickup   EMP_013    09:00   -      (12.8992, 77.6562)       
+│  4   Pickup   EMP_018    09:07   -      (12.9215, 77.6565)       
+│  5   Pickup   EMP_041    09:23   -      (12.9709, 77.6504)       
+│  6   Pickup   EMP_067    09:28   -      (12.9872, 77.6485)       
+│  7   Dropoff  EMP_018    09:50   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_067    09:50   -      (13.0500, 77.6150)       
+│  9   Dropoff  EMP_041    09:50   -      (13.0500, 77.6150)       
+│  10  Dropoff  EMP_013    09:50   -      (13.0500, 77.6150)       
+│  11  Dropoff  EMP_097    09:50   -      (13.0500, 77.6150)       
+│  12  Dropoff  EMP_015    09:50   -      (13.0500, 77.6150)       
+└───────────────────────────────────────────────────────────────────────────────
+
+┌─ Vehicle: V_SUV_04
+│  Type: suv | Fuel: Petrol | Category: SUV
+│  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
+│  Start Location: (12.9279, 77.6271)
+│  Route Distance: 56.03 km | Route Time: 112.1 min
+│  Route Cost (CTC contribution): 1008.59
+│
+│  Stops:
+│  --------------------------------------------------------------------------
+│  #   Type     Employee   Time    Wait   Location                 
+│  --------------------------------------------------------------------------
+│  1   Pickup   EMP_066    08:31   -      (12.8453, 77.6848)       
+│  2   Pickup   EMP_007    08:37   -      (12.8283, 77.6939)       
+│  3   Pickup   EMP_082    08:39   0m     (12.8268, 77.6879)       
+│  4   Pickup   EMP_026    08:40   -      (12.8300, 77.6848)       
+│  5   Pickup   EMP_078    08:49   -      (12.8567, 77.6744)       
+│  6   Pickup   EMP_087    09:24   -      (12.9644, 77.6388)       
+│  7   Dropoff  EMP_078    09:52   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_087    09:52   -      (13.0500, 77.6150)       
+│  9   Dropoff  EMP_026    09:52   -      (13.0500, 77.6150)       
+│  10  Dropoff  EMP_082    09:52   -      (13.0500, 77.6150)       
+│  11  Dropoff  EMP_066    09:52   -      (13.0500, 77.6150)       
+│  12  Dropoff  EMP_007    09:52   -      (13.0500, 77.6150)       
+└───────────────────────────────────────────────────────────────────────────────
+
+┌─ Vehicle: V_SUV_05
+│  Type: suv | Fuel: Petrol | Category: SUV
+│  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
+│  Start Location: (12.9279, 77.6271)
+│  Route Distance: 31.75 km | Route Time: 103.9 min
+│  Route Cost (CTC contribution): 571.48
+│
+│  Stops:
+│  --------------------------------------------------------------------------
+│  #   Type     Employee   Time    Wait   Location                 
+│  --------------------------------------------------------------------------
+│  1   Pickup   EMP_046    08:59   40m    (12.9509, 77.6835)       
+│  2   Pickup   EMP_016    08:59   -      (12.9522, 77.6839)       
+│  3   Pickup   EMP_096    09:09   -      (12.9748, 77.6585)       
+│  4   Pickup   EMP_024    09:11   -      (12.9787, 77.6546)       
+│  5   Pickup   EMP_085    09:13   -      (12.9832, 77.6604)       
+│  6   Pickup   EMP_069    09:20   -      (12.9794, 77.6372)       
+│  7   Dropoff  EMP_069    09:43   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_024    09:43   -      (13.0500, 77.6150)       
+│  9   Dropoff  EMP_016    09:43   -      (13.0500, 77.6150)       
+│  10  Dropoff  EMP_096    09:43   -      (13.0500, 77.6150)       
+│  11  Dropoff  EMP_046    09:43   -      (13.0500, 77.6150)       
+│  12  Dropoff  EMP_085    09:43   -      (13.0500, 77.6150)       
+└───────────────────────────────────────────────────────────────────────────────
+
+┌─ Vehicle: V_SUV_06
+│  Type: suv | Fuel: Petrol | Category: SUV
+│  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
+│  Start Location: (12.9279, 77.6271)
+│  Route Distance: 35.71 km | Route Time: 96.6 min
+│  Route Cost (CTC contribution): 642.73
+│
+│  Stops:
+│  --------------------------------------------------------------------------
+│  #   Type     Employee   Time    Wait   Location                 
+│  --------------------------------------------------------------------------
+│  1   Pickup   EMP_089    08:20   -      (12.9543, 77.6903)       
+│  2   Pickup   EMP_032    08:53   24m    (12.9588, 77.7158)       
+│  3   Pickup   EMP_038    08:55   1m     (12.9621, 77.7169)       
+│  4   Pickup   EMP_090    08:58   -      (12.9691, 77.7071)       
+│  5   Pickup   EMP_048    09:01   -      (12.9764, 77.6994)       
+│  6   Pickup   EMP_044    09:02   -      (12.9760, 77.6969)       
+│  7   Dropoff  EMP_089    09:36   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_032    09:36   -      (13.0500, 77.6150)       
+│  9   Dropoff  EMP_044    09:36   -      (13.0500, 77.6150)       
+│  10  Dropoff  EMP_090    09:36   -      (13.0500, 77.6150)       
+│  11  Dropoff  EMP_048    09:36   -      (13.0500, 77.6150)       
+│  12  Dropoff  EMP_038    09:36   -      (13.0500, 77.6150)       
+└───────────────────────────────────────────────────────────────────────────────
+
+┌─ Vehicle: V_SUV_07
 │  Type: suv | Fuel: Petrol | Category: SUV
 │  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
 │  Start Location: (12.9279, 77.6271)
@@ -85,451 +210,313 @@ VEHICLE ROUTES (24 active vehicles)
 │  2   Dropoff  EMP_EDGE_99 10:02   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
-┌─ Vehicle: V_SUV_03
+┌─ Vehicle: V_SUV_08
 │  Type: suv | Fuel: Petrol | Category: SUV
 │  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 55.32 km | Route Time: 110.6 min
-│  Route Cost (CTC contribution): 995.69
-│
-│  Stops:
-│  --------------------------------------------------------------------------
-│  #   Type     Employee   Time    Wait   Location                 
-│  --------------------------------------------------------------------------
-│  1   Pickup   EMP_015    08:35   -      (12.8210, 77.6707)       
-│  2   Pickup   EMP_097    08:39   -      (12.8320, 77.6670)       
-│  3   Pickup   EMP_053    08:45   -      (12.8525, 77.6671)       
-│  4   Pickup   EMP_013    09:00   -      (12.8992, 77.6562)       
-│  5   Pickup   EMP_034    09:17   -      (12.9542, 77.6588)       
-│  6   Pickup   EMP_091    09:20   -      (12.9613, 77.6525)       
-│  7   Dropoff  EMP_013    09:50   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_091    09:50   -      (13.0500, 77.6150)       
-│  9   Dropoff  EMP_053    09:50   -      (13.0500, 77.6150)       
-│  10  Dropoff  EMP_034    09:50   -      (13.0500, 77.6150)       
-│  11  Dropoff  EMP_097    09:50   -      (13.0500, 77.6150)       
-│  12  Dropoff  EMP_015    09:50   -      (13.0500, 77.6150)       
-└───────────────────────────────────────────────────────────────────────────────
-
-┌─ Vehicle: V_SUV_04
-│  Type: suv | Fuel: Petrol | Category: SUV
-│  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
-│  Start Location: (12.9279, 77.6271)
-│  Route Distance: 34.81 km | Route Time: 95.0 min
-│  Route Cost (CTC contribution): 626.61
-│
-│  Stops:
-│  --------------------------------------------------------------------------
-│  #   Type     Employee   Time    Wait   Location                 
-│  --------------------------------------------------------------------------
-│  1   Pickup   EMP_019    08:05   1m     (12.9227, 77.6387)       
-│  2   Pickup   EMP_005    08:33   22m    (12.9031, 77.6328)       
-│  3   Pickup   EMP_083    08:44   -      (12.9130, 77.5978)       
-│  4   Pickup   EMP_092    08:53   3m     (12.9331, 77.6009)       
-│  5   Pickup   EMP_043    08:57   -      (12.9409, 77.5883)       
-│  6   Pickup   EMP_056    09:01   -      (12.9433, 77.6012)       
-│  7   Dropoff  EMP_043    09:34   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_056    09:34   -      (13.0500, 77.6150)       
-│  9   Dropoff  EMP_092    09:34   -      (13.0500, 77.6150)       
-│  10  Dropoff  EMP_005    09:34   -      (13.0500, 77.6150)       
-│  11  Dropoff  EMP_019    09:34   -      (13.0500, 77.6150)       
-│  12  Dropoff  EMP_083    09:34   -      (13.0500, 77.6150)       
-└───────────────────────────────────────────────────────────────────────────────
-
-┌─ Vehicle: V_SUV_05
-│  Type: suv | Fuel: Petrol | Category: SUV
-│  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
-│  Start Location: (12.9279, 77.6271)
-│  Route Distance: 43.07 km | Route Time: 93.4 min
-│  Route Cost (CTC contribution): 775.32
+│  Route Distance: 44.70 km | Route Time: 89.4 min
+│  Route Cost (CTC contribution): 804.59
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
 │  1   Pickup   EMP_077    08:32   -      (12.9550, 77.7313)       
-│  2   Pickup   EMP_021    08:48   7m     (12.9425, 77.7081)       
-│  3   Pickup   EMP_073    08:49   -      (12.9434, 77.7023)       
-│  4   Pickup   EMP_085    09:07   -      (12.9832, 77.6604)       
-│  5   Pickup   EMP_067    09:11   -      (12.9872, 77.6485)       
-│  6   Dropoff  EMP_067    09:33   -      (13.0500, 77.6150)       
-│  7   Dropoff  EMP_077    09:33   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_021    09:33   -      (13.0500, 77.6150)       
-│  9   Dropoff  EMP_085    09:33   -      (13.0500, 77.6150)       
-│  10  Dropoff  EMP_073    09:33   -      (13.0500, 77.6150)       
-└───────────────────────────────────────────────────────────────────────────────
-
-┌─ Vehicle: V_SUV_06
-│  Type: suv | Fuel: Petrol | Category: SUV
-│  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
-│  Start Location: (12.9279, 77.6271)
-│  Route Distance: 57.15 km | Route Time: 120.3 min
-│  Route Cost (CTC contribution): 1028.64
-│
-│  Stops:
-│  --------------------------------------------------------------------------
-│  #   Type     Employee   Time    Wait   Location                 
-│  --------------------------------------------------------------------------
-│  1   Pickup   EMP_026    08:35   -      (12.8300, 77.6848)       
-│  2   Pickup   EMP_082    08:39   2m     (12.8268, 77.6879)       
-│  3   Pickup   EMP_007    08:40   -      (12.8283, 77.6939)       
-│  4   Pickup   EMP_066    08:46   -      (12.8453, 77.6848)       
-│  5   Pickup   EMP_098    08:54   4m     (12.8490, 77.6735)       
-│  6   Pickup   EMP_096    09:33   -      (12.9748, 77.6585)       
-│  7   Dropoff  EMP_096    10:00   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_098    10:00   -      (13.0500, 77.6150)       
-│  9   Dropoff  EMP_082    10:00   -      (13.0500, 77.6150)       
-│  10  Dropoff  EMP_066    10:00   -      (13.0500, 77.6150)       
-│  11  Dropoff  EMP_026    10:00   -      (13.0500, 77.6150)       
-│  12  Dropoff  EMP_007    10:00   -      (13.0500, 77.6150)       
-└───────────────────────────────────────────────────────────────────────────────
-
-┌─ Vehicle: V_SUV_08
-│  Type: suv | Fuel: Petrol | Category: SUV
-│  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
-│  Start Location: (12.9279, 77.6271)
-│  Route Distance: 31.32 km | Route Time: 83.1 min
-│  Route Cost (CTC contribution): 563.83
-│
-│  Stops:
-│  --------------------------------------------------------------------------
-│  #   Type     Employee   Time    Wait   Location                 
-│  --------------------------------------------------------------------------
-│  1   Pickup   EMP_065    08:13   1m     (12.9439, 77.5900)       
-│  2   Pickup   EMP_000    08:17   -      (12.9358, 77.5760)       
-│  3   Pickup   EMP_051    08:35   16m    (12.9381, 77.5735)       
-│  4   Pickup   EMP_064    08:36   -      (12.9420, 77.5738)       
-│  5   Pickup   EMP_011    08:42   -      (12.9355, 77.5920)       
-│  6   Pickup   EMP_033    08:50   4m     (12.9444, 77.6025)       
-│  7   Dropoff  EMP_033    09:23   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_000    09:23   -      (13.0500, 77.6150)       
-│  9   Dropoff  EMP_065    09:23   -      (13.0500, 77.6150)       
-│  10  Dropoff  EMP_011    09:23   -      (13.0500, 77.6150)       
-│  11  Dropoff  EMP_064    09:23   -      (13.0500, 77.6150)       
-│  12  Dropoff  EMP_051    09:23   -      (13.0500, 77.6150)       
+│  2   Pickup   EMP_017    08:39   -      (12.9674, 77.7514)       
+│  3   Pickup   EMP_071    08:45   -      (12.9718, 77.7325)       
+│  4   Pickup   EMP_020    08:50   -      (12.9756, 77.7161)       
+│  5   Dropoff  EMP_077    09:29   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_017    09:29   -      (13.0500, 77.6150)       
+│  7   Dropoff  EMP_020    09:29   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_071    09:29   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
 ┌─ Vehicle: V_SUV_09
 │  Type: suv | Fuel: Petrol | Category: SUV
 │  Capacity: 6 | Speed: 30.0 km/h | Cost: 18.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 28.41 km | Route Time: 94.2 min
-│  Route Cost (CTC contribution): 511.31
+│  Route Distance: 46.71 km | Route Time: 100.1 min
+│  Route Cost (CTC contribution): 840.74
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
-│  1   Pickup   EMP_003    08:21   9m     (12.9133, 77.5922)       
-│  2   Pickup   EMP_049    08:23   -      (12.9175, 77.5869)       
-│  3   Pickup   EMP_035    08:31   7m     (12.9197, 77.5838)       
-│  4   Pickup   EMP_030    08:40   9m     (12.9199, 77.5827)       
-│  5   Pickup   EMP_042    09:00   12m    (12.9439, 77.5860)       
-│  6   Dropoff  EMP_049    09:34   -      (13.0500, 77.6150)       
-│  7   Dropoff  EMP_035    09:34   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_042    09:34   -      (13.0500, 77.6150)       
-│  9   Dropoff  EMP_030    09:34   -      (13.0500, 77.6150)       
-│  10  Dropoff  EMP_003    09:34   -      (13.0500, 77.6150)       
+│  1   Pickup   EMP_028    08:04   -      (12.9210, 77.6391)       
+│  2   Pickup   EMP_004    08:28   -      (12.8572, 77.6867)       
+│  3   Pickup   EMP_076    08:36   7m     (12.8582, 77.6880)       
+│  4   Pickup   EMP_060    08:52   -      (12.9071, 77.6640)       
+│  5   Pickup   EMP_091    09:10   -      (12.9613, 77.6525)       
+│  6   Pickup   EMP_014    09:12   -      (12.9684, 77.6519)       
+│  7   Dropoff  EMP_014    09:40   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_091    09:40   -      (13.0500, 77.6150)       
+│  9   Dropoff  EMP_028    09:40   -      (13.0500, 77.6150)       
+│  10  Dropoff  EMP_004    09:40   -      (13.0500, 77.6150)       
+│  11  Dropoff  EMP_060    09:40   -      (13.0500, 77.6150)       
+│  12  Dropoff  EMP_076    09:40   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
 ┌─ Vehicle: V_SED_00
 │  Type: sedan | Fuel: Petrol | Category: Sedan
 │  Capacity: 4 | Speed: 30.0 km/h | Cost: 14.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 46.95 km | Route Time: 93.9 min
-│  Route Cost (CTC contribution): 657.35
+│  Route Distance: 48.34 km | Route Time: 96.7 min
+│  Route Cost (CTC contribution): 676.74
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
-│  1   Pickup   EMP_062    08:51   -      (12.9750, 77.7366)       
-│  2   Pickup   EMP_031    08:55   -      (12.9779, 77.7503)       
-│  3   Pickup   EMP_068    08:59   -      (12.9806, 77.7622)       
-│  4   Dropoff  EMP_068    09:48   -      (13.0500, 77.6150)       
-│  5   Dropoff  EMP_031    09:48   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_062    09:48   -      (13.0500, 77.6150)       
+│  1   Pickup   EMP_006    08:43   -      (12.9726, 77.7095)       
+│  2   Pickup   EMP_086    08:54   -      (12.9860, 77.7423)       
+│  3   Pickup   EMP_068    09:00   -      (12.9806, 77.7622)       
+│  4   Pickup   EMP_052    09:03   -      (12.9887, 77.7620)       
+│  5   Dropoff  EMP_006    09:51   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_068    09:51   -      (13.0500, 77.6150)       
+│  7   Dropoff  EMP_086    09:51   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_052    09:51   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
 ┌─ Vehicle: V_SED_01
 │  Type: sedan | Fuel: Petrol | Category: Sedan
 │  Capacity: 4 | Speed: 30.0 km/h | Cost: 14.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 20.09 km | Route Time: 51.7 min
-│  Route Cost (CTC contribution): 281.21
+│  Route Distance: 24.75 km | Route Time: 73.3 min
+│  Route Cost (CTC contribution): 346.53
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
-│  1   Pickup   EMP_072    08:36   12m    (12.9582, 77.6260)       
-│  2   Pickup   EMP_075    08:36   -      (12.9593, 77.6260)       
-│  3   Pickup   EMP_029    08:39   -      (12.9686, 77.6274)       
-│  4   Pickup   EMP_069    08:43   -      (12.9794, 77.6372)       
-│  5   Dropoff  EMP_072    09:06   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_075    09:06   -      (13.0500, 77.6150)       
-│  7   Dropoff  EMP_069    09:06   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_029    09:06   -      (13.0500, 77.6150)       
+│  1   Pickup   EMP_056    08:48   24m    (12.9433, 77.6012)       
+│  2   Pickup   EMP_011    08:51   -      (12.9355, 77.5920)       
+│  3   Pickup   EMP_065    08:54   -      (12.9439, 77.5900)       
+│  4   Pickup   EMP_002    08:56   -      (12.9488, 77.5925)       
+│  5   Dropoff  EMP_065    09:28   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_011    09:28   -      (13.0500, 77.6150)       
+│  7   Dropoff  EMP_056    09:28   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_002    09:28   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
 ┌─ Vehicle: V_SED_02
 │  Type: sedan | Fuel: Petrol | Category: Sedan
 │  Capacity: 4 | Speed: 30.0 km/h | Cost: 14.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 27.95 km | Route Time: 62.1 min
-│  Route Cost (CTC contribution): 391.35
+│  Route Distance: 32.93 km | Route Time: 75.9 min
+│  Route Cost (CTC contribution): 461.01
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
-│  1   Pickup   EMP_054    08:29   6m     (12.9239, 77.6016)       
-│  2   Pickup   EMP_057    08:45   -      (12.9557, 77.6466)       
-│  3   Pickup   EMP_059    08:48   -      (12.9631, 77.6404)       
-│  4   Pickup   EMP_040    08:51   -      (12.9716, 77.6353)       
-│  5   Dropoff  EMP_040    09:17   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_059    09:17   -      (13.0500, 77.6150)       
-│  7   Dropoff  EMP_054    09:17   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_057    09:17   -      (13.0500, 77.6150)       
-└───────────────────────────────────────────────────────────────────────────────
-
-┌─ Vehicle: V_SED_03
-│  Type: sedan | Fuel: Petrol | Category: Sedan
-│  Capacity: 4 | Speed: 30.0 km/h | Cost: 14.0/km
-│  Start Location: (12.9279, 77.6271)
-│  Route Distance: 33.33 km | Route Time: 73.8 min
-│  Route Cost (CTC contribution): 466.66
-│
-│  Stops:
-│  --------------------------------------------------------------------------
-│  #   Type     Employee   Time    Wait   Location                 
-│  --------------------------------------------------------------------------
-│  1   Pickup   EMP_016    08:41   7m     (12.9522, 77.6839)       
-│  2   Pickup   EMP_089    08:43   -      (12.9543, 77.6903)       
-│  3   Pickup   EMP_006    08:51   -      (12.9726, 77.7095)       
-│  4   Pickup   EMP_048    08:54   -      (12.9764, 77.6994)       
-│  5   Dropoff  EMP_048    09:28   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_089    09:28   -      (13.0500, 77.6150)       
-│  7   Dropoff  EMP_016    09:28   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_006    09:28   -      (13.0500, 77.6150)       
+│  1   Pickup   EMP_005    08:33   10m    (12.9031, 77.6328)       
+│  2   Pickup   EMP_003    08:45   -      (12.9133, 77.5922)       
+│  3   Pickup   EMP_030    08:49   -      (12.9199, 77.5827)       
+│  4   Pickup   EMP_043    08:56   -      (12.9409, 77.5883)       
+│  5   Dropoff  EMP_043    09:30   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_003    09:30   -      (13.0500, 77.6150)       
+│  7   Dropoff  EMP_005    09:30   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_030    09:30   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
 ┌─ Vehicle: V_SED_04
 │  Type: sedan | Fuel: Petrol | Category: Sedan
 │  Capacity: 4 | Speed: 30.0 km/h | Cost: 14.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 49.10 km | Route Time: 99.6 min
-│  Route Cost (CTC contribution): 687.46
-│
-│  Stops:
-│  --------------------------------------------------------------------------
-│  #   Type     Employee   Time    Wait   Location                 
-│  --------------------------------------------------------------------------
-│  1   Pickup   EMP_025    08:58   1m     (12.9585, 77.7606)       
-│  2   Pickup   EMP_063    09:00   -      (12.9640, 77.7644)       
-│  3   Pickup   EMP_045    09:00   -      (12.9648, 77.7637)       
-│  4   Pickup   EMP_022    09:02   -      (12.9708, 77.7665)       
-│  5   Dropoff  EMP_063    09:54   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_045    09:54   -      (13.0500, 77.6150)       
-│  7   Dropoff  EMP_025    09:54   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_022    09:54   -      (13.0500, 77.6150)       
-└───────────────────────────────────────────────────────────────────────────────
-
-┌─ Vehicle: V_SED_06
-│  Type: sedan | Fuel: Petrol | Category: Sedan
-│  Capacity: 4 | Speed: 30.0 km/h | Cost: 14.0/km
-│  Start Location: (12.9279, 77.6271)
-│  Route Distance: 43.13 km | Route Time: 93.8 min
-│  Route Cost (CTC contribution): 603.86
+│  Route Distance: 45.68 km | Route Time: 94.5 min
+│  Route Cost (CTC contribution): 639.50
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
 │  1   Pickup   EMP_061    08:33   -      (12.9451, 77.6854)       
-│  2   Pickup   EMP_037    08:36   -      (12.9396, 77.6918)       
-│  3   Pickup   EMP_032    08:53   8m     (12.9588, 77.7158)       
-│  4   Pickup   EMP_012    09:02   -      (12.9721, 77.7444)       
-│  5   Dropoff  EMP_012    09:48   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_061    09:48   -      (13.0500, 77.6150)       
-│  7   Dropoff  EMP_032    09:48   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_037    09:48   -      (13.0500, 77.6150)       
+│  2   Pickup   EMP_023    08:59   3m     (12.9648, 77.7564)       
+│  3   Pickup   EMP_027    09:02   -      (12.9694, 77.7457)       
+│  4   Pickup   EMP_062    09:05   -      (12.9750, 77.7366)       
+│  5   Dropoff  EMP_027    09:49   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_062    09:49   -      (13.0500, 77.6150)       
+│  7   Dropoff  EMP_023    09:49   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_061    09:49   -      (13.0500, 77.6150)       
+└───────────────────────────────────────────────────────────────────────────────
+
+┌─ Vehicle: V_SED_05
+│  Type: sedan | Fuel: Petrol | Category: Sedan
+│  Capacity: 4 | Speed: 30.0 km/h | Cost: 14.0/km
+│  Start Location: (12.9279, 77.6271)
+│  Route Distance: 24.87 km | Route Time: 67.4 min
+│  Route Cost (CTC contribution): 348.15
+│
+│  Stops:
+│  --------------------------------------------------------------------------
+│  #   Type     Employee   Time    Wait   Location                 
+│  --------------------------------------------------------------------------
+│  1   Pickup   EMP_019    08:18   -      (12.9227, 77.6387)       
+│  2   Pickup   EMP_039    08:40   18m    (12.9189, 77.6495)       
+│  3   Pickup   EMP_057    08:51   -      (12.9557, 77.6466)       
+│  4   Pickup   EMP_055    08:57   -      (12.9758, 77.6412)       
+│  5   Dropoff  EMP_055    09:22   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_019    09:22   -      (13.0500, 77.6150)       
+│  7   Dropoff  EMP_057    09:22   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_039    09:22   -      (13.0500, 77.6150)       
+└───────────────────────────────────────────────────────────────────────────────
+
+┌─ Vehicle: V_SED_06
+│  Type: sedan | Fuel: Petrol | Category: Sedan
+│  Capacity: 4 | Speed: 30.0 km/h | Cost: 14.0/km
+│  Start Location: (12.9279, 77.6271)
+│  Route Distance: 28.30 km | Route Time: 84.4 min
+│  Route Cost (CTC contribution): 396.22
+│
+│  Stops:
+│  --------------------------------------------------------------------------
+│  #   Type     Employee   Time    Wait   Location                 
+│  --------------------------------------------------------------------------
+│  1   Pickup   EMP_083    08:41   16m    (12.9130, 77.5978)       
+│  2   Pickup   EMP_074    08:56   12m    (12.9186, 77.5893)       
+│  3   Pickup   EMP_035    08:57   -      (12.9197, 77.5838)       
+│  4   Pickup   EMP_042    09:05   -      (12.9439, 77.5860)       
+│  5   Dropoff  EMP_035    09:39   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_042    09:39   -      (13.0500, 77.6150)       
+│  7   Dropoff  EMP_074    09:39   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_083    09:39   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
 ┌─ Vehicle: V_SED_07
 │  Type: sedan | Fuel: Petrol | Category: Sedan
 │  Capacity: 4 | Speed: 30.0 km/h | Cost: 14.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 45.70 km | Route Time: 94.5 min
-│  Route Cost (CTC contribution): 639.83
+│  Route Distance: 31.51 km | Route Time: 66.5 min
+│  Route Cost (CTC contribution): 441.18
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
-│  1   Pickup   EMP_079    08:38   0m     (12.9455, 77.6996)       
-│  2   Pickup   EMP_023    08:59   3m     (12.9648, 77.7564)       
-│  3   Pickup   EMP_017    09:00   -      (12.9674, 77.7514)       
-│  4   Pickup   EMP_027    09:02   -      (12.9694, 77.7457)       
-│  5   Dropoff  EMP_079    09:49   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_023    09:49   -      (13.0500, 77.6150)       
-│  7   Dropoff  EMP_017    09:49   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_027    09:49   -      (13.0500, 77.6150)       
+│  1   Pickup   EMP_051    08:35   3m     (12.9381, 77.5735)       
+│  2   Pickup   EMP_064    08:36   -      (12.9420, 77.5738)       
+│  3   Pickup   EMP_080    08:58   -      (12.9783, 77.6354)       
+│  4   Pickup   EMP_081    09:00   -      (12.9847, 77.6299)       
+│  5   Dropoff  EMP_080    09:21   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_081    09:21   -      (13.0500, 77.6150)       
+│  7   Dropoff  EMP_064    09:21   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_051    09:21   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
 ┌─ Vehicle: V_SED_08
 │  Type: sedan | Fuel: Petrol | Category: Sedan
 │  Capacity: 4 | Speed: 30.0 km/h | Cost: 14.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 47.28 km | Route Time: 94.6 min
-│  Route Cost (CTC contribution): 661.93
+│  Route Distance: 48.08 km | Route Time: 104.1 min
+│  Route Cost (CTC contribution): 673.12
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
-│  1   Pickup   EMP_004    08:43   -      (12.8572, 77.6867)       
-│  2   Pickup   EMP_047    08:59   -      (12.8941, 77.6497)       
-│  3   Pickup   EMP_088    09:00   -      (12.8971, 77.6494)       
-│  4   Pickup   EMP_055    09:25   -      (12.9758, 77.6412)       
-│  5   Dropoff  EMP_088    09:49   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_047    09:49   -      (13.0500, 77.6150)       
-│  7   Dropoff  EMP_055    09:49   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_004    09:49   -      (13.0500, 77.6150)       
+│  1   Pickup   EMP_073    08:38   -      (12.9434, 77.7023)       
+│  2   Pickup   EMP_021    08:48   8m     (12.9425, 77.7081)       
+│  3   Pickup   EMP_063    09:06   -      (12.9640, 77.7644)       
+│  4   Pickup   EMP_012    09:12   -      (12.9721, 77.7444)       
+│  5   Dropoff  EMP_021    09:59   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_073    09:59   -      (13.0500, 77.6150)       
+│  7   Dropoff  EMP_012    09:59   -      (13.0500, 77.6150)       
+│  8   Dropoff  EMP_063    09:59   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
-┌─ Vehicle: V_SED_09
-│  Type: sedan | Fuel: Petrol | Category: Sedan
-│  Capacity: 4 | Speed: 30.0 km/h | Cost: 14.0/km
-│  Start Location: (12.9279, 77.6271)
-│  Route Distance: 48.69 km | Route Time: 97.4 min
-│  Route Cost (CTC contribution): 681.68
-│
-│  Stops:
-│  --------------------------------------------------------------------------
-│  #   Type     Employee   Time    Wait   Location                 
-│  --------------------------------------------------------------------------
-│  1   Pickup   EMP_014    08:29   -      (12.9684, 77.6519)       
-│  2   Pickup   EMP_020    08:49   -      (12.9756, 77.7161)       
-│  3   Pickup   EMP_086    08:57   -      (12.9860, 77.7423)       
-│  4   Pickup   EMP_052    09:03   -      (12.9887, 77.7620)       
-│  5   Dropoff  EMP_014    09:52   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_086    09:52   -      (13.0500, 77.6150)       
-│  7   Dropoff  EMP_052    09:52   -      (13.0500, 77.6150)       
-│  8   Dropoff  EMP_020    09:52   -      (13.0500, 77.6150)       
-└───────────────────────────────────────────────────────────────────────────────
-
-┌─ Vehicle: V_HAT_02
+┌─ Vehicle: V_HAT_00
 │  Type: hatchback | Fuel: Petrol | Category: Hatchback
 │  Capacity: 3 | Speed: 30.0 km/h | Cost: 10.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 30.04 km | Route Time: 74.2 min
-│  Route Cost (CTC contribution): 300.44
+│  Route Distance: 47.39 km | Route Time: 94.8 min
+│  Route Cost (CTC contribution): 473.85
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
-│  1   Pickup   EMP_001    08:40   -      (12.9187, 77.5946)       
-│  2   Pickup   EMP_074    08:56   14m    (12.9186, 77.5893)       
-│  3   Pickup   EMP_008    08:59   -      (12.9124, 77.5780)       
-│  4   Dropoff  EMP_074    09:44   -      (13.0500, 77.6150)       
-│  5   Dropoff  EMP_001    09:44   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_008    09:44   -      (13.0500, 77.6150)       
+│  1   Pickup   EMP_079    08:52   -      (12.9455, 77.6996)       
+│  2   Pickup   EMP_025    09:11   -      (12.9585, 77.7606)       
+│  3   Pickup   EMP_094    09:25   -      (12.9731, 77.7160)       
+│  4   Dropoff  EMP_094    10:04   -      (13.0500, 77.6150)       
+│  5   Dropoff  EMP_079    10:04   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_025    10:04   -      (13.0500, 77.6150)       
+└───────────────────────────────────────────────────────────────────────────────
+
+┌─ Vehicle: V_HAT_01
+│  Type: hatchback | Fuel: Petrol | Category: Hatchback
+│  Capacity: 3 | Speed: 30.0 km/h | Cost: 10.0/km
+│  Start Location: (12.9279, 77.6271)
+│  Route Distance: 47.19 km | Route Time: 94.4 min
+│  Route Cost (CTC contribution): 471.89
+│
+│  Stops:
+│  --------------------------------------------------------------------------
+│  #   Type     Employee   Time    Wait   Location                 
+│  --------------------------------------------------------------------------
+│  1   Pickup   EMP_053    08:56   -      (12.8525, 77.6671)       
+│  2   Pickup   EMP_098    08:58   -      (12.8490, 77.6735)       
+│  3   Pickup   EMP_034    09:31   -      (12.9542, 77.6588)       
+│  4   Dropoff  EMP_034    10:04   -      (13.0500, 77.6150)       
+│  5   Dropoff  EMP_098    10:04   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_053    10:04   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
 ┌─ Vehicle: V_HAT_03
 │  Type: hatchback | Fuel: Petrol | Category: Hatchback
 │  Capacity: 3 | Speed: 30.0 km/h | Cost: 10.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 36.71 km | Route Time: 73.4 min
-│  Route Cost (CTC contribution): 367.06
+│  Route Distance: 28.66 km | Route Time: 72.2 min
+│  Route Cost (CTC contribution): 286.56
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
-│  1   Pickup   EMP_010    08:39   -      (12.9544, 77.6433)       
-│  2   Pickup   EMP_038    09:02   -      (12.9621, 77.7169)       
-│  3   Pickup   EMP_044    09:09   -      (12.9760, 77.6969)       
-│  4   Dropoff  EMP_044    09:43   -      (13.0500, 77.6150)       
-│  5   Dropoff  EMP_010    09:43   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_038    09:43   -      (13.0500, 77.6150)       
+│  1   Pickup   EMP_092    08:53   15m    (12.9331, 77.6009)       
+│  2   Pickup   EMP_000    09:00   -      (12.9358, 77.5760)       
+│  3   Pickup   EMP_070    09:03   -      (12.9369, 77.5652)       
+│  4   Dropoff  EMP_092    09:42   -      (13.0500, 77.6150)       
+│  5   Dropoff  EMP_070    09:42   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_000    09:42   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
-┌─ Vehicle: V_HAT_04
+┌─ Vehicle: V_HAT_07
 │  Type: hatchback | Fuel: Petrol | Category: Hatchback
 │  Capacity: 3 | Speed: 30.0 km/h | Cost: 10.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 19.29 km | Route Time: 44.8 min
-│  Route Cost (CTC contribution): 192.91
+│  Route Distance: 24.02 km | Route Time: 54.2 min
+│  Route Cost (CTC contribution): 240.17
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
 │  1   Pickup   EMP_009    08:37   6m     (12.9303, 77.6263)       
-│  2   Pickup   EMP_081    08:53   -      (12.9847, 77.6299)       
-│  3   Dropoff  EMP_081    09:14   -      (13.0500, 77.6150)       
-│  4   Dropoff  EMP_009    09:14   -      (13.0500, 77.6150)       
+│  2   Pickup   EMP_054    08:44   -      (12.9239, 77.6016)       
+│  3   Pickup   EMP_033    08:51   -      (12.9444, 77.6025)       
+│  4   Dropoff  EMP_033    09:24   -      (13.0500, 77.6150)       
+│  5   Dropoff  EMP_009    09:24   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_054    09:24   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
-┌─ Vehicle: V_HAT_05
+┌─ Vehicle: V_HAT_08
 │  Type: hatchback | Fuel: Petrol | Category: Hatchback
 │  Capacity: 3 | Speed: 30.0 km/h | Cost: 10.0/km
 │  Start Location: (12.9279, 77.6271)
-│  Route Distance: 39.14 km | Route Time: 78.3 min
-│  Route Cost (CTC contribution): 391.40
+│  Route Distance: 34.28 km | Route Time: 73.2 min
+│  Route Cost (CTC contribution): 342.75
 │
 │  Stops:
 │  --------------------------------------------------------------------------
 │  #   Type     Employee   Time    Wait   Location                 
 │  --------------------------------------------------------------------------
-│  1   Pickup   EMP_041    08:45   -      (12.9709, 77.6504)       
-│  2   Pickup   EMP_093    09:04   -      (12.9430, 77.7057)       
-│  3   Pickup   EMP_050    09:13   -      (12.9719, 77.6974)       
-│  4   Dropoff  EMP_093    09:48   -      (13.0500, 77.6150)       
-│  5   Dropoff  EMP_041    09:48   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_050    09:48   -      (13.0500, 77.6150)       
-└───────────────────────────────────────────────────────────────────────────────
-
-┌─ Vehicle: V_HAT_06
-│  Type: hatchback | Fuel: Petrol | Category: Hatchback
-│  Capacity: 3 | Speed: 30.0 km/h | Cost: 10.0/km
-│  Start Location: (12.9279, 77.6271)
-│  Route Distance: 47.84 km | Route Time: 98.3 min
-│  Route Cost (CTC contribution): 478.42
-│
-│  Stops:
-│  --------------------------------------------------------------------------
-│  #   Type     Employee   Time    Wait   Location                 
-│  --------------------------------------------------------------------------
-│  1   Pickup   EMP_039    08:40   3m     (12.9189, 77.6495)       
-│  2   Pickup   EMP_076    09:02   -      (12.8582, 77.6880)       
-│  3   Pickup   EMP_046    09:31   -      (12.9509, 77.6835)       
-│  4   Dropoff  EMP_076    10:08   -      (13.0500, 77.6150)       
-│  5   Dropoff  EMP_046    10:08   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_039    10:08   -      (13.0500, 77.6150)       
-└───────────────────────────────────────────────────────────────────────────────
-
-┌─ Vehicle: V_HAT_09
-│  Type: hatchback | Fuel: Petrol | Category: Hatchback
-│  Capacity: 3 | Speed: 30.0 km/h | Cost: 10.0/km
-│  Start Location: (12.9279, 77.6271)
-│  Route Distance: 59.35 km | Route Time: 118.7 min
-│  Route Cost (CTC contribution): 593.49
-│
-│  Stops:
-│  --------------------------------------------------------------------------
-│  #   Type     Employee   Time    Wait   Location                 
-│  --------------------------------------------------------------------------
-│  1   Pickup   EMP_028    08:34   -      (12.9210, 77.6391)       
-│  2   Pickup   EMP_002    08:50   -      (12.9488, 77.5925)       
-│  3   Pickup   EMP_070    08:59   -      (12.9369, 77.5652)       
-│  4   Dropoff  EMP_070    09:38   -      (13.0500, 77.6150)       
-│  5   Dropoff  EMP_028    09:38   -      (13.0500, 77.6150)       
-│  6   Dropoff  EMP_002    09:38   -      (13.0500, 77.6150)       
-│  7   Pickup   EMP_024    10:03   -      (12.9787, 77.6546)       
-│  8   Dropoff  EMP_024    10:28   -      (13.0500, 77.6150)       
+│  1   Pickup   EMP_037    08:49   -      (12.9396, 77.6918)       
+│  2   Pickup   EMP_093    08:59   5m     (12.9430, 77.7057)       
+│  3   Pickup   EMP_050    09:08   -      (12.9719, 77.6974)       
+│  4   Dropoff  EMP_050    09:43   -      (13.0500, 77.6150)       
+│  5   Dropoff  EMP_093    09:43   -      (13.0500, 77.6150)       
+│  6   Dropoff  EMP_037    09:43   -      (13.0500, 77.6150)       
 └───────────────────────────────────────────────────────────────────────────────
 
 --------------------------------------------------------------------------------
@@ -542,23 +529,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_08
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_HAT_03
+  │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 08:17
-  ├─ Dropoff Time: 09:23
+  ├─ Pickup Time: 09:00
+  ├─ Dropoff Time: 09:42
   ├─ Road Distance: 18.73 km (pickup → dropoff)
   │
-  ├─ Status: ✓ ON-TIME
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 78.66 (shared)
-     ├─ Time: 65 min (includes shared ride detours)
-     └─ Savings: -78.66 (0.0%)
+     ├─ Cost: 72.03 (shared)
+     ├─ Time: 42 min (includes shared ride detours)
+     └─ Savings: -72.03 (0.0%)
 
   Employee: EMP_001
   ├─ Priority: P3
@@ -566,11 +553,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_02
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SUV_01
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:40
-  ├─ Dropoff Time: 09:44
+  ├─ Pickup Time: 08:24
+  ├─ Dropoff Time: 09:27
   ├─ Road Distance: 20.67 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -580,9 +567,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 91.63 (shared)
-     ├─ Time: 64 min (includes shared ride detours)
-     └─ Savings: -91.63 (0.0%)
+     ├─ Cost: 140.83 (shared)
+     ├─ Time: 63 min (includes shared ride detours)
+     └─ Savings: -140.83 (0.0%)
 
   Employee: EMP_002
   ├─ Priority: P3
@@ -590,11 +577,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_09
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SED_01
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:50
-  ├─ Dropoff Time: 09:38
+  ├─ Pickup Time: 08:56
+  ├─ Dropoff Time: 09:28
   ├─ Road Distance: 16.11 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -604,9 +591,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 86.53 (shared)
-     ├─ Time: 47 min (includes shared ride detours)
-     └─ Savings: -86.53 (0.0%)
+     ├─ Cost: 56.40 (shared)
+     ├─ Time: 32 min (includes shared ride detours)
+     └─ Savings: -56.40 (0.0%)
 
   Employee: EMP_003
   ├─ Priority: P3
@@ -614,11 +601,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_09
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_02
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:21
-  ├─ Dropoff Time: 09:34
+  ├─ Pickup Time: 08:45
+  ├─ Dropoff Time: 09:30
   ├─ Road Distance: 21.55 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -628,9 +615,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 103.33 (shared)
-     ├─ Time: 73 min (includes shared ride detours)
-     └─ Savings: -103.33 (0.0%)
+     ├─ Cost: 89.26 (shared)
+     ├─ Time: 45 min (includes shared ride detours)
+     └─ Savings: -89.26 (0.0%)
 
   Employee: EMP_004
   ├─ Priority: P2
@@ -638,11 +625,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_08
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_09
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:43
-  ├─ Dropoff Time: 09:49
+  ├─ Pickup Time: 08:28
+  ├─ Dropoff Time: 09:40
   ├─ Road Distance: 31.93 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -652,9 +639,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 215.93 (shared)
-     ├─ Time: 66 min (includes shared ride detours)
-     └─ Savings: -215.93 (0.0%)
+     ├─ Cost: 137.39 (shared)
+     ├─ Time: 71 min (includes shared ride detours)
+     └─ Savings: -137.39 (0.0%)
 
   Employee: EMP_005
   ├─ Priority: P3
@@ -662,11 +649,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_04
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_02
+  │  └─ sedan | Petrol | Sedan
   │
   ├─ Pickup Time: 08:33
-  ├─ Dropoff Time: 09:34
+  ├─ Dropoff Time: 09:30
   ├─ Road Distance: 23.03 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -676,9 +663,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 136.40 (shared)
-     ├─ Time: 62 min (includes shared ride detours)
-     └─ Savings: -136.40 (0.0%)
+     ├─ Cost: 178.36 (shared)
+     ├─ Time: 58 min (includes shared ride detours)
+     └─ Savings: -178.36 (0.0%)
 
   Employee: EMP_006
   ├─ Priority: P3
@@ -686,23 +673,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_03
+  ├─ Assigned Vehicle: V_SED_00
   │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:51
-  ├─ Dropoff Time: 09:28
+  ├─ Pickup Time: 08:43
+  ├─ Dropoff Time: 09:51
   ├─ Road Distance: 18.72 km (pickup → dropoff)
   │
-  ├─ Status: ✓ ON-TIME
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 67.78 (shared)
-     ├─ Time: 38 min (includes shared ride detours)
-     └─ Savings: -67.78 (0.0%)
+     ├─ Cost: 188.21 (shared)
+     ├─ Time: 68 min (includes shared ride detours)
+     └─ Savings: -188.21 (0.0%)
 
   Employee: EMP_007
   ├─ Priority: P4
@@ -710,23 +697,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_06
+  ├─ Assigned Vehicle: V_SUV_04
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:40
-  ├─ Dropoff Time: 10:00
+  ├─ Pickup Time: 08:37
+  ├─ Dropoff Time: 09:52
   ├─ Road Distance: 36.53 km (pickup → dropoff)
   │
-  ├─ Status: ✗ LATE by 15 min
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 137.32 (shared)
-     ├─ Time: 79 min (includes shared ride detours)
-     └─ Savings: -137.32 (0.0%)
+     ├─ Cost: 137.40 (shared)
+     ├─ Time: 75 min (includes shared ride detours)
+     └─ Savings: -137.40 (0.0%)
 
   Employee: EMP_008
   ├─ Priority: P3
@@ -734,11 +721,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_02
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SUV_01
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:59
-  ├─ Dropoff Time: 09:44
+  ├─ Pickup Time: 08:38
+  ├─ Dropoff Time: 09:27
   ├─ Road Distance: 22.14 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -748,9 +735,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 73.80 (shared)
-     ├─ Time: 44 min (includes shared ride detours)
-     └─ Savings: -73.80 (0.0%)
+     ├─ Cost: 105.62 (shared)
+     ├─ Time: 49 min (includes shared ride detours)
+     └─ Savings: -105.62 (0.0%)
 
   Employee: EMP_009
   ├─ Priority: P3
@@ -758,11 +745,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_04
+  ├─ Assigned Vehicle: V_HAT_07
   │  └─ hatchback | Petrol | Hatchback
   │
   ├─ Pickup Time: 08:37
-  ├─ Dropoff Time: 09:14
+  ├─ Dropoff Time: 09:24
   ├─ Road Distance: 18.71 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -772,9 +759,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 136.81 (shared)
-     ├─ Time: 38 min (includes shared ride detours)
-     └─ Savings: -136.81 (0.0%)
+     ├─ Cost: 109.89 (shared)
+     ├─ Time: 47 min (includes shared ride detours)
+     └─ Savings: -109.89 (0.0%)
 
   Employee: EMP_010
   ├─ Priority: P3
@@ -782,10 +769,10 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_03
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SUV_00
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:39
+  ├─ Pickup Time: 09:11
   ├─ Dropoff Time: 09:43
   ├─ Road Distance: 15.48 km (pickup → dropoff)
   │
@@ -796,9 +783,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 187.46 (shared)
-     ├─ Time: 64 min (includes shared ride detours)
-     └─ Savings: -187.46 (0.0%)
+     ├─ Cost: 49.67 (shared)
+     ├─ Time: 31 min (includes shared ride detours)
+     └─ Savings: -49.67 (0.0%)
 
   Employee: EMP_011
   ├─ Priority: P5
@@ -806,11 +793,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_08
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_01
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:42
-  ├─ Dropoff Time: 09:23
+  ├─ Pickup Time: 08:51
+  ├─ Dropoff Time: 09:28
   ├─ Road Distance: 18.16 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -820,9 +807,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 57.21 (shared)
-     ├─ Time: 41 min (includes shared ride detours)
-     └─ Savings: -57.21 (0.0%)
+     ├─ Cost: 69.73 (shared)
+     ├─ Time: 37 min (includes shared ride detours)
+     └─ Savings: -69.73 (0.0%)
 
   Employee: EMP_012
   ├─ Priority: P4
@@ -830,11 +817,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_06
+  ├─ Assigned Vehicle: V_SED_08
   │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 09:02
-  ├─ Dropoff Time: 09:48
+  ├─ Pickup Time: 09:12
+  ├─ Dropoff Time: 09:59
   ├─ Road Distance: 23.07 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -868,9 +855,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 88.60 (shared)
+     ├─ Cost: 97.90 (shared)
      ├─ Time: 50 min (includes shared ride detours)
-     └─ Savings: -88.60 (0.0%)
+     └─ Savings: -97.90 (0.0%)
 
   Employee: EMP_014
   ├─ Priority: P3
@@ -878,23 +865,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_09
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_09
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:29
-  ├─ Dropoff Time: 09:52
+  ├─ Pickup Time: 09:12
+  ├─ Dropoff Time: 09:40
   ├─ Road Distance: 13.89 km (pickup → dropoff)
   │
-  ├─ Status: ⚠ MINOR DELAY
+  ├─ Status: ✓ ON-TIME
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 266.31 (shared)
-     ├─ Time: 83 min (includes shared ride detours)
-     └─ Savings: -266.31 (0.0%)
+     ├─ Cost: 41.66 (shared)
+     ├─ Time: 28 min (includes shared ride detours)
+     └─ Savings: -41.66 (0.0%)
 
   Employee: EMP_015
   ├─ Priority: P2
@@ -916,9 +903,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 194.47 (shared)
-     ├─ Time: 75 min (includes shared ride detours)
-     └─ Savings: -194.47 (0.0%)
+     ├─ Cost: 225.61 (shared)
+     ├─ Time: 74 min (includes shared ride detours)
+     └─ Savings: -225.61 (0.0%)
 
   Employee: EMP_016
   ├─ Priority: P4
@@ -926,11 +913,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_03
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_05
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:41
-  ├─ Dropoff Time: 09:28
+  ├─ Pickup Time: 08:59
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 18.46 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -940,9 +927,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 110.64 (shared)
-     ├─ Time: 48 min (includes shared ride detours)
-     └─ Savings: -110.64 (0.0%)
+     ├─ Cost: 104.42 (shared)
+     ├─ Time: 45 min (includes shared ride detours)
+     └─ Savings: -104.42 (0.0%)
 
   Employee: EMP_017
   ├─ Priority: P3
@@ -950,11 +937,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_07
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_08
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:00
-  ├─ Dropoff Time: 09:49
+  ├─ Pickup Time: 08:39
+  ├─ Dropoff Time: 09:29
   ├─ Road Distance: 24.37 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -964,9 +951,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 86.42 (shared)
+     ├─ Cost: 128.37 (shared)
      ├─ Time: 49 min (includes shared ride detours)
-     └─ Savings: -86.42 (0.0%)
+     └─ Savings: -128.37 (0.0%)
 
   Employee: EMP_018
   ├─ Priority: P3
@@ -974,11 +961,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_00
+  ├─ Assigned Vehicle: V_SUV_03
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:02
-  ├─ Dropoff Time: 09:44
+  ├─ Pickup Time: 09:07
+  ├─ Dropoff Time: 09:50
   ├─ Road Distance: 20.96 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -988,9 +975,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 75.10 (shared)
-     ├─ Time: 42 min (includes shared ride detours)
-     └─ Savings: -75.10 (0.0%)
+     ├─ Cost: 77.07 (shared)
+     ├─ Time: 43 min (includes shared ride detours)
+     └─ Savings: -77.07 (0.0%)
 
   Employee: EMP_019
   ├─ Priority: P3
@@ -998,11 +985,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_04
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_05
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:05
-  ├─ Dropoff Time: 09:34
+  ├─ Pickup Time: 08:18
+  ├─ Dropoff Time: 09:22
   ├─ Road Distance: 20.14 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1012,9 +999,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 193.59 (shared)
-     ├─ Time: 90 min (includes shared ride detours)
-     └─ Savings: -193.59 (0.0%)
+     ├─ Cost: 122.37 (shared)
+     ├─ Time: 64 min (includes shared ride detours)
+     └─ Savings: -122.37 (0.0%)
 
   Employee: EMP_020
   ├─ Priority: P5
@@ -1022,11 +1009,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_09
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_08
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:49
-  ├─ Dropoff Time: 09:52
+  ├─ Pickup Time: 08:50
+  ├─ Dropoff Time: 09:29
   ├─ Road Distance: 19.22 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1036,9 +1023,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 128.94 (shared)
-     ├─ Time: 63 min (includes shared ride detours)
-     └─ Savings: -128.94 (0.0%)
+     ├─ Cost: 86.51 (shared)
+     ├─ Time: 38 min (includes shared ride detours)
+     └─ Savings: -86.51 (0.0%)
 
   Employee: EMP_021
   ├─ Priority: P3
@@ -1046,11 +1033,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_05
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_08
+  │  └─ sedan | Petrol | Sedan
   │
   ├─ Pickup Time: 08:48
-  ├─ Dropoff Time: 09:33
+  ├─ Dropoff Time: 09:59
   ├─ Road Distance: 21.90 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1060,9 +1047,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 109.57 (shared)
-     ├─ Time: 45 min (includes shared ride detours)
-     └─ Savings: -109.57 (0.0%)
+     ├─ Cost: 160.29 (shared)
+     ├─ Time: 71 min (includes shared ride detours)
+     └─ Savings: -160.29 (0.0%)
 
   Employee: EMP_022
   ├─ Priority: P3
@@ -1070,23 +1057,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_04
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_02
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:02
-  ├─ Dropoff Time: 09:54
+  ├─ Pickup Time: 08:46
+  ├─ Dropoff Time: 09:38
   ├─ Road Distance: 26.08 km (pickup → dropoff)
   │
-  ├─ Status: ⚠ MINOR DELAY
+  ├─ Status: ✓ ON-TIME
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 91.27 (shared)
+     ├─ Cost: 82.34 (shared)
      ├─ Time: 52 min (includes shared ride detours)
-     └─ Savings: -91.27 (0.0%)
+     └─ Savings: -82.34 (0.0%)
 
   Employee: EMP_023
   ├─ Priority: P1
@@ -1094,7 +1081,7 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_07
+  ├─ Assigned Vehicle: V_SED_04
   │  └─ sedan | Petrol | Sedan
   │
   ├─ Pickup Time: 08:59
@@ -1108,9 +1095,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 92.38 (shared)
+     ├─ Cost: 96.41 (shared)
      ├─ Time: 50 min (includes shared ride detours)
-     └─ Savings: -92.38 (0.0%)
+     └─ Savings: -96.41 (0.0%)
 
   Employee: EMP_024
   ├─ Priority: P3
@@ -1118,23 +1105,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_09
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SUV_05
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 10:03
-  ├─ Dropoff Time: 10:28
+  ├─ Pickup Time: 09:11
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 12.62 km (pickup → dropoff)
   │
-  ├─ Status: ⚠ MINOR DELAY
+  ├─ Status: ✓ ON-TIME
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 126.19 (shared)
-     ├─ Time: 25 min (includes shared ride detours)
-     └─ Savings: -126.19 (0.0%)
+     ├─ Cost: 52.41 (shared)
+     ├─ Time: 32 min (includes shared ride detours)
+     └─ Savings: -52.41 (0.0%)
 
   Employee: EMP_025
   ├─ Priority: P3
@@ -1142,11 +1129,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_04
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_HAT_00
+  │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 08:58
-  ├─ Dropoff Time: 09:54
+  ├─ Pickup Time: 09:11
+  ├─ Dropoff Time: 10:04
   ├─ Road Distance: 26.28 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1156,9 +1143,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 111.65 (shared)
-     ├─ Time: 57 min (includes shared ride detours)
-     └─ Savings: -111.65 (0.0%)
+     ├─ Cost: 100.48 (shared)
+     ├─ Time: 53 min (includes shared ride detours)
+     └─ Savings: -100.48 (0.0%)
 
   Employee: EMP_026
   ├─ Priority: P3
@@ -1166,11 +1153,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_06
+  ├─ Assigned Vehicle: V_SUV_04
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:35
-  ├─ Dropoff Time: 10:00
+  ├─ Pickup Time: 08:40
+  ├─ Dropoff Time: 09:52
   ├─ Road Distance: 35.84 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -1180,9 +1167,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 158.24 (shared)
-     ├─ Time: 85 min (includes shared ride detours)
-     └─ Savings: -158.24 (0.0%)
+     ├─ Cost: 124.80 (shared)
+     ├─ Time: 72 min (includes shared ride detours)
+     └─ Savings: -124.80 (0.0%)
 
   Employee: EMP_027
   ├─ Priority: P4
@@ -1190,7 +1177,7 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_07
+  ├─ Assigned Vehicle: V_SED_04
   │  └─ sedan | Petrol | Sedan
   │
   ├─ Pickup Time: 09:02
@@ -1204,9 +1191,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 82.13 (shared)
+     ├─ Cost: 84.04 (shared)
      ├─ Time: 47 min (includes shared ride detours)
-     └─ Savings: -82.13 (0.0%)
+     └─ Savings: -84.04 (0.0%)
 
   Employee: EMP_028
   ├─ Priority: P2
@@ -1214,11 +1201,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_09
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SUV_09
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:34
-  ├─ Dropoff Time: 09:38
+  ├─ Pickup Time: 08:04
+  ├─ Dropoff Time: 09:40
   ├─ Road Distance: 20.41 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -1228,9 +1215,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 169.53 (shared)
-     ├─ Time: 64 min (includes shared ride detours)
-     └─ Savings: -169.53 (0.0%)
+     ├─ Cost: 358.47 (shared)
+     ├─ Time: 96 min (includes shared ride detours)
+     └─ Savings: -358.47 (0.0%)
 
   Employee: EMP_029
   ├─ Priority: P1
@@ -1238,11 +1225,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_01
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_01
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:39
-  ├─ Dropoff Time: 09:06
+  ├─ Pickup Time: 09:01
+  ├─ Dropoff Time: 09:27
   ├─ Road Distance: 12.81 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1252,9 +1239,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 50.70 (shared)
-     ├─ Time: 27 min (includes shared ride detours)
-     └─ Savings: -50.70 (0.0%)
+     ├─ Cost: 38.44 (shared)
+     ├─ Time: 26 min (includes shared ride detours)
+     └─ Savings: -38.44 (0.0%)
 
   Employee: EMP_030
   ├─ Priority: P2
@@ -1262,11 +1249,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_09
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_02
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:40
-  ├─ Dropoff Time: 09:34
+  ├─ Pickup Time: 08:49
+  ├─ Dropoff Time: 09:30
   ├─ Road Distance: 20.84 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1276,9 +1263,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 78.52 (shared)
-     ├─ Time: 54 min (includes shared ride detours)
-     └─ Savings: -78.52 (0.0%)
+     ├─ Cost: 76.90 (shared)
+     ├─ Time: 42 min (includes shared ride detours)
+     └─ Savings: -76.90 (0.0%)
 
   Employee: EMP_031
   ├─ Priority: P3
@@ -1286,11 +1273,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_00
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_02
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:55
-  ├─ Dropoff Time: 09:48
+  ├─ Pickup Time: 08:51
+  ├─ Dropoff Time: 09:38
   ├─ Road Distance: 23.39 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -1300,9 +1287,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 128.84 (shared)
-     ├─ Time: 53 min (includes shared ride detours)
-     └─ Savings: -128.84 (0.0%)
+     ├─ Cost: 70.16 (shared)
+     ├─ Time: 47 min (includes shared ride detours)
+     └─ Savings: -70.16 (0.0%)
 
   Employee: EMP_032
   ├─ Priority: P5
@@ -1310,11 +1297,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_06
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_06
+  │  └─ suv | Petrol | SUV
   │
   ├─ Pickup Time: 08:53
-  ├─ Dropoff Time: 09:48
+  ├─ Dropoff Time: 09:36
   ├─ Road Distance: 20.86 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1324,9 +1311,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 103.22 (shared)
-     ├─ Time: 56 min (includes shared ride detours)
-     └─ Savings: -103.22 (0.0%)
+     ├─ Cost: 75.49 (shared)
+     ├─ Time: 44 min (includes shared ride detours)
+     └─ Savings: -75.49 (0.0%)
 
   Employee: EMP_033
   ├─ Priority: P2
@@ -1334,11 +1321,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_08
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_HAT_07
+  │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 08:50
-  ├─ Dropoff Time: 09:23
+  ├─ Pickup Time: 08:51
+  ├─ Dropoff Time: 09:24
   ├─ Road Distance: 16.55 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1348,9 +1335,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 49.64 (shared)
+     ├─ Cost: 55.16 (shared)
      ├─ Time: 33 min (includes shared ride detours)
-     └─ Savings: -49.64 (0.0%)
+     └─ Savings: -55.16 (0.0%)
 
   Employee: EMP_034
   ├─ Priority: P3
@@ -1358,11 +1345,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_03
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_HAT_01
+  │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 09:17
-  ├─ Dropoff Time: 09:50
+  ├─ Pickup Time: 09:31
+  ├─ Dropoff Time: 10:04
   ├─ Road Distance: 16.33 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1372,9 +1359,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 50.05 (shared)
+     ├─ Cost: 54.42 (shared)
      ├─ Time: 33 min (includes shared ride detours)
-     └─ Savings: -50.05 (0.0%)
+     └─ Savings: -54.42 (0.0%)
 
   Employee: EMP_035
   ├─ Priority: P2
@@ -1382,11 +1369,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_09
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_06
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:31
-  ├─ Dropoff Time: 09:34
+  ├─ Pickup Time: 08:57
+  ├─ Dropoff Time: 09:39
   ├─ Road Distance: 20.83 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1396,9 +1383,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 79.52 (shared)
-     ├─ Time: 63 min (includes shared ride detours)
-     └─ Savings: -79.52 (0.0%)
+     ├─ Cost: 77.47 (shared)
+     ├─ Time: 42 min (includes shared ride detours)
+     └─ Savings: -77.47 (0.0%)
 
   Employee: EMP_036
   ├─ Priority: P1
@@ -1410,7 +1397,7 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ suv | Petrol | SUV
   │
   ├─ Pickup Time: 08:32
-  ├─ Dropoff Time: 09:44
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 35.06 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -1420,9 +1407,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 240.35 (shared)
-     ├─ Time: 72 min (includes shared ride detours)
-     └─ Savings: -240.35 (0.0%)
+     ├─ Cost: 291.87 (shared)
+     ├─ Time: 70 min (includes shared ride detours)
+     └─ Savings: -291.87 (0.0%)
 
   Employee: EMP_037
   ├─ Priority: P3
@@ -1430,11 +1417,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_06
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_HAT_08
+  │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 08:36
-  ├─ Dropoff Time: 09:48
+  ├─ Pickup Time: 08:49
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 20.76 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -1444,9 +1431,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 136.15 (shared)
-     ├─ Time: 73 min (includes shared ride detours)
-     └─ Savings: -136.15 (0.0%)
+     ├─ Cost: 103.24 (shared)
+     ├─ Time: 53 min (includes shared ride detours)
+     └─ Savings: -103.24 (0.0%)
 
   Employee: EMP_038
   ├─ Priority: P2
@@ -1454,11 +1441,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_03
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SUV_06
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:02
-  ├─ Dropoff Time: 09:43
+  ├─ Pickup Time: 08:55
+  ├─ Dropoff Time: 09:36
   ├─ Road Distance: 20.64 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1468,9 +1455,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 75.09 (shared)
-     ├─ Time: 41 min (includes shared ride detours)
-     └─ Savings: -75.09 (0.0%)
+     ├─ Cost: 70.58 (shared)
+     ├─ Time: 42 min (includes shared ride detours)
+     └─ Savings: -70.58 (0.0%)
 
   Employee: EMP_039
   ├─ Priority: P2
@@ -1478,11 +1465,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_06
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SED_05
+  │  └─ sedan | Petrol | Sedan
   │
   ├─ Pickup Time: 08:40
-  ├─ Dropoff Time: 10:08
+  ├─ Dropoff Time: 09:22
   ├─ Road Distance: 21.07 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1492,9 +1479,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 245.44 (shared)
-     ├─ Time: 88 min (includes shared ride detours)
-     └─ Savings: -245.44 (0.0%)
+     ├─ Cost: 98.03 (shared)
+     ├─ Time: 42 min (includes shared ride detours)
+     └─ Savings: -98.03 (0.0%)
 
   Employee: EMP_040
   ├─ Priority: P4
@@ -1502,23 +1489,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_02
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_00
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:51
-  ├─ Dropoff Time: 09:17
+  ├─ Pickup Time: 09:17
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 12.58 km (pickup → dropoff)
   │
-  ├─ Status: ✓ ON-TIME
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 44.03 (shared)
+     ├─ Cost: 37.74 (shared)
      ├─ Time: 25 min (includes shared ride detours)
-     └─ Savings: -44.03 (0.0%)
+     └─ Savings: -37.74 (0.0%)
 
   Employee: EMP_041
   ├─ Priority: P3
@@ -1526,11 +1513,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_05
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SUV_03
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:45
-  ├─ Dropoff Time: 09:48
+  ├─ Pickup Time: 09:23
+  ├─ Dropoff Time: 09:50
   ├─ Road Distance: 13.43 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -1540,9 +1527,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 176.08 (shared)
-     ├─ Time: 63 min (includes shared ride detours)
-     └─ Savings: -176.08 (0.0%)
+     ├─ Cost: 42.23 (shared)
+     ├─ Time: 27 min (includes shared ride detours)
+     └─ Savings: -42.23 (0.0%)
 
   Employee: EMP_042
   ├─ Priority: P1
@@ -1550,11 +1537,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_09
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_06
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 09:00
-  ├─ Dropoff Time: 09:34
+  ├─ Pickup Time: 09:05
+  ├─ Dropoff Time: 09:39
   ├─ Road Distance: 17.09 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1564,9 +1551,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 61.52 (shared)
+     ├─ Cost: 59.81 (shared)
      ├─ Time: 34 min (includes shared ride detours)
-     └─ Savings: -61.52 (0.0%)
+     └─ Savings: -59.81 (0.0%)
 
   Employee: EMP_043
   ├─ Priority: P3
@@ -1574,11 +1561,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_04
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_02
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:57
-  ├─ Dropoff Time: 09:34
+  ├─ Pickup Time: 08:56
+  ├─ Dropoff Time: 09:30
   ├─ Road Distance: 17.46 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1588,9 +1575,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 57.38 (shared)
-     ├─ Time: 37 min (includes shared ride detours)
-     └─ Savings: -57.38 (0.0%)
+     ├─ Cost: 61.09 (shared)
+     ├─ Time: 35 min (includes shared ride detours)
+     └─ Savings: -61.09 (0.0%)
 
   Employee: EMP_044
   ├─ Priority: P2
@@ -1598,11 +1585,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_03
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SUV_06
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:09
-  ├─ Dropoff Time: 09:43
+  ├─ Pickup Time: 09:02
+  ├─ Dropoff Time: 09:36
   ├─ Road Distance: 16.94 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1612,9 +1599,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 56.48 (shared)
+     ├─ Cost: 50.83 (shared)
      ├─ Time: 34 min (includes shared ride detours)
-     └─ Savings: -56.48 (0.0%)
+     └─ Savings: -50.83 (0.0%)
 
   Employee: EMP_045
   ├─ Priority: P3
@@ -1622,23 +1609,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_04
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_02
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:00
-  ├─ Dropoff Time: 09:54
+  ├─ Pickup Time: 08:43
+  ├─ Dropoff Time: 09:38
   ├─ Road Distance: 26.16 km (pickup → dropoff)
   │
-  ├─ Status: ⚠ MINOR DELAY
+  ├─ Status: ✓ ON-TIME
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 96.03 (shared)
-     ├─ Time: 54 min (includes shared ride detours)
-     └─ Savings: -96.03 (0.0%)
+     ├─ Cost: 93.96 (shared)
+     ├─ Time: 55 min (includes shared ride detours)
+     └─ Savings: -93.96 (0.0%)
 
   Employee: EMP_046
   ├─ Priority: P3
@@ -1646,11 +1633,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_06
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SUV_05
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:31
-  ├─ Dropoff Time: 10:08
+  ├─ Pickup Time: 08:59
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 18.60 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1660,9 +1647,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 62.01 (shared)
-     ├─ Time: 37 min (includes shared ride detours)
-     └─ Savings: -62.01 (0.0%)
+     ├─ Cost: 108.29 (shared)
+     ├─ Time: 45 min (includes shared ride detours)
+     └─ Savings: -108.29 (0.0%)
 
   Employee: EMP_047
   ├─ Priority: P4
@@ -1670,11 +1657,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_08
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_00
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:59
-  ├─ Dropoff Time: 09:49
+  ├─ Pickup Time: 08:53
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 24.84 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1684,9 +1671,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 103.49 (shared)
+     ├─ Cost: 107.73 (shared)
      ├─ Time: 50 min (includes shared ride detours)
-     └─ Savings: -103.49 (0.0%)
+     └─ Savings: -107.73 (0.0%)
 
   Employee: EMP_048
   ├─ Priority: P2
@@ -1694,23 +1681,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_03
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_06
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:54
-  ├─ Dropoff Time: 09:28
+  ├─ Pickup Time: 09:01
+  ├─ Dropoff Time: 09:36
   ├─ Road Distance: 17.18 km (pickup → dropoff)
   │
-  ├─ Status: ✓ ON-TIME
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 60.14 (shared)
-     ├─ Time: 34 min (includes shared ride detours)
-     └─ Savings: -60.14 (0.0%)
+     ├─ Cost: 52.23 (shared)
+     ├─ Time: 35 min (includes shared ride detours)
+     └─ Savings: -52.23 (0.0%)
 
   Employee: EMP_049
   ├─ Priority: P3
@@ -1718,11 +1705,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_09
+  ├─ Assigned Vehicle: V_SUV_01
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:23
-  ├─ Dropoff Time: 09:34
+  ├─ Pickup Time: 08:26
+  ├─ Dropoff Time: 09:27
   ├─ Road Distance: 21.07 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1732,9 +1719,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 84.85 (shared)
-     ├─ Time: 71 min (includes shared ride detours)
-     └─ Savings: -84.85 (0.0%)
+     ├─ Cost: 119.72 (shared)
+     ├─ Time: 61 min (includes shared ride detours)
+     └─ Savings: -119.72 (0.0%)
 
   Employee: EMP_050
   ├─ Priority: P2
@@ -1742,11 +1729,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_05
+  ├─ Assigned Vehicle: V_HAT_08
   │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 09:13
-  ├─ Dropoff Time: 09:48
+  ├─ Pickup Time: 09:08
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 17.43 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -1766,11 +1753,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_08
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_07
+  │  └─ sedan | Petrol | Sedan
   │
   ├─ Pickup Time: 08:35
-  ├─ Dropoff Time: 09:23
+  ├─ Dropoff Time: 09:21
   ├─ Road Distance: 18.52 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1780,9 +1767,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 74.02 (shared)
-     ├─ Time: 48 min (includes shared ride detours)
-     └─ Savings: -74.02 (0.0%)
+     ├─ Cost: 127.31 (shared)
+     ├─ Time: 46 min (includes shared ride detours)
+     └─ Savings: -127.31 (0.0%)
 
   Employee: EMP_052
   ├─ Priority: P2
@@ -1790,11 +1777,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_09
+  ├─ Assigned Vehicle: V_SED_00
   │  └─ sedan | Petrol | Sedan
   │
   ├─ Pickup Time: 09:03
-  ├─ Dropoff Time: 09:52
+  ├─ Dropoff Time: 09:51
   ├─ Road Distance: 24.25 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -1814,11 +1801,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_03
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_HAT_01
+  │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 08:45
-  ├─ Dropoff Time: 09:50
+  ├─ Pickup Time: 08:56
+  ├─ Dropoff Time: 10:04
   ├─ Road Distance: 31.74 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1828,9 +1815,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 133.33 (shared)
-     ├─ Time: 65 min (includes shared ride detours)
-     └─ Savings: -133.33 (0.0%)
+     ├─ Cost: 148.30 (shared)
+     ├─ Time: 68 min (includes shared ride detours)
+     └─ Savings: -148.30 (0.0%)
 
   Employee: EMP_054
   ├─ Priority: P2
@@ -1838,11 +1825,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_02
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_HAT_07
+  │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 08:29
-  ├─ Dropoff Time: 09:17
+  ├─ Pickup Time: 08:44
+  ├─ Dropoff Time: 09:24
   ├─ Road Distance: 19.74 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1852,9 +1839,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 179.66 (shared)
-     ├─ Time: 48 min (includes shared ride detours)
-     └─ Savings: -179.66 (0.0%)
+     ├─ Cost: 71.14 (shared)
+     ├─ Time: 39 min (includes shared ride detours)
+     └─ Savings: -71.14 (0.0%)
 
   Employee: EMP_055
   ├─ Priority: P4
@@ -1862,14 +1849,14 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_08
+  ├─ Assigned Vehicle: V_SED_05
   │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 09:25
-  ├─ Dropoff Time: 09:49
+  ├─ Pickup Time: 08:57
+  ├─ Dropoff Time: 09:22
   ├─ Road Distance: 12.22 km (pickup → dropoff)
   │
-  ├─ Status: ⚠ MINOR DELAY
+  ├─ Status: ✓ ON-TIME
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
@@ -1886,11 +1873,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_04
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_01
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 09:01
-  ├─ Dropoff Time: 09:34
+  ├─ Pickup Time: 08:48
+  ├─ Dropoff Time: 09:28
   ├─ Road Distance: 16.74 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1900,9 +1887,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 50.22 (shared)
-     ├─ Time: 33 min (includes shared ride detours)
-     └─ Savings: -50.22 (0.0%)
+     ├─ Cost: 95.53 (shared)
+     ├─ Time: 40 min (includes shared ride detours)
+     └─ Savings: -95.53 (0.0%)
 
   Employee: EMP_057
   ├─ Priority: P4
@@ -1910,11 +1897,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_02
+  ├─ Assigned Vehicle: V_SED_05
   │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:45
-  ├─ Dropoff Time: 09:17
+  ├─ Pickup Time: 08:51
+  ├─ Dropoff Time: 09:22
   ├─ Road Distance: 15.45 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1924,9 +1911,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 61.65 (shared)
+     ├─ Cost: 57.85 (shared)
      ├─ Time: 31 min (includes shared ride detours)
-     └─ Savings: -61.65 (0.0%)
+     └─ Savings: -57.85 (0.0%)
 
   Employee: EMP_058
   ├─ Priority: P2
@@ -1934,11 +1921,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_01
+  ├─ Assigned Vehicle: V_SUV_02
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:42
-  ├─ Dropoff Time: 09:39
+  ├─ Pickup Time: 08:40
+  ├─ Dropoff Time: 09:38
   ├─ Road Distance: 24.95 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -1948,9 +1935,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 90.48 (shared)
-     ├─ Time: 57 min (includes shared ride detours)
-     └─ Savings: -90.48 (0.0%)
+     ├─ Cost: 116.31 (shared)
+     ├─ Time: 58 min (includes shared ride detours)
+     └─ Savings: -116.31 (0.0%)
 
   Employee: EMP_059
   ├─ Priority: P1
@@ -1958,23 +1945,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_02
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_00
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:48
-  ├─ Dropoff Time: 09:17
+  ├─ Pickup Time: 09:14
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 14.06 km (pickup → dropoff)
   │
-  ├─ Status: ✓ ON-TIME
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 51.20 (shared)
+     ├─ Cost: 43.28 (shared)
      ├─ Time: 28 min (includes shared ride detours)
-     └─ Savings: -51.20 (0.0%)
+     └─ Savings: -43.28 (0.0%)
 
   Employee: EMP_060
   ├─ Priority: P2
@@ -1982,11 +1969,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_00
+  ├─ Assigned Vehicle: V_SUV_09
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:57
-  ├─ Dropoff Time: 09:44
+  ├─ Pickup Time: 08:52
+  ├─ Dropoff Time: 09:40
   ├─ Road Distance: 23.46 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -1996,9 +1983,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 90.25 (shared)
+     ├─ Cost: 84.42 (shared)
      ├─ Time: 47 min (includes shared ride detours)
-     └─ Savings: -90.25 (0.0%)
+     └─ Savings: -84.42 (0.0%)
 
   Employee: EMP_061
   ├─ Priority: P3
@@ -2006,11 +1993,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_06
+  ├─ Assigned Vehicle: V_SED_04
   │  └─ sedan | Petrol | Sedan
   │
   ├─ Pickup Time: 08:33
-  ├─ Dropoff Time: 09:48
+  ├─ Dropoff Time: 09:49
   ├─ Road Distance: 19.51 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2020,9 +2007,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 154.37 (shared)
-     ├─ Time: 75 min (includes shared ride detours)
-     └─ Savings: -154.37 (0.0%)
+     ├─ Cost: 253.26 (shared)
+     ├─ Time: 76 min (includes shared ride detours)
+     └─ Savings: -253.26 (0.0%)
 
   Employee: EMP_062
   ├─ Priority: P2
@@ -2030,11 +2017,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_00
+  ├─ Assigned Vehicle: V_SED_04
   │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:51
-  ├─ Dropoff Time: 09:48
+  ├─ Pickup Time: 09:05
+  ├─ Dropoff Time: 09:49
   ├─ Road Distance: 21.83 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2044,9 +2031,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 158.42 (shared)
-     ├─ Time: 58 min (includes shared ride detours)
-     └─ Savings: -158.42 (0.0%)
+     ├─ Cost: 76.41 (shared)
+     ├─ Time: 44 min (includes shared ride detours)
+     └─ Savings: -76.41 (0.0%)
 
   Employee: EMP_063
   ├─ Priority: P3
@@ -2054,11 +2041,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_04
+  ├─ Assigned Vehicle: V_SED_08
   │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 09:00
-  ├─ Dropoff Time: 09:54
+  ├─ Pickup Time: 09:06
+  ├─ Dropoff Time: 09:59
   ├─ Road Distance: 26.32 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2068,9 +2055,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 97.23 (shared)
-     ├─ Time: 55 min (includes shared ride detours)
-     └─ Savings: -97.23 (0.0%)
+     ├─ Cost: 96.09 (shared)
+     ├─ Time: 53 min (includes shared ride detours)
+     └─ Savings: -96.09 (0.0%)
 
   Employee: EMP_064
   ├─ Priority: P3
@@ -2078,11 +2065,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_08
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_07
+  │  └─ sedan | Petrol | Sedan
   │
   ├─ Pickup Time: 08:36
-  ├─ Dropoff Time: 09:23
+  ├─ Dropoff Time: 09:21
   ├─ Road Distance: 17.94 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2092,9 +2079,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 70.43 (shared)
-     ├─ Time: 47 min (includes shared ride detours)
-     └─ Savings: -70.43 (0.0%)
+     ├─ Cost: 118.93 (shared)
+     ├─ Time: 45 min (includes shared ride detours)
+     └─ Savings: -118.93 (0.0%)
 
   Employee: EMP_065
   ├─ Priority: P4
@@ -2102,11 +2089,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_08
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_01
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:13
-  ├─ Dropoff Time: 09:23
+  ├─ Pickup Time: 08:54
+  ├─ Dropoff Time: 09:28
   ├─ Road Distance: 16.95 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2116,9 +2103,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 123.20 (shared)
-     ├─ Time: 70 min (includes shared ride detours)
-     └─ Savings: -123.20 (0.0%)
+     ├─ Cost: 60.41 (shared)
+     ├─ Time: 34 min (includes shared ride detours)
+     └─ Savings: -60.41 (0.0%)
 
   Employee: EMP_066
   ├─ Priority: P4
@@ -2126,11 +2113,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_06
+  ├─ Assigned Vehicle: V_SUV_04
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:46
-  ├─ Dropoff Time: 10:00
+  ├─ Pickup Time: 08:31
+  ├─ Dropoff Time: 09:52
   ├─ Road Distance: 33.59 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -2140,9 +2127,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 119.47 (shared)
-     ├─ Time: 73 min (includes shared ride detours)
-     └─ Savings: -119.47 (0.0%)
+     ├─ Cost: 190.95 (shared)
+     ├─ Time: 81 min (includes shared ride detours)
+     └─ Savings: -190.95 (0.0%)
 
   Employee: EMP_067
   ├─ Priority: P2
@@ -2150,23 +2137,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_05
+  ├─ Assigned Vehicle: V_SUV_03
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:11
-  ├─ Dropoff Time: 09:33
+  ├─ Pickup Time: 09:28
+  ├─ Dropoff Time: 09:50
   ├─ Road Distance: 11.02 km (pickup → dropoff)
   │
-  ├─ Status: ✓ ON-TIME
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 39.67 (shared)
+     ├─ Cost: 33.06 (shared)
      ├─ Time: 22 min (includes shared ride detours)
-     └─ Savings: -39.67 (0.0%)
+     └─ Savings: -33.06 (0.0%)
 
   Employee: EMP_068
   ├─ Priority: P2
@@ -2177,8 +2164,8 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Assigned Vehicle: V_SED_00
   │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:59
-  ├─ Dropoff Time: 09:48
+  ├─ Pickup Time: 09:00
+  ├─ Dropoff Time: 09:51
   ├─ Road Distance: 24.81 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2188,9 +2175,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 115.76 (shared)
-     ├─ Time: 50 min (includes shared ride detours)
-     └─ Savings: -115.76 (0.0%)
+     ├─ Cost: 90.71 (shared)
+     ├─ Time: 51 min (includes shared ride detours)
+     └─ Savings: -90.71 (0.0%)
 
   Employee: EMP_069
   ├─ Priority: P3
@@ -2198,11 +2185,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_01
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_05
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:43
-  ├─ Dropoff Time: 09:06
+  ├─ Pickup Time: 09:20
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 11.49 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2212,9 +2199,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 40.22 (shared)
+     ├─ Cost: 34.48 (shared)
      ├─ Time: 23 min (includes shared ride detours)
-     └─ Savings: -40.22 (0.0%)
+     └─ Savings: -34.48 (0.0%)
 
   Employee: EMP_070
   ├─ Priority: P2
@@ -2222,11 +2209,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_09
+  ├─ Assigned Vehicle: V_HAT_03
   │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 08:59
-  ├─ Dropoff Time: 09:38
+  ├─ Pickup Time: 09:03
+  ├─ Dropoff Time: 09:42
   ├─ Road Distance: 19.16 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2246,23 +2233,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_01
+  ├─ Assigned Vehicle: V_SUV_08
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:35
-  ├─ Dropoff Time: 09:39
+  ├─ Pickup Time: 08:45
+  ├─ Dropoff Time: 09:29
   ├─ Road Distance: 21.59 km (pickup → dropoff)
   │
-  ├─ Status: ⚠ MINOR DELAY
+  ├─ Status: ✓ ON-TIME
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 112.17 (shared)
-     ├─ Time: 64 min (includes shared ride detours)
-     └─ Savings: -112.17 (0.0%)
+     ├─ Cost: 101.86 (shared)
+     ├─ Time: 44 min (includes shared ride detours)
+     └─ Savings: -101.86 (0.0%)
 
   Employee: EMP_072
   ├─ Priority: P4
@@ -2270,11 +2257,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_01
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_01
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:36
-  ├─ Dropoff Time: 09:06
+  ├─ Pickup Time: 08:58
+  ├─ Dropoff Time: 09:27
   ├─ Road Distance: 14.39 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2284,9 +2271,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 63.26 (shared)
-     ├─ Time: 31 min (includes shared ride detours)
-     └─ Savings: -63.26 (0.0%)
+     ├─ Cost: 44.45 (shared)
+     ├─ Time: 29 min (includes shared ride detours)
+     └─ Savings: -44.45 (0.0%)
 
   Employee: EMP_073
   ├─ Priority: P3
@@ -2294,11 +2281,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_05
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_08
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:49
-  ├─ Dropoff Time: 09:33
+  ├─ Pickup Time: 08:38
+  ├─ Dropoff Time: 09:59
   ├─ Road Distance: 21.23 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2308,9 +2295,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 101.51 (shared)
-     ├─ Time: 44 min (includes shared ride detours)
-     └─ Savings: -101.51 (0.0%)
+     ├─ Cost: 172.82 (shared)
+     ├─ Time: 81 min (includes shared ride detours)
+     └─ Savings: -172.82 (0.0%)
 
   Employee: EMP_074
   ├─ Priority: P4
@@ -2318,11 +2305,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_02
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SED_06
+  │  └─ sedan | Petrol | Sedan
   │
   ├─ Pickup Time: 08:56
-  ├─ Dropoff Time: 09:44
+  ├─ Dropoff Time: 09:39
   ├─ Road Distance: 20.82 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2332,9 +2319,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 83.63 (shared)
-     ├─ Time: 48 min (includes shared ride detours)
-     └─ Savings: -83.63 (0.0%)
+     ├─ Cost: 83.43 (shared)
+     ├─ Time: 43 min (includes shared ride detours)
+     └─ Savings: -83.43 (0.0%)
 
   Employee: EMP_075
   ├─ Priority: P4
@@ -2342,11 +2329,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_01
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_01
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:36
-  ├─ Dropoff Time: 09:06
+  ├─ Pickup Time: 08:58
+  ├─ Dropoff Time: 09:27
   ├─ Road Distance: 14.22 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2356,9 +2343,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 60.91 (shared)
-     ├─ Time: 30 min (includes shared ride detours)
-     └─ Savings: -60.91 (0.0%)
+     ├─ Cost: 43.70 (shared)
+     ├─ Time: 29 min (includes shared ride detours)
+     └─ Savings: -43.70 (0.0%)
 
   Employee: EMP_076
   ├─ Priority: P2
@@ -2366,23 +2353,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_06
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SUV_09
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:02
-  ├─ Dropoff Time: 10:08
+  ├─ Pickup Time: 08:36
+  ├─ Dropoff Time: 09:40
   ├─ Road Distance: 31.85 km (pickup → dropoff)
   │
-  ├─ Status: ⚠ MINOR DELAY
+  ├─ Status: ✓ ON-TIME
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 134.25 (shared)
-     ├─ Time: 66 min (includes shared ride detours)
-     └─ Savings: -134.25 (0.0%)
+     ├─ Cost: 135.06 (shared)
+     ├─ Time: 64 min (includes shared ride detours)
+     └─ Savings: -135.06 (0.0%)
 
   Employee: EMP_077
   ├─ Priority: P4
@@ -2390,23 +2377,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_05
+  ├─ Assigned Vehicle: V_SUV_08
   │  └─ suv | Petrol | SUV
   │
   ├─ Pickup Time: 08:32
-  ├─ Dropoff Time: 09:33
+  ├─ Dropoff Time: 09:29
   ├─ Road Distance: 23.02 km (pickup → dropoff)
   │
-  ├─ Status: ⚠ MINOR DELAY
+  ├─ Status: ✓ ON-TIME
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 181.86 (shared)
-     ├─ Time: 61 min (includes shared ride detours)
-     └─ Savings: -181.86 (0.0%)
+     ├─ Cost: 193.42 (shared)
+     ├─ Time: 57 min (includes shared ride detours)
+     └─ Savings: -193.42 (0.0%)
 
   Employee: EMP_078
   ├─ Priority: P3
@@ -2414,11 +2401,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_00
+  ├─ Assigned Vehicle: V_SUV_04
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:41
-  ├─ Dropoff Time: 09:44
+  ├─ Pickup Time: 08:49
+  ├─ Dropoff Time: 09:52
   ├─ Road Distance: 31.41 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2428,9 +2415,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 162.26 (shared)
+     ├─ Cost: 104.83 (shared)
      ├─ Time: 63 min (includes shared ride detours)
-     └─ Savings: -162.26 (0.0%)
+     └─ Savings: -104.83 (0.0%)
 
   Employee: EMP_079
   ├─ Priority: P3
@@ -2438,11 +2425,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_07
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_HAT_00
+  │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 08:38
-  ├─ Dropoff Time: 09:49
+  ├─ Pickup Time: 08:52
+  ├─ Dropoff Time: 10:04
   ├─ Road Distance: 20.72 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2452,9 +2439,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 220.28 (shared)
-     ├─ Time: 71 min (includes shared ride detours)
-     └─ Savings: -220.28 (0.0%)
+     ├─ Cost: 195.26 (shared)
+     ├─ Time: 72 min (includes shared ride detours)
+     └─ Savings: -195.26 (0.0%)
 
   Employee: EMP_080
   ├─ Priority: P3
@@ -2462,11 +2449,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_00
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_07
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 09:21
-  ├─ Dropoff Time: 09:44
+  ├─ Pickup Time: 08:58
+  ├─ Dropoff Time: 09:21
   ├─ Road Distance: 11.58 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2476,9 +2463,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 34.74 (shared)
+     ├─ Cost: 42.50 (shared)
      ├─ Time: 23 min (includes shared ride detours)
-     └─ Savings: -34.74 (0.0%)
+     └─ Savings: -42.50 (0.0%)
 
   Employee: EMP_081
   ├─ Priority: P3
@@ -2486,11 +2473,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_04
-  │  └─ hatchback | Petrol | Hatchback
+  ├─ Assigned Vehicle: V_SED_07
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:53
-  ├─ Dropoff Time: 09:14
+  ├─ Pickup Time: 09:00
+  ├─ Dropoff Time: 09:21
   ├─ Road Distance: 10.42 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2500,9 +2487,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 52.10 (shared)
+     ├─ Cost: 36.47 (shared)
      ├─ Time: 21 min (includes shared ride detours)
-     └─ Savings: -52.10 (0.0%)
+     └─ Savings: -36.47 (0.0%)
 
   Employee: EMP_082
   ├─ Priority: P2
@@ -2510,11 +2497,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_06
+  ├─ Assigned Vehicle: V_SUV_04
   │  └─ suv | Petrol | SUV
   │
   ├─ Pickup Time: 08:39
-  ├─ Dropoff Time: 10:00
+  ├─ Dropoff Time: 09:52
   ├─ Road Distance: 36.46 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2524,9 +2511,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 145.76 (shared)
-     ├─ Time: 81 min (includes shared ride detours)
-     └─ Savings: -145.76 (0.0%)
+     ├─ Cost: 128.96 (shared)
+     ├─ Time: 73 min (includes shared ride detours)
+     └─ Savings: -128.96 (0.0%)
 
   Employee: EMP_083
   ├─ Priority: P3
@@ -2534,11 +2521,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_04
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_SED_06
+  │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:44
-  ├─ Dropoff Time: 09:34
+  ├─ Pickup Time: 08:41
+  ├─ Dropoff Time: 09:39
   ├─ Road Distance: 21.49 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2548,9 +2535,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 86.56 (shared)
-     ├─ Time: 51 min (includes shared ride detours)
-     └─ Savings: -86.56 (0.0%)
+     ├─ Cost: 105.26 (shared)
+     ├─ Time: 58 min (includes shared ride detours)
+     └─ Savings: -105.26 (0.0%)
 
   Employee: EMP_084
   ├─ Priority: P1
@@ -2558,11 +2545,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_01
+  ├─ Assigned Vehicle: V_SUV_02
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:52
-  ├─ Dropoff Time: 09:39
+  ├─ Pickup Time: 08:51
+  ├─ Dropoff Time: 09:38
   ├─ Road Distance: 23.58 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -2572,9 +2559,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 70.73 (shared)
+     ├─ Cost: 70.98 (shared)
      ├─ Time: 47 min (includes shared ride detours)
-     └─ Savings: -70.73 (0.0%)
+     └─ Savings: -70.98 (0.0%)
 
   Employee: EMP_085
   ├─ Priority: P3
@@ -2585,8 +2572,8 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Assigned Vehicle: V_SUV_05
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:07
-  ├─ Dropoff Time: 09:33
+  ├─ Pickup Time: 09:13
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 12.48 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2596,9 +2583,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 48.29 (shared)
-     ├─ Time: 26 min (includes shared ride detours)
-     └─ Savings: -48.29 (0.0%)
+     ├─ Cost: 47.35 (shared)
+     ├─ Time: 30 min (includes shared ride detours)
+     └─ Savings: -47.35 (0.0%)
 
   Employee: EMP_086
   ├─ Priority: P1
@@ -2606,11 +2593,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_09
+  ├─ Assigned Vehicle: V_SED_00
   │  └─ sedan | Petrol | Sedan
   │
-  ├─ Pickup Time: 08:57
-  ├─ Dropoff Time: 09:52
+  ├─ Pickup Time: 08:54
+  ├─ Dropoff Time: 09:51
   ├─ Road Distance: 21.73 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -2620,9 +2607,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 98.88 (shared)
-     ├─ Time: 55 min (includes shared ride detours)
-     └─ Savings: -98.88 (0.0%)
+     ├─ Cost: 112.63 (shared)
+     ├─ Time: 57 min (includes shared ride detours)
+     └─ Savings: -112.63 (0.0%)
 
   Employee: EMP_087
   ├─ Priority: P3
@@ -2630,11 +2617,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_00
+  ├─ Assigned Vehicle: V_SUV_04
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:16
-  ├─ Dropoff Time: 09:44
+  ├─ Pickup Time: 09:24
+  ├─ Dropoff Time: 09:52
   ├─ Road Distance: 13.81 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2644,9 +2631,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 42.79 (shared)
+     ├─ Cost: 41.44 (shared)
      ├─ Time: 28 min (includes shared ride detours)
-     └─ Savings: -42.79 (0.0%)
+     └─ Savings: -41.44 (0.0%)
 
   Employee: EMP_088
   ├─ Priority: P3
@@ -2654,11 +2641,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_08
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_00
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:00
-  ├─ Dropoff Time: 09:49
+  ├─ Pickup Time: 08:53
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 24.37 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2668,9 +2655,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 100.24 (shared)
+     ├─ Cost: 103.55 (shared)
      ├─ Time: 49 min (includes shared ride detours)
-     └─ Savings: -100.24 (0.0%)
+     └─ Savings: -103.55 (0.0%)
 
   Employee: EMP_089
   ├─ Priority: P3
@@ -2678,23 +2665,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SED_03
-  │  └─ sedan | Petrol | Sedan
+  ├─ Assigned Vehicle: V_SUV_06
+  │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:43
-  ├─ Dropoff Time: 09:28
+  ├─ Pickup Time: 08:20
+  ├─ Dropoff Time: 09:36
   ├─ Road Distance: 18.77 km (pickup → dropoff)
   │
-  ├─ Status: ✓ ON-TIME
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 96.35 (shared)
-     ├─ Time: 46 min (includes shared ride detours)
-     └─ Savings: -96.35 (0.0%)
+     ├─ Cost: 146.33 (shared)
+     ├─ Time: 76 min (includes shared ride detours)
+     └─ Savings: -146.33 (0.0%)
 
   Employee: EMP_090
   ├─ Priority: P3
@@ -2702,11 +2689,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_01
+  ├─ Assigned Vehicle: V_SUV_06
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:27
-  ├─ Dropoff Time: 09:39
+  ├─ Pickup Time: 08:58
+  ├─ Dropoff Time: 09:36
   ├─ Road Distance: 18.81 km (pickup → dropoff)
   │
   ├─ Status: ⚠ MINOR DELAY
@@ -2716,9 +2703,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 161.67 (shared)
-     ├─ Time: 72 min (includes shared ride detours)
-     └─ Savings: -161.67 (0.0%)
+     ├─ Cost: 59.58 (shared)
+     ├─ Time: 38 min (includes shared ride detours)
+     └─ Savings: -59.58 (0.0%)
 
   Employee: EMP_091
   ├─ Priority: P5
@@ -2726,23 +2713,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_03
+  ├─ Assigned Vehicle: V_SUV_09
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:20
-  ├─ Dropoff Time: 09:50
+  ├─ Pickup Time: 09:10
+  ├─ Dropoff Time: 09:40
   ├─ Road Distance: 14.93 km (pickup → dropoff)
   │
-  ├─ Status: ✗ LATE by 20 min
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 44.78 (shared)
+     ├─ Cost: 45.60 (shared)
      ├─ Time: 30 min (includes shared ride detours)
-     └─ Savings: -44.78 (0.0%)
+     └─ Savings: -45.60 (0.0%)
 
   Employee: EMP_092
   ├─ Priority: P4
@@ -2750,11 +2737,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_04
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_HAT_03
+  │  └─ hatchback | Petrol | Hatchback
   │
   ├─ Pickup Time: 08:53
-  ├─ Dropoff Time: 09:34
+  ├─ Dropoff Time: 09:42
   ├─ Road Distance: 18.33 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2764,9 +2751,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 67.59 (shared)
-     ├─ Time: 42 min (includes shared ride detours)
-     └─ Savings: -67.59 (0.0%)
+     ├─ Cost: 110.12 (shared)
+     ├─ Time: 49 min (includes shared ride detours)
+     └─ Savings: -110.12 (0.0%)
 
   Employee: EMP_093
   ├─ Priority: P3
@@ -2774,11 +2761,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_HAT_05
+  ├─ Assigned Vehicle: V_HAT_08
   │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 09:04
-  ├─ Dropoff Time: 09:48
+  ├─ Pickup Time: 08:59
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 21.61 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2798,23 +2785,23 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_01
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_HAT_00
+  │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 08:30
-  ├─ Dropoff Time: 09:39
+  ├─ Pickup Time: 09:25
+  ├─ Dropoff Time: 10:04
   ├─ Road Distance: 19.44 km (pickup → dropoff)
   │
-  ├─ Status: ✓ ON-TIME
+  ├─ Status: ⚠ MINOR DELAY
   │
   ├─ BASELINE (Individual Cab - Ola/Uber/Rapido):
   │  ├─ Cost: 0.00
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 134.78 (shared)
-     ├─ Time: 69 min (includes shared ride detours)
-     └─ Savings: -134.78 (0.0%)
+     ├─ Cost: 64.81 (shared)
+     ├─ Time: 39 min (includes shared ride detours)
+     └─ Savings: -64.81 (0.0%)
 
   Employee: EMP_095
   ├─ Priority: P1
@@ -2822,11 +2809,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_01
+  ├─ Assigned Vehicle: V_SUV_02
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 08:46
-  ├─ Dropoff Time: 09:39
+  ├─ Pickup Time: 08:45
+  ├─ Dropoff Time: 09:38
   ├─ Road Distance: 26.63 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2836,9 +2823,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 81.72 (shared)
-     ├─ Time: 53 min (includes shared ride detours)
-     └─ Savings: -81.72 (0.0%)
+     ├─ Cost: 86.06 (shared)
+     ├─ Time: 54 min (includes shared ride detours)
+     └─ Savings: -86.06 (0.0%)
 
   Employee: EMP_096
   ├─ Priority: P3
@@ -2846,11 +2833,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_06
+  ├─ Assigned Vehicle: V_SUV_05
   │  └─ suv | Petrol | SUV
   │
-  ├─ Pickup Time: 09:33
-  ├─ Dropoff Time: 10:00
+  ├─ Pickup Time: 09:09
+  ├─ Dropoff Time: 09:43
   ├─ Road Distance: 13.44 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2860,9 +2847,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 40.31 (shared)
-     ├─ Time: 27 min (includes shared ride detours)
-     └─ Savings: -40.31 (0.0%)
+     ├─ Cost: 57.50 (shared)
+     ├─ Time: 34 min (includes shared ride detours)
+     └─ Savings: -57.50 (0.0%)
 
   Employee: EMP_097
   ├─ Priority: P3
@@ -2884,9 +2871,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 162.13 (shared)
+     ├─ Cost: 193.27 (shared)
      ├─ Time: 71 min (includes shared ride detours)
-     └─ Savings: -162.13 (0.0%)
+     └─ Savings: -193.27 (0.0%)
 
   Employee: EMP_098
   ├─ Priority: P3
@@ -2894,11 +2881,11 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: any
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_06
-  │  └─ suv | Petrol | SUV
+  ├─ Assigned Vehicle: V_HAT_01
+  │  └─ hatchback | Petrol | Hatchback
   │
-  ├─ Pickup Time: 08:54
-  ├─ Dropoff Time: 10:00
+  ├─ Pickup Time: 08:58
+  ├─ Dropoff Time: 10:04
   ├─ Road Distance: 32.53 km (pickup → dropoff)
   │
   ├─ Status: ✓ ON-TIME
@@ -2908,9 +2895,9 @@ DETAILED EMPLOYEE ASSIGNMENTS
   │  └─ Time: 0 min
   │
   └─ OPTIMIZED (Shared Ride):
-     ├─ Cost: 111.30 (shared)
+     ├─ Cost: 137.08 (shared)
      ├─ Time: 66 min (includes shared ride detours)
-     └─ Savings: -111.30 (0.0%)
+     └─ Savings: -137.08 (0.0%)
 
   Employee: EMP_EDGE_99
   ├─ Priority: P1
@@ -2918,7 +2905,7 @@ DETAILED EMPLOYEE ASSIGNMENTS
   ├─ Vehicle Preference: suv
   ├─ Sharing Preference: Max 100 passengers
   │
-  ├─ Assigned Vehicle: V_SUV_02
+  ├─ Assigned Vehicle: V_SUV_07
   │  └─ suv | Petrol | SUV
   │
   ├─ Pickup Time: 08:43
@@ -2942,108 +2929,108 @@ QUICK REFERENCE TABLE
 
 Emp    Veh   Type  Fuel    Base$    Opt$     Save$    BaseT  OptT   Status    
 ------------------------------------------------------------------------------
-EMP_000 V_SUV_08 suv   Petrol  0        78.7     -78.7    0      65     On-time   
-EMP_001 V_HAT_02 hatc  Petrol  0        91.6     -91.6    0      64     On-time   
-EMP_002 V_HAT_09 hatc  Petrol  0        86.5     -86.5    0      47     On-time   
-EMP_003 V_SUV_09 suv   Petrol  0        103.3    -103.3   0      73     On-time   
-EMP_004 V_SED_08 seda  Petrol  0        215.9    -215.9   0      66     On-time   
-EMP_005 V_SUV_04 suv   Petrol  0        136.4    -136.4   0      62     On-time   
-EMP_006 V_SED_03 seda  Petrol  0        67.8     -67.8    0      38     On-time   
-EMP_007 V_SUV_06 suv   Petrol  0        137.3    -137.3   0      79     LATE      
-EMP_008 V_HAT_02 hatc  Petrol  0        73.8     -73.8    0      44     On-time   
-EMP_009 V_HAT_04 hatc  Petrol  0        136.8    -136.8   0      38     On-time   
-EMP_010 V_HAT_03 hatc  Petrol  0        187.5    -187.5   0      64     On-time   
-EMP_011 V_SUV_08 suv   Petrol  0        57.2     -57.2    0      41     On-time   
-EMP_012 V_SED_06 seda  Petrol  0        80.8     -80.8    0      46     On-time   
-EMP_013 V_SUV_03 suv   Petrol  0        88.6     -88.6    0      50     On-time   
-EMP_014 V_SED_09 seda  Petrol  0        266.3    -266.3   0      83     Delay     
-EMP_015 V_SUV_03 suv   Petrol  0        194.5    -194.5   0      75     Delay     
-EMP_016 V_SED_03 seda  Petrol  0        110.6    -110.6   0      48     On-time   
-EMP_017 V_SED_07 seda  Petrol  0        86.4     -86.4    0      49     On-time   
-EMP_018 V_SUV_00 suv   Petrol  0        75.1     -75.1    0      42     On-time   
-EMP_019 V_SUV_04 suv   Petrol  0        193.6    -193.6   0      90     On-time   
-EMP_020 V_SED_09 seda  Petrol  0        128.9    -128.9   0      63     On-time   
-EMP_021 V_SUV_05 suv   Petrol  0        109.6    -109.6   0      45     On-time   
-EMP_022 V_SED_04 seda  Petrol  0        91.3     -91.3    0      52     Delay     
-EMP_023 V_SED_07 seda  Petrol  0        92.4     -92.4    0      50     On-time   
-EMP_024 V_HAT_09 hatc  Petrol  0        126.2    -126.2   0      25     Delay     
-EMP_025 V_SED_04 seda  Petrol  0        111.6    -111.6   0      57     On-time   
-EMP_026 V_SUV_06 suv   Petrol  0        158.2    -158.2   0      85     Delay     
-EMP_027 V_SED_07 seda  Petrol  0        82.1     -82.1    0      47     On-time   
-EMP_028 V_HAT_09 hatc  Petrol  0        169.5    -169.5   0      64     Delay     
-EMP_029 V_SED_01 seda  Petrol  0        50.7     -50.7    0      27     On-time   
-EMP_030 V_SUV_09 suv   Petrol  0        78.5     -78.5    0      54     On-time   
-EMP_031 V_SED_00 seda  Petrol  0        128.8    -128.8   0      53     Delay     
-EMP_032 V_SED_06 seda  Petrol  0        103.2    -103.2   0      56     On-time   
-EMP_033 V_SUV_08 suv   Petrol  0        49.6     -49.6    0      33     On-time   
-EMP_034 V_SUV_03 suv   Petrol  0        50.1     -50.1    0      33     On-time   
-EMP_035 V_SUV_09 suv   Petrol  0        79.5     -79.5    0      63     On-time   
-EMP_036 V_SUV_00 suv   Petrol  0        240.3    -240.3   0      72     Delay     
-EMP_037 V_SED_06 seda  Petrol  0        136.1    -136.1   0      73     Delay     
-EMP_038 V_HAT_03 hatc  Petrol  0        75.1     -75.1    0      41     On-time   
-EMP_039 V_HAT_06 hatc  Petrol  0        245.4    -245.4   0      88     On-time   
-EMP_040 V_SED_02 seda  Petrol  0        44.0     -44.0    0      25     On-time   
-EMP_041 V_HAT_05 hatc  Petrol  0        176.1    -176.1   0      63     Delay     
-EMP_042 V_SUV_09 suv   Petrol  0        61.5     -61.5    0      34     On-time   
-EMP_043 V_SUV_04 suv   Petrol  0        57.4     -57.4    0      37     On-time   
-EMP_044 V_HAT_03 hatc  Petrol  0        56.5     -56.5    0      34     On-time   
-EMP_045 V_SED_04 seda  Petrol  0        96.0     -96.0    0      54     Delay     
-EMP_046 V_HAT_06 hatc  Petrol  0        62.0     -62.0    0      37     On-time   
-EMP_047 V_SED_08 seda  Petrol  0        103.5    -103.5   0      50     On-time   
-EMP_048 V_SED_03 seda  Petrol  0        60.1     -60.1    0      34     On-time   
-EMP_049 V_SUV_09 suv   Petrol  0        84.8     -84.8    0      71     On-time   
-EMP_050 V_HAT_05 hatc  Petrol  0        58.1     -58.1    0      35     Delay     
-EMP_051 V_SUV_08 suv   Petrol  0        74.0     -74.0    0      48     On-time   
-EMP_052 V_SED_09 seda  Petrol  0        84.9     -84.9    0      48     Delay     
-EMP_053 V_SUV_03 suv   Petrol  0        133.3    -133.3   0      65     On-time   
-EMP_054 V_SED_02 seda  Petrol  0        179.7    -179.7   0      48     On-time   
-EMP_055 V_SED_08 seda  Petrol  0        42.8     -42.8    0      24     Delay     
-EMP_056 V_SUV_04 suv   Petrol  0        50.2     -50.2    0      33     On-time   
-EMP_057 V_SED_02 seda  Petrol  0        61.7     -61.7    0      31     On-time   
-EMP_058 V_SUV_01 suv   Petrol  0        90.5     -90.5    0      57     On-time   
-EMP_059 V_SED_02 seda  Petrol  0        51.2     -51.2    0      28     On-time   
-EMP_060 V_SUV_00 suv   Petrol  0        90.3     -90.3    0      47     Delay     
-EMP_061 V_SED_06 seda  Petrol  0        154.4    -154.4   0      75     On-time   
-EMP_062 V_SED_00 seda  Petrol  0        158.4    -158.4   0      58     On-time   
-EMP_063 V_SED_04 seda  Petrol  0        97.2     -97.2    0      55     On-time   
-EMP_064 V_SUV_08 suv   Petrol  0        70.4     -70.4    0      47     On-time   
-EMP_065 V_SUV_08 suv   Petrol  0        123.2    -123.2   0      70     On-time   
-EMP_066 V_SUV_06 suv   Petrol  0        119.5    -119.5   0      73     Delay     
-EMP_067 V_SUV_05 suv   Petrol  0        39.7     -39.7    0      22     On-time   
-EMP_068 V_SED_00 seda  Petrol  0        115.8    -115.8   0      50     On-time   
-EMP_069 V_SED_01 seda  Petrol  0        40.2     -40.2    0      23     On-time   
-EMP_070 V_HAT_09 hatc  Petrol  0        63.9     -63.9    0      38     On-time   
-EMP_071 V_SUV_01 suv   Petrol  0        112.2    -112.2   0      64     Delay     
-EMP_072 V_SED_01 seda  Petrol  0        63.3     -63.3    0      31     On-time   
-EMP_073 V_SUV_05 suv   Petrol  0        101.5    -101.5   0      44     On-time   
-EMP_074 V_HAT_02 hatc  Petrol  0        83.6     -83.6    0      48     On-time   
-EMP_075 V_SED_01 seda  Petrol  0        60.9     -60.9    0      30     On-time   
-EMP_076 V_HAT_06 hatc  Petrol  0        134.3    -134.3   0      66     Delay     
-EMP_077 V_SUV_05 suv   Petrol  0        181.9    -181.9   0      61     Delay     
-EMP_078 V_SUV_00 suv   Petrol  0        162.3    -162.3   0      63     On-time   
-EMP_079 V_SED_07 seda  Petrol  0        220.3    -220.3   0      71     On-time   
-EMP_080 V_SUV_00 suv   Petrol  0        34.7     -34.7    0      23     On-time   
-EMP_081 V_HAT_04 hatc  Petrol  0        52.1     -52.1    0      21     On-time   
-EMP_082 V_SUV_06 suv   Petrol  0        145.8    -145.8   0      81     On-time   
-EMP_083 V_SUV_04 suv   Petrol  0        86.6     -86.6    0      51     On-time   
-EMP_084 V_SUV_01 suv   Petrol  0        70.7     -70.7    0      47     Delay     
-EMP_085 V_SUV_05 suv   Petrol  0        48.3     -48.3    0      26     On-time   
-EMP_086 V_SED_09 seda  Petrol  0        98.9     -98.9    0      55     Delay     
-EMP_087 V_SUV_00 suv   Petrol  0        42.8     -42.8    0      28     On-time   
-EMP_088 V_SED_08 seda  Petrol  0        100.2    -100.2   0      49     On-time   
-EMP_089 V_SED_03 seda  Petrol  0        96.4     -96.4    0      46     On-time   
-EMP_090 V_SUV_01 suv   Petrol  0        161.7    -161.7   0      72     Delay     
-EMP_091 V_SUV_03 suv   Petrol  0        44.8     -44.8    0      30     LATE      
-EMP_092 V_SUV_04 suv   Petrol  0        67.6     -67.6    0      42     On-time   
-EMP_093 V_HAT_05 hatc  Petrol  0        81.5     -81.5    0      44     On-time   
-EMP_094 V_SUV_01 suv   Petrol  0        134.8    -134.8   0      69     On-time   
-EMP_095 V_SUV_01 suv   Petrol  0        81.7     -81.7    0      53     On-time   
-EMP_096 V_SUV_06 suv   Petrol  0        40.3     -40.3    0      27     On-time   
-EMP_097 V_SUV_03 suv   Petrol  0        162.1    -162.1   0      71     On-time   
-EMP_098 V_SUV_06 suv   Petrol  0        111.3    -111.3   0      66     On-time   
-EMP_EDGE_99 V_SUV_02 suv   Petrol  0        711.2    -711.2   0      79     LATE      
+EMP_000 V_HAT_03 hatc  Petrol  0        72.0     -72.0    0      42     Delay     
+EMP_001 V_SUV_01 suv   Petrol  0        140.8    -140.8   0      63     On-time   
+EMP_002 V_SED_01 seda  Petrol  0        56.4     -56.4    0      32     On-time   
+EMP_003 V_SED_02 seda  Petrol  0        89.3     -89.3    0      45     On-time   
+EMP_004 V_SUV_09 suv   Petrol  0        137.4    -137.4   0      71     On-time   
+EMP_005 V_SED_02 seda  Petrol  0        178.4    -178.4   0      58     On-time   
+EMP_006 V_SED_00 seda  Petrol  0        188.2    -188.2   0      68     Delay     
+EMP_007 V_SUV_04 suv   Petrol  0        137.4    -137.4   0      75     Delay     
+EMP_008 V_SUV_01 suv   Petrol  0        105.6    -105.6   0      49     On-time   
+EMP_009 V_HAT_07 hatc  Petrol  0        109.9    -109.9   0      47     On-time   
+EMP_010 V_SUV_00 suv   Petrol  0        49.7     -49.7    0      31     On-time   
+EMP_011 V_SED_01 seda  Petrol  0        69.7     -69.7    0      37     On-time   
+EMP_012 V_SED_08 seda  Petrol  0        80.8     -80.8    0      46     On-time   
+EMP_013 V_SUV_03 suv   Petrol  0        97.9     -97.9    0      50     On-time   
+EMP_014 V_SUV_09 suv   Petrol  0        41.7     -41.7    0      28     On-time   
+EMP_015 V_SUV_03 suv   Petrol  0        225.6    -225.6   0      74     Delay     
+EMP_016 V_SUV_05 suv   Petrol  0        104.4    -104.4   0      45     On-time   
+EMP_017 V_SUV_08 suv   Petrol  0        128.4    -128.4   0      49     On-time   
+EMP_018 V_SUV_03 suv   Petrol  0        77.1     -77.1    0      43     On-time   
+EMP_019 V_SED_05 seda  Petrol  0        122.4    -122.4   0      64     On-time   
+EMP_020 V_SUV_08 suv   Petrol  0        86.5     -86.5    0      38     On-time   
+EMP_021 V_SED_08 seda  Petrol  0        160.3    -160.3   0      71     On-time   
+EMP_022 V_SUV_02 suv   Petrol  0        82.3     -82.3    0      52     On-time   
+EMP_023 V_SED_04 seda  Petrol  0        96.4     -96.4    0      50     On-time   
+EMP_024 V_SUV_05 suv   Petrol  0        52.4     -52.4    0      32     On-time   
+EMP_025 V_HAT_00 hatc  Petrol  0        100.5    -100.5   0      53     On-time   
+EMP_026 V_SUV_04 suv   Petrol  0        124.8    -124.8   0      72     Delay     
+EMP_027 V_SED_04 seda  Petrol  0        84.0     -84.0    0      47     On-time   
+EMP_028 V_SUV_09 suv   Petrol  0        358.5    -358.5   0      96     Delay     
+EMP_029 V_SUV_01 suv   Petrol  0        38.4     -38.4    0      26     On-time   
+EMP_030 V_SED_02 seda  Petrol  0        76.9     -76.9    0      42     On-time   
+EMP_031 V_SUV_02 suv   Petrol  0        70.2     -70.2    0      47     Delay     
+EMP_032 V_SUV_06 suv   Petrol  0        75.5     -75.5    0      44     On-time   
+EMP_033 V_HAT_07 hatc  Petrol  0        55.2     -55.2    0      33     On-time   
+EMP_034 V_HAT_01 hatc  Petrol  0        54.4     -54.4    0      33     On-time   
+EMP_035 V_SED_06 seda  Petrol  0        77.5     -77.5    0      42     On-time   
+EMP_036 V_SUV_00 suv   Petrol  0        291.9    -291.9   0      70     Delay     
+EMP_037 V_HAT_08 hatc  Petrol  0        103.2    -103.2   0      53     Delay     
+EMP_038 V_SUV_06 suv   Petrol  0        70.6     -70.6    0      42     On-time   
+EMP_039 V_SED_05 seda  Petrol  0        98.0     -98.0    0      42     On-time   
+EMP_040 V_SUV_00 suv   Petrol  0        37.7     -37.7    0      25     Delay     
+EMP_041 V_SUV_03 suv   Petrol  0        42.2     -42.2    0      27     Delay     
+EMP_042 V_SED_06 seda  Petrol  0        59.8     -59.8    0      34     On-time   
+EMP_043 V_SED_02 seda  Petrol  0        61.1     -61.1    0      35     On-time   
+EMP_044 V_SUV_06 suv   Petrol  0        50.8     -50.8    0      34     On-time   
+EMP_045 V_SUV_02 suv   Petrol  0        94.0     -94.0    0      55     On-time   
+EMP_046 V_SUV_05 suv   Petrol  0        108.3    -108.3   0      45     On-time   
+EMP_047 V_SUV_00 suv   Petrol  0        107.7    -107.7   0      50     On-time   
+EMP_048 V_SUV_06 suv   Petrol  0        52.2     -52.2    0      35     Delay     
+EMP_049 V_SUV_01 suv   Petrol  0        119.7    -119.7   0      61     On-time   
+EMP_050 V_HAT_08 hatc  Petrol  0        58.1     -58.1    0      35     Delay     
+EMP_051 V_SED_07 seda  Petrol  0        127.3    -127.3   0      46     On-time   
+EMP_052 V_SED_00 seda  Petrol  0        84.9     -84.9    0      48     Delay     
+EMP_053 V_HAT_01 hatc  Petrol  0        148.3    -148.3   0      68     On-time   
+EMP_054 V_HAT_07 hatc  Petrol  0        71.1     -71.1    0      39     On-time   
+EMP_055 V_SED_05 seda  Petrol  0        42.8     -42.8    0      24     On-time   
+EMP_056 V_SED_01 seda  Petrol  0        95.5     -95.5    0      40     On-time   
+EMP_057 V_SED_05 seda  Petrol  0        57.9     -57.9    0      31     On-time   
+EMP_058 V_SUV_02 suv   Petrol  0        116.3    -116.3   0      58     On-time   
+EMP_059 V_SUV_00 suv   Petrol  0        43.3     -43.3    0      28     Delay     
+EMP_060 V_SUV_09 suv   Petrol  0        84.4     -84.4    0      47     Delay     
+EMP_061 V_SED_04 seda  Petrol  0        253.3    -253.3   0      76     On-time   
+EMP_062 V_SED_04 seda  Petrol  0        76.4     -76.4    0      44     On-time   
+EMP_063 V_SED_08 seda  Petrol  0        96.1     -96.1    0      53     On-time   
+EMP_064 V_SED_07 seda  Petrol  0        118.9    -118.9   0      45     On-time   
+EMP_065 V_SED_01 seda  Petrol  0        60.4     -60.4    0      34     On-time   
+EMP_066 V_SUV_04 suv   Petrol  0        190.9    -190.9   0      81     Delay     
+EMP_067 V_SUV_03 suv   Petrol  0        33.1     -33.1    0      22     Delay     
+EMP_068 V_SED_00 seda  Petrol  0        90.7     -90.7    0      51     On-time   
+EMP_069 V_SUV_05 suv   Petrol  0        34.5     -34.5    0      23     On-time   
+EMP_070 V_HAT_03 hatc  Petrol  0        63.9     -63.9    0      38     On-time   
+EMP_071 V_SUV_08 suv   Petrol  0        101.9    -101.9   0      44     On-time   
+EMP_072 V_SUV_01 suv   Petrol  0        44.4     -44.4    0      29     On-time   
+EMP_073 V_SED_08 seda  Petrol  0        172.8    -172.8   0      81     On-time   
+EMP_074 V_SED_06 seda  Petrol  0        83.4     -83.4    0      43     On-time   
+EMP_075 V_SUV_01 suv   Petrol  0        43.7     -43.7    0      29     On-time   
+EMP_076 V_SUV_09 suv   Petrol  0        135.1    -135.1   0      64     On-time   
+EMP_077 V_SUV_08 suv   Petrol  0        193.4    -193.4   0      57     On-time   
+EMP_078 V_SUV_04 suv   Petrol  0        104.8    -104.8   0      63     On-time   
+EMP_079 V_HAT_00 hatc  Petrol  0        195.3    -195.3   0      72     On-time   
+EMP_080 V_SED_07 seda  Petrol  0        42.5     -42.5    0      23     On-time   
+EMP_081 V_SED_07 seda  Petrol  0        36.5     -36.5    0      21     On-time   
+EMP_082 V_SUV_04 suv   Petrol  0        129.0    -129.0   0      73     On-time   
+EMP_083 V_SED_06 seda  Petrol  0        105.3    -105.3   0      58     On-time   
+EMP_084 V_SUV_02 suv   Petrol  0        71.0     -71.0    0      47     Delay     
+EMP_085 V_SUV_05 suv   Petrol  0        47.3     -47.3    0      30     On-time   
+EMP_086 V_SED_00 seda  Petrol  0        112.6    -112.6   0      57     Delay     
+EMP_087 V_SUV_04 suv   Petrol  0        41.4     -41.4    0      28     On-time   
+EMP_088 V_SUV_00 suv   Petrol  0        103.6    -103.6   0      49     On-time   
+EMP_089 V_SUV_06 suv   Petrol  0        146.3    -146.3   0      76     Delay     
+EMP_090 V_SUV_06 suv   Petrol  0        59.6     -59.6    0      38     Delay     
+EMP_091 V_SUV_09 suv   Petrol  0        45.6     -45.6    0      30     Delay     
+EMP_092 V_HAT_03 hatc  Petrol  0        110.1    -110.1   0      49     On-time   
+EMP_093 V_HAT_08 hatc  Petrol  0        81.5     -81.5    0      44     On-time   
+EMP_094 V_HAT_00 hatc  Petrol  0        64.8     -64.8    0      39     Delay     
+EMP_095 V_SUV_02 suv   Petrol  0        86.1     -86.1    0      54     On-time   
+EMP_096 V_SUV_05 suv   Petrol  0        57.5     -57.5    0      34     On-time   
+EMP_097 V_SUV_03 suv   Petrol  0        193.3    -193.3   0      71     On-time   
+EMP_098 V_HAT_01 hatc  Petrol  0        137.1    -137.1   0      66     On-time   
+EMP_EDGE_99 V_SUV_07 suv   Petrol  0        711.2    -711.2   0      79     LATE      
 ------------------------------------------------------------------------------
-TOTAL                      0        10971.0  -10971.0
+TOTAL                      0        10509.1  -10509.1
 
 ================================================================================
 NOTES:

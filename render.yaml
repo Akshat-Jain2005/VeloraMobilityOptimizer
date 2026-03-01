@@ -1,18 +1,11 @@
-# ══════════════════════════════════════════════════════════════════════════════
-# Render Blueprint - Infrastructure as Code for Velora Backend
-# https://render.com/docs/blueprint-spec
-# ══════════════════════════════════════════════════════════════════════════════
-
 services:
   - type: web
     name: velorabackend-kri-2651-ti
     runtime: docker
-    plan: free  # Change to "starter" ($7/mo) for always-on
+    plan: free  
     
-    # Health check endpoint
     healthCheckPath: /api/health
     
-    # Environment variables (set sensitive ones in Render dashboard)
     envVars:
       - key: NODE_ENV
         value: production
@@ -21,4 +14,4 @@ services:
       - key: FRONTEND_URL
         value: https://velorafrontend-kri-2651-ti.onrender.com
       - key: MAPS_API_KEY
-        sync: false  # Optional: Set in dashboard if you have Google Maps API key
+        sync: false 

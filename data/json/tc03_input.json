@@ -1,7 +1,7 @@
 {
   "config": {
     "allow_external_maps": true,
-    "maps_api_key": "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVjNTI5YTlhZWQ2MTRiNmFhMmJmMGVmYTllODQxYjFkIiwiaCI6Im11cm11cjY0In0",
+    "maps_api_key": "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVjNTI5YTlhZWQ2MTRiNmFhMmJmMGVmYTllODQxYjFkIiwiaCI6Im11cm11cjY0In0=",
     "tolerances": {
       "1": 5,
       "2": 8,
