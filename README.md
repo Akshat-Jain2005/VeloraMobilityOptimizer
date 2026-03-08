@@ -2,6 +2,9 @@
 
 Employee transportation cost optimizer for Heterogeneous Vehicle Routing with Soft Time Windows (HVRPSTW). Given a fleet of vehicles and a set of employees with pickup/dropoff locations and time windows, it finds routes that minimize total cost while satisfying capacity, precedence, and time-window constraints.
 
+**YouTube Demo**
+
+
 **Live deployment:**
 - Frontend: https://velorafrontend-kri-2651-ti.onrender.com
 - Backend API: https://velorabackend-kri-2651-ti.onrender.com
@@ -267,13 +270,12 @@ All environment variables for production are configured in `render.yaml`.
 
 Five pre-built test cases are in `data/json/tc0X_input.json`:
 
-| TC | Employees | Vehicles | Notes |
-|----|-----------|----------|-------|
-| tc01 | 5 | 3 | Basic convergence test |
-| tc02 | 8 | 3 | Mixed priorities |
-| tc03 | 10 | 4 | Sharing limits |
-| tc04 | 15 | 5 | Penalty-dominated (tight windows) |
-| tc05 | 12 | 4 | OSRM vs haversine comparison |
+| TC | Employees | Vehicles |
+|----|-----------|----------|
+| tc01 | 5 | 3 |
+| tc02 | 8 | 3 |
+| tc03 | 10 | 4 |
+| tc04 | 15 | 5 |
 
 Run a test case via the UI (Test Cases tab) or directly:
 
