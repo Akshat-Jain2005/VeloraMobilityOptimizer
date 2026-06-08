@@ -1,13 +1,25 @@
-# Velora Mobility Optimizer
+<div align="center">
 
-Employee transportation cost optimizer for Heterogeneous Vehicle Routing with Soft Time Windows (HVRPSTW). Given a fleet of vehicles and a set of employees with pickup/dropoff locations and time windows, it finds routes that minimize total cost while satisfying capacity, precedence, and time-window constraints.
+# 🚗 Velora Mobility Optimizer
 
-**YouTube Demo**
-- https://www.youtube.com/watch?v=4BbK0500LLs
+**Employee Transportation Cost Optimizer using Heterogeneous Vehicle Routing with Soft Time Windows (HVRPSTW)**
 
-**Live deployment:**
-- Frontend: https://velorafrontend-kri-2651-ti.onrender.com
-- Backend API: https://velorabackend-kri-2651-ti.onrender.com
+![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat&logo=node.js&logoColor=white)
+![React](https://img.shields.io/badge/React-Vite-61DAFB?style=flat&logo=react&logoColor=black)
+![C++](https://img.shields.io/badge/C++-17-00599C?style=flat&logo=c%2B%2B&logoColor=white)
+![OSRM](https://img.shields.io/badge/OSRM-Routing-7D4698?style=flat)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=flat&logo=docker&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat)
+
+🎬 **[YouTube Demo](https://www.youtube.com/watch?v=4BbK0500LLs)** &nbsp;|&nbsp; 🌐 **[Live Frontend](https://velorafrontend-kri-2651-ti.onrender.com)** &nbsp;|&nbsp; ⚙️ **[Live Backend API](https://velorabackend-kri-2651-ti.onrender.com)**
+
+</div>
+
+---
+
+## Overview
+
+Velora finds optimal employee pickup/dropoff routes across a heterogeneous vehicle fleet, minimizing total transportation cost while respecting capacity, precedence, and soft time-window constraints. It combines a **C++ 4-phase metaheuristic solver** with a **Node.js REST API** and a **React + Vite** frontend.
 
 ---
 
@@ -73,7 +85,7 @@ VeloraMobilityOptimizer/
 
 ## Algorithm
 
-The solver is a **4-phase metaheuristic** for HVRPSTW, implemented in C++ with a fixed random seed (42) for reproducible results.
+The solver is a **4-phase metaheuristic** for HVRPSTW, implemented in C++ with a fixed random seed (`42`) for fully reproducible results.
 
 ### Objective Function
 
@@ -83,7 +95,7 @@ Minimize: Σ (distance_ij × costPerKm_v) × w_cost
         + Penalty terms
 ```
 
-Default weights: `w_cost = 0.7`, `w_time = 0.3`
+> Default weights: `w_cost = 0.7`, `w_time = 0.3`
 
 ### Constraints
 
@@ -94,13 +106,15 @@ Default weights: `w_cost = 0.7`, `w_time = 0.3`
 
 Soft constraints are penalized rather than strictly enforced, allowing the optimizer to trade off constraint violations against route cost.
 
+---
+
 ### Phase 1 — Solomon I1 Greedy Construction
 
-Up to 20 restarts of a greedy insertion heuristic. Each restart shuffles requests within priority buckets and inserts them one by one into the cheapest feasible position across all vehicles. The best result across all restarts is kept.
+Up to **20 restarts** of a greedy insertion heuristic. Each restart shuffles requests within priority buckets and inserts them one by one into the cheapest feasible position across all vehicles. The best result across all restarts is kept.
 
 ### Phase 2 — Simulated Annealing (SA)
 
-Deterministic SA with 5 move operators. Terminates by `maxNoImprove` count (not wall-clock), so results are identical every run with seed=42.
+Deterministic SA with 5 move operators. Terminates by `maxNoImprove` count (not wall-clock), so results are identical every run with `seed=42`.
 
 | Operator | Weight | Description |
 |----------|--------|-------------|
@@ -114,12 +128,15 @@ SA parameters scale with problem complexity (`avgRouteStops`): initial temperatu
 
 ### Phase 3 — Adaptive Large Neighborhood Search (ALNS)
 
-Time-bounded destroy-repair loop using Ropke & Pisinger adaptive scoring (σ₁=33, σ₂=9, σ₃=3, λ=0.8).
+Time-bounded destroy-repair loop using **Ropke & Pisinger** adaptive scoring (`σ₁=33`, `σ₂=9`, `σ₃=3`, `λ=0.8`).
 
 **Destroy operators:**
-- **Shaw Removal** — remove geographically related requests (seed + nearest neighbors)
-- **Random Removal** — uniform random selection for diversification
-- **Route Removal** — evict the entire most-penalized route (plateau escape)
+
+| Operator | Purpose |
+|----------|---------|
+| Shaw Removal | Remove geographically related requests (seed + nearest neighbors) |
+| Random Removal | Uniform random selection for diversification |
+| Route Removal | Evict the entire most-penalized route (plateau escape) |
 
 **Repair:** Regret-2 insertion heuristic — inserts requests with the highest regret (2nd-best minus best insertion cost) first, prioritizing tightly-constrained requests.
 
@@ -131,10 +148,10 @@ Restarts SA from the ALNS best solution with a shorter `maxNoImprove` for fine-g
 
 | Mode | Method | Speed |
 |------|--------|-------|
-| `osrm` | OSRM Table API — single HTTP call for full NxN matrix | ~5–20s pre-compute, then O(1) lookups |
+| `osrm` | OSRM Table API — single HTTP call for full N×N matrix | ~5–20s pre-compute, then O(1) lookups |
 | `haversine` | Straight-line air distance | Instant |
 
-All SA/ALNS distance lookups are O(1) reads from a pre-computed NxN matrix.
+All SA/ALNS distance lookups are **O(1) reads** from a pre-computed N×N matrix.
 
 ---
 
@@ -184,11 +201,11 @@ npm run dev
 # App available at http://localhost:5173
 ```
 
-The Vite dev server proxies `/api` requests to `localhost:3001` automatically.
+> The Vite dev server proxies `/api` requests to `localhost:3001` automatically.
 
 ### Using the CLI
 
-You can run the solver directly for debugging:
+Run the solver directly for debugging:
 
 ```bash
 ./solver/build/velora_solver input.json output.json [convergence.csv]
@@ -206,12 +223,12 @@ Submit a JSON optimization request.
 ```json
 {
   "config": {
-    "distance_method": "osrm",       // "osrm" | "haversine"
-    "solver_time_seconds": 30,        // 10–300
-    "force_assign": true,             // false = leave violators unassigned
+    "distance_method": "osrm",
+    "solver_time_seconds": 30,
+    "force_assign": true,
     "weights": { "cost": 0.7, "time": 0.3 },
     "tolerances": { "1": 5, "2": 10, "3": 15, "4": 20, "5": 30 },
-    "penalty_weights": { "sharingViolationPenalty": 500, ... }
+    "penalty_weights": { "sharingViolationPenalty": 500 }
   },
   "vehicles": [
     {
@@ -241,9 +258,11 @@ Submit a JSON optimization request.
 }
 ```
 
-Times are **minutes from midnight** (e.g. 480 = 08:00, 540 = 09:00).
+> Times are **minutes from midnight** (e.g. `480` = 08:00, `540` = 09:00).
 
 **Response:** `{ jobId, status: "success", result: { routes, unassigned, summary, constraintAnalysis } }`
+
+---
 
 ### `POST /api/parse`
 
@@ -259,8 +278,10 @@ Returns solver binary status.
 
 The project deploys to **Render.com** via `render.yaml`:
 
-- **Backend:** Docker runtime — builds the C++ solver inside the container and starts the Node.js API.
-- **Frontend:** Static site — `npm run build` → serves `frontend/dist/`.
+| Service | Type | Details |
+|---------|------|---------|
+| **Backend** | Docker runtime | Builds the C++ solver inside the container, then starts the Node.js API |
+| **Frontend** | Static site | `npm run build` → serves `frontend/dist/` |
 
 All environment variables for production are configured in `render.yaml`.
 
@@ -277,7 +298,7 @@ Five pre-built test cases are in `data/json/tc0X_input.json`:
 | tc03 | 10 | 4 |
 | tc04 | 15 | 5 |
 
-Run a test case via the UI (Test Cases tab) or directly:
+Run a test case via the **Test Cases** tab in the UI, or directly:
 
 ```bash
 ./solver/build/velora_solver data/json/tc01_input.json out.json
